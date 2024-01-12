@@ -5,13 +5,19 @@ website:
   title: "ISSS608-VAA"
   navbar:
     left:
+    - text: "Hands-On Exercises"
+      menu:
+        - text: "Hands-On Exercise 1"
+          href: "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html"
+    
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
 
 format:
   html:
-    theme: cosmo
+    theme: morph
     css: styles.css
     toc: true
 
