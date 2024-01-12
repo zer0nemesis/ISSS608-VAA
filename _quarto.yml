@@ -17,7 +17,7 @@ website:
 
 format:
   html:
-    theme: morph
+    theme: cyborg
     css: styles.css
     toc: true
 
