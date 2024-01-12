@@ -53,7 +53,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#r-graphic-vs-ggplot",
     "title": "Hands-On Exercise 1: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "3.1 R Graphic VS ggplot",
-    "text": "3.1 R Graphic VS ggplot\nFirst, let us compare how R Graphics, the core graphical functions of Base R and ggplot plot a simple histogram.\n\nhist(exam_data$MATHS)\n\n\n\n\n```{#| eval = False}\n\nRggplot\n\n\nhist(exam_data$MATHS)\n\n\nggplot(data=exam_data, aes(x = MATHS)) + geom_histogram(bins=10, boundary = 100, color=“black”, fill=“grey”) + ggtitle(“Distribution of Maths scores”)\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n:::\nAs you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended? The transferable skills from ggplot2 are not the idiosyncrasies of plotting syntax, but a powerful way of thinking about visualisation, as a way of mapping between variables and the visual properties of geometric objects that you can perceive."
+    "text": "3.1 R Graphic VS ggplot\nFirst, let us compare how R Graphics, the core graphical functions of Base R and ggplot plot a simple histogram.\n\nhist(exam_data$MATHS)\n\n\n\n\n\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n\nAs you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended? The transferable skills from ggplot2 are not the idiosyncrasies of plotting syntax, but a powerful way of thinking about visualisation, as a way of mapping between variables and the visual properties of geometric objects that you can perceive."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#a-layered-grammar-of-graphics",
@@ -201,5 +201,12 @@
     "title": "Hands-On Exercise 1: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "12. References",
     "text": "12. References\n\nHadley Wickham (2023) ggplot2: Elegant Graphics for Data Analysis. Online 3rd edition.\nWinston Chang (2013) R Graphics Cookbook 2nd edition. Online version.\nHealy, Kieran (2019) Data Visualization: A practical introduction. Online version\nLearning ggplot2 on Paper – Components\nLearning ggplot2 on Paper – Layer\nLearning ggplot2 on Paper – Scale"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#ggplot",
+    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#ggplot",
+    "title": "Hands-On Exercise 1: A Layered Grammar of Graphics: ggplot2 methods",
+    "section": "ggplot",
+    "text": "ggplot\nggplot(data=exam_data, aes(x = MATHS)) + geom_histogram(bins=10, boundary = 100, color=“black”, fill=“grey”) + ggtitle(“Distribution of Maths scores”)\n:::\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n:::\nAs you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended? The transferable skills from ggplot2 are not the idiosyncrasies of plotting syntax, but a powerful way of thinking about visualisation, as a way of mapping between variables and the visual properties of geometric objects that you can perceive."
   }
 ]
