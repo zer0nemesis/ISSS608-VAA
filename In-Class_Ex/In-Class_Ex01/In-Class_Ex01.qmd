@@ -61,8 +61,11 @@ We will now import the file back into the R enviroment using the [read_rds](http
 stu_qqq <- read_rds("data/stu_qqq_SG.rds")
 ```
 
-***Note:*** Remember to:
+::: callout-important
+
+##Remember to:
 
 -   delete the 3.9GB source file from the data folder
 
 -   include #\| eval: false into the first three code chunks, to faciliate the subsequent push to Github.
+:::
