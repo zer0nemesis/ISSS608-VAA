@@ -1,0 +1,4 @@
+---
+title: "In-Class Exercise 01: A Layered Grammar of Graphics: ggplot2 methods"
+author: "Roger Chen"
+---
