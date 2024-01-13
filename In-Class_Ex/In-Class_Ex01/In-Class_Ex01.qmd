@@ -12,7 +12,7 @@ editor: visual
 
 # 1. Learning Outcome
 
-This chapter aims to share how to create a quarto document using either the source editor, or the visual editor.
+This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds.
 
 # 2. Getting Started
 

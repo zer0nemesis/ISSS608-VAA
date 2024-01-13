@@ -214,7 +214,7 @@
     "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
     "title": "In-Class Exercise 01: Now You See It!",
     "section": "",
-    "text": "This chapter aims to share how to create a quarto document using either the source editor, or the visual editor."
+    "text": "This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds."
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
