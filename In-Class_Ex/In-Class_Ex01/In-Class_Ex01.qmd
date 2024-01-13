@@ -1,4 +1,68 @@
 ---
-title: "In-Class Exercise 01: A Layered Grammar of Graphics: ggplot2 methods"
+title: "In-Class Exercise 01: Now You See It!"
 author: "Roger Chen"
+date: "13 Jan 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
 ---
+
+# 1. Learning Outcome
+
+This chapter aims to share how to create a quarto document using either the source editor, or the visual editor.
+
+# 2. Getting Started
+
+## 2.1 Loading R Packages
+
+In this in-class exercise, two R packages will be used. They are:
+
+-   [tidyverse](https://www.tidyverse.org/), and
+
+-   [haven](https://haven.tidyverse.org/).
+
+The code chunk used is as follows:
+
+```{r}
+pacman::p_load(tidyverse, haven)
+```
+
+## 2.2 Importing PISA Data
+
+The code chunk below uses the [read_sas](https://haven.tidyverse.org/reference/read_sas.html) function from the haven package to import PISA data into R.
+
+```{r}
+#| eval: false
+stu_qqq <- read_sas("data/stu_qqq.sas7bdat")
+```
+
+As there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the [filter](https://dplyr.tidyverse.org/reference/filter.html) function from the dpylr package.
+
+```{r}
+#| eval: false
+stu_qqq_SG <- stu_qqq %>%
+  filter(CNT == "SGP")
+```
+
+We will then save the file as a rds document in the data folder, using [write_rds](https://readr.tidyverse.org/reference/read_rds.html) function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.
+
+```{r}
+#| eval: false
+write_rds(stu_qqq_SG, 
+          "data/stu_qqq_SG.rds")
+```
+
+We will now import the file back into the R enviroment using the [read_rds](https://readr.tidyverse.org/reference/read_rds.html) function.
+
+```{r}
+stu_qqq <- read_rds("data/stu_qqq_SG.rds")
+```
+
+***Note:*** Remember to:
+
+-   delete the 3.9GB source file from the data folder
+
+-   include #\| eval: false into the first three code chunks, to faciliate the subsequent push to Github.
