@@ -318,8 +318,8 @@
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#creating-composite-graphics-pathwork-methods",
     "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#creating-composite-graphics-pathwork-methods",
     "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "5.1 Creating Composite Graphics: pathwork methods",
-    "text": "5.1 Creating Composite Graphics: pathwork methods\nThere are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as grid.arrange() of gridExtra package and plot_grid() of cowplot package. In this section, I am going to shared with you an ggplot2 extension called patchwork which is specially designed for combining separate ggplot2 graphs into a single figure.\nPatchwork package has a very simple syntax where we can create layouts super easily. Here’s the general syntax that combines:\n\nTwo-Column Layout using the Plus Sign +.\nParenthesis () to create a subplot group.\nTwo-Row Layout using the Division Sign /"
+    "section": "5.1 Creating Composite Graphics: pathwork methods ",
+    "text": "5.1 Creating Composite Graphics: pathwork methods \nThere are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as grid.arrange() of gridExtra package and plot_grid() of cowplot package. In this section, I am going to shared with you an ggplot2 extension called patchwork which is specially designed for combining separate ggplot2 graphs into a single figure.\nPatchwork package has a very simple syntax where we can create layouts super easily. Here’s the general syntax that combines:\n\nTwo-Column Layout using the Plus Sign +.\nParenthesis () to create a subplot group.\nTwo-Row Layout using the Division Sign /"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#combining-two-ggplot2-graphs",

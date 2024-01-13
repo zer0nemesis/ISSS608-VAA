@@ -8,9 +8,11 @@ execute:
 number-sections: true
 ---
 
+---
+
 # **Overview**
 
-In this chapter, we will leverage several ggplot2 extensions to create more elegant and effective statistical graphics. By the end of this chapter, we will be able to:
+In this chapter, we will leverage several ggplot2 ![](data/ggplot2logo.png){width="30" height="35"} extensions to create more elegant and effective statistical graphics. By the end of this chapter, we will be able to:
 
 -   control the placement of annotation on a graph by using functions provided in ggrepel package,
 
@@ -100,7 +102,7 @@ ggplot(data=exam_data,
 ```
 :::
 
-ggrepel is an extension of **ggplot2** package which provides `geoms` for **ggplot2** to repel overlapping text as in our examples on the right.
+ggrepel ![](data/ggrepelLOGO.jpg){width="30" height="30"} is an extension of **ggplot2** package which provides `geoms` for **ggplot2** to repel overlapping text as in our examples on the right.
 
 ![](data/ggrepel.jpg){fig-align="center"}
 
@@ -385,7 +387,7 @@ p3
 ```
 :::
 
-## **Creating Composite Graphics: pathwork methods**
+## **Creating Composite Graphics: pathwork methods** ![](data/patchwork.png){width="30" height="35"}
 
 There are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as [`grid.arrange()`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) of **gridExtra** package and [`plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) of [**cowplot**](https://wilkelab.org/cowplot/) package. In this section, I am going to shared with you an ggplot2 extension called [**patchwork**](https://patchwork.data-imaginist.com/) which is specially designed for combining separate ggplot2 graphs into a single figure.
 
