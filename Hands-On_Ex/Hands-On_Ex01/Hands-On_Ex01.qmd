@@ -1,5 +1,7 @@
 ---
-title: "Hands-On Exercise 1: A Layered Grammar of Graphics: ggplot2 methods"
+title: "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods"
+date: "13 Jan 2024"
+date-modified: last-modified
 author: "Roger Chen"
 ---
 
@@ -26,6 +28,7 @@ pacman::p_load(tidyverse)
 -   **readr** is one of the tidyverse package.
 
 ```{r}
+
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
@@ -47,9 +50,7 @@ First, let us compare how R Graphics, the core graphical functions of Base R and
 
 ```{r}
 hist(exam_data$MATHS)
-```
 
-```{r}
 ggplot(data=exam_data, aes(x = MATHS)) +
   geom_histogram(bins=10, 
                  boundary = 100,
@@ -82,7 +83,7 @@ A good grammar of graphics will allow us to gain insight into the composition of
 
 ggplot2 is an implementation of Leland Wilkinson’s Grammar of Graphics. Figure below shows the seven grammars of ggplot2.
 
-![*Reference: Hadley Wickham (2010) “A layered grammar of graphics.” Journal of Computational and Graphical Statistics, vol. 19, no. 1, pp. 3–28.*](data/A Layered Grammar of Graphics.jpg)
+![*Reference: Hadley Wickham (2010) “A layered grammar of graphics.” Journal of Computational and Graphical Statistics, vol. 19, no. 1, pp. 3–28.*](data/A%20Layered%20Grammar%20of%20Graphics.jpg)
 
 A short description of each building block are as follows:
 
