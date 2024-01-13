@@ -77,7 +77,7 @@ stu_qqq_SG <- read_rds("data/stu_qqq_SG.rds")
 ```
 
 ::: callout-important
-## Remember to:
+Remember to:
 
 -   delete the 3.9GB source file from the data folder; and
 

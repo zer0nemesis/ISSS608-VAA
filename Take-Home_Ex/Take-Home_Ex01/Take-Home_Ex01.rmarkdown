@@ -1,0 +1,149 @@
+---
+title: "Take Home Exercise 01: Creating Data Visualisation Beyond Default"
+author: "Roger Chen"
+date: "14 Jan 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+number-sections: true
+editor: visual
+---
+
+
+# Background
+
+![](data/OECDLogo.png){width="35" height="16"} OECD education director Andreas Schleicher shared in a BBC article that “Singapore managed to achieve excellence without wide differences between children from wealthy and disadvantaged families.” (2016) Furthermore, several Singapore’s Minister for Education also started an “every school a good school” slogan. The general public, however, strongly belief that there are still disparities that exist, especially between the elite schools and neighborhood school, between students from families with higher socioeconomic status and those with relatively lower socioeconomic status and immigration and non-immigration families.
+
+# Learning Outcome
+
+![](data/PISABanner.png){fig-align="center"}
+
+The 2022 Programme for International Student Assessment (PISA) data was released on December 5, 2022. PISA global education survey every three years to assess the education systems worldwide through testing 15 year old students in the subjects of mathematics, reading, and science.
+
+In this take-home exercise, we will use appropriate **Exploratory Data Analysis (EDA)** methods and **ggplot2** functions to reveal:
+
+-   the distribution of Singapore students’ performance in mathematics, reading, and science, and
+
+-   the relationship between these performances with schools, gender and socioeconomic status of the students.
+
+# Data Preparation
+
+## Loading R Packages
+
+In this take-home exercise, two R packages will be used. They are:
+
+-   [tidyverse](https://www.tidyverse.org/), and
+
+-   [haven](https://haven.tidyverse.org/).
+
+The code chunk used is as follows:
+
+
+```{r}
+pacman::p_load(tidyverse, haven, knitr, kableExtra)
+```
+
+
+## Importing PISA 2022 Data
+
+The code chunk below uses the [read_sas](https://haven.tidyverse.org/reference/read_sas.html) function from the haven package to import PISA data into R.
+
+
+```{r}
+#| eval: false 
+
+stu_qqq <- read_sas("data/stu_qqq.sas7bdat")
+```
+
+
+We will next filter the observations to those from Singapore, using the [filter](https://dplyr.tidyverse.org/reference/filter.html) function from the dpylr package.
+
+
+```{r}
+#| eval: false 
+
+stu_qqq_SG <- stu_qqq %>%
+  filter(CNT == "SGP")
+```
+
+
+We will then save the file as a rds document in the data folder, using [write_rds](https://readr.tidyverse.org/reference/read_rds.html) function. This reduces the file size from 3.9GB to 65.3MB, which makes it easier to push to Github subsequently.
+
+
+```{r}
+#| eval: false 
+
+write_rds(stu_qqq_SG, "data/stu_qqq_SG.rds")
+```
+
+
+We will now import the file back into the R enviroment using the [read_rds](https://readr.tidyverse.org/reference/read_rds.html) function.
+
+
+```{r}
+stu_qqq_SG <- read_rds("data/stu_qqq_SG.rds")
+```
+
+
+::: callout-important
+Remember to:
+
+-   delete the 3.9GB source file from the data folder; and
+
+-   include "#\| eval: false" into the first three code chunks of this section.
+:::
+
+## Summary Statistics of Data
+
+::: panel-tabset
+## First 5 Rows
+
+Displaying the first five rows using head():
+
+
+```{r}
+head(stu_qqq_SG,5)
+```
+
+
+## Dataset Structure
+
+Checking the structure of stu_qqq_SG using str():
+
+
+```{r}
+str(stu_qqq_SG) 
+```
+
+
+## Data Health
+
+Checking for duplicates:
+
+
+```{r}
+stu_qqq_SG[duplicated(stu_qqq_SG),]
+```
+
+
+::: callout-note
+No duplicated rows were found.
+:::
+
+Checking for missing values:
+
+
+```{r}
+sum(is.na(stu_qqq_SG))
+```
+
+
+::: callout-note
+4,168,500 missing values were found.
+:::
+:::
+
+# References
+
