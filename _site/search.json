@@ -271,5 +271,12 @@
     "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
     "section": "3.1 Working with ggrepel",
     "text": "3.1 Working with ggrepel\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  geom_label_repel(aes(label = ID), \n                   fontface = \"bold\") +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  ggtitle(\"English scores versus Maths scores for Primary 3\")"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-ggtheme-package",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-ggtheme-package",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "4.1 Working with ggtheme package",
+    "text": "4.1 Working with ggtheme package\nggthemes provides ‘ggplot2’ themes that replicate the look of plots by Edward Tufte, Stephen Few, Fivethirtyeight, The Economist, ‘Stata’, ‘Excel’, and The Wall Street Journal, among others.\nIn the example below, The Economist theme is used."
   }
 ]
