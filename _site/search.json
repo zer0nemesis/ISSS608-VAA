@@ -1,17 +1,52 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ISSS608 - VISUAL ANALYTICS AND APPLICATIONS",
+    "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html",
+    "href": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html",
+    "title": "Take Home Exercise 01: Creating Data Visualisation Beyond Default",
     "section": "",
-    "text": "This website documents Roger’s learning journey through the Visual Analytics and Applications Jungle.\n\n\n\n\n\nIn this website, you will find my coursework prepared for this course. Let us navigate through this jungle and learn together."
+    "text": "OECD education director Andreas Schleicher shared in a BBC article that “Singapore managed to achieve excellence without wide differences between children from wealthy and disadvantaged families.” (2016) Furthermore, several Singapore’s Minister for Education also started an “every school a good school” slogan. The general public, however, strongly belief that there are still disparities that exist, especially between the elite schools and neighborhood school, between students from families with higher socioeconomic status and those with relatively lower socioeconomic status and immigration and non-immigration families."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#loading-r-packages",
+    "href": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#loading-r-packages",
+    "title": "Take Home Exercise 01: Creating Data Visualisation Beyond Default",
+    "section": "3.1 Loading R Packages",
+    "text": "3.1 Loading R Packages\nIn this take-home exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven, knitr, kableExtra)"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#importing-pisa-2022-data",
+    "href": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#importing-pisa-2022-data",
+    "title": "Take Home Exercise 01: Creating Data Visualisation Beyond Default",
+    "section": "3.2 Importing PISA 2022 Data",
+    "text": "3.2 Importing PISA 2022 Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nWe will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduces the file size from 3.9GB to 65.3MB, which makes it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\n\n\n\n\n\n\nRemember to:\n\n\n\n\ndelete the 3.9GB source file from the data folder; and\ninclude “#| eval: false” into the first three code chunks of this section."
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#summary-statistics-of-data",
+    "href": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#summary-statistics-of-data",
+    "title": "Take Home Exercise 01: Creating Data Visualisation Beyond Default",
+    "section": "3.3 Summary Statistics of Data",
+    "text": "3.3 Summary Statistics of Data\n\nFirst 5 RowsDataset StructureData Health\n\n\nDisplaying the first five rows using head():\n\nhead(stu_qqq_SG,5)\n\n# A tibble: 5 × 1,279\n  CNT   CNTRYID CNTSCHID CNTSTUID CYC   NatCen STRATUM SUBNATIO REGION  OECD\n  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 SGP       702 70200052 70200001 08MS  070200 SGP01   7020000   70200     0\n2 SGP       702 70200134 70200002 08MS  070200 SGP01   7020000   70200     0\n3 SGP       702 70200112 70200003 08MS  070200 SGP01   7020000   70200     0\n4 SGP       702 70200004 70200004 08MS  070200 SGP01   7020000   70200     0\n5 SGP       702 70200152 70200005 08MS  070200 SGP01   7020000   70200     0\n# ℹ 1,269 more variables: ADMINMODE &lt;dbl&gt;, LANGTEST_QQQ &lt;dbl&gt;,\n#   LANGTEST_COG &lt;dbl&gt;, LANGTEST_PAQ &lt;dbl&gt;, Option_CT &lt;dbl&gt;, Option_FL &lt;dbl&gt;,\n#   Option_ICTQ &lt;dbl&gt;, Option_WBQ &lt;dbl&gt;, Option_PQ &lt;dbl&gt;, Option_TQ &lt;dbl&gt;,\n#   Option_UH &lt;dbl&gt;, BOOKID &lt;dbl&gt;, ST001D01T &lt;dbl&gt;, ST003D02T &lt;dbl&gt;,\n#   ST003D03T &lt;dbl&gt;, ST004D01T &lt;dbl&gt;, ST250Q01JA &lt;dbl&gt;, ST250Q02JA &lt;dbl&gt;,\n#   ST250Q03JA &lt;dbl&gt;, ST250Q04JA &lt;dbl&gt;, ST250Q05JA &lt;dbl&gt;, ST250D06JA &lt;chr&gt;,\n#   ST250D07JA &lt;chr&gt;, ST251Q01JA &lt;dbl&gt;, ST251Q02JA &lt;dbl&gt;, ST251Q03JA &lt;dbl&gt;, …\n\n\n\n\nChecking the structure of stu_qqq_SG using str():\n\nstr(stu_qqq_SG) \n\ntibble [6,606 × 1,279] (S3: tbl_df/tbl/data.frame)\n $ CNT         : chr [1:6606] \"SGP\" \"SGP\" \"SGP\" \"SGP\" ...\n  ..- attr(*, \"label\")= chr \"Country code 3-character\"\n $ CNTRYID     : num [1:6606] 702 702 702 702 702 702 702 702 702 702 ...\n  ..- attr(*, \"label\")= chr \"Country Identifier\"\n $ CNTSCHID    : num [1:6606] 70200052 70200134 70200112 70200004 70200152 ...\n  ..- attr(*, \"label\")= chr \"Intl. School ID\"\n $ CNTSTUID    : num [1:6606] 70200001 70200002 70200003 70200004 70200005 ...\n  ..- attr(*, \"label\")= chr \"Intl. Student ID\"\n $ CYC         : chr [1:6606] \"08MS\" \"08MS\" \"08MS\" \"08MS\" ...\n  ..- attr(*, \"label\")= chr \"PISA Assessment Cycle (2 digits + 2 character Assessment type - MS/FT)\"\n $ NatCen      : chr [1:6606] \"070200\" \"070200\" \"070200\" \"070200\" ...\n  ..- attr(*, \"label\")= chr \"National Centre 6-digit Code\"\n $ STRATUM     : chr [1:6606] \"SGP01\" \"SGP01\" \"SGP01\" \"SGP01\" ...\n  ..- attr(*, \"label\")= chr \"Stratum ID 5-character (cnt + original stratum ID)\"\n $ SUBNATIO    : chr [1:6606] \"7020000\" \"7020000\" \"7020000\" \"7020000\" ...\n  ..- attr(*, \"label\")= chr \"Adjudicated sub-region code 7-digit code (3-digit country code + region ID + stratum ID)\"\n $ REGION      : num [1:6606] 70200 70200 70200 70200 70200 70200 70200 70200 70200 70200 ...\n  ..- attr(*, \"label\")= chr \"REGION\"\n $ OECD        : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...\n  ..- attr(*, \"label\")= chr \"OECD country\"\n $ ADMINMODE   : num [1:6606] 2 2 2 2 2 2 2 2 2 2 ...\n  ..- attr(*, \"label\")= chr \"Mode of Respondent\"\n $ LANGTEST_QQQ: num [1:6606] 313 313 313 313 313 313 313 313 313 313 ...\n  ..- attr(*, \"label\")= chr \"Language of Questionnaire\"\n $ LANGTEST_COG: num [1:6606] 313 313 313 313 313 313 313 313 313 313 ...\n  ..- attr(*, \"label\")= chr \"Language of Assessment\"\n $ LANGTEST_PAQ: num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Language of Parent Questionnaire\"\n $ Option_CT   : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Creative Thinking Option\"\n $ Option_FL   : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Financial Literacy Option\"\n $ Option_ICTQ : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"ICT Questionnaire Option\"\n $ Option_WBQ  : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...\n  ..- attr(*, \"label\")= chr \"Well-Being Questionnaire Option\"\n $ Option_PQ   : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...\n  ..- attr(*, \"label\")= chr \"Parent Questionnaire Option\"\n $ Option_TQ   : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...\n  ..- attr(*, \"label\")= chr \"Teacher Questionnaire Option\"\n $ Option_UH   : num [1:6606] 0 0 0 0 0 0 0 0 0 0 ...\n  ..- attr(*, \"label\")= chr \"Une Heure Option\"\n $ BOOKID      : num [1:6606] 4 45 8 40 42 15 13 39 14 7 ...\n  ..- attr(*, \"label\")= chr \"Form Identifier\"\n $ ST001D01T   : num [1:6606] 10 10 10 10 10 10 10 10 10 10 ...\n  ..- attr(*, \"label\")= chr \"Student International Grade (Derived)\"\n $ ST003D02T   : num [1:6606] 10 6 7 2 9 9 3 4 8 6 ...\n  ..- attr(*, \"label\")= chr \"Student (Standardized) Birth - Month\"\n $ ST003D03T   : num [1:6606] 2006 2006 2006 2006 2006 ...\n  ..- attr(*, \"label\")= chr \"Student (Standardized) Birth -Year\"\n $ ST004D01T   : num [1:6606] 1 2 2 2 1 1 2 2 1 2 ...\n  ..- attr(*, \"label\")= chr \"Student (Standardized) Gender\"\n $ ST250Q01JA  : num [1:6606] 2 1 1 2 2 2 1 1 2 2 ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your [home]: A room of your own\"\n $ ST250Q02JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your [home]: A computer (laptop, desktop, or tablet) that you can use for school work\"\n $ ST250Q03JA  : num [1:6606] 1 1 2 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your [home]: Educational Software or Apps\"\n $ ST250Q04JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your [home]: Your own [cell phone] with Internet access (e.g. smartphone)\"\n $ ST250Q05JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your [home]: Internet access (e.g. Wi-fi) (excluding through smartphones)\"\n $ ST250D06JA  : chr [1:6606] \"7020002\" \"7020001\" \"7020001\" \"7020002\" ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your home? &lt;Country-specific item 1&gt;\"\n $ ST250D07JA  : chr [1:6606] \"7020002\" \"7020001\" \"7020002\" \"7020002\" ...\n  ..- attr(*, \"label\")= chr \"Which of the following are in your home? &lt;Country-specific item 2&gt;\"\n $ ST251Q01JA  : num [1:6606] 2 1 2 1 2 2 2 1 3 3 ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your [home]: Cars, vans, or trucks\"\n $ ST251Q02JA  : num [1:6606] 1 4 1 2 2 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your [home]: Mopeds or motorcycles\"\n $ ST251Q03JA  : num [1:6606] 3 3 3 3 2 2 3 3 4 3 ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your [home]: Rooms with a bath or shower\"\n $ ST251Q04JA  : num [1:6606] 3 3 3 3 2 3 3 3 4 3 ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your [home]: Rooms with a [flush toilet]\"\n $ ST251Q06JA  : num [1:6606] 3 4 2 2 1 2 2 3 4 1 ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your [home]: Musical instruments (e.g. guitar, piano, [country-specific example])\"\n $ ST251Q07JA  : num [1:6606] 3 2 1 1 4 1 4 1 4 3 ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your [home]: Works of art (e.g. paintings, sculptures, [country-specific example])\"\n $ ST251D08JA  : chr [1:6606] \"9999997\" \"9999997\" \"9999997\" \"9999997\" ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your home? &lt;Country-specific item 1&gt;\"\n $ ST251D09JA  : chr [1:6606] \"9999997\" \"9999997\" \"9999997\" \"9999997\" ...\n  ..- attr(*, \"label\")= chr \"How many of these items are there at your home? &lt;Country-specific item 2&gt;\"\n $ ST253Q01JA  : num [1:6606] 7 8 7 6 7 7 8 8 8 7 ...\n  ..- attr(*, \"label\")= chr \"How many [digital devices] with screens are there in your [home]?\"\n $ ST254Q01JA  : num [1:6606] 2 3 2 2 2 2 2 2 2 2 ...\n  ..- attr(*, \"label\")= chr \"How many of the following [digital devices] are in your [home]: Televisions\"\n $ ST254Q02JA  : num [1:6606] 1 2 2 1 3 2 2 5 2 2 ...\n  ..- attr(*, \"label\")= chr \"How many of the following [digital devices] are in your [home]: Desktop computers\"\n $ ST254Q03JA  : num [1:6606] 3 2 2 2 2 2 3 3 3 4 ...\n  ..- attr(*, \"label\")= chr \"How many of the following [digital devices] are in your [home]: Laptop computers or notebooks\"\n $ ST254Q04JA  : num [1:6606] 2 3 2 1 1 2 2 3 3 2 ...\n  ..- attr(*, \"label\")= chr \"How many of the following [digital devices] are in your [home]: Tablets (e.g. [iPad®], [BlackBerry® Playbook™])\"\n $ ST254Q05JA  : num [1:6606] 1 5 1 1 NA 1 1 5 2 2 ...\n  ..- attr(*, \"label\")= chr \"How many of the following [digital devices] are in your [home]: E-book readers (e.g. [Kindle™], [Kobo], [Bookeen])\"\n $ ST254Q06JA  : num [1:6606] 3 2 3 3 4 2 4 3 4 4 ...\n  ..- attr(*, \"label\")= chr \"How many of the following [digital devices] are in your [home]: [Cell phones] with Internet access (i.e. smartphones)\"\n $ ST255Q01JA  : num [1:6606] 7 4 4 3 2 2 4 5 7 4 ...\n  ..- attr(*, \"label\")= chr \"How many books are there in your [home]?\"\n $ ST256Q01JA  : num [1:6606] 2 4 5 2 4 1 1 3 4 4 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Religious books (e.g. [Bible], [Example 2])\"\n $ ST256Q02JA  : num [1:6606] 2 5 2 1 1 2 1 5 4 2 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Classical literature (e.g. [Shakespeare], [Example 2])\"\n $ ST256Q03JA  : num [1:6606] 4 5 2 1 1 2 2 5 5 1 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Contemporary literature\"\n $ ST256Q06JA  : num [1:6606] 4 3 3 2 2 5 2 4 4 1 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Books on science\"\n $ ST256Q07JA  : num [1:6606] 3 5 5 2 2 5 1 4 3 1 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Books on art, music, or design\"\n $ ST256Q08JA  : num [1:6606] 3 3 3 1 1 5 1 5 5 2 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: [Technical reference books]\"\n $ ST256Q09JA  : num [1:6606] 2 2 4 2 2 2 2 2 2 3 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Dictionaries\"\n $ ST256Q10JA  : num [1:6606] 4 4 5 2 4 1 4 4 4 3 ...\n  ..- attr(*, \"label\")= chr \"How many of these books at [home]: Books to help with your school work\"\n $ ST230Q01JA  : num [1:6606] 4 4 2 4 4 3 2 2 3 4 ...\n  ..- attr(*, \"label\")= chr \"How many siblings (including brothers, sisters, step-brothers, and step-sisters) do you have?\"\n $ ST005Q01JA  : num [1:6606] 2 2 2 2 2 2 2 2 2 2 ...\n  ..- attr(*, \"label\")= chr \"What is the [highest level of schooling] completed by your mother?\"\n $ ST006Q01JA  : num [1:6606] 2 2 2 2 2 2 2 NA 2 2 ...\n  ..- attr(*, \"label\")= chr \"Does your mother have any of the following qualifications: [ISCED level 8]\"\n $ ST006Q02JA  : num [1:6606] 2 2 2 2 2 2 2 1 2 2 ...\n  ..- attr(*, \"label\")= chr \"Does your mother have any of the following qualifications: [ISCED level 7]\"\n $ ST006Q03JA  : num [1:6606] 1 2 2 2 2 2 2 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Does your mother have any of the following qualifications: [ISCED level 6]\"\n $ ST006Q04JA  : num [1:6606] 2 1 2 2 1 1 2 1 1 2 ...\n  ..- attr(*, \"label\")= chr \"Does your mother have any of the following qualifications: [ISCED level 5]\"\n $ ST006Q05JA  : num [1:6606] 1 1 2 1 2 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Does your mother have any of the following qualifications: [ISCED level 4]\"\n $ ST007Q01JA  : num [1:6606] 2 2 2 4 2 2 4 2 2 2 ...\n  ..- attr(*, \"label\")= chr \"What is the [highest level of schooling] completed by your father?\"\n $ ST008Q01JA  : num [1:6606] 2 2 2 NA 2 2 2 NA 2 2 ...\n  ..- attr(*, \"label\")= chr \"Does your father have any of the following qualifications: [ISCED level 8]\"\n $ ST008Q02JA  : num [1:6606] 2 2 2 NA 2 1 2 NA 2 2 ...\n  ..- attr(*, \"label\")= chr \"Does your father have any of the following qualifications: [ISCED level 7]\"\n $ ST008Q03JA  : num [1:6606] 2 2 2 NA 2 1 2 1 1 2 ...\n  ..- attr(*, \"label\")= chr \"Does your father have any of the following qualifications: [ISCED level 6]\"\n $ ST008Q04JA  : num [1:6606] 1 1 2 NA 1 1 2 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Does your father have any of the following qualifications: [ISCED level 5]\"\n $ ST008Q05JA  : num [1:6606] 2 1 2 1 2 1 2 1 1 2 ...\n  ..- attr(*, \"label\")= chr \"Does your father have any of the following qualifications: [ISCED level 4]\"\n $ ST258Q01JA  : num [1:6606] 1 1 1 5 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"In the past 30 days, how often did you not eat because there was not enough money to buy food?\"\n $ ST259Q01JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Now think about where you would place your family on this scale. Where would you say your family stands at this time?\"\n $ ST259Q02JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Now think about where you would place your family on this scale. Where do you think you will stand when you are 30?\"\n $ ST019AQ01T  : num [1:6606] 1 1 1 1 1 2 1 2 1 1 ...\n  ..- attr(*, \"label\")= chr \"In what country were you and your parents born? You\"\n $ ST019BQ01T  : num [1:6606] 1 1 2 1 1 2 1 2 1 1 ...\n  ..- attr(*, \"label\")= chr \"In what country were you and your parents born? Mother\"\n $ ST019CQ01T  : num [1:6606] 1 1 1 1 1 2 1 2 1 1 ...\n  ..- attr(*, \"label\")= chr \"In what country were you and your parents born? Father\"\n $ ST021Q01TA  : num [1:6606] NA NA NA NA NA 1 NA 1 NA NA ...\n  ..- attr(*, \"label\")= chr \"How old were you when you arrived in [country of test]?\"\n $ ST022Q01TA  : num [1:6606] 1 1 2 2 1 2 1 2 1 2 ...\n  ..- attr(*, \"label\")= chr \"What language do you speak at home most of the time?\"\n $ ST226Q01JA  : num [1:6606] 1 1 1 1 1 1 1 4 1 1 ...\n  ..- attr(*, \"label\")= chr \"How long have you been enrolled at this school?\"\n $ ST125Q01NA  : num [1:6606] 3 5 8 4 8 3 4 8 8 4 ...\n  ..- attr(*, \"label\")= chr \"How old were you when you started [ISCED 0]: Years\"\n $ ST126Q01TA  : num [1:6606] 4 5 5 5 5 5 5 5 4 5 ...\n  ..- attr(*, \"label\")= chr \"How old were you when you started [ISCED 1]: Years\"\n $ ST127Q01TA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Have you ever repeated a [grade]: At [ISCED 1]\"\n $ ST127Q02TA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Have you ever repeated a [grade]: At [ISCED 2]\"\n $ ST127Q03TA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Have you ever repeated a [grade]: At [ISCED 3]\"\n $ ST260Q01JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Have you ever missed school for more than three months in a row: At [ISCED 1]\"\n $ ST260Q02JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Have you ever missed school for more than three months in a row: At [ISCED 2]\"\n $ ST260Q03JA  : num [1:6606] 1 1 1 1 1 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"Have you ever missed school for more than three months in a row: At [ISCED 3]\"\n $ ST261Q01JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I was bored.\"\n $ ST261Q02JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I was suspended for something (e.g. violence, aggression, use of drugs, drug dealing).\"\n $ ST261Q03JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I was pregnant.\"\n $ ST261Q04JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I could not reach school because of transportation problems.\"\n $ ST261Q05JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I had to take care of a family member.\"\n $ ST261Q06JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I had to help with work at home, the family business, or on the family land.\"\n $ ST261Q07JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I had to get work to bring money home.\"\n $ ST261Q08JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I was sick.\"\n $ ST261Q09JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I did not feel safe at school.\"\n $ ST261Q10JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: I could not pay [school fees].\"\n $ ST261Q11JA  : num [1:6606] NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"label\")= chr \"Why miss school for 3+ months: School was closed because of a natural disaster (e.g. flood, earthquake).\"\n $ ST062Q01TA  : num [1:6606] 1 1 1 1 2 1 1 1 1 1 ...\n  ..- attr(*, \"label\")= chr \"In the last two full weeks of school, how often: I [skipped] a whole school day\"\n  [list output truncated]\n\n\n\n\nChecking for duplicates:\n\nstu_qqq_SG[duplicated(stu_qqq_SG),]\n\n# A tibble: 0 × 1,279\n# ℹ 1,279 variables: CNT &lt;chr&gt;, CNTRYID &lt;dbl&gt;, CNTSCHID &lt;dbl&gt;, CNTSTUID &lt;dbl&gt;,\n#   CYC &lt;chr&gt;, NatCen &lt;chr&gt;, STRATUM &lt;chr&gt;, SUBNATIO &lt;chr&gt;, REGION &lt;dbl&gt;,\n#   OECD &lt;dbl&gt;, ADMINMODE &lt;dbl&gt;, LANGTEST_QQQ &lt;dbl&gt;, LANGTEST_COG &lt;dbl&gt;,\n#   LANGTEST_PAQ &lt;dbl&gt;, Option_CT &lt;dbl&gt;, Option_FL &lt;dbl&gt;, Option_ICTQ &lt;dbl&gt;,\n#   Option_WBQ &lt;dbl&gt;, Option_PQ &lt;dbl&gt;, Option_TQ &lt;dbl&gt;, Option_UH &lt;dbl&gt;,\n#   BOOKID &lt;dbl&gt;, ST001D01T &lt;dbl&gt;, ST003D02T &lt;dbl&gt;, ST003D03T &lt;dbl&gt;,\n#   ST004D01T &lt;dbl&gt;, ST250Q01JA &lt;dbl&gt;, ST250Q02JA &lt;dbl&gt;, ST250Q03JA &lt;dbl&gt;, …\n\n\n\n\n\n\n\n\nNote\n\n\n\nNo duplicated rows were found.\n\n\nChecking for missing values:\n\nsum(is.na(stu_qqq_SG))\n\n[1] 4168500\n\n\n\n\n\n\n\n\nNote\n\n\n\n4,168,500 missing values were found."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
+    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
+    "title": "In-Class Exercise 01: Now You See It!",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
+    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
+    "title": "In-Class Exercise 01: Now You See It!",
+    "section": "2.1 Loading R Packages",
+    "text": "2.1 Loading R Packages\nIn this in-class exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
+    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
+    "title": "In-Class Exercise 01: Now You See It!",
+    "section": "2.2 Importing PISA Data",
+    "text": "2.2 Importing PISA Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nAs there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \n          \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\nNote: Remember to:\n\ndelete the 3.9GB source file from the data folder\ninclude #| eval: false into the first three code chunks, to faciliate the subsequent push to Github."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html",
@@ -21,11 +56,11 @@
     "text": "This chapter introduces the basic principles and essential components of ggplot2. At the same time, these components will be used to plot statistical graphics based on the principle of Layered Grammar of Graphics. By the end of this chapter, we will be able to apply the essential graphical elements provided by ggplot2 to create elegant and yet functional statistical graphics."
   },
   {
-    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#install-and-launching-r-packages",
-    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#install-and-launching-r-packages",
-    "title": "Hands-On Exercise 1",
-    "section": "",
-    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, they will be launched into R.\n\npacman::p_load(tidyverse)"
+    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#install-and-launch-r-packages",
+    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#install-and-launch-r-packages",
+    "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
+    "section": "2.1 Install and Launch R Packages",
+    "text": "2.1 Install and Launch R Packages\nBefore we get started, it is important for us to ensure that the required R packages have been installed. If yes, we will load the R packages. If they have yet to be installed, we will install the R packages and load them onto R environment.\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, they will be launched into R.\n\npacman::p_load(tidyverse)"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#importing-the-data",
@@ -33,20 +68,6 @@
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "2.2 Importing the data",
     "text": "2.2 Importing the data\n\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package.\nreadr is one of the tidyverse package.\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\n\nYear end examination grades of a cohort of primary 3 students from a local school.\nThere are a total of seven attributes. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#plotting-a-simple-bar-chart",
-    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#plotting-a-simple-bar-chart",
-    "title": "Hands-On Exercise 1",
-    "section": "",
-    "text": "ggplot(data = exam_data,\n       aes(x = RACE)) +\n  geom_bar()"
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#install-and-launch-r-packages",
-    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#install-and-launch-r-packages",
-    "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
-    "section": "2.1 Install and Launch R Packages",
-    "text": "2.1 Install and Launch R Packages\nBefore we get started, it is important for us to ensure that the required R packages have been installed. If yes, we will load the R packages. If they have yet to be installed, we will install the R packages and load them onto R environment.\nThe code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, they will be launched into R.\n\npacman::p_load(tidyverse)"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#r-graphic-vs-ggplot",
@@ -196,46 +217,11 @@
     "text": "11.1 Working with theme\nThe code chunk below plot a horizontal bar chart using theme_gray().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_gray()\n\n\n\n\nA horizontal bar chart plotted using theme_classic().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_classic()\n\n\n\n\nA horizontal bar chart plotted using theme_minimal().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_minimal()"
   },
   {
-    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#references",
-    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#references",
-    "title": "Hands-On Exercise 1: A Layered Grammar of Graphics: ggplot2 methods",
-    "section": "12. References",
-    "text": "12. References\n\nHadley Wickham (2023) ggplot2: Elegant Graphics for Data Analysis. Online 3rd edition.\nWinston Chang (2013) R Graphics Cookbook 2nd edition. Online version.\nHealy, Kieran (2019) Data Visualization: A practical introduction. Online version\nLearning ggplot2 on Paper – Components\nLearning ggplot2 on Paper – Layer\nLearning ggplot2 on Paper – Scale"
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#ggplot",
-    "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#ggplot",
-    "title": "Hands-On Exercise 1: A Layered Grammar of Graphics: ggplot2 methods",
-    "section": "ggplot",
-    "text": "ggplot\nggplot(data=exam_data, aes(x = MATHS)) + geom_histogram(bins=10, boundary = 100, color=“black”, fill=“grey”) + ggtitle(“Distribution of Maths scores”)\n:::\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n:::\nAs you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended? The transferable skills from ggplot2 are not the idiosyncrasies of plotting syntax, but a powerful way of thinking about visualisation, as a way of mapping between variables and the visual properties of geometric objects that you can perceive."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
-    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
-    "title": "In-Class Exercise 01: Now You See It!",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
-    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
-    "title": "In-Class Exercise 01: Now You See It!",
-    "section": "2.1 Loading R Packages",
-    "text": "2.1 Loading R Packages\nIn this in-class exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
-    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
-    "title": "In-Class Exercise 01: Now You See It!",
-    "section": "2.2 Importing PISA Data",
-    "text": "2.2 Importing PISA Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nAs there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \n          \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\nNote: Remember to:\n\ndelete the 3.9GB source file from the data folder\ninclude #| eval: false into the first three code chunks, to faciliate the subsequent push to Github."
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "",
-    "text": "In this chapter, we will leverage several ggplot2 extensions to create more elegant and effective statistical graphics. By the end of this chapter, we will be able to:\n\ncontrol the placement of annotation on a graph by using functions provided in ggrepel package,\ncreate professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,\nplot composite figure by combining ggplot2 graphs by using patchwork package."
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#installing-and-loading-the-required-libraries",
@@ -252,20 +238,6 @@
     "text": "2.2 Importing data\nFor the purpose of this chapter, a data file called Exam_data will be used. It consists of year end examination grades of a cohort of primary 3 students from a local school. It is in csv file format.\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nThere are a total of seven attributes in the exam_data tibble data frame. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
   },
   {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "Plot",
-    "text": "Plot\n{ojs} ggplot(data=exam_data, aes(x= MATHS, y=ENGLISH)) + geom_point() + geom_smooth(method=lm, size=0.5) +\ngeom_label(aes(label = ID), hjust = .5, vjust = -.5) + coord_cartesian(xlim=c(0,100), ylim=c(0,100)) + ggtitle(“English scores versus Maths scores for Primary 3”) {}"
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "Code",
-    "text": "Code\n{r} ggplot(data=exam_data, aes(x= MATHS, y=ENGLISH)) + geom_point() + geom_smooth(method=lm, size=0.5) +\ngeom_label(aes(label = ID), hjust = .5, vjust = -.5) + coord_cartesian(xlim=c(0,100), ylim=c(0,100)) + ggtitle(“English scores versus Maths scores for Primary 3”) {} ```\nggrepel is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text as in our examples on the right.\n\n\n\n\n\nWe simply replace geom_text() by geom_text_repel() and geom_label() by geom_label_repel."
-  },
-  {
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-ggrepel",
     "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-ggrepel",
     "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
@@ -280,39 +252,11 @@
     "text": "4.1 Working with ggtheme package\nggthemes provides ‘ggplot2’ themes that replicate the look of plots by Edward Tufte, Stephen Few, Fivethirtyeight, The Economist, ‘Stata’, ‘Excel’, and The Wall Street Journal, among others.\nIn the example below, The Economist theme is used.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n             aes(x = MATHS)) +\n  geom_histogram(bins=20, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"aquamarine\") +\n  ggtitle(\"Distribution of Maths scores\") +\n  theme_economist()\n\n\n\n\nIt also provides some extra geoms and scales for ‘ggplot2’. Consult this vignette to learn more."
   },
   {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot-3",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot-3",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "4.2 Plot",
-    "text": "4.2 Plot"
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code-3",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code-3",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "4.3 Code",
-    "text": "4.3 Code\n\nggplot(data=exam_data, \n             aes(x = MATHS)) +\n  geom_histogram(bins=20, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"aquamarine\") +\n  ggtitle(\"Distribution of Maths scores\") +\n  theme_economist()"
-  },
-  {
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-hrbthems-package",
     "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-hrbthems-package",
     "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
     "section": "4.2 Working with hrbthems package",
     "text": "4.2 Working with hrbthems package\nhrbrthemes package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n             aes(x = MATHS)) +\n  geom_histogram(bins=20, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"aquamarine\") +\n  ggtitle(\"Distribution of Maths scores\") +\n  theme_ipsum()\n\n\n\n\n\n\n\n\n\n\nWhat can we learn from the code chunk above:\n\n\n\n\naxis_title_size argument is used to increase the font size of the axis title to 18,\nbase_size argument is used to increase the default axis label to 15, and\ngrid argument is used to remove the x-axis grid lines."
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot-4",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot-4",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "4.5 Plot",
-    "text": "4.5 Plot"
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code-4",
-    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code-4",
-    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
-    "section": "4.6 Code",
-    "text": "4.6 Code\n\nggplot(data=exam_data, \n             aes(x = MATHS)) +\n  geom_histogram(bins=20, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"aquamarine\") +\n  ggtitle(\"Distribution of Maths scores\") +\n  theme_ipsum()"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#creating-composite-graphics-pathwork-methods",
@@ -348,5 +292,12 @@
     "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
     "section": "5.5 Creating a composite figure by using patchwork and ggtheme",
     "text": "5.5 Creating a composite figure by using patchwork and ggtheme\nFigure below is created by combining patchwork and theme_economist() of ggthemes package discussed earlier.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\npatchwork &lt;- (p1 / p2) | p3\npatchwork & theme_economist()"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ISSS608 - VISUAL ANALYTICS AND APPLICATIONS",
+    "section": "",
+    "text": "This website documents Roger’s learning journey through the Visual Analytics and Applications Jungle.\n\n\n\n\n\nIn this website, you will find my coursework prepared for this course. Let us navigate through this jungle and learn together."
   }
 ]
