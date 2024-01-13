@@ -32,7 +32,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#importing-the-data",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "2.2 Importing the data",
-    "text": "2.2 Importing the data\n\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package.\nreadr is one of the tidyverse package.\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nYear end examination grades of a cohort of primary 3 students from a local school.\nThere are a total of seven attributes. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
+    "text": "2.2 Importing the data\n\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package.\nreadr is one of the tidyverse package.\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\n\nYear end examination grades of a cohort of primary 3 students from a local school.\nThere are a total of seven attributes. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#plotting-a-simple-bar-chart",
@@ -74,14 +74,14 @@
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#geometric-objects-geom_dotplot",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "7.2 Geometric Objects: geom_dotplot",
-    "text": "7.2 Geometric Objects: geom_dotplot\nIn a dot plot, the width of a dot corresponds to the bin width (or maximum width, depending on the binning algorithm), and dots are stacked, with each dot representing one observation.\nIn the code chunk below, geom_dotplot() of ggplot2 is used to plot a dot plot.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot(dotsize = 0.5)\n\nBin width defaults to 1/30 of the range of the data. Pick better value with\n`binwidth`.\n\n\n\n\n\nNote:\n\nThe y scale is not very useful, in fact it is very misleading.\n\nThe code chunk below performs the following two steps:\n\nscale_y_continuous() is used to turn off the y-axis, and\nbinwidth argument is used to change the binwidth to 2.5.\n\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot(binwidth=2.5,         \n               dotsize = 0.5) +      \n  scale_y_continuous(NULL,           \n                     breaks = NULL)"
+    "text": "7.2 Geometric Objects: geom_dotplot\nIn a dot plot, the width of a dot corresponds to the bin width (or maximum width, depending on the binning algorithm), and dots are stacked, with each dot representing one observation.\nIn the code chunk below, geom_dotplot() of ggplot2 is used to plot a dot plot.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot(dotsize = 0.5)\n\n\n\n\nNote:\n\nThe y scale is not very useful, in fact it is very misleading.\n\nThe code chunk below performs the following two steps:\n\nscale_y_continuous() is used to turn off the y-axis, and\nbinwidth argument is used to change the binwidth to 2.5.\n\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot(binwidth=2.5,         \n               dotsize = 0.5) +      \n  scale_y_continuous(NULL,           \n                     breaks = NULL)"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#geometric-objects-geom_histogram",
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#geometric-objects-geom_histogram",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "7.3 Geometric Objects: geom_histogram()",
-    "text": "7.3 Geometric Objects: geom_histogram()\nIn the code chunk below, geom_histogram() is used to create a simple histogram by using values in MATHS field of exam_data.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_histogram()       \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\nNote: The default bin is 30."
+    "text": "7.3 Geometric Objects: geom_histogram()\nIn the code chunk below, geom_histogram() is used to create a simple histogram by using values in MATHS field of exam_data.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_histogram()       \n\n\n\n\nNote: The default bin is 30."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#modifying-a-geometric-object-by-changing-geom",
@@ -144,21 +144,21 @@
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#working-with-stat---the-stat_summary-method",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "8.2 Working with stat - the stat_summary() method",
-    "text": "8.2 Working with stat - the stat_summary() method\nThe code chunk below adds mean values by using stat_summary() function and overriding the default geom.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot() +\n  stat_summary(geom = \"point\",       \n               fun.y=\"mean\",         \n               colour =\"red\",        \n               size=4)               \n\nWarning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.\nℹ Please use the `fun` argument instead."
+    "text": "8.2 Working with stat - the stat_summary() method\nThe code chunk below adds mean values by using stat_summary() function and overriding the default geom.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot() +\n  stat_summary(geom = \"point\",       \n               fun.y=\"mean\",         \n               colour =\"red\",        \n               size=4)"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#working-with-stat---the-geom-method",
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#working-with-stat---the-geom-method",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "8.3 Working with stat - the geom() method",
-    "text": "8.3 Working with stat - the geom() method\nThe code chunk below adding mean values by using geom_() function and overriding the default stat.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot() +\n  geom_point(stat=\"summary\",        \n             fun.y=\"mean\",           \n             colour =\"red\",          \n             size=4)          \n\nWarning in geom_point(stat = \"summary\", fun.y = \"mean\", colour = \"red\", :\nIgnoring unknown parameters: `fun.y`\n\n\nNo summary function supplied, defaulting to `mean_se()`"
+    "text": "8.3 Working with stat - the geom() method\nThe code chunk below adding mean values by using geom_() function and overriding the default stat.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot() +\n  geom_point(stat=\"summary\",        \n             fun.y=\"mean\",           \n             colour =\"red\",          \n             size=4)"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#adding-a-best-fit-curve-on-a-scatterplot",
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#adding-a-best-fit-curve-on-a-scatterplot",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "8.4 Adding a best fit curve on a scatterplot?",
-    "text": "8.4 Adding a best fit curve on a scatterplot?\nThe scatterplot below shows the relationship of Maths and English grades of pupils. The interpretability of this graph can be improved by adding a best fit curve. In the code chunk below, geom_smooth() is used to plot a best fit curve on the scatterplot.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(linewidth=0.5)\n\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n\n\n\n\n\nNote: The default method used is loess.\nThe default smoothing method can be overridden as shown below.\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              linewidth=0.5)\n\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "8.4 Adding a best fit curve on a scatterplot?\nThe scatterplot below shows the relationship of Maths and English grades of pupils. The interpretability of this graph can be improved by adding a best fit curve. In the code chunk below, geom_smooth() is used to plot a best fit curve on the scatterplot.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(linewidth=0.5)\n\n\n\n\nNote: The default method used is loess.\nThe default smoothing method can be overridden as shown below.\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              linewidth=0.5)"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#working-with-facet_wrap",
@@ -186,7 +186,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#changing-the-y--and-x-axis-range",
     "title": "Hands-On Exercise 01: A Layered Grammar of Graphics: ggplot2 methods",
     "section": "10.2 Changing the y- and x-axis range",
-    "text": "10.2 Changing the y- and x-axis range\nThe scatterplot on the right is slightly misleading because the y-aixs and x-axis range are not equal.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, size=0.5)\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\nThe code chunk below fixed both the y-axis and x-axis range from 0-100.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "10.2 Changing the y- and x-axis range\nThe scatterplot on the right is slightly misleading because the y-aixs and x-axis range are not equal.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, size=0.5)\n\n\n\n\nThe code chunk below fixed both the y-axis and x-axis range from 0-100.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html#working-with-theme",
@@ -229,5 +229,47 @@
     "title": "In-Class Exercise 01: Now You See It!",
     "section": "2.2 Importing PISA Data",
     "text": "2.2 Importing PISA Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nAs there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \n          \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\nNote: Remember to:\n\ndelete the 3.9GB source file from the data folder\ninclude #| eval: false into the first three code chunks, to faciliate the subsequent push to Github."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "",
+    "text": "In this chapter, we will leverage several ggplot2 extensions to create more elegant and effective statistical graphics. By the end of this chapter, we will be able to:\n\ncontrol the placement of annotation on a graph by using functions provided in ggrepel package,\ncreate professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,\nplot composite figure by combining ggplot2 graphs by using patchwork package."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#installing-and-loading-the-required-libraries",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#installing-and-loading-the-required-libraries",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "2.1 Installing and loading the required libraries",
+    "text": "2.1 Installing and loading the required libraries\nIn this chapter, beside tidyverse, four R packages will be used. They are:\n\nggrepel: an R package provides geoms for ggplot2 to repel overlapping text labels.\nggthemes: an R package provides some extra themes, geoms, and scales for ‘ggplot2’.\nhrbrthemes: an R package provides typography-centric themes and theme components for ggplot2.\npatchwork: an R package for preparing composite figure created using ggplot2.\n\nCode chunk below will be used to check if these packages have been installed and also will load them onto the working R environment.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#importing-data",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#importing-data",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "2.2 Importing data",
+    "text": "2.2 Importing data\nFor the purpose of this chapter, a data file called Exam_data will be used. It consists of year end examination grades of a cohort of primary 3 students from a local school. It is in csv file format.\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nThere are a total of seven attributes in the exam_data tibble data frame. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#plot",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "Plot",
+    "text": "Plot\n{ojs} ggplot(data=exam_data, aes(x= MATHS, y=ENGLISH)) + geom_point() + geom_smooth(method=lm, size=0.5) +\ngeom_label(aes(label = ID), hjust = .5, vjust = -.5) + coord_cartesian(xlim=c(0,100), ylim=c(0,100)) + ggtitle(“English scores versus Maths scores for Primary 3”) {}"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#code",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "Code",
+    "text": "Code\n{r} ggplot(data=exam_data, aes(x= MATHS, y=ENGLISH)) + geom_point() + geom_smooth(method=lm, size=0.5) +\ngeom_label(aes(label = ID), hjust = .5, vjust = -.5) + coord_cartesian(xlim=c(0,100), ylim=c(0,100)) + ggtitle(“English scores versus Maths scores for Primary 3”) {} ```\nggrepel is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text as in our examples on the right.\n\n\n\n\n\nWe simply replace geom_text() by geom_text_repel() and geom_label() by geom_label_repel."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-ggrepel",
+    "href": "Hands-On_Ex/Hands-On_Ex02/Hands-On_Ex02.html#working-with-ggrepel",
+    "title": "Hands-On Exercise 02 : Beyond ggplot2 Fundamentals",
+    "section": "3.1 Working with ggrepel",
+    "text": "3.1 Working with ggrepel\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  geom_label_repel(aes(label = ID), \n                   fontface = \"bold\") +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  ggtitle(\"English scores versus Maths scores for Primary 3\")"
   }
 ]
