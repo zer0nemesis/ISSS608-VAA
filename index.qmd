@@ -1,14 +1,14 @@
 ---
-title: "ISSS608-VAA"
+title: "ISSS608 - VISUAL ANALYTICS AND APPLICATIONS"
 ---
 
 This website documents Roger's learning journey through the **Visual Analytics and Applications** Jungle.
 
-![](ItIsAJungle.jpg)
+![](ItIsAJungle.jpg){fig-align="center"}
 
 In this website, you will find my coursework prepared for this course. Let us navigate through this jungle and learn together.
 
-![](LearnTogether.jpg)
+![](LearnTogether.jpg){fig-align="center"}
 
 ```         
 ```
