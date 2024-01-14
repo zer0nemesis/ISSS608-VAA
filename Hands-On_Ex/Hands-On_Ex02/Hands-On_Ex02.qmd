@@ -387,9 +387,9 @@ p3
 ```
 :::
 
-## **Creating Composite Graphics: pathwork methods** ![](data/patchwork.png){width="30" height="35"}
+## **Creating Composite Graphics: patchwork methods**
 
-There are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as [`grid.arrange()`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) of **gridExtra** package and [`plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) of [**cowplot**](https://wilkelab.org/cowplot/) package. In this section, I am going to shared with you an ggplot2 extension called [**patchwork**](https://patchwork.data-imaginist.com/) which is specially designed for combining separate ggplot2 graphs into a single figure.
+There are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as [`grid.arrange()`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) of **gridExtra** package and [`plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) of [**cowplot**](https://wilkelab.org/cowplot/) package. In this section, I am going to shared with you an ggplot2 extension called [**patchwork**](https://patchwork.data-imaginist.com/) ![](data/patchwork.png){width="30" height="35"} which is specially designed for combining separate ggplot2 graphs into a single figure.
 
 Patchwork package has a very simple syntax where we can create layouts super easily. Here’s the general syntax that combines:
 

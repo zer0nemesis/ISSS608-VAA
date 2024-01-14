@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#beyond-single-graph" id="toc-beyond-single-graph" class="nav-link" data-scroll-target="#beyond-single-graph"><span class="header-section-number">5</span> <strong>Beyond Single Graph</strong></a>
   <ul class="collapse">
-  <li><a href="#creating-composite-graphics-pathwork-methods" id="toc-creating-composite-graphics-pathwork-methods" class="nav-link" data-scroll-target="#creating-composite-graphics-pathwork-methods"><span class="header-section-number">5.1</span> <strong>Creating Composite Graphics: pathwork methods</strong> <img src="data/patchwork.png" width="30" height="35"></a></li>
+  <li><a href="#creating-composite-graphics-patchwork-methods" id="toc-creating-composite-graphics-patchwork-methods" class="nav-link" data-scroll-target="#creating-composite-graphics-patchwork-methods"><span class="header-section-number">5.1</span> <strong>Creating Composite Graphics: patchwork methods</strong></a></li>
   <li><a href="#combining-two-ggplot2-graphs" id="toc-combining-two-ggplot2-graphs" class="nav-link" data-scroll-target="#combining-two-ggplot2-graphs"><span class="header-section-number">5.2</span> <strong>Combining two ggplot2 graphs</strong></a></li>
   <li><a href="#combining-three-ggplot2-graphs" id="toc-combining-three-ggplot2-graphs" class="nav-link" data-scroll-target="#combining-three-ggplot2-graphs"><span class="header-section-number">5.3</span> <strong>Combining three ggplot2 graphs</strong></a></li>
   <li><a href="#creating-figure-with-insert" id="toc-creating-figure-with-insert" class="nav-link" data-scroll-target="#creating-figure-with-insert"><span class="header-section-number">5.4</span> <strong>Creating figure with insert</strong></a></li>
@@ -542,9 +542,9 @@ What can we learn from the code chunk above:
 </div>
 </div>
 </div>
-<section id="creating-composite-graphics-pathwork-methods" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="creating-composite-graphics-pathwork-methods"><span class="header-section-number">5.1</span> <strong>Creating Composite Graphics: pathwork methods</strong> <img src="data/patchwork.png" width="30" height="35"></h2>
-<p>There are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as <a href="https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html"><code>grid.arrange()</code></a> of <strong>gridExtra</strong> package and <a href="https://wilkelab.org/cowplot/reference/plot_grid.html"><code>plot_grid()</code></a> of <a href="https://wilkelab.org/cowplot/"><strong>cowplot</strong></a> package. In this section, I am going to shared with you an ggplot2 extension called <a href="https://patchwork.data-imaginist.com/"><strong>patchwork</strong></a> which is specially designed for combining separate ggplot2 graphs into a single figure.</p>
+<section id="creating-composite-graphics-patchwork-methods" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="creating-composite-graphics-patchwork-methods"><span class="header-section-number">5.1</span> <strong>Creating Composite Graphics: patchwork methods</strong></h2>
+<p>There are several ggplot2 extension’s functions support the needs to prepare composite figure by combining several graphs such as <a href="https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html"><code>grid.arrange()</code></a> of <strong>gridExtra</strong> package and <a href="https://wilkelab.org/cowplot/reference/plot_grid.html"><code>plot_grid()</code></a> of <a href="https://wilkelab.org/cowplot/"><strong>cowplot</strong></a> package. In this section, I am going to shared with you an ggplot2 extension called <a href="https://patchwork.data-imaginist.com/"><strong>patchwork</strong></a> <img src="data/patchwork.png" width="30" height="35"> which is specially designed for combining separate ggplot2 graphs into a single figure.</p>
 <p>Patchwork package has a very simple syntax where we can create layouts super easily. Here’s the general syntax that combines:</p>
 <ul>
 <li><p>Two-Column Layout using the Plus Sign +.</p></li>
