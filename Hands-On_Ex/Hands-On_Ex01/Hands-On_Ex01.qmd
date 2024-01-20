@@ -308,6 +308,10 @@ ggplot(data=exam_data,
   geom_violin()
 ```
 
+::: callout-tip
+*You can also include the boxplot together with the violin plot for a better visual data representation.*
+:::
+
 ## **7.9 Geometric Objects: geom_point()**
 
 [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html) is especially useful for creating scatterplot.

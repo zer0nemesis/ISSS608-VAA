@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Roger Chen">
-<meta name="dcterms.date" content="2024-01-13">
+<meta name="dcterms.date" content="2024-01-20">
 
-<title>ISSS608-VAA - In-Class Exercise 01: Now You See It!</title>
+<title>ISSS608-VAA - In-Class Exercise 2: Tableau Visualisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -184,12 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome">1. Learning Outcome</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
-  <ul class="collapse">
-  <li><a href="#loading-r-packages" id="toc-loading-r-packages" class="nav-link" data-scroll-target="#loading-r-packages">2.1 Loading R Packages</a></li>
-  <li><a href="#importing-pisa-data" id="toc-importing-pisa-data" class="nav-link" data-scroll-target="#importing-pisa-data">2.2 Importing PISA Data</a></li>
-  </ul></li>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span class="header-section-number">1</span> Learning Outcome</a></li>
   </ul>
 </nav>
     </div>
@@ -198,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">In-Class Exercise 01: Now You See It!</h1>
+<h1 class="title">In-Class Exercise 2: Tableau Visualisation</h1>
 </div>
 
 
@@ -215,14 +176,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 13, 2024</p>
+      <p class="date">January 20, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 14, 2024</p>
+      <p class="date-modified">January 20, 2024</p>
     </div>
   </div>
     
@@ -231,64 +192,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="learning-outcome" class="level1">
-<h1>1. Learning Outcome</h1>
-<p>This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds.</p>
-</section>
-<section id="getting-started" class="level1">
-<h1>2. Getting Started</h1>
-<section id="loading-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="loading-r-packages">2.1 Loading R Packages</h2>
-<p>In this in-class exercise, two R packages will be used. They are:</p>
+<section id="learning-outcome" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Learning Outcome</h1>
+<p>An introduction on using Tableau to visualise data, and publishing it on the website.</p>
+<p>Importing the data</p>
+<p>linking tables</p>
+<p>using the sheet function</p>
 <ul>
-<li><p><a href="https://www.tidyverse.org/">tidyverse</a>, and</p></li>
-<li><p><a href="https://haven.tidyverse.org/">haven</a>.</p></li>
-</ul>
-<p>The code chunk used is as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="importing-pisa-data" class="level2">
-<h2 class="anchored" data-anchor-id="importing-pisa-data">2.2 Importing PISA Data</h2>
-<p>The code chunk below uses the <a href="https://haven.tidyverse.org/reference/read_sas.html">read_sas</a> function from the haven package to import PISA data into R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>stu_qqq <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"data/stu_qqq.sas7bdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>As there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the <a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a> function from the dpylr package.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG <span class="ot">&lt;-</span> stu_qqq <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CNT <span class="sc">==</span> <span class="st">"SGP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We will then save the file as a rds document in the data folder, using <a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds</a> function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(stu_qqq_SG, </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"data/stu_qqq_SG.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We will now import the file back into the R enviroment using the <a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds</a> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>stu_qqq <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/stu_qqq_SG.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Remember to:</p>
+<li><p>computing totals</p></li>
+<li><p>Adding reference line</p></li>
+<li><p>adjusting the size of graph lines</p></li>
+<li><p>dual axis plot</p>
 <ul>
-<li><p>delete the 3.9GB source file from the data folder</p></li>
-<li><p>include #| eval: false into the first three code chunks, to faciliate the subsequent push to Github.</p></li>
+<li><p>editing colours from range to bi-colour</p></li>
+<li><p>synchronise axis</p></li>
+</ul></li>
+<li><p>copying graph images to ppt</p></li>
+<li><p>Saving to Tableau Public</p></li>
 </ul>
-</div>
-</div>
+<p>You can access In-Class_Ex02 Tableau webpage <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes">here</a>.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

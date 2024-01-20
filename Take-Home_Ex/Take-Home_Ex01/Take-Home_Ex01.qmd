@@ -122,8 +122,16 @@ sum(is.na(stu_qqq_SG))
 ```
 
 ::: callout-note
-4,168,500 missing values were found.
+4,168,500 missing values were found. A detailed look into these missing values will be necessary to understand its impact on the relationship between Singapore students’ performance in mathematics, reading, and science with schools, gender and socioeconomic status of the students.
 :::
 :::
 
+can take average, can also follow PISA calculation for scores
+
+while u can use the ESCS score, also need to go deeper to understand the reasons
+
 # References
+
+1.  OECD (2019), “How PISA results are reported: What is a PISA score?”, in PISA 2018 Results (Volume I):
+    What Students Know and Can Do, OECD Publishing, Paris
+2.  

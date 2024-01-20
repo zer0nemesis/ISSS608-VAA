@@ -1,0 +1,40 @@
+---
+title: "In-Class Exercise 2: Tableau Visualisation"
+author: "Roger Chen"
+date: "20 Jan 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+number-sections: true
+editor: visual
+---
+
+# Learning Outcome
+
+An introduction on using Tableau to visualise data, and publishing it on the website.
+
+Importing the data
+
+linking tables
+
+using the sheet function
+
+-   computing totals
+
+-   Adding reference line
+
+-   adjusting the size of graph lines
+
+-   dual axis plot
+
+    -   editing colours from range to bi-colour
+
+    -   synchronise axis
+
+-   copying graph images to ppt
+
+-   Saving to Tableau Public
+
+You can access In-Class_Ex02 Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes).
