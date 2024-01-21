@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 21, 2024</p>
+      <p class="date-modified">January 22, 2024</p>
     </div>
   </div>
     
@@ -817,6 +817,19 @@ Important
 <p><img src="Take-Home_Ex01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As mentioned previously, there were 47 students who did not have a socioeconomic score. These students have been ommitted to prevent distortions to the analysis.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -827,8 +840,8 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Common to all Math, Reading and Science, the scatter plots suggest a positive correlation between socioeconomically status with performance scores.</p>
-<p>Specific to Math and Science, the distributions for male students are skewed more to the left, while the distributions for female students are more normal. This may imply that a higher percentage of male students perform better in Math and Science, as compared to female students.</p>
+<p>Common to all Math, Reading and Science, the scatter plots generally suggest a positive correlation between socioeconomically status with performance scores.</p>
+<p>An interesting insight is that there is a steep decline in the performance when the socioeconomical score exceed the value of 2. This may suggest either the presense of outliers, or that students with exceedingly high socioeconomic status will fail to perform as well as their peers.</p>
 </div>
 </div>
 </div>
@@ -860,9 +873,7 @@ Important
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Science Scores by Socioeconomical Status"</span>, <span class="at">x =</span> <span class="st">"Socioeconomical Status"</span>, <span class="at">y =</span> <span class="st">"Mean Science Score"</span>)  <span class="sc">+</span></span>
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()</span>
 <span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>e1</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>e2</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>e3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(e1, e2, e3, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

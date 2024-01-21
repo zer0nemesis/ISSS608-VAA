@@ -436,17 +436,20 @@ e3 <- ggplot(stu_qqq_SG_ESCS,
 
 grid.arrange(e1, e2, e3, ncol = 3)
 ```
-::: callout-important
-Common to all Math, Reading and Science, the scatter plots suggest a positive correlation between socioeconomically status with performance scores.
+::: callout-note
+As mentioned previously, there were 47 students who did not have a socioeconomic score. These students have been ommitted to prevent distortions to the analysis.    
+:::
 
-Specific to Math and Science, the distributions for male students are skewed more to the left, while the distributions for female students are more normal. This may imply that a higher percentage of male students perform better in Math and Science, as compared to female students.    
+::: callout-important
+Common to all Math, Reading and Science, the scatter plots generally suggest a positive correlation between socioeconomically status with performance scores.
+
+An interesting insight is that there is a steep decline in the performance when the socioeconomical score exceed the value of 2. This may suggest either the presense of outliers, or that students with exceedingly high socioeconomic status will fail to perform as well as their peers.    
 :::
 
 ## Code
 
 ```{r}
 #| eval: false
-
 
 stu_qqq_SG_ESCS <- stu_qqq_SG[!is.na(stu_qqq_SG$ESCS),]
 
@@ -474,9 +477,7 @@ e3 <- ggplot(stu_qqq_SG_ESCS,
   labs(title = "Distribution of Science Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Science Score")  +
   theme_economist()
 
-e1
-e2
-e3
+grid.arrange(e1, e2, e3, ncol = 3)
 ```
 :::
 
