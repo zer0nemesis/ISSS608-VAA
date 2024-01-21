@@ -647,4 +647,3 @@ grid.arrange(e1, e2, e3, ncol = 3)
 # References
 
 1.  OECD (2019), “How PISA results are reported: What is a PISA score?”, in PISA 2018 Results (Volume I): What Students Know and Can Do, OECD Publishing, Paris
-2.  
