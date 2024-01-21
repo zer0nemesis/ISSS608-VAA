@@ -147,7 +147,7 @@ A total of 47 missing values were found. A deeper study revealed that all 47 mis
 ::: panel-tabset
 ## Plot
 
-```{r}
+```{r, fig.height=8}
 #| echo: false
 
 ## Plot
@@ -159,8 +159,9 @@ h1 <- ggplot(data = stu_qqq_SG,
                  boundary = 850,
                  color="black", 
                  fill="aquamarine") + 
-  coord_cartesian(xlim=c(0,850)) +
-  ggtitle("Distribution of Maths Scores")
+  coord_cartesian(xlim=c(150,850)) +
+  ggtitle("Distribution of Maths Scores") +
+  theme_economist()
 
 meanreadscore = rowMeans(select(stu_qqq_SG, PV1READ : PV10READ))
 stu_qqq_SG$meanreadscore = meanreadscore
@@ -169,9 +170,10 @@ h2 <- ggplot(data = stu_qqq_SG,
   geom_histogram(bins=20, 
                  boundary = 850,
                  color="black", 
-                 fill="aquamarine") + 
-  coord_cartesian(xlim=c(0,850)) +
-  ggtitle("Distribution of Reading Scores")
+                 fill="cornsilk") + 
+  coord_cartesian(xlim=c(150,850)) +
+  ggtitle("Distribution of Reading Scores") +
+  theme_economist()
 
 meansciescore = rowMeans(select(stu_qqq_SG, PV1SCIE : PV10SCIE))
 stu_qqq_SG$meansciescore = meansciescore
@@ -180,9 +182,10 @@ h3 <- ggplot(data = stu_qqq_SG,
   geom_histogram(bins=20, 
                  boundary = 850,
                  color="black", 
-                 fill="aquamarine") + 
-  coord_cartesian(xlim=c(0,850)) +
-  ggtitle("Distribution of Science Scores")
+                 fill="darkolivegreen2") + 
+  coord_cartesian(xlim=c(150,850)) +
+  ggtitle("Distribution of Science Scores") +
+  theme_economist()
 
 ((h1 / h2) / h3) + 
   plot_annotation(tag_levels = 'I')
@@ -205,8 +208,9 @@ h1 <- ggplot(data = stu_qqq_SG,
                  boundary = 850,
                  color="black", 
                  fill="aquamarine") + 
-  coord_cartesian(xlim=c(0,850)) +
-  ggtitle("Distribution of Maths Scores")
+  coord_cartesian(xlim=c(150,850)) +
+  ggtitle("Distribution of Maths Scores") +
+  theme_economist()
 
 meanreadscore = rowMeans(select(stu_qqq_SG, PV1READ : PV10READ))
 stu_qqq_SG$meanreadscore = meanreadscore
@@ -215,9 +219,10 @@ h2 <- ggplot(data = stu_qqq_SG,
   geom_histogram(bins=20, 
                  boundary = 850,
                  color="black", 
-                 fill="aquamarine") + 
-  coord_cartesian(xlim=c(0,850)) +
-  ggtitle("Distribution of Reading Scores")
+                 fill="cornsilk") + 
+  coord_cartesian(xlim=c(150,850)) +
+  ggtitle("Distribution of Reading Scores") +
+  theme_economist()
 
 meansciescore = rowMeans(select(stu_qqq_SG, PV1SCIE : PV10SCIE))
 stu_qqq_SG$meansciescore = meansciescore
@@ -226,9 +231,10 @@ h3 <- ggplot(data = stu_qqq_SG,
   geom_histogram(bins=20, 
                  boundary = 850,
                  color="black", 
-                 fill="aquamarine") + 
-  coord_cartesian(xlim=c(0,850)) +
-  ggtitle("Distribution of Science Scores")
+                 fill="darkolivegreen2") + 
+  coord_cartesian(xlim=c(150,850)) +
+  ggtitle("Distribution of Science Scores") +
+  theme_economist()
 
 ((h1 / h2) / h3) + 
   plot_annotation(tag_levels = 'I')
@@ -373,35 +379,12 @@ Even though we need to scroll to view the math/ reading/ science performance of 
 -   CAT 3 - performance score generally between 200 and 450
 :::
 
-## Code for Plot 1
+## Code
 
 ```{r}
 #| eval: false
 
-ggplot(stu_qqq_SG, 
-       aes(x = meanmathscore, 
-           y = CNTSCHID,
-           group = CNTSCHID)) +
-  geom_density_ridges(
-    scale = .05,
-    rel_min_height = 0.01,
-    bandwidth = 0.4,
-    fill = lighten("#7097BB", .3),
-    color = "white"
-  ) +
-  scale_x_continuous(
-    name = "Mean Maths Scores",
-    expand = c(0, 0)
-    ) +
-  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6)))
-```
-
-##Code for Plot 2
-
-```{r}
-#| eval: false
-
-ggplot(stu_qqq_SG, 
+s1 <- ggplot(stu_qqq_SG, 
        aes(x = meanmathscore, 
            y = CNTSCHID,
            group = CNTSCHID,
@@ -417,6 +400,42 @@ ggplot(stu_qqq_SG,
   ) +
   scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
   theme_ridges()
+
+s2 <- ggplot(stu_qqq_SG, 
+       aes(x = meanreadscore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Reading Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+s3 <- ggplot(stu_qqq_SG, 
+       aes(x = meansciescore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Science Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+grid.arrange(s1, s2, s3, ncol = 3)
 ```
 :::
 
@@ -440,7 +459,8 @@ g1 <- ggplot(stu_qqq_SG,
                justification = -0.1,
                .width = 0,
                scale = .8,
-               point_colour = NA) +
+               point_colour = NA,
+               slab_fill = "aquamarine") +
   geom_boxplot(width = .05,
                outlier.shape = NA) +
   stat_dots(side = "left", 
@@ -458,7 +478,8 @@ g2 <- ggplot(stu_qqq_SG,
                justification = -0.1,
                .width = 0,
                scale = .8,
-               point_colour = NA) +
+               point_colour = NA,
+               slab_fill = "cornsilk") +
   geom_boxplot(width = .05,
                outlier.shape = NA) +
   stat_dots(side = "left", 
@@ -476,7 +497,8 @@ g3 <- ggplot(stu_qqq_SG,
                justification = -0.1,
                .width = 0,
                scale = .8,
-               point_colour = NA) +
+               point_colour = NA,
+               slab_fill = "darkolivegreen2") +
   geom_boxplot(width = .05,
                outlier.shape = NA) +
   stat_dots(side = "left", 
@@ -512,7 +534,8 @@ g1 <- ggplot(stu_qqq_SG,
                justification = -0.1,
                .width = 0,
                scale = .8,
-               point_colour = NA) +
+               point_colour = NA,
+               slab_fill = "aquamarine") +
   geom_boxplot(width = .05,
                outlier.shape = NA) +
   stat_dots(side = "left", 
@@ -530,7 +553,8 @@ g2 <- ggplot(stu_qqq_SG,
                justification = -0.1,
                .width = 0,
                scale = .8,
-               point_colour = NA) +
+               point_colour = NA,
+               slab_fill = "cornsilk") +
   geom_boxplot(width = .05,
                outlier.shape = NA) +
   stat_dots(side = "left", 
@@ -548,7 +572,8 @@ g3 <- ggplot(stu_qqq_SG,
                justification = -0.1,
                .width = 0,
                scale = .8,
-               point_colour = NA) +
+               point_colour = NA,
+               slab_fill = "darkolivegreen2") +
   geom_boxplot(width = .05,
                outlier.shape = NA) +
   stat_dots(side = "left", 
@@ -575,32 +600,32 @@ stu_qqq_SG_ESCS <- stu_qqq_SG[!is.na(stu_qqq_SG$ESCS),]
 e1 <- ggplot(stu_qqq_SG_ESCS,
              aes(x = ESCS,
                  y = meanmathscore)) +
-  geom_point() +
+  geom_point(color = "aquamarine") +
   geom_smooth(linewidth=0.5) +
   labs(title = "Distribution of Math Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Math Score")  +
-  theme_economist()
+  theme_economist() + theme(plot.title = element_text(size = 10))
 
 e2 <- ggplot(stu_qqq_SG_ESCS,
              aes(x = ESCS,
                  y = meanreadscore)) +
-  geom_point() +
+  geom_point(color = "cornsilk") +
   geom_smooth(linewidth=0.5) +
   labs(title = "Distribution of Reading Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Reading Score")  +
-  theme_economist()
+  theme_economist() + theme(plot.title = element_text(size = 10))
 
 e3 <- ggplot(stu_qqq_SG_ESCS,
              aes(x = ESCS,
                  y = meansciescore)) +
-  geom_point() +
+  geom_point(color = "darkolivegreen2") +
   geom_smooth(linewidth=0.5) +
   labs(title = "Distribution of Science Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Science Score")  +
-  theme_economist()
+  theme_economist() + theme(plot.title = element_text(size = 10))
 
 grid.arrange(e1, e2, e3, ncol = 3)
 ```
 
 ::: callout-note
-As mentioned previously, there were 47 students who did not have a socioeconomic score. These students have been ommitted to prevent distortions to the analysis.
+As mentioned previously, there were 47 students who did not have a socioeconomic score. These students have been omitted to prevent distortions to the analysis.
 :::
 
 ::: callout-important
