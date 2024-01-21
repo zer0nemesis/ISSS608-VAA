@@ -147,7 +147,7 @@ A total of 47 missing values were found. A deeper study revealed that all 47 mis
 ::: panel-tabset
 ## Plot
 
-```{r, fig.height=8}
+```{r, fig.height=6}
 #| echo: false
 
 ## Plot
