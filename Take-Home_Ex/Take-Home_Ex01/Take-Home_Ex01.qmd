@@ -41,7 +41,7 @@ The code chunk used is as follows:
 
 ```{r}
 pacman::p_load(tidyverse, haven, knitr, kableExtra, intsvy, ggrepel, patchwork, 
-               ggthemes, hrbrthemes, ggdist, ggridges,colorspace, gridExtra)
+               ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra)
 ```
 
 ## Importing PISA 2022 Data
@@ -241,20 +241,111 @@ h3 <- ggplot(data = stu_qqq_SG,
 We will examine if there is any relationship between each of the performances with Schools.
 
 ::: panel-tabset
-## Plot
+## Plot 1 - Overview
 
 ```{r}
 #| echo: false
 
+ggplot(stu_qqq_SG, 
+       aes(x = meanmathscore, 
+           y = CNTSCHID,
+           group = CNTSCHID)) +
+  geom_density_ridges(
+    scale = .05,
+    rel_min_height = 0.01,
+    bandwidth = 0.4,
+    fill = lighten("#7097BB", .3),
+    color = "white"
+  ) +
+  scale_x_continuous(
+    name = "Mean Maths Scores",
+    expand = c(0, 0)
+    ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6)))
+```
+
+::: callout-important
+Due to the overwhelming number of schools in the study, it is not meaningful to squeeze in all the schools within one page. Thus a zoom-in version is provided on the next tab.
+:::
+
+## Plot 2 - Zoom In View
+
+```{r, fig.height=20}
+#| echo: false
+
+ggplot(stu_qqq_SG, 
+       aes(x = meanmathscore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Math Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
 
 ```
 
-## Code
+::: callout-important
+Even though we need to scroll to view the math performance of the schools, we can see there the schools generally fall into one of three categories:
+
+-   CAT 1 - performance score generally between 600 and \>800
+
+-   CAT 2 - performance score generally between 450 and 700
+
+-   CAT 3 - performance score generally between 200 and 450
+:::
+
+## Code for Plot 1
 
 ```{r}
 #| eval: false
 
+ggplot(stu_qqq_SG, 
+       aes(x = meanmathscore, 
+           y = CNTSCHID,
+           group = CNTSCHID)) +
+  geom_density_ridges(
+    scale = .05,
+    rel_min_height = 0.01,
+    bandwidth = 0.4,
+    fill = lighten("#7097BB", .3),
+    color = "white"
+  ) +
+  scale_x_continuous(
+    name = "Mean Maths Scores",
+    expand = c(0, 0)
+    ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6)))
+```
 
+##Code for Plot 2
+
+```{r}
+#| eval: false
+
+ggplot(stu_qqq_SG, 
+       aes(x = meanmathscore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Math Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
 ```
 :::
 
@@ -326,12 +417,12 @@ g3 <- ggplot(stu_qqq_SG,
 
 grid.arrange(g1, g2, g3)
 ```
+
 ::: callout-important
 Common to all Math, Reading and Science, the distributions for male students are wider than the distributions for female students. This indicate a higher variance among male students as compared to the female students.
 
-Specific to Math and Science, the distributions for male students are skewed more to the left, while the distributions for female students are more normal. This may imply that a higher percentage of male students perform better in Math and Science, as compared to female students.    
+Specific to Math and Science, the distributions for male students are skewed more to the left, while the distributions for female students are more normal. This may imply that a higher percentage of male students perform better in Math and Science, as compared to female students.
 :::
-
 
 ## Code
 
@@ -436,14 +527,15 @@ e3 <- ggplot(stu_qqq_SG_ESCS,
 
 grid.arrange(e1, e2, e3, ncol = 3)
 ```
+
 ::: callout-note
-As mentioned previously, there were 47 students who did not have a socioeconomic score. These students have been ommitted to prevent distortions to the analysis.    
+As mentioned previously, there were 47 students who did not have a socioeconomic score. These students have been ommitted to prevent distortions to the analysis.
 :::
 
 ::: callout-important
 Common to all Math, Reading and Science, the scatter plots generally suggest a positive correlation between socioeconomically status with performance scores.
 
-An interesting insight is that there is a steep decline in the performance when the socioeconomical score exceed the value of 2. This may suggest either the presense of outliers, or that students with exceedingly high socioeconomic status will fail to perform as well as their peers.    
+An interesting insight is that there is a steep decline in the performance when the socioeconomical score exceed the value of 2. This may suggest either the presense of outliers, or that students with exceedingly high socioeconomic status will fail to perform as well as their peers.
 :::
 
 ## Code
@@ -480,7 +572,6 @@ e3 <- ggplot(stu_qqq_SG_ESCS,
 grid.arrange(e1, e2, e3, ncol = 3)
 ```
 :::
-
 
 # References
 

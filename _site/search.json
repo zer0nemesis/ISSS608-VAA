@@ -11,7 +11,7 @@
     "href": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#loading-r-packages",
     "title": "Take Home Exercise 01: Creating Data Visualisation Beyond Default",
     "section": "3.1 Loading R Packages",
-    "text": "3.1 Loading R Packages\nIn this take-home exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven, knitr, kableExtra, intsvy, ggrepel, patchwork, \n               ggthemes, hrbrthemes, ggdist, ggridges,colorspace, gridExtra)"
+    "text": "3.1 Loading R Packages\nIn this take-home exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven, knitr, kableExtra, intsvy, ggrepel, patchwork, \n               ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra)"
   },
   {
     "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html#importing-pisa-2022-data",
