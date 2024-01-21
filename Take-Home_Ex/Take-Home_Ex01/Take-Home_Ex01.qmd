@@ -243,37 +243,10 @@ We will examine if there is any relationship between each of the performances wi
 ::: panel-tabset
 ## Plot 1 - Overview
 
-```{r}
+```{r, fig.width=20, fig.height=10}
 #| echo: false
 
-ggplot(stu_qqq_SG, 
-       aes(x = meanmathscore, 
-           y = CNTSCHID,
-           group = CNTSCHID)) +
-  geom_density_ridges(
-    scale = .05,
-    rel_min_height = 0.01,
-    bandwidth = 0.4,
-    fill = lighten("#7097BB", .3),
-    color = "white"
-  ) +
-  scale_x_continuous(
-    name = "Mean Maths Scores",
-    expand = c(0, 0)
-    ) +
-  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6)))
-```
-
-::: callout-important
-Due to the overwhelming number of schools in the study, it is not meaningful to squeeze in all the schools within one page. Thus a zoom-in version is provided on the next tab.
-:::
-
-## Plot 2 - Zoom In View
-
-```{r, fig.height=20}
-#| echo: false
-
-ggplot(stu_qqq_SG, 
+s1 <- ggplot(stu_qqq_SG, 
        aes(x = meanmathscore, 
            y = CNTSCHID,
            group = CNTSCHID,
@@ -290,10 +263,108 @@ ggplot(stu_qqq_SG,
   scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
   theme_ridges()
 
+s2 <- ggplot(stu_qqq_SG, 
+       aes(x = meanreadscore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Reading Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+s3 <- ggplot(stu_qqq_SG, 
+       aes(x = meansciescore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Science Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+grid.arrange(s1, s2, s3, ncol = 3)
 ```
 
 ::: callout-important
-Even though we need to scroll to view the math performance of the schools, we can see there the schools generally fall into one of three categories:
+Due to the overwhelming number of schools in the study, it is not meaningful to squeeze in all the schools within one page. Thus a zoom-in version is provided on the next tab.
+:::
+
+## Plot 2 - Zoom In View
+
+```{r, fig.width= 20, fig.height=60}
+#| echo: false
+
+s1z <- ggplot(stu_qqq_SG, 
+       aes(x = meanmathscore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Math Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+s2z <- ggplot(stu_qqq_SG, 
+       aes(x = meanreadscore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Reading Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+s3z <- ggplot(stu_qqq_SG, 
+       aes(x = meansciescore, 
+           y = CNTSCHID,
+           group = CNTSCHID,
+           fill = after_stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  scale_x_continuous(
+    name = "Science Scores",
+    expand = c(0, 0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+
+grid.arrange(s1z, s2z, s3z, ncol = 3)
+```
+
+::: callout-important
+Even though we need to scroll to view the math/ reading/ science performance of the schools, we can observe that schools who do not do well in one subject, also do not do well for the other two subjects. The converse is also true, in that schools who do exceedingly well in one subject also do well in the other two subjects. Thus, we can see that the schools generally fall into one of three categories:
 
 -   CAT 1 - performance score generally between 600 and \>800
 
