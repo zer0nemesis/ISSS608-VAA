@@ -40,7 +40,8 @@ In this take-home exercise, two R packages will be used. They are:
 The code chunk used is as follows:
 
 ```{r}
-pacman::p_load(tidyverse, haven, knitr, kableExtra)
+pacman::p_load(tidyverse, haven, knitr, kableExtra, intsvy, ggrepel, patchwork, 
+               ggthemes, hrbrthemes, ggdist, ggridges,colorspace, gridExtra)
 ```
 
 ## Importing PISA 2022 Data
@@ -76,7 +77,7 @@ We will now import the file back into the R enviroment using the [read_rds](http
 stu_qqq_SG <- read_rds("data/stu_qqq_SG.rds")
 ```
 
-::: callout-important
+::: callout-warning
 Remember to:
 
 -   delete the 3.9GB source file from the data folder; and
@@ -95,6 +96,10 @@ Displaying the first five rows using head():
 head(stu_qqq_SG,5)
 ```
 
+::: callout-note
+At first look,the data table seemed to be in order.
+:::
+
 ## Dataset Structure
 
 Checking the structure of stu_qqq_SG using str():
@@ -102,6 +107,10 @@ Checking the structure of stu_qqq_SG using str():
 ```{r}
 str(stu_qqq_SG) 
 ```
+
+::: callout-note
+A examination of the data structure revealed that the data types are all correct.
+:::
 
 ## Data Health
 
@@ -115,23 +124,364 @@ stu_qqq_SG[duplicated(stu_qqq_SG),]
 No duplicated rows were found.
 :::
 
-Checking for missing values:
+Checking for missing values for school ID, gender, social-economical status, and plausible values for maths, reading and science:
 
 ```{r}
-sum(is.na(stu_qqq_SG))
+stu <- c(stu_qqq_SG$CNTSCHID, stu_qqq_SG$ST004D01T, stu_qqq_SG$ESCS, 
+         stu_qqq_SG$PV1MATH, stu_qqq_SG$PV2MATH, stu_qqq_SG$PV3MATH, stu_qqq_SG$PV4MATH, stu_qqq_SG$PV5MATH, stu_qqq_SG$PV6MATH, stu_qqq_SG$PV7MATH, stu_qqq_SG$PV8MATH, stu_qqq_SG$PV9MATH, stu_qqq_SG$PV10MATH, 
+         stu_qqq_SG$PV1READ, stu_qqq_SG$PV2READ, stu_qqq_SG$PV3READ, stu_qqq_SG$PV4READ, stu_qqq_SG$PV5READ, stu_qqq_SG$PV6READ, stu_qqq_SG$PV7READ, stu_qqq_SG$PV8READ, stu_qqq_SG$PV9READ, stu_qqq_SG$PV10READ,
+         stu_qqq_SG$PV1SCIE, stu_qqq_SG$PV2SCIE, stu_qqq_SG$PV3SCIE, stu_qqq_SG$PV4SCIE, stu_qqq_SG$PV5SCIE, stu_qqq_SG$PV6SCIE, stu_qqq_SG$PV7SCIE, stu_qqq_SG$PV8SCIE, stu_qqq_SG$PV9SCIE, stu_qqq_SG$PV10SCIE)
+  
+sum(is.na(stu))
+
+sum(is.na(stu_qqq_SG$ESCS))
 ```
 
 ::: callout-note
-4,168,500 missing values were found. A detailed look into these missing values will be necessary to understand its impact on the relationship between Singapore students’ performance in mathematics, reading, and science with schools, gender and socioeconomic status of the students.
+A total of 47 missing values were found. A deeper study revealed that all 47 missing values were from "socioeconomic status", which constitutes 0.7% of the dataset. To maintain the integrity of the analysis, these 47 students will be omitted when comparing PISA performance to socioeconomic status.
 :::
 :::
 
-can take average, can also follow PISA calculation for scores
+# Distribution of Mean Math/ Reading/ Science Scores
 
-while u can use the ESCS score, also need to go deeper to understand the reasons
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+
+## Plot
+meanmathscore = rowMeans(select(stu_qqq_SG, PV1MATH : PV10MATH))
+stu_qqq_SG$meanmathscore <- meanmathscore
+h1 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanmathscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(0,850)) +
+  ggtitle("Distribution of Maths Scores")
+
+meanreadscore = rowMeans(select(stu_qqq_SG, PV1READ : PV10READ))
+stu_qqq_SG$meanreadscore = meanreadscore
+h2 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanreadscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(0,850)) +
+  ggtitle("Distribution of Reading Scores")
+
+meansciescore = rowMeans(select(stu_qqq_SG, PV1SCIE : PV10SCIE))
+stu_qqq_SG$meansciescore = meansciescore
+h3 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meansciescore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(0,850)) +
+  ggtitle("Distribution of Science Scores")
+
+((h1 / h2) / h3) + 
+  plot_annotation(tag_levels = 'I')
+```
+
+::: callout-important
+All three mean performance scores showed relatively "normal" distribution curves, with the 50th percentile around the score of 600.
+:::
+
+## Code
+
+```{r}
+#| eval: false
+
+meanmathscore = rowMeans(select(stu_qqq_SG, PV1MATH : PV10MATH))
+stu_qqq_SG$meanmathscore <- meanmathscore
+h1 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanmathscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(0,850)) +
+  ggtitle("Distribution of Maths Scores")
+
+meanreadscore = rowMeans(select(stu_qqq_SG, PV1READ : PV10READ))
+stu_qqq_SG$meanreadscore = meanreadscore
+h2 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanreadscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(0,850)) +
+  ggtitle("Distribution of Reading Scores")
+
+meansciescore = rowMeans(select(stu_qqq_SG, PV1SCIE : PV10SCIE))
+stu_qqq_SG$meansciescore = meansciescore
+h3 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meansciescore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(0,850)) +
+  ggtitle("Distribution of Science Scores")
+
+((h1 / h2) / h3) + 
+  plot_annotation(tag_levels = 'I')
+
+```
+:::
+
+# Relationship between Performances with Schools
+
+We will examine if there is any relationship between each of the performances with Schools.
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+
+
+```
+
+## Code
+
+```{r}
+#| eval: false
+
+
+```
+:::
+
+# Relationship between Performances with Gender
+
+::: panel-tabset
+## Plot
+
+```{r, fig.height=9}
+#| echo: false
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 1, "Female")
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 2, "Male")
+
+g1 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanmathscore)) +
+  labs(title = "Distribution of Math Scores by Gender", x = "Gender", y = "Mean Math Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA) +
+  geom_boxplot(width = .05,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+  coord_flip() +
+  theme_economist()
+
+g2 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanreadscore)) +
+  labs(title = "Distribution of Reading Scores by Gender", x = "Gender", y = "Mean Reading Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA) +
+  geom_boxplot(width = .05,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+  coord_flip() +
+  theme_economist()
+
+g3 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meansciescore)) +
+  labs(title = "Distribution of Science Scores by Gender", x = "Gender", y = "Mean Science Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA) +
+  geom_boxplot(width = .05,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05,
+            binwidth = 4,
+            dotsize = .5) +
+  coord_flip() +
+  theme_economist()
+
+grid.arrange(g1, g2, g3)
+```
+::: callout-important
+Common to all Math, Reading and Science, the distributions for male students are wider than the distributions for female students. This indicate a higher variance among male students as compared to the female students.
+
+Specific to Math and Science, the distributions for male students are skewed more to the left, while the distributions for female students are more normal. This may imply that a higher percentage of male students perform better in Math and Science, as compared to female students.    
+:::
+
+
+## Code
+
+```{r}
+#| eval: false
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 1, "Female")
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 2, "Male")
+
+g1 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanmathscore)) +
+  labs(title = "Distribution of Math Scores by Gender", x = "Gender", y = "Mean Math Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA) +
+  geom_boxplot(width = .05,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+  coord_flip() +
+  theme_economist()
+
+g2 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanreadscore)) +
+  labs(title = "Distribution of Reading Scores by Gender", x = "Gender", y = "Mean Reading Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA) +
+  geom_boxplot(width = .05,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+  coord_flip() +
+  theme_economist()
+
+g3 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meansciescore)) +
+  labs(title = "Distribution of Science Scores by Gender", x = "Gender", y = "Mean Science Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA) +
+  geom_boxplot(width = .05,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05,
+            binwidth = 4,
+            dotsize = .5) +
+  coord_flip() +
+  theme_economist()
+
+grid.arrange(g1, g2, g3)
+```
+:::
+
+# Relationship between Performances with Socio Economic Status
+
+::: panel-tabset
+## Plot
+
+```{r, fig.width= 15}
+#| echo: false
+
+stu_qqq_SG_ESCS <- stu_qqq_SG[!is.na(stu_qqq_SG$ESCS),]
+
+e1 <- ggplot(stu_qqq_SG_ESCS,
+             aes(x = ESCS,
+                 y = meanmathscore)) +
+  geom_point() +
+  geom_smooth(linewidth=0.5) +
+  labs(title = "Distribution of Math Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Math Score")  +
+  theme_economist()
+
+e2 <- ggplot(stu_qqq_SG_ESCS,
+             aes(x = ESCS,
+                 y = meanreadscore)) +
+  geom_point() +
+  geom_smooth(linewidth=0.5) +
+  labs(title = "Distribution of Reading Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Reading Score")  +
+  theme_economist()
+
+e3 <- ggplot(stu_qqq_SG_ESCS,
+             aes(x = ESCS,
+                 y = meansciescore)) +
+  geom_point() +
+  geom_smooth(linewidth=0.5) +
+  labs(title = "Distribution of Science Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Science Score")  +
+  theme_economist()
+
+grid.arrange(e1, e2, e3, ncol = 3)
+```
+::: callout-important
+Common to all Math, Reading and Science, the scatter plots suggest a positive correlation between socioeconomically status with performance scores.
+
+Specific to Math and Science, the distributions for male students are skewed more to the left, while the distributions for female students are more normal. This may imply that a higher percentage of male students perform better in Math and Science, as compared to female students.    
+:::
+
+## Code
+
+```{r}
+#| eval: false
+
+
+stu_qqq_SG_ESCS <- stu_qqq_SG[!is.na(stu_qqq_SG$ESCS),]
+
+e1 <- ggplot(stu_qqq_SG_ESCS,
+             aes(x = ESCS,
+                 y = meanmathscore)) +
+  geom_point() +
+  geom_smooth(linewidth=0.5) +
+  labs(title = "Distribution of Math Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Math Score")  +
+  theme_economist()
+
+e2 <- ggplot(stu_qqq_SG_ESCS,
+             aes(x = ESCS,
+                 y = meanreadscore)) +
+  geom_point() +
+  geom_smooth(linewidth=0.5) +
+  labs(title = "Distribution of Reading Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Reading Score")  +
+  theme_economist()
+
+e3 <- ggplot(stu_qqq_SG_ESCS,
+             aes(x = ESCS,
+                 y = meansciescore)) +
+  geom_point() +
+  geom_smooth(linewidth=0.5) +
+  labs(title = "Distribution of Science Scores by Socioeconomical Status", x = "Socioeconomical Status", y = "Mean Science Score")  +
+  theme_economist()
+
+e1
+e2
+e3
+```
+:::
+
 
 # References
 
-1.  OECD (2019), “How PISA results are reported: What is a PISA score?”, in PISA 2018 Results (Volume I):
-    What Students Know and Can Do, OECD Publishing, Paris
+1.  OECD (2019), “How PISA results are reported: What is a PISA score?”, in PISA 2018 Results (Volume I): What Students Know and Can Do, OECD Publishing, Paris
 2.  
