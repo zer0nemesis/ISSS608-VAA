@@ -92,7 +92,7 @@ We will demostrate how to incorporate a dual axis plot. First, we drag the "Prof
 
 From the graph below, we notice that the scales for "Sum(Sales)" and "Sum(Profits)" are not synchronised. It may be difficult for readers to notice the different scales at first glance. Thus we will synchonise the axis by simplying hovering around the "Profit" y-axis, right-click and select "Synchronise Axis".
 
-![](images/clipboard-622984594.png)
+![](images/clipboard-1865991491.png)
 
 ### Editing Graph Colours from Ranged to Bi-Polar
 
