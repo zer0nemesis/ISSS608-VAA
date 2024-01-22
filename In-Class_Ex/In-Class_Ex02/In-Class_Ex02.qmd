@@ -11,9 +11,9 @@ number-sections: true
 editor: visual
 ---
 
-# Learning Outcome
+# ![](images/clipboard-966608310.png)Learning Outcome
 
-An introduction on using Tableau to visualise data, and publishing it on the website. You can access In-Class_Ex02 Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes).
+An introduction on using Tableau to visualise data, and publish it on the website. You can access In-Class_Ex02 Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes).
 
 # Getting Started
 
@@ -70,6 +70,10 @@ To add a reference line, simply hover around the y-axis, right click and select 
 This is what the per pane for "Scope" looks like:
 
 ![](images/clipboard-3254232487.png){fig-align="center"}
+
+You can also customise your own reference line by selecting "custom" under "Line/ Label", and typing in "Avg = \<Value\>".
+
+![](images/clipboard-1473527738.png)
 
 ### Adjusting Graph Lines
 
