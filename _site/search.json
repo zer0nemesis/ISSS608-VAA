@@ -130,7 +130,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#interactive-data-table-dt-package",
     "title": "Hands On Exercise 03: Programming Interactive Data Visualisation with R",
     "section": "8.1 Interactive Data Table: DT package",
-    "text": "8.1 Interactive Data Table: DT package\n\nA wrapper of the JavaScript Library DataTables\nData objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’ (typically via R Markdown or Shiny).\n\n\nDT::datatable(exam_data, class = \"dark display compact\")"
+    "text": "8.1 Interactive Data Table: DT package\n\nA wrapper of the JavaScript Library DataTables\nData objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’ (typically via R Markdown or Shiny).\n\n\nDT::datatable(exam_data, class = \"display compact\", style = \"bootstrap5\")"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html",

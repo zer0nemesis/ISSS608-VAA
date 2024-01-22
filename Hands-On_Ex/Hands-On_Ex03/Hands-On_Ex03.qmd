@@ -751,8 +751,8 @@ highlight_key() simply creates an object of class crosstalk::SharedData. Visit t
 
 ```{r}
 #| column: page
-  
-DT::datatable(exam_data, class = "dark display compact")
+
+DT::datatable(exam_data, class = "display compact", style = "bootstrap5")
 
 ```
 
@@ -763,6 +763,7 @@ DT::datatable(exam_data, class = "dark display compact")
 
 ```{r}
 #| echo: false
+#| column: page
 
 d <- highlight_key(exam_data) 
 p <- ggplot(d, 
@@ -776,7 +777,7 @@ gg <- highlight(ggplotly(p),
                 "plotly_selected")  
 
 crosstalk::bscols(gg,               
-                  DT::datatable(d), 
+                  DT::datatable(d, class = "display compact", style = "bootstrap5"), 
                   widths = 5)        
 ```
 
