@@ -32,7 +32,7 @@
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html",
     "title": "In-Class Exercise 2: Tableau Visualisation",
     "section": "",
-    "text": "An introduction on using Tableau to visualise data, and publish it on the website. You can access In-Class_Ex02 Tableau webpage here."
+    "text": "Learning Outcome\nAn introduction on using Tableau to visualise data, and publish it on the website. You can access In-Class_Ex02 Tableau webpage here."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html",
@@ -430,22 +430,22 @@
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#importing-the-data",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#importing-the-data",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "2.1 Importing the data",
-    "text": "2.1 Importing the data\nThere are two ways to import the data. You can either drag the data source file into Tableau Window directly, or clicking on “file/ open/ data”"
+    "section": "1.1 Importing the data",
+    "text": "1.1 Importing the data\nThere are two ways to import the data. You can either drag the data source file into Tableau Window directly, or clicking on “file/ open/ data”"
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#viewing-the-data",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#viewing-the-data",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "2.2 Viewing the Data",
-    "text": "2.2 Viewing the Data\nWe can see that there are three sheets to choose from, which corresponds with the sheets in the data source file. We will first drag “Orders” into the main window.\n\n\n\n\n\nAfter that is done, there will be two tables being displayed, as shown below. On the left are the descriptors for the fields, while the right displays the observations."
+    "section": "1.2 Viewing the Data",
+    "text": "1.2 Viewing the Data\nWe can see that there are three sheets to choose from, which corresponds with the sheets in the data source file. We will first drag “Orders” into the main window.\n\n\n\n\n\nAfter that is done, there will be two tables being displayed, as shown below. On the left are the descriptors for the fields, while the right displays the observations."
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#establishing-relationships-between-sheets",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#establishing-relationships-between-sheets",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "2.3 Establishing Relationships between Sheets",
-    "text": "2.3 Establishing Relationships between Sheets\nTo establish a relationships between sheets, simply link them by dragging the sheets into the top window."
+    "section": "1.3 Establishing Relationships between Sheets",
+    "text": "1.3 Establishing Relationships between Sheets\nTo establish a relationships between sheets, simply link them by dragging the sheets into the top window."
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#exploring-tableau-functions",
@@ -458,28 +458,28 @@
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#tables",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#tables",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "3.1 Tables",
-    "text": "3.1 Tables\n\n3.1.1 Creating Tables\nTo create a table, first drag “Region” into the Columns and “Year” into Rows. After which, just drag “Sales” into the table itself, as follows:\n\n\n\n\n\n\n\n3.1.2 Computing Totals\nTo compute total, simply go over to the “Analytics Panel”, click on “Totals” and drag it over to either “Column Grand Totals”, “Row Grand Totals” or both."
+    "section": "2.1 Tables",
+    "text": "2.1 Tables\n\n2.1.1 Creating Tables\nTo create a table, first drag “Region” into the Columns and “Year” into Rows. After which, just drag “Sales” into the table itself, as follows:\n\n\n\n\n\n\n\n2.1.2 Computing Totals\nTo compute total, simply go over to the “Analytics Panel”, click on “Totals” and drag it over to either “Column Grand Totals”, “Row Grand Totals” or both."
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#graphs",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#graphs",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "3.2 Graphs",
-    "text": "3.2 Graphs\nFirst, you can create a graph by dragging the following variables into the rows and columns.\n\n\n\n\n\n\n3.2.1 Adding Reference Line\nTo add a reference line, simply hover around the y-axis, right click and select “Add Reference Line”. Thereafter, on the pop-out box, you can select the various options for “Scope”, “Line” and “Formatting”.\n\n\n\n\n\nThis is what the per pane for “Scope” looks like:\n\n\n\n\n\nYou can also customise your own reference line by selecting “custom” under “Line/ Label”, and typing in “Avg = &lt;Value&gt;”.\n\n\n\n3.2.2 Adjusting Graph Lines\nUnder the Marks panel, you can select the “Colour” and “Size” for the graph lines.\n\n\n\n\n\n\n\n3.2.3 Incorporating Dual Axis Plot\nWe will demostrate how to incorporate a dual axis plot. First, we drag the “Profits” into the Rows. Notice that graphs for the profits will created in each output pane. Next, we will hover around the profit y-axis, right-click, and select “Dual Axis”.\n\n\nFrom the graph below, we notice that the scales for “Sum(Sales)” and “Sum(Profits)” are not synchronised. It may be difficult for readers to notice the different scales at first glance.\nThus we will synchonise the axis by simplying hovering around the “Profit” y-axis, right-click and select “Synchronise Axis”.\n\n\n3.2.4 Formatting Axis Titles\nWe observe that the x-axis titles are being cut off, resulting in the first letter being displayed, and the remaining letters reflected as “…”. To overcome this, simply hover over “Month” in columns, right-click and select “Format”. From the “Format” panel that popped out, select how you want the dates to be reflected on the axis.\n\n\n\n3.2.5 Editing Graph Colours from Ranged to Bi-Polar\nFirst, we will change the graph type of “Profits” from line to bar. Next, we will drag “Sum(Profits)” over to “Color” under the “Marks” panel, selecting 2 for “Stepped Color”."
+    "section": "2.2 Graphs",
+    "text": "2.2 Graphs\nFirst, you can create a graph by dragging the following variables into the rows and columns.\n\n\n\n\n\n\n2.2.1 Adding Reference Line\nTo add a reference line, simply hover around the y-axis, right click and select “Add Reference Line”. Thereafter, on the pop-out box, you can select the various options for “Scope”, “Line” and “Formatting”.\n\n\n\n\n\nThis is what the per pane for “Scope” looks like:\n\n\n\n\n\nYou can also customise your own reference line by selecting “custom” under “Line/ Label”, and typing in “Avg = &lt;Value&gt;”.\n\n\n\n2.2.2 Adjusting Graph Lines\nUnder the Marks panel, you can select the “Colour” and “Size” for the graph lines.\n\n\n\n\n\n\n\n2.2.3 Incorporating Dual Axis Plot\nWe will demostrate how to incorporate a dual axis plot. First, we drag the “Profits” into the Rows. Notice that graphs for the profits will created in each output pane. Next, we will hover around the profit y-axis, right-click, and select “Dual Axis”.\n\n\nFrom the graph below, we notice that the scales for “Sum(Sales)” and “Sum(Profits)” are not synchronised. It may be difficult for readers to notice the different scales at first glance.\nThus we will synchonise the axis by simplying hovering around the “Profit” y-axis, right-click and select “Synchronise Axis”.\n\n\n2.2.4 Formatting Axis Titles\nWe observe that the x-axis titles are being cut off, resulting in the first letter being displayed, and the remaining letters reflected as “…”. To overcome this, simply hover over “Month” in columns, right-click and select “Format”. From the “Format” panel that popped out, select how you want the dates to be reflected on the axis.\n\n\n\n2.2.5 Editing Graph Colours from Ranged to Bi-Polar\nFirst, we will change the graph type of “Profits” from line to bar. Next, we will drag “Sum(Profits)” over to “Color” under the “Marks” panel, selecting 2 for “Stepped Color”."
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#things-about-tableau-you-must-know",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#things-about-tableau-you-must-know",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "6.1 Things about Tableau you must know!",
-    "text": "6.1 Things about Tableau you must know!\n\nPolaris: A System for Query, Analysis,and Visualization of Multidimensional Relational Databases\nTableau Technology\nShow Me: Automatic Presentation for Visual Analysis\nWhitepaper: Visual Analysis for Everyone\nAnalytics Best Practices in Tableau"
+    "section": "5.1 Things about Tableau you must know!",
+    "text": "5.1 Things about Tableau you must know!\n\nPolaris: A System for Query, Analysis,and Visualization of Multidimensional Relational Databases\nTableau Technology\nShow Me: Automatic Presentation for Visual Analysis\nWhitepaper: Visual Analysis for Everyone\nAnalytics Best Practices in Tableau"
   },
   {
     "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#learning-tableau",
     "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#learning-tableau",
     "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "6.2 Learning Tableau",
-    "text": "6.2 Learning Tableau\n\nGetting Started\nTableau Interface\nGetting Started with Visual Analytics\nFormatting\nThe Formatting Pane\nReference lines\nGetting Started with Data also self-learn the remaining videos under ’‘’Connecting to Data’’’\nGetting Started with Tableau Prep Builder. This is a brand-new product from Tableau designed to help everyone quickly and confidently combine, shape, and clean their data for analysis. You can learn more about Tableau Data Prep here. You are encouraged to view all the 12 videos under ’‘’Tableau Prep’’’."
+    "section": "5.2 Learning Tableau",
+    "text": "5.2 Learning Tableau\n\nGetting Started\nTableau Interface\nGetting Started with Visual Analytics\nFormatting\nThe Formatting Pane\nReference lines\nGetting Started with Data also self-learn the remaining videos under ’‘’Connecting to Data’’’\nGetting Started with Tableau Prep Builder. This is a brand-new product from Tableau designed to help everyone quickly and confidently combine, shape, and clean their data for analysis. You can learn more about Tableau Data Prep here. You are encouraged to view all the 12 videos under ’‘’Tableau Prep’’’."
   }
 ]

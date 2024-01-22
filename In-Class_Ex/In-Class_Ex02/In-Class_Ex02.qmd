@@ -11,7 +11,7 @@ number-sections: true
 editor: visual
 ---
 
-# ![](images/clipboard-966608310.png)Learning Outcome
+![](images/clipboard-966608310.png)Learning Outcome
 
 An introduction on using Tableau to visualise data, and publish it on the website. You can access In-Class_Ex02 Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes).
 
