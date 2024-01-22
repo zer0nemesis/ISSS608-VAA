@@ -251,6 +251,7 @@ We will examine if there is any relationship between each of the performances wi
 
 ```{r, fig.width=20, fig.height=10}
 #| echo: false
+#| column: page
 
 s1 <- ggplot(stu_qqq_SG, 
        aes(x = meanmathscore, 
@@ -594,6 +595,7 @@ grid.arrange(g1, g2, g3)
 
 ```{r, fig.width= 15}
 #| echo: false
+#| column: page
 
 stu_qqq_SG_ESCS <- stu_qqq_SG[!is.na(stu_qqq_SG$ESCS),]
 
