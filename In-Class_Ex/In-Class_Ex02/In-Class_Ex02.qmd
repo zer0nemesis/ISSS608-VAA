@@ -25,17 +25,17 @@ There are two ways to import the data. You can either drag the data source file 
 
 We can see that there are three sheets to choose from, which corresponds with the sheets in the data source file. We will first drag "*Orders*" into the main window.
 
-![](images/clipboard-2141975025.png)
+![](images/clipboard-2141975025.png){fig-align="center"}
 
 After that is done, there will be two tables being displayed, as shown below. On the left are the descriptors for the fields, while the right displays the observations.
 
-![](images/clipboard-2159868905.png)
+![](images/clipboard-2159868905.png){fig-align="center"}
 
 ## Establishing Relationships between Sheets
 
 To establish a relationships between sheets, simply link them by dragging the sheets into the top window.
 
-![](images/clipboard-4294267177.png)
+![](images/clipboard-4294267177.png){fig-align="center"}
 
 # Exploring Tableau Functions
 
@@ -47,37 +47,35 @@ On the bottom left corner, there are three tabs denoting "New Worksheet", "New D
 
 To create a table, first drag "Region" into the *Columns* and "Year" into *Rows*. After which, just drag "Sales" into the table itself, as follows:
 
-![](images/clipboard-214538957.png)
+![](images/clipboard-214538957.png){fig-align="center"}
 
 ### Computing Totals
 
 To compute total, simply go over to the "Analytics Panel", click on "Totals" and drag it over to either "Column Grand Totals", "Row Grand Totals" or both.
 
-![](images/clipboard-408880183.png)
+![](images/clipboard-408880183.png){fig-align="center"}
 
 ## Graphs
 
 First, you can create a graph by dragging the following variables into the *rows* and *columns*.
 
-![](images/clipboard-3994776885.png)
+![](images/clipboard-3994776885.png){fig-align="center"}
 
 ### Adding Reference Line
 
 To add a reference line, simply hover around the y-axis, right click and select "Add Reference Line". Thereafter, on the pop-out box, you can select the various options for "Scope", "Line" and "Formatting".
 
-![](images/clipboard-3053705445.png){width="270"}
-
-![](images/clipboard-2847352611.png){width="147"}
+![](images/clipboard-663479542.png){fig-align="center"}
 
 This is what the per pane for "Scope" looks like:
 
-![](images/clipboard-3254232487.png)
+![](images/clipboard-3254232487.png){fig-align="center"}
 
 ### Adjusting Graph Lines
 
 Under the *Marks* panel, you can select the "Colour" and "Size" for the graph lines.
 
-![](images/clipboard-2908559952.png)
+![](images/clipboard-2908559952.png){fig-align="center"}
 
 ### Incorporating Dual Axis Plot
 
@@ -114,9 +112,9 @@ To publish your work to Tableau Public, simply go to "Server/ Tableau Public/ Sa
 
 ![](images/clipboard-2854721195.png)
 
-#  References
+# References
 
-### **Things about Tableau you must know!**
+## **Things about Tableau you must know!**
 
 -   [Polaris: A System for Query, Analysis,and Visualization of Multidimensional Relational Databases](https://graphics.stanford.edu/papers/polaris_extended/polaris.pdf)
 
@@ -128,7 +126,7 @@ To publish your work to Tableau Public, simply go to "Server/ Tableau Public/ Sa
 
 -   [Analytics Best Practices in Tableau](https://help.tableau.com/current/blueprint/en-us/bp_analytics_best_practices_in_tableau.htm)
 
-### **Learning Tableau**
+## **Learning Tableau**
 
 -   [Getting Started](https://www.tableau.com/learn/tutorials/on-demand/getting-started)
 
