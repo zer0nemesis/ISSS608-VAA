@@ -130,7 +130,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#interactive-data-table-dt-package",
     "title": "Hands On Exercise 03: Programming Interactive Data Visualisation with R",
     "section": "8.1 Interactive Data Table: DT package",
-    "text": "8.1 Interactive Data Table: DT package\n\nA wrapper of the JavaScript Library DataTables\nData objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’ (typically via R Markdown or Shiny).\n\n\nDT::datatable(exam_data, class = \"display\")"
+    "text": "8.1 Interactive Data Table: DT package\n\nA wrapper of the JavaScript Library DataTables\nData objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’ (typically via R Markdown or Shiny).\n\n\nDT::datatable(exam_data, class = \"dark display compact\")"
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex01/Hands-On_Ex01.html",
@@ -404,5 +404,26 @@
     "title": "ISSS608 - VISUAL ANALYTICS AND APPLICATIONS",
     "section": "",
     "text": "This website documents Roger’s learning journey through the Visual Analytics and Applications Jungle.\n\n\n\n\n\nIn this website, you will find my coursework prepared for this course. Let us navigate through this jungle and learn together."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#linked-brushing-crosstalk-method",
+    "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#linked-brushing-crosstalk-method",
+    "title": "Hands On Exercise 03: Programming Interactive Data Visualisation with R",
+    "section": "8.2 Linked brushing: crosstalk method",
+    "text": "8.2 Linked brushing: crosstalk method\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d), \n                  widths = 5)        \n\n\n\n\n\n\n\nNote\n\n\n\nThings to learn from the code chunk:\n\nhighlight() is a function of plotly package. It sets a variety of options for brushing (i.e., highlighting) multiple plots. These options are primarily designed for linking multiple plotly graphs, and may not behave as expected when linking plotly to another htmlwidget package via crosstalk. In some cases, other htmlwidgets will respect these options, such as persistent selection in leaflet.\nbscols() is a helper function of crosstalk package. It makes it easy to put HTML elements side by side. It can be called directly from the console but is especially designed to work in an R Markdown document. Warning: This will bring in all of Bootstrap!."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#ggiraph",
+    "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#ggiraph",
+    "title": "Hands On Exercise 03: Programming Interactive Data Visualisation with R",
+    "section": "9.1 ggiraph",
+    "text": "9.1 ggiraph\nThis link provides online version of the reference guide and several useful articles. Use this link to download the pdf version of the reference guide.\n\nHow to Plot With Ggiraph\nInteractive map of France with ggiraph\nCustom interactive sunbursts with ggplot in R\nThis link provides code example on how ggiraph is used to interactive graphs for Swiss Olympians - the solo specialists."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#plotly-for-r",
+    "href": "Hands-On_Ex/Hands-On_Ex03/Hands-On_Ex03.html#plotly-for-r",
+    "title": "Hands On Exercise 03: Programming Interactive Data Visualisation with R",
+    "section": "9.2 plotly for R",
+    "text": "9.2 plotly for R\n\nGetting Started with Plotly in R\nA collection of plotly R graphs are available via this link.\nCarson Sievert (2020) Interactive web-based data visualization with R, plotly, and shiny, Chapman and Hall/CRC is the best resource to learn plotly for R. The online version is available via this link\nPlotly R Figure Reference provides a comprehensive discussion of each visual representations.\nPlotly R Library Fundamentals is a good place to learn the fundamental features of Plotly’s R API.\nGetting Started\nVisit this link for a very interesting implementation of gganimate by your senior.\nBuilding an animation step-by-step with gganimate.\nCreating a composite gif with multiple gganimate panels"
   }
 ]
