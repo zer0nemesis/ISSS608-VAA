@@ -13,28 +13,135 @@ editor: visual
 
 # Learning Outcome
 
-An introduction on using Tableau to visualise data, and publishing it on the website.
+An introduction on using Tableau to visualise data, and publishing it on the website. You can access In-Class_Ex02 Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes).
 
-Importing the data
+# Getting Started
 
-linking tables
+## Importing the data
 
-using the sheet function
+There are two ways to import the data. You can either drag the data source file into Tableau Window directly, or clicking on "file/ open/ data"
 
--   computing totals
+## Viewing the Data
 
--   Adding reference line
+We can see that there are three sheets to choose from, which corresponds with the sheets in the data source file. We will first drag "*Orders*" into the main window.
 
--   adjusting the size of graph lines
+![](images/clipboard-2141975025.png)
 
--   dual axis plot
+After that is done, there will be two tables being displayed, as shown below. On the left are the descriptors for the fields, while the right displays the observations.
 
-    -   editing colours from range to bi-colour
+![](images/clipboard-2159868905.png)
 
-    -   synchronise axis
+## Establishing Relationships between Sheets
 
--   copying graph images to ppt
+To establish a relationships between sheets, simply link them by dragging the sheets into the top window.
 
--   Saving to Tableau Public
+![](images/clipboard-4294267177.png)
 
-You can access In-Class_Ex02 Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex02/MonthlySalesandProfitbyRegion2016-2019?publish=yes).
+# Exploring Tableau Functions
+
+On the bottom left corner, there are three tabs denoting "New Worksheet", "New Dashboard" and "New Story". We will first explore the functions using the sheet.
+
+## Tables
+
+### Creating Tables
+
+To create a table, first drag "Region" into the *Columns* and "Year" into *Rows*. After which, just drag "Sales" into the table itself, as follows:
+
+![](images/clipboard-214538957.png)
+
+### Computing Totals
+
+To compute total, simply go over to the "Analytics Panel", click on "Totals" and drag it over to either "Column Grand Totals", "Row Grand Totals" or both.
+
+![](images/clipboard-408880183.png)
+
+## Graphs
+
+First, you can create a graph by dragging the following variables into the *rows* and *columns*.
+
+![](images/clipboard-3994776885.png)
+
+### Adding Reference Line
+
+To add a reference line, simply hover around the y-axis, right click and select "Add Reference Line". Thereafter, on the pop-out box, you can select the various options for "Scope", "Line" and "Formatting".
+
+![](images/clipboard-3053705445.png){width="270"}
+
+![](images/clipboard-2847352611.png){width="147"}
+
+This is what the per pane for "Scope" looks like:
+
+![](images/clipboard-3254232487.png)
+
+### Adjusting Graph Lines
+
+Under the *Marks* panel, you can select the "Colour" and "Size" for the graph lines.
+
+![](images/clipboard-2908559952.png)
+
+### Incorporating Dual Axis Plot
+
+We will demostrate how to incorporate a dual axis plot. First, we drag the "Profits" into the *Rows*. Notice that graphs for the profits will created in each output pane. Next, we will hover around the profit y-axis, right-click, and select "Dual Axis".
+
+\
+![](images/clipboard-2702904742.png)
+
+From the graph below, we notice that the scales for "Sum(Sales)" and "Sum(Profits)" are not synchronised. It may be difficult for readers to notice the different scales at first glance.
+
+![](images/clipboard-622984594.png)Thus we will synchonise the axis by simplying hovering around the "Profit" y-axis, right-click and select "Synchronise Axis".
+
+### Formatting Axis Titles
+
+We observe that the x-axis titles are being cut off, resulting in the first letter being displayed, and the remaining letters reflected as "...". To overcome this, simply hover over "Month" in *columns*, right-click and select "Format". From the "Format" panel that popped out, select how you want the dates to be reflected on the axis.
+
+![](images/clipboard-513675260.png)
+
+### Editing Graph Colours from Ranged to Bi-Polar
+
+First, we will change the graph type of "Profits" from *line* to *bar*. Next, we will drag "Sum(Profits)" over to "Color" under the "Marks" panel, selecting 2 for "Stepped Color".
+
+![](images/clipboard-1428876796.png)
+
+# Copying Graph Images to PPT
+
+There will be instances when bosses demand data visualisation on powerpoint slides. To achieve this, simply hover over the graph, right-click, select "Copy" and choose the different options of copying.
+
+![](images/clipboard-397602774.png)
+
+# Saving to Tableau Public
+
+To publish your work to Tableau Public, simply go to "Server/ Tableau Public/ Save to Tableau Public". Before that, remember to rename your worksheets and saving your file as a "Tableau Extract" file.
+
+![](images/clipboard-2854721195.png)
+
+#  References
+
+### **Things about Tableau you must know!**
+
+-   [Polaris: A System for Query, Analysis,and Visualization of Multidimensional Relational Databases](https://graphics.stanford.edu/papers/polaris_extended/polaris.pdf)
+
+-   [Tableau Technology](https://www.tableau.com/products/technology)
+
+-   [Show Me: Automatic Presentation for Visual Analysis](https://www.tableau.com/sites/default/files/whitepapers/081027-infovis-showme-vfinal-fix.pdf)
+
+-   [Whitepaper: Visual Analysis for Everyone](https://www.tableau.com/sites/default/files/whitepapers/TS_WP_VA_F2_new_temp_0.pdf)
+
+-   [Analytics Best Practices in Tableau](https://help.tableau.com/current/blueprint/en-us/bp_analytics_best_practices_in_tableau.htm)
+
+### **Learning Tableau**
+
+-   [Getting Started](https://www.tableau.com/learn/tutorials/on-demand/getting-started)
+
+-   [Tableau Interface](http://www.tableau.com/learn/tutorials/on-demand/tableau-interface)
+
+-   [Getting Started with Visual Analytics](https://www.tableau.com/learn/tutorials/on-demand/getting-started-visual-analytics)
+
+-   [Formatting](https://www.tableau.com/learn/tutorials/on-demand/formatting)
+
+-   [The Formatting Pane](https://www.tableau.com/learn/tutorials/on-demand/formatting-pane)
+
+-   [Reference lines](https://www.tableau.com/learn/tutorials/on-demand/reference-lines)
+
+-   [Getting Started with Data](https://www.tableau.com/learn/tutorials/on-demand/getting-started-data) also self-learn the remaining videos under ’‘’Connecting to Data’’’
+
+-   [Getting Started with Tableau Prep Builder](https://www.tableau.com/learn/tutorials/on-demand/getting-started-tableau-prep). This is a brand-new product from Tableau designed to help everyone quickly and confidently combine, shape, and clean their data for analysis. You can learn more about Tableau Data Prep [here](https://www.tableau.com/about/blog/2018/3/tableau-prep-project-maestro-here-redefining-your-data-prep-experience-84620). You are encouraged to view all the 12 videos under ’‘’Tableau Prep’’’.
