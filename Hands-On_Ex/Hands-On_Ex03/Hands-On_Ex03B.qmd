@@ -114,7 +114,6 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 In the code chunk below, the basic ggplot2 functions are used to create a static bubble plot.
 
 ```{r}
-#| column: page
 
 ggplot(globalPop, aes(x = Old, y = Young, 
                       size = Population, 
