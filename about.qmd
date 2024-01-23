@@ -1,9 +1,16 @@
 ---
 title: "About"
+image: images/Badge.jpg
+about: 
+  template: jolla
+  image-width: 20em
+  image-shape: round
 ---
 
-About this site
+---
 
-```{r}
-1 + 1
-```
+## About this site
+
+This is the work of a student pursuing ***Masters in Information Technology*** at Singapore Management University.
+
+When not working/ studying, Roger enjoys spending time with family and friends.
