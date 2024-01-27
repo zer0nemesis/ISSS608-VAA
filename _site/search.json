@@ -677,5 +677,40 @@
     "title": "About",
     "section": "About this site",
     "text": "About this site\nThis is the work of a student pursuing Masters in Information Technology at Singapore Management University.\nWhen not working/ studying, Roger enjoys spending time with family and friends."
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html",
+    "title": "Take Home Ex 02: DataVis Makeover",
+    "section": "",
+    "text": "In this take home exercise, we will:\n\nselect one of the Take-home Exercise 1 prepared by my classmate, Freddie Jr. Ngo Tan\ncritic the submission in terms of clarity and aesthetics,\nprepare a sketch for the alternative design by using the data visualisation design principles and best practices we had learned in Lesson 1 and 2, and\nremake the original design by using ggplot2, ggplot2 extensions and tidyverse packages.\n\n\n\nThe aim of Take Home Exercise 01 was to use appropriate Exploratory Data Analysis (EDA) methods and ggplot2 functions to reveal:\n\nthe distribution of Singapore students’ performance in mathematics, reading, and science, and\nthe relationship between these performances with schools, gender and socioeconomic status of the students.\n\nThe dataset used was extracted from the “PISA 2022 database” which contains the full set of responses from individual students."
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#recap-of-take-home-exercise-01",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#recap-of-take-home-exercise-01",
+    "title": "Take Home Ex 02: DataVis Makeover",
+    "section": "",
+    "text": "The aim of Take Home Exercise 01 was to use appropriate Exploratory Data Analysis (EDA) methods and ggplot2 functions to reveal:\n\nthe distribution of Singapore students’ performance in mathematics, reading, and science, and\nthe relationship between these performances with schools, gender and socioeconomic status of the students.\n\nThe dataset used was extracted from the “PISA 2022 database” which contains the full set of responses from individual students."
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#loading-r-packages",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#loading-r-packages",
+    "title": "Take Home Ex 02: DataVis Makeover",
+    "section": "2.1 Loading R Packages",
+    "text": "2.1 Loading R Packages\nIn this take-home exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven, knitr, kableExtra, intsvy, ggrepel, patchwork, \n               ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra)"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#importing-pisa-2022-data",
+    "href": "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html#importing-pisa-2022-data",
+    "title": "Take Home Ex 02: DataVis Makeover",
+    "section": "2.2 Importing PISA 2022 Data",
+    "text": "2.2 Importing PISA 2022 Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nWe will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduces the file size from 3.9GB to 65.3MB, which makes it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\n\n\n\n\n\n\nWarning\n\n\n\nRemember to:\n\ndelete the 3.9GB source file from the data folder; and\ninclude “#| eval: false” into the first three code chunks of this section."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html",
+    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html",
+    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "section": "",
+    "text": "you can access the final tableau report here and story here.\n\nuncheck “Aggregate Measures” to reveal scatter plot\n\nResulting scatter plot\n\nhow to make it less cluttered? last four options for time series\n\n\n\n\nAfter using “Compute using State” and “Aggregate Measures”\n\n\n\nSelecting “Trend Line” and choosing specific points\n\nunlike JMP “Lasso tool” we cannot choose odd shapes. So need to select using the box select tool, then unselect those points you do not want\n\nnext, we want to change the size of the scatter plot. FIrst, we drag “sales” to “size”\n\n\n\n\nWe will now have a scatterplot categorised into four quadrants\n\nAdding a filter\n\ndisplaying the filter panel on the right, but the graph disappears when none of the options are checked\n\nto mandate that at least one option is chosen\n\ncreating a dynamic sheet name to follow the selected year\n\ncustomising the animation effects\n\nInserting details\n\nto do the above, u need to create a new sheet, and a new annual sales and profit chart.\n\ncreating a dual axis for profits\n\nresizing so that u can view on desktop and handphone\n\nusing dashboards to combine different visualisation sheets together\nusing story points to combine different visualisation sheets/ dashboards together"
   }
 ]
