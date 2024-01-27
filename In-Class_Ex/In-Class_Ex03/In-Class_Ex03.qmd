@@ -1,6 +1,6 @@
 ---
 title: "In-Class Exercise 3: Tableau Visualisation"
-sub-title: "Dashboards and Story Points"
+subtitle: "Dashboards and Story Points"
 author: "Roger Chen"
 date: "27 Jan 2024"
 date-modified: "last-modified"
