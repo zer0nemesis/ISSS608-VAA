@@ -162,7 +162,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span class="header-section-number">1</span> Learning Outcome</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">2</span> Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data"><span class="header-section-number">2.1</span> Importing Data</a></li>
+  </ul></li>
+  <li><a href="#using-tableau-functions" id="toc-using-tableau-functions" class="nav-link" data-scroll-target="#using-tableau-functions"><span class="header-section-number">3</span> Using Tableau Functions</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-scatter-plot" id="toc-creating-a-scatter-plot" class="nav-link" data-scroll-target="#creating-a-scatter-plot"><span class="header-section-number">3.1</span> Creating a Scatter Plot</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,7 +216,21 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>you can access the final tableau report <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitReport/SuperstoreSalesandProfitReport?publish=yes">here</a> and story <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitStory/SuperstoreSalesandProfitStory?publish=yes">here</a>.</p>
+<section id="learning-outcome" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Learning Outcome</h1>
+<p>In this in-class exercise, we will learn how to use Tableau Public to create interactive scatterplots. You can access the Superstore tableau report <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitReport/SuperstoreSalesandProfitReport?publish=yes">here</a> and story <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitStory/SuperstoreSalesandProfitStory?publish=yes">here</a>; and the Exam-data dashboard <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-ClassEx03MathsvsEnglishScatterplotwithmarginalboxplot/MathsVsEnglish?publish=yes">here</a>.</p>
+</section>
+<section id="getting-started" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Getting Started</h1>
+<section id="importing-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">2.1</span> Importing Data</h2>
+<p>We will build on what we have created during In-Class Exercise 2 <a href="https://isss608rogerchen.netlify.app/in-class_ex/in-class_ex02/in-class_ex02">here</a>.</p>
+</section>
+</section>
+<section id="using-tableau-functions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Using Tableau Functions</h1>
+<section id="creating-a-scatter-plot" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="creating-a-scatter-plot"><span class="header-section-number">3.1</span> Creating a Scatter Plot</h2>
 <p><img src="images/clipboard-3446394744.png" class="img-fluid"></p>
 <p>uncheck “Aggregate Measures” to reveal scatter plot</p>
 <p><img src="images/clipboard-4202897418.png" class="img-fluid"></p>
@@ -248,8 +276,29 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/clipboard-1781499014.png" class="img-fluid"></p>
 <p>using dashboards to combine different visualisation sheets together</p>
 <p>using story points to combine different visualisation sheets/ dashboards together</p>
+<p>import exam data, create scatterplot, adjust size and shape</p>
+<p><img src="images/clipboard-134513223.png" class="img-fluid"></p>
+<p>select historgram, then select boxplot</p>
+<p>drag “ID” into detail, then replace “COUNT(English)” with “SUM(English)”</p>
+<p><img src="images/clipboard-3072694844.png" class="img-fluid"></p>
+<p>duplicate, and edit for maths scores</p>
+<p><img src="images/clipboard-1326266138.png" class="img-fluid"></p>
+<p>then use dashboard to piece the scatterplot and boxplots together</p>
+<p><img src="images/clipboard-2102008253.png" class="img-fluid"></p>
+<p>coordinated link view for interactivity</p>
+<p>add in the aggreagation for scatterplot, then drag “ID” into each detail box for each of the sheets</p>
+<p>dashboard/ actions/ add actions/ highlight</p>
+<p><img src="images/clipboard-845947794.png" class="img-fluid"></p>
+<p>repeat for boxplots - &gt; scatterplot interactivity</p>
+<p><img src="images/clipboard-858380792.png" class="img-fluid"></p>
+<p>stitching the different plots to synchronise the axes using “Blank”</p>
+<p><img src="images/clipboard-979413293.png" class="img-fluid"></p>
+<p>note: need to extract the exam_data before publishing.</p>
+<p><img src="images/clipboard-2747672890.png" class="img-fluid"></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

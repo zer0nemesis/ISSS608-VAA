@@ -12,9 +12,19 @@ number-sections: true
 editor: visual
 ---
 
-you can access the final tableau report [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitReport/SuperstoreSalesandProfitReport?publish=yes) and story [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitStory/SuperstoreSalesandProfitStory?publish=yes).
+# Learning Outcome
 
-exam data dashboard [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-ClassEx03MathsvsEnglishScatterplotwithmarginalboxplot/MathsVsEnglish?publish=yes).
+In this in-class exercise, we will learn how to use Tableau Public to create interactive scatterplots. You can access the Superstore tableau report [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitReport/SuperstoreSalesandProfitReport?publish=yes) and story [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex03-SuperstoreSalesandProfitStory/SuperstoreSalesandProfitStory?publish=yes); and the Exam-data dashboard [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-ClassEx03MathsvsEnglishScatterplotwithmarginalboxplot/MathsVsEnglish?publish=yes).
+
+# Getting Started
+
+## Importing Data
+
+We will build on what we have created during In-Class Exercise 2 [here](https://isss608rogerchen.netlify.app/in-class_ex/in-class_ex02/in-class_ex02).
+
+# Using Tableau Functions
+
+## Creating a Scatter Plot
 
 ![](images/clipboard-3446394744.png)
 
