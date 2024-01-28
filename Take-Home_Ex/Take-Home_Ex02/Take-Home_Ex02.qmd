@@ -1,5 +1,6 @@
 ---
 title: "Take Home Ex 02: DataVis Makeover"
+subtitle: "Work-in-Progress"
 author: "Roger Chen"
 date: "26 Jan 2024"
 date-modified: "last-modified"
@@ -37,17 +38,34 @@ The dataset used was extracted from the "[PISA 2022 database](https://www.oecd.o
 
 ## Loading R Packages
 
-In this take-home exercise, two R packages will be used. They are:
+In this take-home exercise, eleven R packages will be used. They are:
 
--   [tidyverse](https://www.tidyverse.org/), and
+-   [tidyverse](https://www.tidyverse.org/),
 
--   [haven](https://haven.tidyverse.org/).
+-   [haven](https://haven.tidyverse.org/),
+
+-   [ggplot2](https://ggplot2.tidyverse.org/),
+
+-   [ggrepel](https://ggrepel.slowkow.com/),
+
+-   [patchwork](https://patchwork.data-imaginist.com/),
+
+-   [ggthemes](https://cran.r-project.org/web/packages/ggthemes/),
+
+-   [hrbrthemes](https://cinc.rud.is/web/packages/hrbrthemes/),
+
+-   [ggdist](https://cran.r-project.org/web/packages/ggdist/index.html),
+
+-   [ggridges](https://cran.r-project.org/web/packages/ggridges/index.html),
+
+-   [colorspace](https://colorspace.r-forge.r-project.org/articles/colorspace.html), and
+
+-   [gridExtra](https://cran.r-project.org/web/packages/gridExtra/index.html).
 
 The code chunk used is as follows:
 
 ```{r}
-pacman::p_load(tidyverse, haven, knitr, kableExtra, intsvy, ggrepel, patchwork, 
-               ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra)
+pacman::p_load(tidyverse, haven, ggplot2, ggrepel, patchwork, ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra,cowplot)
 ```
 
 ## Importing PISA 2022 Data
@@ -89,4 +107,166 @@ Remember to:
 -   delete the 3.9GB source file from the data folder; and
 
 -   include "#\| eval: false" into the first three code chunks of this section.
+:::
+
+# Critique in terms of Clarity and Aesthetics
+
+## Distribution of Students’ Performance
+
+The first requirement for Take-Home_Ex02 was to show the distribution of Singapore students’ performance in mathematics, reading, and science. Freddie made use of boxplots to illustrate the distribution of the scores as shown below. The boxplots for each of the subjects were segregated into different tabs, and the code chunk was "hidden" from the audience's view unless the user clicks on "Show the code".
+
+![](images/clipboard-406550956.png)
+
+### Positive Areas
+
+The three box plots were clear and simple. It gave me (as audience) a clear view of the min-max distribution, interquartile range, median and outliers.
+
+### Areas for Improvement
+
+It was difficult for me to comprehend what analysis the graphs were trying to tell me. I thought that adding a histogram to supplement the boxplot may be able to tell the audience what the distributions look like. In addition, there are merits to combining all three graphs together on the same panel, so that the audience can have an overview at one glance, instead of having to navigate the different tabs to compare the similarity/differences between the three subjects.
+
+### Re-Modelled Distribution
+
+::: panel-tabset
+## Plot
+
+```{r, fig.height= 5, fig.width=10}
+#| echo: false
+#| column: page
+
+meanmathscore = rowMeans(select(stu_qqq_SG, PV1MATH : PV10MATH))
+stu_qqq_SG$meanmathscore <- meanmathscore
+h1 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanmathscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(100,850)) +
+  ggtitle("Distribution of Maths Scores") +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+b1 <- ggplot(data = stu_qqq_SG,
+       aes (x = "Math", y = meanmathscore))+
+  geom_boxplot(width=0.2, notch=TRUE)+
+  stat_summary(geom = "point", fun.y= "mean", colour ="aquamarine", size=2)+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  coord_flip() + 
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+meanreadscore = rowMeans(select(stu_qqq_SG, PV1READ : PV10READ))
+stu_qqq_SG$meanreadscore = meanreadscore
+h2 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanreadscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="cornsilk") + 
+  coord_cartesian(xlim=c(100,850)) +
+  ggtitle("Distribution of Reading Scores") +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+b2 <- ggplot(data = stu_qqq_SG,
+       aes (x = "Reading", y = meanreadscore))+
+  geom_boxplot(width=0.2, notch=TRUE)+
+  stat_summary(geom = "point", fun.y= "mean", colour ="cornsilk", size=2)+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  coord_flip() + 
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+meansciescore = rowMeans(select(stu_qqq_SG, PV1SCIE : PV10SCIE))
+stu_qqq_SG$meansciescore = meansciescore
+h3 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meansciescore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="darkolivegreen2") + 
+  coord_cartesian(xlim=c(100,850)) +
+  ggtitle("Distribution of Science Scores") +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+b3 <- ggplot(data = stu_qqq_SG,
+       aes (x = "Science", y = meansciescore))+
+  geom_boxplot(width=0.2, position = "dodge")+
+  stat_summary(geom = "point", fun.y= "mean", colour ="darkolivegreen2", size=2)+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  coord_flip() +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+plot_grid(h1, h2, h3, b1, b2, b3, ncol=3,align="v",rel_heights=c(4,1.5),axis = 'lr')
+```
+
+::: callout-tip
+Do align the x-axis of both histograms and boxplots so that the distributions are mapped correctly.
+:::
+
+## Code
+
+```{r}
+#| eval: false
+
+meanmathscore = rowMeans(select(stu_qqq_SG, PV1MATH : PV10MATH))
+stu_qqq_SG$meanmathscore <- meanmathscore
+h1 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanmathscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="aquamarine") + 
+  coord_cartesian(xlim=c(100,850)) +
+  ggtitle("Distribution of Maths Scores") +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+b1 <- ggplot(data = stu_qqq_SG,
+       aes (x = "Math", y = meanmathscore))+
+  geom_boxplot(width=0.2, notch=TRUE)+
+  stat_summary(geom = "point", fun.y= "mean", colour ="aquamarine", size=2)+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  coord_flip() + 
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+meanreadscore = rowMeans(select(stu_qqq_SG, PV1READ : PV10READ))
+stu_qqq_SG$meanreadscore = meanreadscore
+h2 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meanreadscore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="cornsilk") + 
+  coord_cartesian(xlim=c(100,850)) +
+  ggtitle("Distribution of Reading Scores") +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+b2 <- ggplot(data = stu_qqq_SG,
+       aes (x = "Reading", y = meanreadscore))+
+  geom_boxplot(width=0.2, notch=TRUE)+
+  stat_summary(geom = "point", fun.y= "mean", colour ="cornsilk", size=2)+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  coord_flip() + 
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+meansciescore = rowMeans(select(stu_qqq_SG, PV1SCIE : PV10SCIE))
+stu_qqq_SG$meansciescore = meansciescore
+h3 <- ggplot(data = stu_qqq_SG, 
+             aes(x = meansciescore)) +
+  geom_histogram(bins=20, 
+                 boundary = 850,
+                 color="black", 
+                 fill="darkolivegreen2") + 
+  coord_cartesian(xlim=c(100,850)) +
+  ggtitle("Distribution of Science Scores") +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+b3 <- ggplot(data = stu_qqq_SG,
+       aes (x = "Science", y = meansciescore))+
+  geom_boxplot(width=0.2, position = "dodge")+
+  stat_summary(geom = "point", fun.y= "mean", colour ="darkolivegreen2", size=2)+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  coord_flip() +
+  theme_economist() & theme(plot.title = element_text(size = 8))
+
+plot_grid(h1, h2, h3, b1, b2, b3, ncol=3,align="v",rel_heights=c(4,1.5),axis = 'lr')
+
+```
 :::
