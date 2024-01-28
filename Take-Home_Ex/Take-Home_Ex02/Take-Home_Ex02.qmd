@@ -127,6 +127,10 @@ The three box plots were clear and simple. It gave me (as audience) a clear view
 
 Just from the boxplots that were displayed one at a time, it was difficult for me to comprehend what the graphs were trying to tell me. I would propose adding a histogram to supplement the boxplots to give a better visualisation to the audience on what the distributions look like. In addition, there are also merits to combine all three graphs on a single output, so that the audience can have an overview at one glance, instead of having to navigate through different tabs to compare the similarities and differences between the three subjects. Lastly, it will be useful to add annotations to the graphs to highlight the key points of the three graphs.
 
+#### Sketch
+
+![](images/clipboard-478496371.png)
+
 ### Re-Modelled Distribution
 
 ::: panel-tabset
@@ -295,6 +299,10 @@ On top of those positive areas described above in 3.1.1 [Positive Areas], a side
 ### Areas for Improvement
 
 Similar to the points mentioned in 3.1.2 [Areas for Improvement], it was difficult for me to comprehend what the boxplots were trying to tell me. I would propose adding a rainplot to supplement the boxplots to give a better visualisation to the audience on how the distributions differ from each other. In addition, combining all three graphs on a single output allows the audience to have a bird's eye view instead of having to navigate through different tabs to compare the similarities and differences between the three subjects. Lastly, it will be useful to add annotations to the graphs to highlight the key points of the three graphs.
+
+#### Sketch of Alternative Design
+
+![](images/clipboard-298228220.png)
 
 ### Re-Modelled Distribution
 
