@@ -58,9 +58,11 @@ In this take-home exercise, eleven R packages will be used. They are:
 
 -   [ggridges](https://cran.r-project.org/web/packages/ggridges/index.html),
 
--   [colorspace](https://colorspace.r-forge.r-project.org/articles/colorspace.html), and
+-   [colorspace](https://colorspace.r-forge.r-project.org/articles/colorspace.html),
 
--   [gridExtra](https://cran.r-project.org/web/packages/gridExtra/index.html).
+-   [gridExtra](https://cran.r-project.org/web/packages/gridExtra/index.html),
+
+-   [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html).
 
 The code chunk used is as follows:
 
@@ -111,7 +113,7 @@ Remember to:
 
 # Critique in terms of Clarity and Aesthetics
 
-## Distribution of Students’ Performance
+## Original Plot of Students’ Performance Distribution
 
 The first requirement for Take-Home_Ex02 was to show the distribution of Singapore students’ performance in mathematics, reading, and science. Freddie made use of boxplots to illustrate the distribution of the scores as shown below. The boxplots for each of the subjects were segregated into different tabs, and the code chunk was "hidden" from the audience's view unless the user clicks on "Show the code".
 
@@ -119,16 +121,16 @@ The first requirement for Take-Home_Ex02 was to show the distribution of Singapo
 
 ### Positive Areas
 
-The three box plots were clear and simple. It gave me (as audience) a clear view of the min-max distribution, interquartile range, median and outliers.
+The three box plots were clear and simple. It gave me (as audience) a clear view of the min-max distribution, interquartile range, median and outliers. The code chunk was also hidden so that it does not clutter the interface.
 
 ### Areas for Improvement
 
-It was difficult for me to comprehend what analysis the graphs were trying to tell me. I thought that adding a histogram to supplement the boxplot may be able to tell the audience what the distributions look like. In addition, there are merits to combining all three graphs together on the same panel, so that the audience can have an overview at one glance, instead of having to navigate the different tabs to compare the similarity/differences between the three subjects.
+Just from the boxplots that were displayed one at a time, it was difficult for me to comprehend what the graphs were trying to tell me. I would propose adding a histogram to supplement the boxplots to give a better visualisation to the audience on what the distributions look like. In addition, there are also merits to combine all three graphs on a single output, so that the audience can have an overview at one glance, instead of having to navigate through different tabs to compare the similarities and differences between the three subjects. Lastly, it will be useful to add annotations to the graphs to highlight the key points of the three graphs.
 
 ### Re-Modelled Distribution
 
 ::: panel-tabset
-## Plot
+### Plot
 
 ```{r, fig.height= 5, fig.width=10}
 #| echo: false
@@ -163,6 +165,11 @@ h2 <- ggplot(data = stu_qqq_SG,
                  color="black", 
                  fill="cornsilk") + 
   coord_cartesian(xlim=c(100,850)) +
+        annotate("text",
+           x=300,
+           y=600,
+           color = "red",
+           label = "There are more outliers\nin Reading as compared to\nMath and Science", size = 2) +
   ggtitle("Distribution of Reading Scores") +
   theme_economist() & theme(plot.title = element_text(size = 8))
 
@@ -190,7 +197,7 @@ b3 <- ggplot(data = stu_qqq_SG,
        aes (x = "Science", y = meansciescore))+
   geom_boxplot(width=0.2, position = "dodge")+
   stat_summary(geom = "point", fun.y= "mean", colour ="darkolivegreen2", size=2)+
-  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
   coord_flip() +
   theme_economist() & theme(plot.title = element_text(size = 8))
 
@@ -201,7 +208,7 @@ plot_grid(h1, h2, h3, b1, b2, b3, ncol=3,align="v",rel_heights=c(4,1.5),axis = '
 Do align the x-axis of both histograms and boxplots so that the distributions are mapped correctly.
 :::
 
-## Code
+### Code
 
 ```{r}
 #| eval: false
@@ -235,6 +242,11 @@ h2 <- ggplot(data = stu_qqq_SG,
                  color="black", 
                  fill="cornsilk") + 
   coord_cartesian(xlim=c(100,850)) +
+        annotate("text",
+           x=300,
+           y=600,
+           color = "red",
+           label = "There are more outliers\nin Reading as compared to\nMath and Science", size = 2) +
   ggtitle("Distribution of Reading Scores") +
   theme_economist() & theme(plot.title = element_text(size = 8))
 
@@ -262,11 +274,223 @@ b3 <- ggplot(data = stu_qqq_SG,
        aes (x = "Science", y = meansciescore))+
   geom_boxplot(width=0.2, position = "dodge")+
   stat_summary(geom = "point", fun.y= "mean", colour ="darkolivegreen2", size=2)+
-  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200))+
+  scale_y_continuous(limits = c(60,880), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
   coord_flip() +
   theme_economist() & theme(plot.title = element_text(size = 8))
 
 plot_grid(h1, h2, h3, b1, b2, b3, ncol=3,align="v",rel_heights=c(4,1.5),axis = 'lr')
+```
+:::
+
+## Original Plot of Students’ Performance by Gender
+
+The second requirement for Take-Home_Ex02 was to examine the relationship between Singapore students’ performances with schools, gender and socioeconomic status of the students. Similarly, Freddie made use of boxplots to illustrate the distribution of the scores by gender as shown below. The boxplots for each of the subjects were segregated into different tabs, and the code chunk was "hidden" from the audience's view unless the user clicks on "Show the code".
+
+![](images/clipboard-4189614754.png)
+
+### Positive Areas
+
+On top of those positive areas described above in 3.1.1 [Positive Areas], a side-by-side comparison between the two genders allowed the audience to have a better visualisation of how male students performed against female students.
+
+### Areas for Improvement
+
+Similar to the points mentioned in 3.1.2 [Areas for Improvement], it was difficult for me to comprehend what the boxplots were trying to tell me. I would propose adding a rainplot to supplement the boxplots to give a better visualisation to the audience on how the distributions differ from each other. In addition, combining all three graphs on a single output allows the audience to have a bird's eye view instead of having to navigate through different tabs to compare the similarities and differences between the three subjects. Lastly, it will be useful to add annotations to the graphs to highlight the key points of the three graphs.
+
+### Re-Modelled Distribution
+
+::: panel-tabset
+### Plot
+
+```{r, fig.height= 7, fig.width=10}
+#| echo: false
+#| column: page
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 1, "Female")
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 2, "Male")
+
+g1 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanmathscore)) +
+  labs(title = "Distribution of Math Scores by Gender", x = "Gender", y = "Mean Math Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA,
+               slab_fill = "aquamarine") +
+  annotate(geom = "text",
+           x=2.8,
+           y=720,
+           label = "Male students recorded peak frequency\nat higher Math score",
+           color = "red",
+           size = 2) +
+  geom_boxplot(width = .2,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
+  coord_flip() +
+  theme_economist()
+
+
+g2 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanreadscore)) +
+  labs(title = "Distribution of Reading Scores by Gender", x = "Gender", y = "Mean Reading Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA,
+               slab_fill = "cornsilk") +
+    annotate(geom = "text",
+           x=2.8,
+           y=680,
+           label = "Female and Male students recorded peak frequency\nat similar Reading score",
+           color = "red",
+           size = 2) +
+  geom_boxplot(width = .2,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
+  coord_flip() +
+  theme_economist()
+
+g3 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meansciescore)) +
+  labs(title = "Distribution of Science Scores by Gender", x = "Gender", y = "Mean Science Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA,
+               slab_fill = "darkolivegreen2") +
+      annotate(geom = "text",
+           x=2.8,
+           y=700,
+           label = "Male students recorded peak frequency\nat higher Science score",
+           color = "red",
+           size = 2) +
+  geom_boxplot(width = .2,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05,
+            binwidth = 4,
+            dotsize = .5) +
+    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
+  coord_flip() +
+  theme_economist()
+
+grid.arrange(g1, g2, g3)
+
+```
+
+### Code
+
+```{r}
+#| eval: false
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 1, "Female")
+
+stu_qqq_SG$ST004D01T <- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 2, "Male")
+
+g1 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanmathscore)) +
+  labs(title = "Distribution of Math Scores by Gender", x = "Gender", y = "Mean Math Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA,
+               slab_fill = "aquamarine") +
+  annotate(geom = "text",
+           x=2.8,
+           y=720,
+           label = "Male students recorded peak frequency\nat higher Math score",
+           color = "red",
+           size = 2) +
+  geom_boxplot(width = .2,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
+  coord_flip() +
+  theme_economist()
+
+
+g2 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meanreadscore)) +
+  labs(title = "Distribution of Reading Scores by Gender", x = "Gender", y = "Mean Reading Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA,
+               slab_fill = "cornsilk") +
+    annotate(geom = "text",
+           x=2.8,
+           y=680,
+           label = "Female and Male students recorded peak frequency\nat similar Reading score",
+           color = "red",
+           size = 2) +
+  geom_boxplot(width = .2,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05, 
+            binwidth = 4,
+            dotsize = .5) +
+    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
+  coord_flip() +
+  theme_economist()
+
+g3 <- ggplot(stu_qqq_SG,
+       aes(x = ST004D01T, 
+           y = meansciescore)) +
+  labs(title = "Distribution of Science Scores by Gender", x = "Gender", y = "Mean Science Score") +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.1,
+               .width = 0,
+               scale = .8,
+               point_colour = NA,
+               slab_fill = "darkolivegreen2") +
+      annotate(geom = "text",
+           x=2.8,
+           y=700,
+           label = "Male students recorded peak frequency\nat higher Science score",
+           color = "red",
+           size = 2) +
+  geom_boxplot(width = .2,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.05,
+            binwidth = 4,
+            dotsize = .5) +
+    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +
+  coord_flip() +
+  theme_economist()
+
+grid.arrange(g1, g2, g3)
+
+
 
 ```
 :::
+
+# Learning Points
+
+This exercise mandated students to critique and makeover the visualisation works of the peers, which helped to embed good practices in data visualization. Through this exercise, students would need to go through the works of their peers, and in so doing, understand how to improve their own visualisation and the common pitfalls to avoid. To summarise, the key learning points are:
+
+-   **Begin with the business question in mind**. It is important to find out the aim and purpose of the visualization. Only then, can students start designing an appropriate visualization tool to aid decision making.
+
+-   **There is no perfect visualisation**, as we will always be foreced to make trade-offs between clarity and aesthetics. As we aspire to build clear and beautiful visualisations, a useful tip provided by Prof Kam will be to provide an "overview first, zoom and filter, then details-on-demand".
