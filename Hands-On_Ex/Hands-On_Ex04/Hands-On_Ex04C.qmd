@@ -309,7 +309,6 @@ This produces a Half Eye visualization, which is contains a half-density and a s
 
 ::: panel-tabset
 ## Plot
-
 ```{r}
 #| echo: false
 
@@ -323,7 +322,6 @@ ggplot(exam,
 ```
 
 ## Code
-
 ```{r}
 #| eval: false
 
@@ -343,7 +341,6 @@ Next, we will add the second geometry layer using [`geom_boxplot()`](https://r4
 
 ::: panel-tabset
 ## Plot
-
 ```{r}
 #| echo: false
 
@@ -359,7 +356,6 @@ ggplot(exam,
 ```
 
 ## Code
-
 ```{r}
 #| eval: false
 
@@ -375,13 +371,12 @@ ggplot(exam,
 ```
 :::
 
-## **Adding the Dot Plots with `stat_dots()`**
+##  **Adding the Dot Plots with `stat_dots()`**
 
 Next, we will add the third geometry layer using [`stat_dots()`](https://mjskay.github.io/ggdist/reference/stat_dots.html) of ggdist package. This produces a half-dotplot, which is similar to a histogram that indicates the number of samples (number of dots) in each bin. We select side = “left” to indicate we want it on the left-hand side.
 
 ::: panel-tabset
 ## Plot
-
 ```{r}
 #| echo: false
 
@@ -401,7 +396,6 @@ ggplot(exam,
 ```
 
 ## Code
-
 ```{r}
 #| eval: false
 
@@ -427,7 +421,6 @@ Lastly, [`coord_flip()`](https://ggplot2.tidyverse.org/reference/coord_flip.htm
 
 ::: panel-tabset
 ## Plot
-
 ```{r}
 #| echo: false
 
@@ -449,7 +442,6 @@ ggplot(exam,
 ```
 
 ## Code
-
 ```{r}
 #| eval: false
 
