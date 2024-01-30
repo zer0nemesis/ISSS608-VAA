@@ -185,7 +185,7 @@ dfCI <- data.frame(number.ll95, number.ul95, number.ll999,
 
 In the code chunk below, ggplot2 functions are used to plot a static funnel plot.
 
-```{r}
+```{r, fig.width= 8.5}
 p <- ggplot(df, aes(x = Positive, y = rate)) +
   geom_point(aes(label=`Sub-district`), 
              alpha=0.4) +
