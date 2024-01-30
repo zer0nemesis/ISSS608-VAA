@@ -1,7 +1,7 @@
 ---
-title: "Hands-On_Ex04A: Visualising Distribution"
+title: "Hands-On_Ex04C: Visualising Uncertainty"
 author: "Roger Chen"
-date: "29 Jan 2024"
+date: "30 Jan 2024"
 date-modified: "last-modified"
 execute: 
   warning: false
@@ -10,7 +10,15 @@ number-sections: true
 
 # **Learning Outcome**
 
-Visualising distribution is not new in statistical analysis. In Hands-On_Ex01, we have shared that some of the popular statistical graphics methods for visualising distribution are histogram, probability density curve (pdf), boxplot, notch plot and violin plot and how they can be created by using ggplot2. In this exercise, we are going to share two relatively new statistical graphic methods for visualising distribution, namely ridgeline plot and raincloud plot by using ggplot2 and its extensions.
+Visualising uncertainty is relatively new in statistical graphics. In this exercise, we will gain hands-on experience on creating statistical graphics for visualising uncertainty. By the end of this exercise, we will be able to:
+
+-   plot statistics error bars by using ggplot2,
+
+-   plot interactive error bars by combining ggplot2, plotly and DT,
+
+-   create advanced by using ggdist, and
+
+-   create hypothetical outcome plots (HOPs) by using ungeviz package.
 
 # **Getting Started**
 
@@ -20,13 +28,24 @@ For the purpose of this exercise, the following R packages will be used, they ar
 
 -   tidyverse, a family of R packages for data science process,
 
--   ggridges, a ggplot2 extension specially designed for plotting ridgeline plots, and
+-   plotly for creating interactive plot,
+
+-   gganimate for creating animation plot,
+
+-   DT for displaying interactive html table,
+
+-   crosstalk for for implementing cross-widget interactions (currently, linked brushing and filtering), and
 
 -   ggdist for visualising distribution and uncertainty.
 
 ```{r}
-pacman::p_load(ggdist, ggridges, ggthemes,
-               colorspace, tidyverse)
+devtools::install_github("wilkelab/ungeviz")
+```
+
+```{r}
+pacman::p_load(ungeviz, plotly, crosstalk,
+               DT, ggdist, ggridges,
+               colorspace, gganimate, tidyverse)
 ```
 
 ## **Data import**
@@ -37,173 +56,46 @@ For the purpose of this exercise, *Exam_data.csv* will be used.
 exam <- read_csv("data/Exam_data.csv")
 ```
 
-# **Visualising Distribution with Ridgeline Plot**
+# **Visualizing the uncertainty of point estimates: ggplot2 methods**
 
-*Ridgeline plot* (sometimes called *Joyplot*) is a data visualisation technique for revealing the distribution of a numeric value for several groups. Distribution can be represented using histograms or density plots, all aligned to the same horizontal scale and presented with a slight overlap.
-
-Figure below is a ridgelines plot showing the distribution of English score by class.
-
-![](images/clipboard-3897783365.png)
-
-::: callout-note
--   Ridgeline plots make sense when the number of group to represent is medium to high, and thus a classic window separation would take to much space. Indeed, the fact that groups overlap each other allows to use space more efficiently. If you have less than 5 groups, dealing with other distribution plots is probably better.
-
--   It works well when there is a clear pattern in the result, like if there is an obvious ranking in groups. Otherwise group will tend to overlap each other, leading to a messy plot not providing any insight.
-:::
-
-## **Plotting ridgeline graph: ggridges method**
-
-There are several ways to plot ridgeline plot with R. In this section, you will learn how to plot ridgeline plot by using [ggridges](https://wilkelab.org/ggridges/) package.
-
-ggridges package provides two main geom to plot gridgeline plots, they are: [`geom_ridgeline()`](https://wilkelab.org/ggridges/reference/geom_ridgeline.html) and [`geom_density_ridges()`](https://wilkelab.org/ggridges/reference/geom_density_ridges.html). The former takes height values directly to draw the ridgelines, and the latter first estimates data densities and then draws those using ridgelines.
-
-The ridgeline plot below is plotted by using `geom_density_ridges()`.
-
-::: panel-tabset
-## Plot
-
-```{r}
-#| echo: false
-
-ggplot(exam, 
-       aes(x = ENGLISH, 
-           y = CLASS)) +
-  geom_density_ridges(
-    scale = 3,
-    rel_min_height = 0.01,
-    bandwidth = 3.4,
-    fill = lighten("#7097BB", .3),
-    color = "white"
-  ) +
-  scale_x_continuous(
-    name = "English grades",
-    expand = c(0, 0)
-    ) +
-  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
-  theme_ridges()
-```
-
-## Code
-
-```{r}
-#| eval: false
-
-ggplot(exam, 
-       aes(x = ENGLISH, 
-           y = CLASS)) +
-  geom_density_ridges(
-    scale = 3,
-    rel_min_height = 0.01,
-    bandwidth = 3.4,
-    fill = lighten("#7097BB", .3),
-    color = "white"
-  ) +
-  scale_x_continuous(
-    name = "English grades",
-    expand = c(0, 0)
-    ) +
-  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
-  theme_ridges()
-```
-:::
-
-## **Varying fill colors along the x axis**
-
-Sometimes we would like to have the area under a ridgeline not filled with a single solid color but rather with colors that vary in some form along the x axis. This effect can be achieved by using either [`geom_ridgeline_gradient()`](https://wilkelab.org/ggridges/reference/geom_ridgeline_gradient.html) or [`geom_density_ridges_gradient()`](https://wilkelab.org/ggridges/reference/geom_ridgeline_gradient.html). Both geoms work just like `geom_ridgeline()` and `geom_density_ridges()`, except that they allow for varying fill colors. However, they do not allow for alpha transparency in the fill. For technical reasons, we can have changing fill colors or transparency but not both.
-
-::: panel-tabset
-## Plot
-
-```{r}
-#| echo: false
-
-ggplot(exam, 
-       aes(x = ENGLISH, 
-           y = CLASS,
-           fill = stat(x))) +
-  geom_density_ridges_gradient(
-    scale = 3,
-    rel_min_height = 0.01) +
-  scale_fill_viridis_c(name = "Temp. [F]",
-                       option = "C") +
-  scale_x_continuous(
-    name = "English grades",
-    expand = c(0, 0)
-  ) +
-  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
-  theme_ridges()
-```
-
-## Code
-
-```{r}
-#| eval: false
-
-ggplot(exam, 
-       aes(x = ENGLISH, 
-           y = CLASS,
-           fill = stat(x))) +
-  geom_density_ridges_gradient(
-    scale = 3,
-    rel_min_height = 0.01) +
-  scale_fill_viridis_c(name = "Temp. [F]",
-                       option = "C") +
-  scale_x_continuous(
-    name = "English grades",
-    expand = c(0, 0)
-  ) +
-  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
-  theme_ridges()
-```
-:::
-
-## **Mapping the probabilities directly onto colour**
-
-Beside providing additional geom objects to support the need to plot ridgeline plot, ggridges package also provides a stat function called [`stat_density_ridges()`](https://wilkelab.org/ggridges/reference/stat_density_ridges.html) that replaces [`stat_density()`](https://ggplot2.tidyverse.org/reference/geom_density.html) of ggplot2.
-
-Figure below is plotted by mapping the probabilities calculated by using `stat(ecdf)` which represent the empirical cumulative density function for the distribution of English score.
-
-::: panel-tabset
-## Plot
-
-```{r}
-#| echo: false
-
-ggplot(exam,
-       aes(x = ENGLISH, 
-           y = CLASS, 
-           fill = 0.5 - abs(0.5-stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", 
-                      calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability",
-                       direction = -1) +
-  theme_ridges()
-```
-
-## Code
-
-```{r}
-#| eval: false
-
-ggplot(exam,
-       aes(x = ENGLISH, 
-           y = CLASS, 
-           fill = 0.5 - abs(0.5-stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", 
-                      calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability",
-                       direction = -1) +
-  theme_ridges()
-```
-:::
+A point estimate is a single number, such as a mean. Uncertainty, on the other hand, is expressed as standard error, confidence interval, or credible interval.
 
 ::: callout-important
-It is important include the argument `calc_ecdf = TRUE` in `stat_density_ridges()`.
+-   Don’t confuse the uncertainty of a point estimate with the variation in the sample
 :::
 
-## **Ridgeline plots with quantile lines**
+In this section, we will learn how to plot error bars of maths scores by race by using data provided in *exam* tibble data frame.
 
-By using [`geom_density_ridges_gradient()`](https://wilkelab.org/ggridges/reference/geom_ridgeline_gradient.html), we can colour the ridgeline plot by quantile, via the calculated `stat(quantile)` aesthetic as shown in the figure below.
+Firstly, code chunk below will be used to derive the necessary summary statistics.
+
+```{r}
+my_sum <- exam %>%
+  group_by(RACE) %>%
+  summarise(
+    n=n(),
+    mean=mean(MATHS),
+    sd=sd(MATHS)
+    ) %>%
+  mutate(se=sd/sqrt(n-1))
+```
+
+::: callout-tip
+# Things to learn from the code chunk above
+
+-   `group_by()` of **dplyr** package is used to group the observation by RACE,
+
+-   `summarise()` is used to compute the count of observations, mean, standard deviation
+
+-   `mutate()` is used to derive standard error of Maths by RACE, and
+
+-   the output is save as a tibble data table called *my_sum*.
+:::
+
+::: callout-note
+For the mathematical explanation, please refer to Slide 20 of Lesson 4.
+:::
+
+Next, the code chunk below will be used to display *my_sum* tibble data frame in an html table format.
 
 ::: panel-tabset
 ## Plot
@@ -211,18 +103,7 @@ By using [`geom_density_ridges_gradient()`](https://wilkelab.org/ggridges/refer
 ```{r}
 #| echo: false
 
-ggplot(exam,
-       aes(x = ENGLISH, 
-           y = CLASS, 
-           fill = factor(stat(quantile))
-           )) +
-  stat_density_ridges(
-    geom = "density_ridges_gradient",
-    calc_ecdf = TRUE, 
-    quantiles = 4,
-    quantile_lines = TRUE) +
-  scale_fill_viridis_d(name = "Quartiles") +
-  theme_ridges()
+knitr::kable(head(my_sum), format = 'html')
 ```
 
 ## Code
@@ -230,22 +111,13 @@ ggplot(exam,
 ```{r}
 #| eval: false
 
-ggplot(exam,
-       aes(x = ENGLISH, 
-           y = CLASS, 
-           fill = factor(stat(quantile))
-           )) +
-  stat_density_ridges(
-    geom = "density_ridges_gradient",
-    calc_ecdf = TRUE, 
-    quantiles = 4,
-    quantile_lines = TRUE) +
-  scale_fill_viridis_d(name = "Quartiles") +
-  theme_ridges()
+knitr::kable(head(my_sum), format = 'html')
 ```
 :::
 
-Instead of using number to define the quantiles, we can also specify quantiles by cut points such as 2.5% and 97.5% tails to colour the ridgeline plot as shown in the figure below.
+## **Plotting standard error bars of point estimates**
+
+Now we are ready to plot the standard error bars of mean maths score by race as shown below.
 
 ::: panel-tabset
 ## Plot
@@ -253,22 +125,23 @@ Instead of using number to define the quantiles, we can also specify quantiles b
 ```{r}
 #| echo: false
 
-ggplot(exam,
-       aes(x = ENGLISH, 
-           y = CLASS, 
-           fill = factor(stat(quantile))
-           )) +
-  stat_density_ridges(
-    geom = "density_ridges_gradient",
-    calc_ecdf = TRUE, 
-    quantiles = c(0.025, 0.975)
-    ) +
-  scale_fill_manual(
-    name = "Probability",
-    values = c("#FF0000A0", "#A0A0A0A0", "#0000FFA0"),
-    labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]")
-  ) +
-  theme_ridges()
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE, 
+        ymin=mean-se, 
+        ymax=mean+se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  ggtitle("Standard error of mean maths score by rac")
 ```
 
 ## Code
@@ -276,189 +149,326 @@ ggplot(exam,
 ```{r}
 #| eval: false
 
-ggplot(exam,
-       aes(x = ENGLISH, 
-           y = CLASS, 
-           fill = factor(stat(quantile))
-           )) +
-  stat_density_ridges(
-    geom = "density_ridges_gradient",
-    calc_ecdf = TRUE, 
-    quantiles = c(0.025, 0.975)
-    ) +
-  scale_fill_manual(
-    name = "Probability",
-    values = c("#FF0000A0", "#A0A0A0A0", "#0000FFA0"),
-    labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]")
-  ) +
-  theme_ridges()
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE, 
+        ymin=mean-se, 
+        ymax=mean+se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  ggtitle("Standard error of mean maths score by rac")
 ```
 :::
 
-# **Visualising Distribution with Raincloud Plot**
+## **Plotting confidence interval of point estimates**
 
-Raincloud Plot is a data visualisation techniques that produces a half-density to a distribution plot. It gets the name because the density plot is in the shape of a “raincloud”. The raincloud (half-density) plot enhances the traditional box-plot by highlighting multiple modalities (an indicator that groups may exist). The boxplot does not show where densities are clustered, but the raincloud plot does!
-
-In this section, you will learn how to create a raincloud plot to visualise the distribution of English score by race. It will be created by using functions provided by **ggdist** and ggplot2 packages.
-
-## **Plotting a Half Eye graph**
-
-First, we will plot a Half-Eye graph by using [`stat_halfeye()`](https://mjskay.github.io/ggdist/reference/stat_halfeye.html) of **ggdist** package.
-
-This produces a Half Eye visualization, which is contains a half-density and a slab-interval.
+Instead of plotting the standard error bar of point estimates, we can also plot the confidence intervals of mean maths score by race.
 
 ::: panel-tabset
 ## Plot
+
 ```{r}
 #| echo: false
 
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA)
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=reorder(RACE, -mean), 
+        ymin=mean-1.96*se, 
+        ymax=mean+1.96*se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  labs(x = "Maths score",
+       title = "95% confidence interval of mean maths score by race")
 ```
 
 ## Code
+
 ```{r}
 #| eval: false
 
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA)
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=reorder(RACE, -mean), 
+        ymin=mean-1.96*se, 
+        ymax=mean+1.96*se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  labs(x = "Maths score",
+       title = "95% confidence interval of mean maths score by race")
 ```
 :::
 
-## **Adding the boxplot with `geom_boxplot()`**
+## **Visualizing the uncertainty of point estimates with interactive error bars**
 
-Next, we will add the second geometry layer using [`geom_boxplot()`](https://r4va.netlify.app/chap09) of ggplot2. This produces a narrow boxplot. We reduce the width and adjust the opacity.
+In this section, we will learn how to plot interactive error bars for the 99% confidence interval of mean maths score by race as shown in the figure below.
 
 ::: panel-tabset
 ## Plot
+
 ```{r}
 #| echo: false
 
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA) +
-  geom_boxplot(width = .20,
-               outlier.shape = NA)
+shared_df = SharedData$new(my_sum)
+
+bscols(widths = c(4,8),
+       ggplotly((ggplot(shared_df) +
+                   geom_errorbar(aes(
+                     x=reorder(RACE, -mean),
+                     ymin=mean-2.58*se, 
+                     ymax=mean+2.58*se), 
+                     width=0.2, 
+                     colour="black", 
+                     alpha=0.9, 
+                     size=0.5) +
+                   geom_point(aes(
+                     x=RACE, 
+                     y=mean, 
+                     text = paste("Race:", `RACE`, 
+                                  "<br>N:", `n`,
+                                  "<br>Avg. Scores:", round(mean, digits = 2),
+                                  "<br>95% CI:[", 
+                                  round((mean-2.58*se), digits = 2), ",",
+                                  round((mean+2.58*se), digits = 2),"]")),
+                     stat="identity", 
+                     color="red", 
+                     size = 1.5, 
+                     alpha=1) + 
+                   xlab("Race") + 
+                   ylab("Average Scores") + 
+                   theme_minimal() + 
+                   theme(axis.text.x = element_text(
+                     angle = 45, vjust = 0.5, hjust=1)) +
+                   ggtitle("99% Confidence interval of average /<br>maths scores by race")), 
+                tooltip = "text"), 
+       DT::datatable(shared_df, 
+                     rownames = FALSE, 
+                     class="display compact", 
+                     width="100%", 
+                     style = "bootstrap5",
+                     options = list(pageLength = 10,
+                                    scrollX=T), 
+                     colnames = c("No. of pupils", 
+                                  "Avg Scores",
+                                  "Std Dev",
+                                  "Std Error")) %>%
+         formatRound(columns=c('mean', 'sd', 'se'),
+                     digits=2))
 ```
 
 ## Code
+
 ```{r}
 #| eval: false
 
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA) +
-  geom_boxplot(width = .20,
-               outlier.shape = NA)
+shared_df = SharedData$new(my_sum)
+
+bscols(widths = c(4,8),
+       ggplotly((ggplot(shared_df) +
+                   geom_errorbar(aes(
+                     x=reorder(RACE, -mean),
+                     ymin=mean-2.58*se, 
+                     ymax=mean+2.58*se), 
+                     width=0.2, 
+                     colour="black", 
+                     alpha=0.9, 
+                     size=0.5) +
+                   geom_point(aes(
+                     x=RACE, 
+                     y=mean, 
+                     text = paste("Race:", `RACE`, 
+                                  "<br>N:", `n`,
+                                  "<br>Avg. Scores:", round(mean, digits = 2),
+                                  "<br>95% CI:[", 
+                                  round((mean-2.58*se), digits = 2), ",",
+                                  round((mean+2.58*se), digits = 2),"]")),
+                     stat="identity", 
+                     color="red", 
+                     size = 1.5, 
+                     alpha=1) + 
+                   xlab("Race") + 
+                   ylab("Average Scores") + 
+                   theme_minimal() + 
+                   theme(axis.text.x = element_text(
+                     angle = 45, vjust = 0.5, hjust=1)) +
+                   ggtitle("99% Confidence interval of average /<br>maths scores by race")), 
+                tooltip = "text"), 
+       DT::datatable(shared_df, 
+                     rownames = FALSE, 
+                     class="compact", 
+                     width="100%", 
+                     options = list(pageLength = 10,
+                                    scrollX=T), 
+                     colnames = c("No. of pupils", 
+                                  "Avg Scores",
+                                  "Std Dev",
+                                  "Std Error")) %>%
+         formatRound(columns=c('mean', 'sd', 'se'),
+                     digits=2))
 ```
 :::
 
-##  **Adding the Dot Plots with `stat_dots()`**
+# **Visualising Uncertainty: ggdist package**
 
-Next, we will add the third geometry layer using [`stat_dots()`](https://mjskay.github.io/ggdist/reference/stat_dots.html) of ggdist package. This produces a half-dotplot, which is similar to a histogram that indicates the number of samples (number of dots) in each bin. We select side = “left” to indicate we want it on the left-hand side.
+-   [**ggdist**](https://mjskay.github.io/ggdist/) is an R package that provides a flexible set of ggplot2 geoms and stats designed especially for visualising distributions and uncertainty.
 
-::: panel-tabset
-## Plot
+-   It is designed for both frequentist and Bayesian uncertainty visualization, taking the view that uncertainty visualization can be unified through the perspective of distribution visualization:
+
+    -   for frequentist models, one visualises confidence distributions or bootstrap distributions (see vignette(“freq-uncertainty-vis”));
+
+    -   for Bayesian models, one visualises probability distributions (see the tidybayes package, which builds on top of ggdist).
+
+![](images/clipboard-1259962916.png)
+
+## **Visualizing the uncertainty of point estimates: ggdist methods**
+
+In the code chunk below, [`stat_pointinterval()`](https://mjskay.github.io/ggdist/reference/stat_pointinterval.html) of **ggdist** is used to build a visual for displaying distribution of maths scores by race.
+
 ```{r}
-#| echo: false
-
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA) +
-  geom_boxplot(width = .20,
-               outlier.shape = NA) +
-  stat_dots(side = "left", 
-            justification = 1.2, 
-            binwidth = .5,
-            dotsize = 2)
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_pointinterval() +
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
 ```
 
-## Code
-```{r}
-#| eval: false
-
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA) +
-  geom_boxplot(width = .20,
-               outlier.shape = NA) +
-  stat_dots(side = "left", 
-            justification = 1.2, 
-            binwidth = .5,
-            dotsize = 2)
-```
+::: callout-note
+This function comes with many arguments, students are advised to read the syntax reference for more detail.
 :::
 
-## **Finishing touch**
+For example, in the code chunk below the following arguments are used:
 
-Lastly, [`coord_flip()`](https://ggplot2.tidyverse.org/reference/coord_flip.html) of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, `theme_economist()` of ggthemes package is used to give the raincloud chart a professional publishing standard look.
+-   .width = 0.95
 
-::: panel-tabset
-## Plot
+-   .point = median
+
+-   .interval = qi
+
 ```{r}
-#| echo: false
-
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA) +
-  geom_boxplot(width = .20,
-               outlier.shape = NA) +
-  stat_dots(side = "left", 
-            justification = 1.2, 
-            binwidth = .5,
-            dotsize = 1.5) +
-  coord_flip() +
-  theme_economist()
+exam %>%
+  ggplot(aes(x = RACE, y = MATHS)) +
+  stat_pointinterval(.width = 0.95,
+  .point = median,
+  .interval = qi) +
+  labs(
+    title = "Visualising confidence intervals of median math score",
+    subtitle = "Median Point + Multiple-interval plot")
 ```
 
-## Code
-```{r}
-#| eval: false
+## **Visualizing the uncertainty of point estimates: ggdist methods**
 
-ggplot(exam, 
-       aes(x = RACE, 
-           y = ENGLISH)) +
-  stat_halfeye(adjust = 0.5,
-               justification = -0.2,
-               .width = 0,
-               point_colour = NA) +
-  geom_boxplot(width = .20,
-               outlier.shape = NA) +
-  stat_dots(side = "left", 
-            justification = 1.2, 
-            binwidth = .5,
-            dotsize = 1.5) +
-  coord_flip() +
-  theme_economist()
-```
+::: callout-note
+## Your turn
+
+Makeover the plot on previous slide by showing 95% and 99% confidence intervals.
 :::
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_pointinterval(
+    show.legend = FALSE) +   
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
+```
+
+Gentle advice: This function comes with many arguments, students are advised to read the syntax reference for more detail.
+
+## **Visualizing the uncertainty of point estimates: ggdist methods**
+
+In the code chunk below, [`stat_gradientinterval()`](https://mjskay.github.io/ggdist/reference/stat_gradientinterval.html) of **ggdist** is used to build a visual for displaying distribution of maths scores by race.
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_gradientinterval(   
+    fill = "skyblue",      
+    show.legend = TRUE     
+  ) +                        
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Gradient + interval plot")
+```
+
+Gentle advice: This function comes with many arguments, students are advised to read the syntax reference for more detail.
+
+# **Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
+
+Step 1: Installing ungeviz package
+
+```{r}
+devtools::install_github("wilkelab/ungeviz")
+```
+
+::: callout-note
+You only need to perform this step once.
+:::
+
+Step 2: Launch the application in R
+
+```{r}
+library(ungeviz)
+```
+
+```{r}
+ggplot(data = exam, 
+       (aes(x = factor(RACE), y = MATHS))) +
+  geom_point(position = position_jitter(
+    height = 0.3, width = 0.05), 
+    size = 0.4, color = "#0072B2", alpha = 1/2) +
+  geom_hpline(data = sampler(25, group = RACE), height = 0.6, color = "#D55E00") +
+  theme_bw() + 
+  # `.draw` is a generated column indicating the sample draw
+  transition_states(.draw, 1, 3)
+```
+
+# **Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
+
+```{r}
+ggplot(data = exam, 
+       (aes(x = factor(RACE), 
+            y = MATHS))) +
+  geom_point(position = position_jitter(
+    height = 0.3, 
+    width = 0.05), 
+    size = 0.4, 
+    color = "#0072B2", 
+    alpha = 1/2) +
+  geom_hpline(data = sampler(25, 
+                             group = RACE), 
+              height = 0.6, 
+              color = "#D55E00") +
+  theme_bw() + 
+  transition_states(.draw, 1, 3)
+```
