@@ -23,6 +23,8 @@ website:
           href: "Hands-On_Ex/Hands-On_Ex04/Hands-On_Ex04C.html"
         - text: "Hands-On Exercise 4D"
           href: "Hands-On_Ex/Hands-On_Ex04/Hands-On_Ex04D.html"
+        - text: "Hands-On Exercise 5"
+          href: "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05A.html"
           
     - text: "In-Class Exercises"
       menu:
@@ -45,11 +47,13 @@ website:
         text: Home
       - about.qmd
 
+
 format:
   html:
     theme: cyborg
     css: styles.css
     toc: true
+  
 
 editor: visual
 

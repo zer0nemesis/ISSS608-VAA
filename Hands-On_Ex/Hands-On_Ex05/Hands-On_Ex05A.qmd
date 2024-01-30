@@ -1,0 +1,10 @@
+---
+title: "Hands-On_Ex05A: Creating Ternary Plot with R"
+subtitle: "In-Progress"
+author: "Roger Chen"
+date: "30 Jan 2024"
+date-modified: "last-modified"
+execute: 
+  warning: false
+number-sections: true
+---
