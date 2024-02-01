@@ -139,7 +139,7 @@ ggscatterstats(
   )
 ```
 
-## **Significant Test of Association (Depedence) : *ggbarstats()* methods**
+## **Significant Test of Association (Dependence) : *ggbarstats()* methods**
 
 In the code chunk below, the Maths scores is binned into a 4-class variable by using [*cut()*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut).
 

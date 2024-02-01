@@ -107,9 +107,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../moon-stars" alt="" class="navbar-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">ISSS608-VAA</span>
     </a>
@@ -156,6 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex04/Hands-On_Ex04D.html" rel="" target="">
  <span class="dropdown-text">Hands-On Exercise 4D</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05A.html" rel="" target="">
+ <span class="dropdown-text">Hands-On Exercise 5</span></a>
   </li>  
     </ul>
   </li>
@@ -234,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ggbetweenstats---summary-of-tests" id="toc-ggbetweenstats---summary-of-tests" class="nav-link" data-scroll-target="#ggbetweenstats---summary-of-tests"><span class="header-section-number">3.7.1</span> ggbetweenstats - Summary of tests</a></li>
   </ul></li>
   <li><a href="#significant-test-of-correlation-ggscatterstats" id="toc-significant-test-of-correlation-ggscatterstats" class="nav-link" data-scroll-target="#significant-test-of-correlation-ggscatterstats"><span class="header-section-number">3.8</span> <strong>Significant Test of Correlation: <em>ggscatterstats()</em></strong></a></li>
-  <li><a href="#significant-test-of-association-depedence-ggbarstats-methods" id="toc-significant-test-of-association-depedence-ggbarstats-methods" class="nav-link" data-scroll-target="#significant-test-of-association-depedence-ggbarstats-methods"><span class="header-section-number">3.9</span> <strong>Significant Test of Association (Depedence) : <em>ggbarstats()</em> methods</strong></a></li>
+  <li><a href="#significant-test-of-association-dependence-ggbarstats-methods" id="toc-significant-test-of-association-dependence-ggbarstats-methods" class="nav-link" data-scroll-target="#significant-test-of-association-dependence-ggbarstats-methods"><span class="header-section-number">3.9</span> <strong>Significant Test of Association (Dependence) : <em>ggbarstats()</em> methods</strong></a></li>
   </ul></li>
   <li><a href="#visualising-models" id="toc-visualising-models" class="nav-link" data-scroll-target="#visualising-models"><span class="header-section-number">4</span> <strong>Visualising Models</strong></a></li>
   <li><a href="#getting-started-1" id="toc-getting-started-1" class="nav-link" data-scroll-target="#getting-started-1"><span class="header-section-number">5</span> <strong>Getting Started</strong></a>
@@ -281,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 29, 2024</p>
+      <p class="date-modified">February 1, 2024</p>
     </div>
   </div>
     
@@ -435,8 +436,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="significant-test-of-association-depedence-ggbarstats-methods" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="significant-test-of-association-depedence-ggbarstats-methods"><span class="header-section-number">3.9</span> <strong>Significant Test of Association (Depedence) : <em>ggbarstats()</em> methods</strong></h2>
+<section id="significant-test-of-association-dependence-ggbarstats-methods" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="significant-test-of-association-dependence-ggbarstats-methods"><span class="header-section-number">3.9</span> <strong>Significant Test of Association (Dependence) : <em>ggbarstats()</em> methods</strong></h2>
 <p>In the code chunk below, the Maths scores is binned into a 4-class variable by using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut"><em>cut()</em></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>exam1 <span class="ot">&lt;-</span> exam <span class="sc">%&gt;%</span> </span>
