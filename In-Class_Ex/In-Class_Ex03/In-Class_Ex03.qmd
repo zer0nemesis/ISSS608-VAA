@@ -28,37 +28,49 @@ We will build on what we have created during In-Class Exercise 2 [here](https://
 
 ![](images/clipboard-3446394744.png)
 
-uncheck "Aggregate Measures" to reveal scatter plot
+At first glance, the data points have been automatically aggregated. From *Analysis* tab, uncheck "Aggregate Measures" to reveal the scatter plot.
 
 ![](images/clipboard-4202897418.png)
 
-Resulting scatter plot
+This is the resulting scatter plot.
 
 ![](images/clipboard-2904140949.png)
 
-how to make it less cluttered? last four options for time series
+To make the scatter plot less cluttered, we can select "Percentile".
 
 ![](images/clipboard-3220445656.png)
 
-![After using "Compute using State" and "Aggregate Measures"](images/clipboard-1580521576.png)
+::: callout-tip
+YTD Total, Compound Growth Rate, Year on Year Growth and YTD Growth can be used for time series visualisation.
+:::
+
+We will next aggregate the points based on states, by using "Compute using State" and "Aggregate Measures" as shown below:
+
+![](images/clipboard-1580521576.png)
+
+Resulting scatter plot as follows:
 
 ![](images/clipboard-41138660.png)
 
-Selecting "Trend Line" and choosing specific points
+To insert trendlines, we can do so by selecting "Trend Line". We can also derive the trend lines of specific observations by choosing specific points on the scatter plot.
 
 ![](images/clipboard-4131544152.png)
 
-unlike JMP "Lasso tool" we cannot choose odd shapes. So need to select using the box select tool, then unselect those points you do not want
+Unlike JMP where we can use the "lasso tool", Tableau does not allow us to choose points of odd shapes. To overcome this, we need to select using the box select tool, then unselect those points we do not want.
 
 ![](images/clipboard-1421574513.png)
 
-next, we want to change the size of the scatter plot. FIrst, we drag "sales" to "size"
+Next, we will change the size of the scatter plot. First, we drag "sales" to "Size"
 
 ![](images/clipboard-1107111438.png)
+
+Next, changing the colour and opacity of the scatter plot.
 
 ![](images/clipboard-3884349436.png)
 
 ![](images/clipboard-1530706442.png)
+
+We will also plot reference lines on the scatterplot so as to better visualise how the observations can be catergorised into four different quadrants.
 
 ![](images/clipboard-4134829557.png)
 
@@ -66,23 +78,33 @@ We will now have a scatterplot categorised into four quadrants
 
 ![](images/clipboard-191447868.png)
 
-Adding a filter
+We can also add a "Filter" option on the scatter plot to improve the interactivity.
 
 ![](images/clipboard-3392045023.png)
 
-displaying the filter panel on the right, but the graph disappears when none of the options are checked
+Although we can display the filter panel on the right, but we notice that the graph disappears when none of the options are checked, which can lead to unnecessary panic.
 
 ![](images/clipboard-3947067927.png)
 
-to mandate that at least one option is chosen
+To prevent that, we can mandate that at least one option needs to be chosen.
 
 ![](images/clipboard-1592687348.png)
 
-creating a dynamic sheet name to follow the selected year
+We can help readers zoom into the details of each point. First, we need to create a new sheet name to follow the selected year. We will create a new sheet, and create a new annual sales and profit chart.
+
+![](images/clipboard-3837062241.png)
+
+Creating a dual axis for profits, so that the profits and losses will be reflected in blue and red respectively.
+
+![](images/clipboard-1663375746.png)
+
+Resizing the charts so that we can view on both desktop and handphone.
+
+![](images/clipboard-1781499014.png)
 
 ![](images/clipboard-2299917629.png)
 
-customising the animation effects
+We can also customising the animation effects that we want to visualise on the scatter plot.
 
 ![](images/clipboard-2913505919.png)
 
@@ -90,56 +112,54 @@ Inserting details
 
 ![](images/clipboard-3799806308.png)
 
-to do the above, u need to create a new sheet, and a new annual sales and profit chart.
+And now, we have an interactive scatter plot.
 
-![](images/clipboard-3837062241.png)
+## Creating Dashboards and Story Points
 
-creating a dual axis for profits
+We can use dashboards to combine different visualisation sheets together.
 
-![](images/clipboard-1663375746.png)
+We can use story points to combine different visualisation sheets and/or dashboards together.
 
-resizing so that u can view on desktop and handphone
-
-![](images/clipboard-1781499014.png)
-
-using dashboards to combine different visualisation sheets together
-
-using story points to combine different visualisation sheets/ dashboards together
-
-import exam data, create scatterplot, adjust size and shape
+We will practice this by importing the Exam_data.csv, then creating scatterplot and adjust the size and shape.
 
 ![](images/clipboard-134513223.png)
 
-select historgram, then select boxplot
+We would like to add a boxplot to the scatter plot. To do this, we will click on "Show Me". We noticed that the boxplot option is actually greyed out, and we are unable to select this option. To overcome this, we will first click on Histogram, which then allows to select the boxplot option.
 
-drag "ID" into detail, then replace "COUNT(English)" with "SUM(English)"
+Thereafter, we will drag "ID" into *Detail*, and replace "CNT(English)" with "SUM(English)".
 
 ![](images/clipboard-3072694844.png)
 
-duplicate, and edit for maths scores
+We will duplicate the sheet and change "SUM(Engligh)" to "SUM(Maths)" to display the maths scores.
 
 ![](images/clipboard-1326266138.png)
 
-then use dashboard to piece the scatterplot and boxplots together
+We will now use a Dashboard to piece the scatterplot and boxplots together.
 
 ![](images/clipboard-2102008253.png)
 
-coordinated link view for interactivity
+## Creating Coordinated Link View for Interactivity
 
-add in the aggreagation for scatterplot, then drag "ID" into each detail box for each of the sheets
+To create a coordinated link view, we will check the aggregation for scatterplot, then drag "ID" into the *Detail* for each of the three sheets. This will allow the common identifiable between the three sheets to be "ID".
 
-dashboard/ actions/ add actions/ highlight
+First, we will work on the scatter plot. Click *Dashboard/ Actions/ Add actions/ Highlight* and check those sheets that we want to be coordinated, as shown below:
 
 ![](images/clipboard-845947794.png)
 
-repeat for boxplots - \> scatterplot interactivity
+We will repeat the above step for both Maths and English boxplots. This allows the points on the scatterplot to be selected when readers select any point on either of the boxplot.
 
 ![](images/clipboard-858380792.png)
 
-stitching the different plots to synchronise the axes using "Blank"
+We can adjust the layout (aka stitching) so that the axes across the different plots are synchronised, using *Dashboard/Blank*.
 
 ![](images/clipboard-979413293.png)
 
-note: need to extract the exam_data before publishing.
+::: callout-note
+As this is the first time we are using the Exam_data.csv, we will need to extract the exam_data before publishing.
+:::
 
 ![](images/clipboard-2747672890.png)
+
+# Saving to Tableau Public
+
+Finally, we will complete this exercise by publishing our work to Tableau Public. Go to “Server/ Tableau Public/ Save to Tableau Public”. Before that, remember to rename your worksheets and save your file as a “Tableau Extract” file.
