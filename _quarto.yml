@@ -3,7 +3,10 @@ project:
 
 website:
   title: "ISSS608-VAA"
+  favicon: "images/badge.jpg"
+  
   navbar:
+    logo: "images/badge.jpg"
     left:
     - text: "Hands-On Exercises"
       menu:
@@ -23,7 +26,7 @@ website:
           href: "Hands-On_Ex/Hands-On_Ex04/Hands-On_Ex04C.html"
         - text: "Hands-On Exercise 4D"
           href: "Hands-On_Ex/Hands-On_Ex04/Hands-On_Ex04D.html"
-        - text: "Hands-On Exercise 5"
+        - text: "Hands-On Exercise 5A"
           href: "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05A.html"
           
     - text: "In-Class Exercises"
@@ -34,6 +37,8 @@ website:
           href: "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html"  
         - text: "In-Class Exercise 3"
           href: "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html" 
+        - text: "In-Class Exercise 4"
+          href: "In-Class_Ex/In-Class_Ex03/In-Class_Ex04.html" 
     
     - text: "Take Home Exercises"
       menu:

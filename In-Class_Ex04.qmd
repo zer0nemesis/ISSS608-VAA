@@ -1,0 +1,9 @@
+---
+title: "In-Class Exercise 04"
+author: "Roger Chen"
+date: "30 Jan 2024"
+date-modified: "last-modified"
+execute: 
+  warning: false
+number-sections: true
+---
