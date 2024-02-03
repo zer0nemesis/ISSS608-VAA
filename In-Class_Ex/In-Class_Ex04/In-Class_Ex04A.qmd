@@ -1,5 +1,5 @@
 ---
-title: "In Class Exercise 04: Programming Interactive Data Visualisation with R"
+title: "In Class Exercise 04A: Programming Interactive Data Visualisation with R"
 author: "Roger Chen"
 date: "02 Feb 2024"
 date-modified: "last-modified"
@@ -761,7 +761,7 @@ Click on a data point of one of the scatterplot and see how the corresponding po
 #| eval: false
 
 d <- highlight_key(exam_data) ### exam data becomes a object for highlight purposes
-p1 <- ggplot(data=d, 
+p1 <- ggplot(data=d,  ### data is no longer Exam_data, and is replaced with d
             aes(x = MATHS,
                 y = ENGLISH)) +
   geom_point(size=1) +
