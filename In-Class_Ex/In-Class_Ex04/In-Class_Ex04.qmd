@@ -843,12 +843,14 @@ p <- ggplot(d,
                   ylim=c(0,100))
 
 gg <- highlight(ggplotly(p),        
-                "plotly_selected")  ### creates a datable table based on what plot_ly() has selected
+                "plotly_selected")  
+### creates a datable table based on what plot_ly() has selected
 
 crosstalk::bscols(gg,               
                   DT::datatable(d, class = "display compact", style = "bootstrap5"), 
                   widths = 5)  
-### data selected by plot_ly is passed over to cross talk, this allows the table to display the records based on the selected obs from the plot_ly graphs     
+### data selected by plot_ly is passed over to cross talk, this allows the table
+### to display the records based on the selected obs from the plot_ly graphs     
 ```
 
 ::: callout-note
