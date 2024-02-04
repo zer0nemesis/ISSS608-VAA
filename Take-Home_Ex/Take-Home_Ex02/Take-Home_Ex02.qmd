@@ -1,6 +1,5 @@
 ---
 title: "Take Home Ex 02: DataVis Makeover"
-subtitle: "Work-in-Progress"
 author: "Roger Chen"
 date: "26 Jan 2024"
 date-modified: "last-modified"
