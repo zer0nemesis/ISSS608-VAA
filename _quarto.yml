@@ -47,7 +47,7 @@ website:
           href: "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html" 
         - text: "4.1. Programming Interactive Data Visualisation with R"
           href: "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html" 
-        - text: "4.2. Programming Interactive Data Visualisation with R"
+        - text: "4.2. Visualising Distribution"
           href: "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html" 
     
     - text: "Take Home Exercises"
@@ -56,6 +56,8 @@ website:
           href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html"
         - text: "2. DataVis Makeover"
           href: "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html"
+        - text: "3. Be Weatherwise or Otherwise"
+          href: "Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03.html"
     
     right:
       - href: index.qmd
