@@ -80,7 +80,7 @@ In this section, we will learn how to plot static heatmaps by using **heatmap()*
 
 In this sub-section, we will plot a heatmap by using *heatmap()* of Base Stats. The code chunk is given below.
 
-```{r}
+```{r, fig.height=10}
 #| column: page
 wh_heatmap <- heatmap(wh_matrix,
                       Rowv=NA, Colv=NA)
