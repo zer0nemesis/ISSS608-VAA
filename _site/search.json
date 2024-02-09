@@ -1348,7 +1348,7 @@
     "href": "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05C.html#working-with-heatmaply",
     "title": "Hands-On_Ex05C: Heatmap for Visualising and Analysing Multivariate Data",
     "section": "5.1 Working with heatmaply",
-    "text": "5.1 Working with heatmaply\n\nheatmaply(mtcars)\n\n\n\n\n\nThe code chunk below shows the basic syntax needed to create n interactive heatmap by using heatmaply package.\n\nheatmaply(wh_matrix[, -c(1, 2, 4, 5)],\n          fontsize_row = 4,\n          fontsize_col = 5, )\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nDifferent from heatmap(), for heatmaply() the default horizontal dendrogram is placed on the left hand side of the heatmap.\nThe text label of each raw, on the other hand, is placed on the right hand side of the heat map.\nWhen the x-axis marker labels are too long, they will be rotated by 135 degree from the north."
+    "text": "5.1 Working with heatmaply\n\nheatmaply(mtcars)\n\n\n\n\n\nThe code chunk below shows the basic syntax needed to create n interactive heatmap by using heatmaply package.\n\nheatmaply(wh_matrix[, -c(1, 2, 4, 5)],\n          fontsize_row = 3,\n          fontsize_col = 4, )\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nDifferent from heatmap(), for heatmaply() the default horizontal dendrogram is placed on the left hand side of the heatmap.\nThe text label of each raw, on the other hand, is placed on the right hand side of the heat map.\nWhen the x-axis marker labels are too long, they will be rotated by 135 degree from the north."
   },
   {
     "objectID": "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05C.html#data-transformation",
