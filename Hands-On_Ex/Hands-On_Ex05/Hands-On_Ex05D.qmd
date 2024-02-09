@@ -52,7 +52,7 @@ In this section, we will learn how to plot static parallel coordinates plot by u
 
 Code chunk below shows a typical syntax used to plot a basic static parallel coordinates plot by using `ggparcoord()`.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 ggparcoord(data = wh, 
            columns = c(7:12))
 ```
