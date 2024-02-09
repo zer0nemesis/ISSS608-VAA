@@ -134,7 +134,7 @@ The code chunk below shows the basic syntax needed to create n interactive heatm
 
 heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
           fontsize_row = 3,
-          fontsize_col = 4, )
+          fontsize_col = 4)
 ```
 
 ::: callout-note
@@ -164,7 +164,9 @@ The code chunk below is used to scale variable values columewise.
 ```{r, fig.height=10, fig.width=10}
 
 heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
-          scale = "column")
+          scale = "column",
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ### Normalising method
@@ -177,7 +179,9 @@ Different from Scaling, the normalise method is performed on the input data set 
 
 ```{r, fig.height=10, fig.width=10}
 
-heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]))
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ### Percentising method
@@ -192,7 +196,9 @@ Similar to Normalize method, the Percentize method is also performed on the inpu
 
 ```{r, fig.height=10, fig.width=10}
 
-heatmaply(percentize(wh_matrix[, -c(1, 2, 4, 5)]))
+heatmaply(percentize(wh_matrix[, -c(1, 2, 4, 5)]),
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ## **Clustering algorithm**
@@ -216,7 +222,9 @@ In the code chunk below, the heatmap is plotted by using hierachical clustering 
 ```{r, fig.height=10, fig.width=10}
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           dist_method = "euclidean",
-          hclust_method = "ward.D")
+          hclust_method = "ward.D",
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ## **Statistical approach**
@@ -249,7 +257,9 @@ With reference to the statistical analysis results, we can prepare the code chun
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           dist_method = "euclidean",
           hclust_method = "average",
-          k_row = 3)
+          k_row = 3,
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ## **Seriation**
@@ -263,7 +273,9 @@ Here we meet our first seriation algorithm: Optimal Leaf Ordering (OLO). This al
 ```{r, fig.height=10, fig.width=10}
 
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
-          seriate = "OLO")
+          seriate = "OLO",
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 The default options is “OLO” (Optimal leaf ordering) which optimizes the above criterion (in O(n\^4)). Another option is “GW” (Gruvaeus and Wainer) which aims for the same goal but uses a potentially faster heuristic.
@@ -271,7 +283,9 @@ The default options is “OLO” (Optimal leaf ordering) which optimizes the abo
 ```{r, fig.height=10, fig.width=10}
 
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
-          seriate = "GW")
+          seriate = "GW",
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 The option “mean” gives the output we would get by default from heatmap functions in other packages such as gplots::heatmap.2.
@@ -279,14 +293,18 @@ The option “mean” gives the output we would get by default from heatmap func
 ```{r, fig.height=10, fig.width=10}
 
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
-          seriate = "mean")
+          seriate = "mean",
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 The option “none” gives us the dendrograms without any rotation that is based on the data matrix.
 
 ```{r, fig.height=10, fig.width=10}
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
-          seriate = "none")
+          seriate = "none",
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ## **Working with colour palettes**
@@ -299,7 +317,9 @@ In the code chunk below, the Blues colour palette of rColorBrewer is used
 
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           seriate = "none",
-          colors = Blues)
+          colors = Blues,
+          fontsize_row = 3,
+          fontsize_col = 4)
 ```
 
 ## **The finishing touch**
