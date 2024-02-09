@@ -1,6 +1,5 @@
 ---
 title: "Hands-On_Ex05C: Heatmap for Visualising and Analysing Multivariate Data"
-subtitle: "Work-in-Progress"
 author: "Roger Chen"
 date: "08 Feb 2024"
 date-modified: "last-modified"
