@@ -63,7 +63,7 @@ Notice that only two argument namely `data` and `columns` is used. `Data` 
 
 The basic parallel coordinates failed to reveal any meaning understanding of the World Happiness measures. In this section, we will learn how to makeover the plot by using a collection of arguments provided by `ggparcoord()`.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 ggparcoord(data = wh, 
            columns = c(7:12), 
            groupColumn = 2,
@@ -93,7 +93,7 @@ Since `ggparcoord()` is developed by extending **ggplot2** package, we can combi
 
 In the code chunk below, `facet_wrap()` of **ggplot2** is used to plot 10 small multiple parallel coordinates plots. Each plot represent one geographical region such as East Asia.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 ggparcoord(data = wh, 
            columns = c(7:12), 
            groupColumn = 2,
@@ -110,7 +110,7 @@ One of the aesthetic defect of the current design is that some of the variable n
 
 To make the x-axis text label easy to read, let us rotate the labels by 30 degrees. We can rotate axis text labels using `theme()` function in ggplot2 as shown in the code chunk below
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 ggparcoord(data = wh, 
            columns = c(7:12), 
            groupColumn = 2,
@@ -132,7 +132,7 @@ ggparcoord(data = wh,
 
 Rotating x-axis text labels to 30 degrees makes the label overlap with the plot and we can avoid this by adjusting the text location using `hjust` argument to theme’s text element with `element_text()`. We use `axis.text.x` as we want to change the look of x-axis text.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 ggparcoord(data = wh, 
            columns = c(7:12), 
            groupColumn = 2,
@@ -152,7 +152,7 @@ ggparcoord(data = wh,
 
 The code chunk below plot an interactive parallel coordinates plot by using `parallelPlot()`.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 wh <- wh %>%
   select("Happiness score", c(7:12))
 parallelPlot(wh,
@@ -166,7 +166,7 @@ Notice that some of the axis labels are too long. We will learn how to overcome 
 
 In the code chunk below, `rotateTitle` argument is used to avoid overlapping axis labels.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 parallelPlot(wh,
              rotateTitle = TRUE)
 ```
@@ -177,7 +177,7 @@ One of the useful interactive feature of parallelPlot is we can click on a varia
 
 We can change the default blue colour scheme by using `continousCS` argument as shown in the code chunl below.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 parallelPlot(wh,
              continuousCS = "YlOrRd",
              rotateTitle = TRUE)
@@ -187,7 +187,7 @@ parallelPlot(wh,
 
 In the code chunk below, `histoVisibility` argument is used to plot histogram along the axis of each variables.
 
-```{r}
+```{r, fig.height=10, fig.width=10}
 histoVisibility <- rep(TRUE, ncol(wh))
 parallelPlot(wh,
              rotateTitle = TRUE,
