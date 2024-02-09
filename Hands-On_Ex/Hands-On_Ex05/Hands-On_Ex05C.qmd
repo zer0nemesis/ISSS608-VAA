@@ -132,7 +132,9 @@ The code chunk below shows the basic syntax needed to create n interactive heatm
 
 ```{r, fig.height=10, fig.width=10}
 
-heatmaply(wh_matrix[, -c(1, 2, 4, 5)])
+heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
+          fontsize_row = 4,
+          fontsize_col = 5, )
 ```
 
 ::: callout-note
