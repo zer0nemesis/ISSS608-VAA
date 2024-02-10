@@ -1,0 +1,10 @@
+---
+title: "Take-Home_Ex03: Be Weatherwise or Otherwise"
+subtitle: "Work-in-Progress"
+author: "Roger Chen"
+date: "10 Feb 2024"
+date-modified: "last-modified"
+execute: 
+  warning: false
+number-sections: true
+---
