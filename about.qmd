@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: images/Badge.jpg
+image: images/badge.png
 about: 
   template: jolla
   image-width: 20em
