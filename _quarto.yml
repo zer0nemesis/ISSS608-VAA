@@ -3,10 +3,10 @@ project:
 
 website:
   title: "ISSS608-VAA"
-  favicon: "images/badge.jpg"
+  favicon: "images/badge.png"
   
   navbar:
-    logo: "images/badge.jpg"
+    logo: "images/badge.png"
     left:
     - text: "Hands-On Exercises"
       menu:
