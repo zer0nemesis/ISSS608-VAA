@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -178,6 +212,14 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html">
  <span class="dropdown-text">4.2. Visualising Distribution</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html">
+ <span class="dropdown-text">5.1. Critic on DataViz Makeover</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex05/In-Class_Ex05b.html">
+ <span class="dropdown-text">5.2. Designing Web-enabled Visual Analytics Application with Shiny</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -221,7 +263,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">2</span> Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#loading-r-packages" id="toc-loading-r-packages" class="nav-link" data-scroll-target="#loading-r-packages"><span class="header-section-number">2.1</span> Loading R Packages</a></li>
+  <li><a href="#importing-temperature-data" id="toc-importing-temperature-data" class="nav-link" data-scroll-target="#importing-temperature-data"><span class="header-section-number">2.2</span> Importing Temperature Data</a></li>
+  <li><a href="#summary-statistics-of-data" id="toc-summary-statistics-of-data" class="nav-link" data-scroll-target="#summary-statistics-of-data"><span class="header-section-number">2.3</span> Summary Statistics of Data</a></li>
+  </ul></li>
+  <li><a href="#static-data-visualisation" id="toc-static-data-visualisation" class="nav-link" data-scroll-target="#static-data-visualisation"><span class="header-section-number">3</span> Static Data Visualisation</a></li>
+  <li><a href="#interactive-data-visualisation" id="toc-interactive-data-visualisation" class="nav-link" data-scroll-target="#interactive-data-visualisation"><span class="header-section-number">4</span> Interactive Data Visualisation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -229,7 +285,6 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Take-Home_Ex03: Be Weatherwise or Otherwise</h1>
-<p class="subtitle lead">Work-in-Progress</p>
 </div>
 
 
@@ -253,7 +308,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 10, 2024</p>
+      <p class="date-modified">February 17, 2024</p>
     </div>
   </div>
     
@@ -264,8 +319,279 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>According to an office report as shown in the infographic below,</p>
+<ul>
+<li><p>Daily mean temperature are projected to increase by 1.4 to 4.6, and</p></li>
+<li><p>The contrast between the wet months (November to January) and dry month (February and June to September) is likely to be more pronounced.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1758350966.png" class="img-fluid figure-img"></p>
+<figcaption>In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above.</figcaption>
+</figure>
+</div>
+</section>
+<section id="data-preparation" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Data Preparation</h1>
+<section id="loading-r-packages" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="loading-r-packages"><span class="header-section-number">2.1</span> Loading R Packages</h2>
+<p>In this take home exercise, the following R packages will be used:</p>
+<ul>
+<li><p><a href="https://www.tidyverse.org/">tidyverse</a>,</p></li>
+<li><p><a href="https://haven.tidyverse.org/">haven</a>,</p></li>
+<li><p><a href="https://ggplot2.tidyverse.org/">ggplot2</a>,</p></li>
+<li><p><a href="https://ggrepel.slowkow.com/">ggrepel</a>,</p></li>
+<li><p><a href="https://patchwork.data-imaginist.com/">patchwork</a>,</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/ggthemes/">ggthemes</a>,</p></li>
+<li><p><a href="https://cinc.rud.is/web/packages/hrbrthemes/">hrbrthemes</a>,</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/ggdist/">ggdist</a>,</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/ggridges/">ggridges</a>,</p></li>
+<li><p><a href="https://colorspace.r-forge.r-project.org/articles/colorspace.html">colorspace</a>,</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/gridExtra/">gridExtra</a>,</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html">cowplot</a>.</p></li>
+<li><p><a href="https://plotly.com/r/">plotly</a>,</p></li>
+<li><p><a href="https://davidgohel.github.io/ggiraph/">ggiraph</a>.</p></li>
+</ul>
+<p>The code chunk used is as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, haven, ggplot2, ggrepel, patchwork, ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra,cowplot, plotly, ggiraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-temperature-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="importing-temperature-data"><span class="header-section-number">2.2</span> Importing Temperature Data</h2>
+<p><strong><em>Changi</em></strong> will be selected for the weather station, and <strong><em>temperature</em></strong> chosen as the factor to be analysed. The data sets will be downloaded from <a href="https://www.weather.gov.sg/climate-historical-daily/">historical daily temperature</a> from <a href="http://www.weather.gov.sg/home/">Meteorological Service Singapore</a> website, Specifically, we will be looking from the years 1983, 1993, 2003, 2013, and 2023, with <strong><em>May</em></strong> as the specific month of study.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">May 1983 Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">May 1993 Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">May 2003 Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">May 2013 Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">May 2023 Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temp1983 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/DAILYDATA_S24_198305.csv"</span>, <span class="at">locale=</span><span class="fu">locale</span>(<span class="at">encoding=</span><span class="st">"latin1"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>temp1983 <span class="ot">&lt;-</span> temp1983 <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Month, Day, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temp1993 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/DAILYDATA_S24_199305.csv"</span>, <span class="at">locale=</span><span class="fu">locale</span>(<span class="at">encoding=</span><span class="st">"latin1"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>temp1993 <span class="ot">&lt;-</span> temp1993 <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Month, Day, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temp2003 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/DAILYDATA_S24_200305.csv"</span>, <span class="at">locale=</span><span class="fu">locale</span>(<span class="at">encoding=</span><span class="st">"latin1"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>temp2003 <span class="ot">&lt;-</span> temp2003 <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Month, Day, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>temp2013 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/DAILYDATA_S24_201305.csv"</span>, <span class="at">locale=</span><span class="fu">locale</span>(<span class="at">encoding=</span><span class="st">"latin1"</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>temp2013 <span class="ot">&lt;-</span> temp2013 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Month, Day, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>temp2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/DAILYDATA_S24_202305.csv"</span>, <span class="at">locale=</span><span class="fu">locale</span>(<span class="at">encoding=</span><span class="st">"latin1"</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>temp2023 <span class="ot">&lt;-</span> temp2023 <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Month, Day,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Mean Temperature (Â°C)</span><span class="st">`</span>, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Maximum Temperature (Â°C)</span><span class="st">`</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Minimum Temperature (Â°C)</span><span class="st">`</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(temp2023)[<span class="fu">colnames</span>(temp2023) <span class="sc">==</span> <span class="st">'Maximum Temperature (Â°C)'</span>] <span class="ot">&lt;-</span> <span class="st">'Maximum Temperature (°C)'</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(temp2023)[<span class="fu">colnames</span>(temp2023) <span class="sc">==</span> <span class="st">'Mean Temperature (Â°C)'</span>] <span class="ot">&lt;-</span> <span class="st">'Mean Temperature (°C)'</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(temp2023)[<span class="fu">colnames</span>(temp2023) <span class="sc">==</span> <span class="st">'Minimum Temperature (Â°C)'</span>] <span class="ot">&lt;-</span> <span class="st">'Minimum Temperature (°C)'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/clipboard-3952412295.png" class="img-fluid" width="385"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unlike the dataset extracted for the earlier years, the column names for the temperatures in May 2023 were coded with an additional “Â”. To align the naming nomenclauture across the different datsets, <a href="https://rdrr.io/r/base/colnames.html">colnames</a> from base R was used to remove the “Â”.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Lastly, using the code chunk below, we will combine the five datasets into a single document, and save it as a new dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>combinedTemp <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(temp1983,temp1993,temp2003,temp2013,temp2023)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(combinedTemp, <span class="st">"data/combinedTemp.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>combinedTemp <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/combinedTemp.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summary-statistics-of-data" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="summary-statistics-of-data"><span class="header-section-number">2.3</span> Summary Statistics of Data</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">First 5 Rows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Dataset Structure</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Data Health</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Displaying the first five rows using head()</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combinedTemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+   Year Month   Day `Mean Temperature (°C)` `Maximum Temperature (°C)`
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;                   &lt;dbl&gt;                      &lt;dbl&gt;
+1  1983     5     1                    27.5                       32.2
+2  1983     5     2                    28.3                       33.1
+3  1983     5     3                    28.9                       33.5
+4  1983     5     4                    28.1                       33.4
+5  1983     5     5                    28.2                       32.7
+6  1983     5     6                    27.9                       32.8
+# ℹ 1 more variable: `Minimum Temperature (°C)` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The data table seemed to be in order.</p>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(combinedTemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [155 × 6] (S3: tbl_df/tbl/data.frame)
+ $ Year                    : num [1:155] 1983 1983 1983 1983 1983 ...
+ $ Month                   : num [1:155] 5 5 5 5 5 5 5 5 5 5 ...
+ $ Day                     : num [1:155] 1 2 3 4 5 6 7 8 9 10 ...
+ $ Mean Temperature (°C)   : num [1:155] 27.5 28.3 28.9 28.1 28.2 27.9 28.2 27.3 26.2 28.1 ...
+ $ Maximum Temperature (°C): num [1:155] 32.2 33.1 33.5 33.4 32.7 32.8 33.1 34 32.2 32.9 ...
+ $ Minimum Temperature (°C): num [1:155] 24.3 25 26 25 25.3 25.2 24.9 23.5 23.7 24.7 ...</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The data types are all correct.</p>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Checking for missing values</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(combinedTemp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No missing values were found.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="static-data-visualisation" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Static Data Visualisation</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Code Chunk</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-Home_Ex03_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>combinedTemp,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Day, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">y=</span><span class="st">`</span><span class="at">Mean Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">group=</span>Year), </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>combinedTemp,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Day, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">y=</span><span class="st">`</span><span class="at">Maximum Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">group=</span>Year), </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>combinedTemp,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Day, </span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">y=</span><span class="st">`</span><span class="at">Minimum Temperature (°C)</span><span class="st">`</span>, </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">group=</span>Year), </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour=</span><span class="st">"green"</span>) <span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Year) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Daily Temperature in Changi during May"</span>) <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Day"</span>) <span class="sc">+</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Temperature (°C)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interactive-data-visualisation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Interactive Data Visualisation</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

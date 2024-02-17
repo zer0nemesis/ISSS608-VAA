@@ -49,6 +49,11 @@ website:
           href: "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html" 
         - text: "4.2. Visualising Distribution"
           href: "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html" 
+        - text: "5.1. Critic on DataViz Makeover"
+          href: "In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html" 
+        - text: "5.2. Designing Web-enabled Visual Analytics Application with Shiny"
+          href: "In-Class_Ex/In-Class_Ex05/In-Class_Ex05b.html" 
+          
     
     - text: "Take Home Exercises"
       menu:

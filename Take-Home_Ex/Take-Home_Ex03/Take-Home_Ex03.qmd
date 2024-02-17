@@ -1,6 +1,5 @@
 ---
 title: "Take-Home_Ex03: Be Weatherwise or Otherwise"
-subtitle: "Work-in-Progress"
 author: "Roger Chen"
 date: "10 Feb 2024"
 date-modified: "last-modified"
@@ -8,3 +7,264 @@ execute:
   warning: false
 number-sections: true
 ---
+
+# Overview
+
+According to an office report as shown in the infographic below,
+
+-   Daily mean temperature are projected to increase by 1.4 to 4.6, and
+
+-   The contrast between the wet months (November to January) and dry month (February and June to September) is likely to be more pronounced.
+
+![In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above.](images/clipboard-1758350966.png)
+
+# Data Preparation
+
+## Loading R Packages
+
+In this take home exercise, the following R packages will be used:
+
+-   [tidyverse](https://www.tidyverse.org/),
+
+-   [haven](https://haven.tidyverse.org/),
+
+-   [ggplot2](https://ggplot2.tidyverse.org/),
+
+-   [ggrepel](https://ggrepel.slowkow.com/),
+
+-   [patchwork](https://patchwork.data-imaginist.com/),
+
+-   [ggthemes](https://cran.r-project.org/web/packages/ggthemes/),
+
+-   [hrbrthemes](https://cinc.rud.is/web/packages/hrbrthemes/),
+
+-   [ggdist](https://cran.r-project.org/web/packages/ggdist/),
+
+-   [ggridges](https://cran.r-project.org/web/packages/ggridges/),
+
+-   [colorspace](https://colorspace.r-forge.r-project.org/articles/colorspace.html),
+
+-   [gridExtra](https://cran.r-project.org/web/packages/gridExtra/),
+
+-   [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html).
+
+-   [plotly](https://plotly.com/r/),
+
+-   [ggiraph](https://davidgohel.github.io/ggiraph/).
+
+The code chunk used is as follows:
+
+```{r}
+pacman::p_load(tidyverse, haven, ggplot2, ggrepel, patchwork, ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra,cowplot, plotly, ggiraph)
+```
+
+## Importing Temperature Data
+
+***Changi*** will be selected for the weather station, and ***temperature*** chosen as the factor to be analysed. The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website, Specifically, we will be looking from the years 1983, 1993, 2003, 2013, and 2023, with ***May*** as the specific month of study.
+
+::: panel-tabset
+### May 1983 Data
+
+```{r}
+#| eval: false
+
+temp1983 <- read_csv("data/DAILYDATA_S24_198305.csv", locale=locale(encoding="latin1"))
+
+temp1983 <- temp1983 %>% 
+  select(Year, Month, Day, 
+         `Mean Temperature (°C)`, 
+         `Maximum Temperature (°C)`, 
+         `Minimum Temperature (°C)`)
+```
+
+### May 1993 Data
+
+```{r}
+#| eval: false
+
+temp1993 <- read_csv("data/DAILYDATA_S24_199305.csv", locale=locale(encoding="latin1"))
+
+temp1993 <- temp1993 %>% 
+  select(Year, Month, Day, 
+         `Mean Temperature (°C)`, 
+         `Maximum Temperature (°C)`, 
+         `Minimum Temperature (°C)`)
+```
+
+### May 2003 Data
+
+```{r}
+#| eval: false
+
+temp2003 <- read_csv("data/DAILYDATA_S24_200305.csv", locale=locale(encoding="latin1"))
+
+temp2003 <- temp2003 %>% 
+  select(Year, Month, Day, 
+         `Mean Temperature (°C)`, 
+         `Maximum Temperature (°C)`, 
+         `Minimum Temperature (°C)`)
+```
+
+### May 2013 Data
+
+```{r}
+#| eval: false
+
+temp2013 <- read_csv("data/DAILYDATA_S24_201305.csv", locale=locale(encoding="latin1"))
+
+temp2013 <- temp2013 %>% 
+  select(Year, Month, Day, 
+         `Mean Temperature (°C)`, 
+         `Maximum Temperature (°C)`, 
+         `Minimum Temperature (°C)`)
+```
+
+### May 2023 Data
+
+```{r}
+#| eval: false
+
+temp2023 <- read_csv("data/DAILYDATA_S24_202305.csv", locale=locale(encoding="latin1"))
+
+temp2023 <- temp2023 %>% 
+  select(Year, Month, Day,
+         `Mean Temperature (Â°C)`, 
+         `Maximum Temperature (Â°C)`, 
+         `Minimum Temperature (Â°C)`
+         )
+
+colnames(temp2023)[colnames(temp2023) == 'Maximum Temperature (Â°C)'] <- 'Maximum Temperature (°C)'
+colnames(temp2023)[colnames(temp2023) == 'Mean Temperature (Â°C)'] <- 'Mean Temperature (°C)'
+colnames(temp2023)[colnames(temp2023) == 'Minimum Temperature (Â°C)'] <- 'Minimum Temperature (°C)'
+
+```
+
+![](images/clipboard-3952412295.png){width="385"}
+
+::: callout-note
+Unlike the dataset extracted for the earlier years, the column names for the temperatures in May 2023 were coded with an additional "Â". To align the naming nomenclauture across the different datsets, [colnames](https://rdrr.io/r/base/colnames.html) from base R was used to remove the "Â".
+:::
+:::
+
+Lastly, using the code chunk below, we will combine the five datasets into a single document, and save it as a new dataset.
+
+```{r}
+#| eval: false
+
+combinedTemp <- bind_rows(temp1983,temp1993,temp2003,temp2013,temp2023)
+
+write_rds(combinedTemp, "data/combinedTemp.csv")
+```
+
+```{r}
+combinedTemp <- read_rds("data/combinedTemp.csv")
+```
+
+## Summary Statistics of Data
+
+::: panel-tabset
+### First 5 Rows
+
+Displaying the first five rows using head()
+
+```{r}
+head(combinedTemp)
+```
+
+::: callout-note
+The data table seemed to be in order.
+:::
+
+### Dataset Structure
+
+```{r}
+str(combinedTemp)
+```
+
+::: callout-note
+The data types are all correct.
+:::
+
+### Data Health
+
+Checking for missing values
+
+```{r}
+sum(is.na(combinedTemp))
+```
+
+::: callout-note
+No missing values were found.
+:::
+:::
+
+# Static Data Visualisation
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+
+ggplot() + 
+  geom_line(data=combinedTemp,
+            aes(x=Day, 
+                y=`Mean Temperature (°C)`, 
+                group=Year), 
+            colour="black") +
+  
+  geom_line(data=combinedTemp,
+            aes(x=Day, 
+                y=`Maximum Temperature (°C)`, 
+                group=Year), 
+            colour="red") +
+  
+  geom_line(data=combinedTemp,
+            aes(x=Day, 
+                y=`Minimum Temperature (°C)`, 
+                group=Year), 
+            colour="green") +
+  
+  facet_grid(~Year) +
+  labs(axis.text.x = element_blank(),
+       title = "Daily Temperature in Changi during May") +
+  xlab("Day") +
+  ylab("Temperature (°C)")
+
+
+```
+
+## Code Chunk
+
+```{r}
+#| eval: false
+
+ggplot() + 
+  geom_line(data=combinedTemp,
+            aes(x=Day, 
+                y=`Mean Temperature (°C)`, 
+                group=Year), 
+            colour="black") +
+  
+  geom_line(data=combinedTemp,
+            aes(x=Day, 
+                y=`Maximum Temperature (°C)`, 
+                group=Year), 
+            colour="red") +
+  
+  geom_line(data=combinedTemp,
+            aes(x=Day, 
+                y=`Minimum Temperature (°C)`, 
+                group=Year), 
+            colour="green") +
+  
+  facet_grid(~Year) +
+  labs(axis.text.x = element_blank(),
+       title = "Daily Temperature in Changi during May") +
+  xlab("Day") +
+  ylab("Temperature (°C)")
+
+```
+:::
+
+# Interactive Data Visualisation

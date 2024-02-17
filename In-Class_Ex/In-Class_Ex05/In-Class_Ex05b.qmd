@@ -1,0 +1,14 @@
+![](images/clipboard-2978556185.png)
+
+---
+title: "In-Class_Ex05B: Designing Web-enabled Visual Analytics Application with Shiny"
+author: "Roger Chen"
+date: "17 Feb 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+number-sections: true
+editor: visual
+---

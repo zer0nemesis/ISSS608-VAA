@@ -1,0 +1,34 @@
+![](images/clipboard-2978556185.png)
+
+---
+title: "In-Class_Ex05A: Critic on DataViz Makeover"
+author: "Roger Chen"
+date: "17 Feb 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+number-sections: true
+editor: visual
+---
+
+Probability Density Plot
+
+Axis values: instead of density for y-axis, should be probability
+
+observing the PDF and comment the skewness of the three curves
+
+when the values are categorical, and "as.factor" is not used, the output will display a scatterplot instead of a boxplot
+
+sort by mean or median (my graph), to identify patterns
+
+-   can also plot by boxplots
+
+for scatterplot, need to pay attention on the aspect ratio. should try to fit within a square as much as possible, otherwise output will be skewed
+
+layout - one histogram should not be larger than the other
+
+-   but can be histogram on the left, then 3 x similarly sized boxplots on the right (with the same aspect and scale)
+
+Try to reduce redundancy in the output
