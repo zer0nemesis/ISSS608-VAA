@@ -16,7 +16,11 @@ According to an office report as shown in the infographic below,
 
 -   The contrast between the wet months (November to January) and dry month (February and June to September) is likely to be more pronounced.
 
-![In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above.](images/clipboard-1758350966.png)
+![](images/clipboard-1758350966.png)
+
+![](images/clipboard-1758350966.png){alt="In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above."}
+
+In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above
 
 # Data Preparation
 
@@ -203,6 +207,7 @@ No missing values were found.
 ## Plot
 
 ```{r}
+#| column: page
 #| echo: false
 
 ggplot() + 
@@ -250,10 +255,6 @@ ggplot() +
   ylab("Temperature (°C)") + 
   
   theme(plot.subtitle = element_text(size = 5, color = "grey"))
-
-```
-
-```{r}
 
 ```
 
@@ -312,6 +313,11 @@ ggplot() +
 :::
 
 ::: callout-note
+In the static plot above, a comparison of the temperatures across the five years was made, with the red, black and green charts depicting the maximum, mean and minimum temperatures per day respectively.
+
+A common observation within each year is that there is a high volatility in the temperature within a month, regardless whether it is measuring the max, mean or min temperatures. In addition, when the max temperature is higher than the rest of the days, the mean and minimum temperatures are also usually higher.
+
+When we plot using a curve, we observed that from 1983 to 1993, there appeared to be a decrease in daily temperatures, before it started to increase in 2003. It then decreased in 2013, before peaking in 2023 again. The highest temperature is also recorded in 2023.
 :::
 
 # Interactive Data Visualisation
@@ -325,42 +331,58 @@ ggplot() +
 combinedTemp$Year <- as.character(combinedTemp$Year)
 ```
 
-```{r}
+```{r, fig.height=15}
+#| column: page
 #| echo: false
 
 d <- highlight_key(combinedTemp)
 
 p1 <- ggplot() +
-  geom_line(data = d,
+  geom_point(data = d,
              aes(x = Day,
                  y = `Minimum Temperature (°C)`),
              group = "Year",
-             colour = "blue") +
-  coord_cartesian(ylim=c(22,35)) + 
+             colour = "green",
+             size = 0.5) +
+  geom_smooth(data=combinedTemp,
+              aes(x=Day,
+                  y=`Minimum Temperature (°C)`,
+                  group=Year),
+              colour="green", linewidth = 1) +
   facet_grid(~Year)
 
 p2 <- ggplot() +
-  geom_line(data = d,
+  geom_point(data = d,
              aes(x = Day,
                  y = `Mean Temperature (°C)`),
              group = "Year",
-             colour = "black") +
-  coord_cartesian(ylim=c(22,35)) + 
-  facet_grid(~Year)
+             colour = "black",
+             size = 0.5) +
+  facet_grid(~Year) +
+  geom_smooth(data=d,
+              aes(x=Day,
+                  y=`Mean Temperature (°C)`,
+                  group="Year"),
+              colour="black", linewidth = 1)
 
 p3 <- ggplot() +
-  geom_line(data = d,
+  geom_point(data = d,
              aes(x = Day,
                  y = `Maximum Temperature (°C)`),
              group = "Year",
-             colour = "red") +
-  coord_cartesian(ylim=c(22,35))+
+             colour = "red",
+             size = 0.5) +
   facet_grid(~Year) +
+  geom_smooth(data=combinedTemp,
+              aes(x=Day,
+                  y=`Maximum Temperature (°C)`,
+                  group=Year),
+              colour="red", linewidth = 1) +
   ggtitle("Daily Temperature in Changi during May")
 
-subplot(ggplotly(p1),
+subplot(ggplotly(p3),
         ggplotly(p2),
-        ggplotly(p3), nrows = 3)
+        ggplotly(p1), nrows = 3)
 ```
 
 ## Code Chunk
@@ -371,41 +393,62 @@ subplot(ggplotly(p1),
 d <- highlight_key(combinedTemp)
 
 p1 <- ggplot() +
-  geom_line(data = d,
+  geom_point(data = d,
              aes(x = Day,
                  y = `Minimum Temperature (°C)`),
              group = "Year",
-             colour = "blue") +
-  coord_cartesian(ylim=c(22,35)) + 
+             colour = "green",
+             size = 0.5) +
+  geom_smooth(data=combinedTemp,
+              aes(x=Day,
+                  y=`Minimum Temperature (°C)`,
+                  group=Year),
+              colour="green", linewidth = 1) +
   facet_grid(~Year)
 
 p2 <- ggplot() +
-  geom_line(data = d,
+  geom_point(data = d,
              aes(x = Day,
                  y = `Mean Temperature (°C)`),
              group = "Year",
-             colour = "black") +
-  coord_cartesian(ylim=c(22,35)) + 
-  facet_grid(~Year)
+             colour = "black",
+             size = 0.5) +
+  facet_grid(~Year) +
+  geom_smooth(data=d,
+              aes(x=Day,
+                  y=`Mean Temperature (°C)`,
+                  group="Year"),
+              colour="black", linewidth = 1)
 
 p3 <- ggplot() +
-  geom_line(data = d,
+  geom_point(data = d,
              aes(x = Day,
                  y = `Maximum Temperature (°C)`),
              group = "Year",
-             colour = "red") +
-  coord_cartesian(ylim=c(22,35))+
+             colour = "red",
+             size = 0.5) +
   facet_grid(~Year) +
+  geom_smooth(data=combinedTemp,
+              aes(x=Day,
+                  y=`Maximum Temperature (°C)`,
+                  group=Year),
+              colour="red", linewidth = 1) +
   ggtitle("Daily Temperature in Changi during May")
 
-subplot(ggplotly(p1),
+subplot(ggplotly(p3),
         ggplotly(p2),
-        ggplotly(p3), nrows = 3)
-
-
-
+        ggplotly(p1), nrows = 3)
 ```
 :::
 
 ::: callout-note
+The interactive plot above allows us to find out the exact readings for each of the daily temperatures captured in May from 1983 to 2023. When we select any reading in any chart, the corresponding readings in the other two charts will be highlighted as well.
 :::
+
+# Conclusion
+
+Based on the observations taken in Changi, the maximum, mean and minimum temperatures fluctuates across the different Month-May from 1983 to 2023. As 2023 recorded the peak mean temperature of 30.7°C, we can state that there is an overall ***increasing*** trend in the temperature.
+
+However, if we compare the mean temperatures from 2003 to 2013, we also noted a ***decreasing*** trend in the mean temperature. Moreover, the average monthly mean temperature do not increase by more than 2°C on a decade-on-decade basis.
+
+Thus, the data is not conclusive for the report to predict that mean temperatures will increase by 1.4°C to 4.6°C.
