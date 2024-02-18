@@ -18,8 +18,6 @@ According to an office report as shown in the infographic below,
 
 ![](images/clipboard-1758350966.png)
 
-![](images/clipboard-1758350966.png){alt="In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above."}
-
 In this take home exercise, we will apply newly acquired visual interactivity and visualising uncertainty methods to validate the claims presented above
 
 # Data Preparation
