@@ -206,7 +206,7 @@ No missing values were found.
 ::: panel-tabset
 ## Plot
 
-```{r}
+```{r, fig.width = 15, fig.height = 8}
 #| column: page
 #| echo: false
 
@@ -331,7 +331,7 @@ When we plot using a curve, we observed that from 1983 to 1993, there appeared t
 combinedTemp$Year <- as.character(combinedTemp$Year)
 ```
 
-```{r, fig.height=15}
+```{r, fig.height=12}
 #| column: page
 #| echo: false
 
