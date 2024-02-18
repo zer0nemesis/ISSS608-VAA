@@ -30,17 +30,11 @@ In this take home exercise, the following R packages will be used:
 
 -   [ggplot2](https://ggplot2.tidyverse.org/),
 
--   [ggrepel](https://ggrepel.slowkow.com/),
-
 -   [patchwork](https://patchwork.data-imaginist.com/),
 
 -   [ggthemes](https://cran.r-project.org/web/packages/ggthemes/),
 
--   [hrbrthemes](https://cinc.rud.is/web/packages/hrbrthemes/),
-
 -   [ggdist](https://cran.r-project.org/web/packages/ggdist/),
-
--   [ggridges](https://cran.r-project.org/web/packages/ggridges/),
 
 -   [colorspace](https://colorspace.r-forge.r-project.org/articles/colorspace.html),
 
@@ -50,12 +44,14 @@ In this take home exercise, the following R packages will be used:
 
 -   [plotly](https://plotly.com/r/),
 
--   [ggiraph](https://davidgohel.github.io/ggiraph/).
+-   [ggiraph](https://davidgohel.github.io/ggiraph/),
+
+-   [DT](https://rstudio.github.io/DT/).
 
 The code chunk used is as follows:
 
 ```{r}
-pacman::p_load(tidyverse, haven, ggplot2, ggrepel, patchwork, ggthemes, hrbrthemes, ggdist, ggridges, colorspace, gridExtra,cowplot, plotly, ggiraph)
+pacman::p_load(tidyverse, haven, ggplot2, patchwork, ggthemes, ggdist, colorspace, gridExtra,cowplot, plotly, ggiraph, DT)
 ```
 
 ## Importing Temperature Data
@@ -154,7 +150,10 @@ Lastly, using the code chunk below, we will combine the five datasets into a sin
 combinedTemp <- bind_rows(temp1983,temp1993,temp2003,temp2013,temp2023)
 
 write_rds(combinedTemp, "data/combinedTemp.csv")
+
 ```
+
+Next, we will call the dataset "***combinedTemp***" into the environment.
 
 ```{r}
 combinedTemp <- read_rds("data/combinedTemp.csv")
@@ -165,10 +164,10 @@ combinedTemp <- read_rds("data/combinedTemp.csv")
 ::: panel-tabset
 ### First 5 Rows
 
-Displaying the first five rows using head()
+Using [**DT**](https://rstudio.github.io/DT/), we will display the dataset as a interactive table on html page.
 
 ```{r}
-head(combinedTemp)
+DT::datatable(combinedTemp, class = "display compact", style = "bootstrap5")
 ```
 
 ::: callout-note
@@ -225,12 +224,36 @@ ggplot() +
                 group=Year), 
             colour="green") +
   
+  geom_smooth(data=combinedTemp,
+            aes(x=Day, 
+                y=`Mean Temperature (°C)`, 
+                group=Year), 
+            colour="black", linewidth = 0.2) +
+  
+  geom_smooth(data=combinedTemp,
+            aes(x=Day, 
+                y=`Maximum Temperature (°C)`, 
+                group=Year), 
+            colour="red", linewidth = 0.2) +
+  
+  geom_smooth(data=combinedTemp,
+            aes(x=Day, 
+                y=`Minimum Temperature (°C)`, 
+                group=Year), 
+            colour="green", linewidth = 0.2) +
+  
   facet_grid(~Year) +
   labs(axis.text.x = element_blank(),
-       title = "Daily Temperature in Changi during May") +
+       title = "Daily Temperature in Changi during May",
+       subtitle = "(Max, Mean, Min Temperature)") +
   xlab("Day") +
-  ylab("Temperature (°C)")
+  ylab("Temperature (°C)") + 
+  
+  theme(plot.subtitle = element_text(size = 5, color = "grey"))
 
+```
+
+```{r}
 
 ```
 
@@ -258,13 +281,131 @@ ggplot() +
                 group=Year), 
             colour="green") +
   
+  geom_smooth(data=combinedTemp,
+            aes(x=Day, 
+                y=`Mean Temperature (°C)`, 
+                group=Year), 
+            colour="black", linewidth = 0.2) +
+  
+  geom_smooth(data=combinedTemp,
+            aes(x=Day, 
+                y=`Maximum Temperature (°C)`, 
+                group=Year), 
+            colour="red", linewidth = 0.2) +
+  
+  geom_smooth(data=combinedTemp,
+            aes(x=Day, 
+                y=`Minimum Temperature (°C)`, 
+                group=Year), 
+            colour="green", linewidth = 0.2) +
+  
   facet_grid(~Year) +
   labs(axis.text.x = element_blank(),
-       title = "Daily Temperature in Changi during May") +
+       title = "Daily Temperature in Changi during May",
+       subtitle = "(Max, Mean, Min Temperature)") +
   xlab("Day") +
-  ylab("Temperature (°C)")
+  ylab("Temperature (°C)") + 
+  
+  theme(plot.subtitle = element_text(size = 5, color = "grey"))
 
 ```
 :::
 
+::: callout-note
+:::
+
 # Interactive Data Visualisation
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+
+combinedTemp$Year <- as.character(combinedTemp$Year)
+```
+
+```{r}
+#| echo: false
+
+d <- highlight_key(combinedTemp)
+
+p1 <- ggplot() +
+  geom_line(data = d,
+             aes(x = Day,
+                 y = `Minimum Temperature (°C)`),
+             group = "Year",
+             colour = "blue") +
+  coord_cartesian(ylim=c(22,35)) + 
+  facet_grid(~Year)
+
+p2 <- ggplot() +
+  geom_line(data = d,
+             aes(x = Day,
+                 y = `Mean Temperature (°C)`),
+             group = "Year",
+             colour = "black") +
+  coord_cartesian(ylim=c(22,35)) + 
+  facet_grid(~Year)
+
+p3 <- ggplot() +
+  geom_line(data = d,
+             aes(x = Day,
+                 y = `Maximum Temperature (°C)`),
+             group = "Year",
+             colour = "red") +
+  coord_cartesian(ylim=c(22,35))+
+  facet_grid(~Year) +
+  ggtitle("Daily Temperature in Changi during May")
+
+subplot(ggplotly(p1),
+        ggplotly(p2),
+        ggplotly(p3), nrows = 3)
+```
+
+## Code Chunk
+
+```{r}
+#| eval: false
+
+d <- highlight_key(combinedTemp)
+
+p1 <- ggplot() +
+  geom_line(data = d,
+             aes(x = Day,
+                 y = `Minimum Temperature (°C)`),
+             group = "Year",
+             colour = "blue") +
+  coord_cartesian(ylim=c(22,35)) + 
+  facet_grid(~Year)
+
+p2 <- ggplot() +
+  geom_line(data = d,
+             aes(x = Day,
+                 y = `Mean Temperature (°C)`),
+             group = "Year",
+             colour = "black") +
+  coord_cartesian(ylim=c(22,35)) + 
+  facet_grid(~Year)
+
+p3 <- ggplot() +
+  geom_line(data = d,
+             aes(x = Day,
+                 y = `Maximum Temperature (°C)`),
+             group = "Year",
+             colour = "red") +
+  coord_cartesian(ylim=c(22,35))+
+  facet_grid(~Year) +
+  ggtitle("Daily Temperature in Changi during May")
+
+subplot(ggplotly(p1),
+        ggplotly(p2),
+        ggplotly(p3), nrows = 3)
+
+
+
+```
+:::
+
+::: callout-note
+:::
