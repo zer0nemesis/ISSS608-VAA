@@ -30,7 +30,7 @@ In this take home exercise, the following R packages will be used:
 
 -   [ggplot2](https://ggplot2.tidyverse.org/),
 
--   **gganimate**,
+-   [gganimate](https://gganimate.com/),
 
 -   [plotly](https://plotly.com/r/),
 
