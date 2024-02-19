@@ -460,13 +460,13 @@ ggplot(combinedTemp, aes(x = Day, y = `Mean Temperature (°C)`,
   
   scale_size(range = c(2, 12)) +
   
-  labs(title = 'Days in May across 1983 to 2023', 
+  labs(title = 'Daily Mean Temperature across Different Days in May (1983 to 2023)', 
        x = 'Day', 
        y = '`Mean Temperature (°C)`') +
   
   transition_time(Day) +       
   
-  ease_aes(y = 'linear')          
+  ease_aes(y = 'linear')         
 ```
 
 ## Code Chunk
