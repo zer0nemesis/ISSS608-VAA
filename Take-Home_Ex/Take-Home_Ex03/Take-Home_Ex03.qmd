@@ -28,21 +28,7 @@ In this take home exercise, the following R packages will be used:
 
 -   [tidyverse](https://www.tidyverse.org/),
 
--   [haven](https://haven.tidyverse.org/),
-
 -   [ggplot2](https://ggplot2.tidyverse.org/),
-
--   [patchwork](https://patchwork.data-imaginist.com/),
-
--   [ggthemes](https://cran.r-project.org/web/packages/ggthemes/),
-
--   [ggdist](https://cran.r-project.org/web/packages/ggdist/),
-
--   [colorspace](https://colorspace.r-forge.r-project.org/articles/colorspace.html),
-
--   [gridExtra](https://cran.r-project.org/web/packages/gridExtra/),
-
--   [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html).
 
 -   [plotly](https://plotly.com/r/),
 
@@ -53,7 +39,7 @@ In this take home exercise, the following R packages will be used:
 The code chunk used is as follows:
 
 ```{r}
-pacman::p_load(tidyverse, haven, ggplot2, patchwork, ggthemes, ggdist, colorspace, gridExtra,cowplot, plotly, ggiraph, DT)
+pacman::p_load(tidyverse, ggplot2, plotly, ggiraph, DT)
 ```
 
 ## Importing Temperature Data

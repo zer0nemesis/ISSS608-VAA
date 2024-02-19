@@ -11,7 +11,7 @@
     "href": "Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03.html#loading-r-packages",
     "title": "Take-Home_Ex03: Be Weatherwise or Otherwise",
     "section": "2.1 Loading R Packages",
-    "text": "2.1 Loading R Packages\nIn this take home exercise, the following R packages will be used:\n\ntidyverse,\nhaven,\nggplot2,\npatchwork,\nggthemes,\nggdist,\ncolorspace,\ngridExtra,\ncowplot.\nplotly,\nggiraph,\nDT.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven, ggplot2, patchwork, ggthemes, ggdist, colorspace, gridExtra,cowplot, plotly, ggiraph, DT)"
+    "text": "2.1 Loading R Packages\nIn this take home exercise, the following R packages will be used:\n\ntidyverse,\nggplot2,\nplotly,\nggiraph,\nDT.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, ggplot2, plotly, ggiraph, DT)"
   },
   {
     "objectID": "Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03.html#importing-temperature-data",
