@@ -65,14 +65,14 @@ Before we continue to the next step, we should read the syntax description of [*
 Figure below shows the scatter plot matrix of Wine Quality Data. It is a 11 by 11 matrix.
 
 ```{r}
-#| column: page
+
 pairs(wine[,1:11])
 ```
 
 The required input of *pairs()* can be a matrix or data frame. The code chunk used to create the scatterplot matrix is relatively simple. It uses the default *pairs* function. Columns 2 to 12 of wine dataframe is used to build the scatterplot matrix. The variables are: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates and alcohol.
 
 ```{r}
-#| column: page
+
 pairs(wine[,2:12])
 ```
 
@@ -83,14 +83,14 @@ pairs(wine[,2:12])
 To show the lower half of the correlation matrix, the upper.panel argument will be used as shown in the code chunk below.
 
 ```{r}
-#| column: page
+
 pairs(wine[,2:12], upper.panel = NULL)
 ```
 
 Similarly, we can display the upper half of the correlation matrix by using the code chunk below.
 
 ```{r}
-#| column: page
+
 pairs(wine[,2:12], lower.panel = NULL)
 ```
 
@@ -101,7 +101,7 @@ To show the correlation coefficient of each pair of variables instead of a scatt
 Don’t worry about the details for now-just type this code into our R session or script. Let’s have more fun way to display the correlation matrix.
 
 ```{r}
-#| column: page
+
 panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...) {
 usr <- par("usr")
 on.exit(par(usr))
@@ -138,14 +138,14 @@ In this section, we will learn how to visualising correlation matrix by using [*
 One of the advantage of using *ggcorrmat()* over many other methods to visualise a correlation matrix is its ability to provide a comprehensive and yet professional statistical report as shown in the figure below.
 
 ```{r}
-#| column: page
+
 ggstatsplot::ggcorrmat(
   data = wine, 
   cor.vars = 1:11)
 ```
 
 ```{r}
-#| column: page
+
 ggstatsplot::ggcorrmat(
   data = wine, 
   cor.vars = 1:11,
@@ -166,7 +166,7 @@ Things to learn from the code chunk above:
 The sample sub-code chunk can be used to control specific component of the plot such as the font size of the x-axis, y-axis, and the statistical report.
 
 ```{r}
-#| column: page
+
 ggplot.component = list(
     theme(text=element_text(size=5),
       axis.text.x = element_text(size = 8),
@@ -178,7 +178,7 @@ ggplot.component = list(
 Since ggstasplot is an extension of ggplot2, it also supports faceting. However the feature is not available in *ggcorrmat()* but in the [*grouped_ggcorrmat()*](https://indrajeetpatil.github.io/ggstatsplot/reference/grouped_ggcorrmat.html) of **ggstatsplot**.
 
 ```{r}
-#| column: page
+
 grouped_ggcorrmat(
   data = wine,
   cor.vars = 1:11,

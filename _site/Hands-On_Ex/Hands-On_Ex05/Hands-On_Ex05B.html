@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -330,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 8, 2024</p>
+      <p class="date-modified">February 21, 2024</p>
     </div>
   </div>
     
@@ -378,66 +378,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Notice that beside quality and type, the rest of the variables are numerical and continuous data type.</p>
 </section>
 </section>
-<section id="building-correlation-matrix-pairs-method" class="level1 page-columns page-full" data-number="4">
+<section id="building-correlation-matrix-pairs-method" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> <strong>Building Correlation Matrix: <em>pairs()</em> method</strong></h1>
 <p>There are more than one way to build scatterplot matrix with R. In this section, we will learn how to create a scatterplot matrix by using the <em>pairs</em> function of R Graphics.</p>
 <p>Before we continue to the next step, we should read the syntax description of <a href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/pairs.html"><em>pairs</em></a>function.</p>
-<section id="building-a-basic-correlation-matrix" class="level2 page-columns page-full" data-number="4.1">
+<section id="building-a-basic-correlation-matrix" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="building-a-basic-correlation-matrix"><span class="header-section-number">4.1</span> <strong>Building a basic correlation matrix</strong></h2>
 <p>Figure below shows the scatter plot matrix of Wine Quality Data. It is a 11 by 11 matrix.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The required input of <em>pairs()</em> can be a matrix or data frame. The code chunk used to create the scatterplot matrix is relatively simple. It uses the default <em>pairs</em> function. Columns 2 to 12 of wine dataframe is used to build the scatterplot matrix. The variables are: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates and alcohol.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="drawing-the-lower-corner" class="level2 page-columns page-full" data-number="4.2">
+<section id="drawing-the-lower-corner" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="drawing-the-lower-corner"><span class="header-section-number">4.2</span> <strong>Drawing the lower corner</strong></h2>
 <p><em>pairs</em> function of R Graphics provided many customisation arguments. For example, it is a common practice to show either the upper half or lower half of the correlation matrix instead of both. This is because a correlation matrix is symmetric.</p>
 <p>To show the lower half of the correlation matrix, the upper.panel argument will be used as shown in the code chunk below.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>], <span class="at">upper.panel =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Similarly, we can display the upper half of the correlation matrix by using the code chunk below.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>], <span class="at">lower.panel =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="including-with-correlation-coefficients" class="level2 page-columns page-full" data-number="4.3">
+<section id="including-with-correlation-coefficients" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="including-with-correlation-coefficients"><span class="header-section-number">4.3</span> <strong>Including with correlation coefficients</strong></h2>
 <p>To show the correlation coefficient of each pair of variables instead of a scatter plot, <a href="https://www.rdocumentation.org/packages/xcms/versions/1.48.0/topics/panel.cor"><em>panel.cor</em></a> function will be used. This will also show higher correlations in a larger font.</p>
 <p>Don’t worry about the details for now-just type this code into our R session or script. Let’s have more fun way to display the correlation matrix.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>panel.cor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">prefix=</span><span class="st">""</span>, cex.cor, ...) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>usr <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="st">"usr"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on.exit</span>(<span class="fu">par</span>(usr))</span>
@@ -451,17 +451,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>], </span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper.panel =</span> panel.cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="visualising-correlation-matrix-ggcormat" class="level1 page-columns page-full" data-number="5">
+<section id="visualising-correlation-matrix-ggcormat" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> <strong>Visualising Correlation Matrix: ggcormat()</strong></h1>
 <p>One of the major limitation of the correlation matrix is that the scatter plots appear very cluttered when the number of observations is relatively large (i.e.&nbsp;more than 500 observations). To over come this problem, <strong>Corrgram</strong> data visualisation technique suggested by D. J. Murdoch and E. D. Chow (1996) and Friendly, M (2002) and will be used.</p>
 <p>There are at least three R packages provided functions to plot corrgram, they are:</p>
@@ -472,22 +472,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>On top that, some R package like ggstatsplot package also provides functions for building corrgram.</p>
 <p>In this section, we will learn how to visualising correlation matrix by using <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggcorrmat.html"><em>ggcorrmat()</em></a> of <a href="https://indrajeetpatil.github.io/ggstatsplot/"><strong>ggstatsplot</strong></a> package.</p>
-<section id="the-basic-plot" class="level2 page-columns page-full" data-number="5.1">
+<section id="the-basic-plot" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="the-basic-plot"><span class="header-section-number">5.1</span> <strong>The basic plot</strong></h2>
 <p>One of the advantage of using&nbsp;<em>ggcorrmat()</em>&nbsp;over many other methods to visualise a correlation matrix is its ability to provide a comprehensive and yet professional statistical report as shown in the figure below.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggcorrmat</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wine, </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggcorrmat</span>(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wine, </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>,</span>
@@ -497,10 +497,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title    =</span> <span class="st">"Correlogram for wine dataset"</span>,</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"Four pairs are no significant at p &lt; 0.05"</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>ggcorrplot.args</code> argument provide additional (mostly aesthetic) arguments that will be passed to <a href="http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2"><code>ggcorrplot::ggcorrplot</code></a> function. The list should avoid any of the following arguments since they are already internally being used: <code>corr</code>, <code>method</code>, <code>p.mat</code>, <code>sig.level</code>, <code>ggtheme</code>, <code>colors</code>, <code>lab</code>, <code>pch</code>, <code>legend.title</code>, <code>digits</code>.</p></li>
 </ul>
 <p>The sample sub-code chunk can be used to control specific component of the plot such as the font size of the x-axis, y-axis, and the statistical report.</p>
-<div class="cell column-page">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ggplot.component <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
@@ -519,10 +519,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="building-multiple-plots" class="level1 page-columns page-full" data-number="6">
+<section id="building-multiple-plots" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> <strong>Building multiple plots</strong></h1>
 <p>Since ggstasplot is an extension of ggplot2, it also supports faceting. However the feature is not available in&nbsp;<em>ggcorrmat()</em>&nbsp;but in the&nbsp;<a href="https://indrajeetpatil.github.io/ggstatsplot/reference/grouped_ggcorrmat.html"><em>grouped_ggcorrmat()</em></a>&nbsp;of&nbsp;<strong>ggstatsplot</strong>.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grouped_ggcorrmat</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wine,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>,</span>
@@ -540,10 +540,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Dataset: UCI Machine Learning Repository"</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img column-page" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-On_Ex05B_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
