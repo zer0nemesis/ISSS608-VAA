@@ -79,7 +79,7 @@ agpop_mutated <- pop_data %>%
 Use ***ggtern()*** function of **ggtern** package to create a simple ternary plot.
 
 ```{r}
-#| column: page
+
 #Building the static ternary plot
 ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
   geom_point()
