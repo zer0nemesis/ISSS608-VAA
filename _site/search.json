@@ -1615,5 +1615,110 @@
     "title": "Take Home Ex 02: DataVis Makeover",
     "section": "3.2 Original Plot of Students’ Performance by Gender",
     "text": "3.2 Original Plot of Students’ Performance by Gender\nThe second requirement for Take-Home_Ex02 was to examine the relationship between Singapore students’ performances with schools, gender and socioeconomic status of the students. Similarly, Freddie made use of boxplots to illustrate the distribution of the scores by gender as shown below. The boxplots for each of the subjects were segregated into different tabs, and the code chunk was “hidden” from the audience’s view unless the user clicks on “Show the code”.\n\n\n3.2.1 Positive Areas\nOn top of those positive areas described above in 3.1.1 Positive Areas, a side-by-side comparison between the two genders allowed the audience to have a better visualisation of how male students performed against female students.\n\n\n3.2.2 Areas for Improvement\nSimilar to the points mentioned in 3.1.2 Areas for Improvement, it was difficult for me to comprehend what the boxplots were trying to tell me. I would propose adding a rainplot to supplement the boxplots to give a better visualisation to the audience on how the distributions differ from each other. In addition, combining all three graphs on a single output allows the audience to have a bird’s eye view instead of having to navigate through different tabs to compare the similarities and differences between the three subjects. Lastly, it will be useful to add annotations to the graphs to highlight the key points of the three graphs.\n\n3.2.2.1 Sketch of Alternative Design\n\n\n\n\n3.2.3 Re-Modelled Distribution\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nstu_qqq_SG$ST004D01T &lt;- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 1, \"Female\")\n\nstu_qqq_SG$ST004D01T &lt;- replace(stu_qqq_SG$ST004D01T, stu_qqq_SG$ST004D01T == 2, \"Male\")\n\ng1 &lt;- ggplot(stu_qqq_SG,\n       aes(x = ST004D01T, \n           y = meanmathscore)) +\n  labs(title = \"Distribution of Math Scores by Gender\", x = \"Gender\", y = \"Mean Math Score\") +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.1,\n               .width = 0,\n               scale = .8,\n               point_colour = NA,\n               slab_fill = \"aquamarine\") +\n  annotate(geom = \"text\",\n           x=2.8,\n           y=720,\n           label = \"Male students recorded peak frequency\\nat higher Math score\",\n           color = \"red\",\n           size = 2) +\n  geom_boxplot(width = .2,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.05, \n            binwidth = 4,\n            dotsize = .5) +\n    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +\n  coord_flip() +\n  theme_economist()\n\n\ng2 &lt;- ggplot(stu_qqq_SG,\n       aes(x = ST004D01T, \n           y = meanreadscore)) +\n  labs(title = \"Distribution of Reading Scores by Gender\", x = \"Gender\", y = \"Mean Reading Score\") +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.1,\n               .width = 0,\n               scale = .8,\n               point_colour = NA,\n               slab_fill = \"cornsilk\") +\n    annotate(geom = \"text\",\n           x=2.8,\n           y=680,\n           label = \"Female and Male students recorded peak frequency\\nat similar Reading score\",\n           color = \"red\",\n           size = 2) +\n  geom_boxplot(width = .2,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.05, \n            binwidth = 4,\n            dotsize = .5) +\n    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +\n  coord_flip() +\n  theme_economist()\n\ng3 &lt;- ggplot(stu_qqq_SG,\n       aes(x = ST004D01T, \n           y = meansciescore)) +\n  labs(title = \"Distribution of Science Scores by Gender\", x = \"Gender\", y = \"Mean Science Score\") +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.1,\n               .width = 0,\n               scale = .8,\n               point_colour = NA,\n               slab_fill = \"darkolivegreen2\") +\n      annotate(geom = \"text\",\n           x=2.8,\n           y=700,\n           label = \"Male students recorded peak frequency\\nat higher Science score\",\n           color = \"red\",\n           size = 2) +\n  geom_boxplot(width = .2,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.05,\n            binwidth = 4,\n            dotsize = .5) +\n    scale_y_continuous(limits = c(250,850), expand = c(0,0), breaks = seq(200, 800, by = 200)) +\n  coord_flip() +\n  theme_economist()\n\ngrid.arrange(g1, g2, g3)"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "",
+    "text": "By the end of this hands-on exercise, we will be able to create the following data visualisation by using R packages:\n\nplotting a calender heatmap by using ggplot2 functions,\nplotting a cycle plot by using ggplot2 function,\nplotting a slopegraph\nplotting a horizon chart"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#importing-data",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#importing-data",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.1 Importing Data",
+    "text": "3.1 Importing Data\nFor the purpose of this hands-on exercise, eventlog.csv file will be used. This data file consists of 199,999 rows of time-series cyber attack records by country.\nFirst, we will use the code chunk below to import eventlog.csv file into R environment and called the data frame as attacks.\n\nattacks &lt;- read_csv(\"data/eventlog.csv\")"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#examining-the-data-structure",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#examining-the-data-structure",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.2 Examining the data structure",
+    "text": "3.2 Examining the data structure\nIt is always a good practice to examine the imported data frame before further analysis is performed.\nFor example, kable() can be used to review the structure of the imported data frame.\n\nkable(head(attacks))\n\n\n\n\ntimestamp\nsource_country\ntz\n\n\n\n\n2015-03-12 15:59:16\nCN\nAsia/Shanghai\n\n\n2015-03-12 16:00:48\nFR\nEurope/Paris\n\n\n2015-03-12 16:02:26\nCN\nAsia/Shanghai\n\n\n2015-03-12 16:02:38\nUS\nAmerica/Chicago\n\n\n2015-03-12 16:03:22\nCN\nAsia/Shanghai\n\n\n2015-03-12 16:03:45\nCN\nAsia/Shanghai\n\n\n\n\n\nThere are three columns, namely timestamp, source_country and tz.\n\ntimestamp field stores date-time values in POSIXct format.\nsource_country field stores the source of the attack. It is in ISO 3166-1 alpha-2 country code.\ntz field stores time zone of the source IP address."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#data-preparation",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#data-preparation",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.3 Data Preparation",
+    "text": "3.3 Data Preparation\nStep 1: Deriving weekday and hour of day fields\nBefore we can plot the calender heatmap, two new fields namely wkday and hour need to be derived. In this step, we will write a function to perform the task.\n\nmake_hr_wkday &lt;- function(ts, sc, tz) {\n  real_times &lt;- ymd_hms(ts, \n                        tz = tz[1], \n                        quiet = TRUE)\n  dt &lt;- data.table(source_country = sc,\n                   wkday = weekdays(real_times),\n                   hour = hour(real_times))\n  return(dt)\n  }\n\n\n\n\n\n\n\nNote\n\n\n\n\nymd_hms() and hour() are from lubridate package, and\nweekdays() is a base R function.\n\n\n\nStep 2: Deriving the attacks tibble data frame\n\nwkday_levels &lt;- c('Saturday', 'Friday', \n                  'Thursday', 'Wednesday', \n                  'Tuesday', 'Monday', \n                  'Sunday')\n\nattacks &lt;- attacks %&gt;%\n  group_by(tz) %&gt;%\n  do(make_hr_wkday(.$timestamp, \n                   .$source_country, \n                   .$tz)) %&gt;% \n  ungroup() %&gt;% \n  mutate(wkday = factor(\n    wkday, levels = wkday_levels),\n    hour  = factor(\n      hour, levels = 0:23))\n\n\n\n\n\n\n\nNote\n\n\n\nBeside extracting the necessary data into attacks data frame, mutate() of dplyr package is used to convert wkday and hour fields into factor so they’ll be ordered when plotting\n\n\nTable below shows the tidy tibble table after processing.\n\nkable(head(attacks))\n\n\n\n\ntz\nsource_country\nwkday\nhour\n\n\n\n\nAfrica/Cairo\nBG\nSaturday\n20\n\n\nAfrica/Cairo\nTW\nSunday\n6\n\n\nAfrica/Cairo\nTW\nSunday\n8\n\n\nAfrica/Cairo\nCN\nSunday\n11\n\n\nAfrica/Cairo\nUS\nSunday\n15\n\n\nAfrica/Cairo\nCA\nMonday\n11"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#building-the-calendar-heatmaps",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#building-the-calendar-heatmaps",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.4 Building the Calendar Heatmaps",
+    "text": "3.4 Building the Calendar Heatmaps\n\ngrouped &lt;- attacks %&gt;% \n  count(wkday, hour) %&gt;% \n  ungroup() %&gt;%\n  na.omit()\n\nggplot(grouped, \n       aes(hour, \n           wkday, \n           fill = n)) + \ngeom_tile(color = \"white\", \n          linewidth = 0.1) + \ntheme_tufte(base_family = \"Helvetica\") + \ncoord_equal() +\nscale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\nlabs(x = NULL, \n     y = NULL, \n     title = \"Attacks by weekday and time of day\") +\ntheme(axis.ticks = element_blank(),\n      plot.title = element_text(hjust = 0.5),\n      legend.title = element_text(size = 8),\n      legend.text = element_text(size = 6) )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThings to learn from the code chunk\n\n\n\n\na tibble data table called grouped is derived by aggregating the attack by wkday and hour fields.\na new field called n is derived by using group_by() and count() functions.\nna.omit() is used to exclude missing value.\ngeom_tile() is used to plot tiles (grids) at each x and y position. color and size arguments are used to specify the border color and line size of the tiles.\ntheme_tufte() of ggthemes package is used to remove unnecessary chart junk. To learn which visual components of default ggplot2 have been excluded, you are encouraged to comment out this line to examine the default plot.\ncoord_equal() is used to ensure the plot will have an aspect ratio of 1:1.\nscale_fill_gradient() function is used to creates a two colour gradient (low-high).\n\n\n\nThen we can simply group the count by hour and wkday and plot it, since we know that we have values for every combination there’s no need to further preprocess the data."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#building-multiple-calendar-heatmaps",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#building-multiple-calendar-heatmaps",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.5 Building Multiple Calendar Heatmaps",
+    "text": "3.5 Building Multiple Calendar Heatmaps\nChallenge: Building multiple heatmaps for the top four countries with the highest number of attacks."
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#plotting-multiple-calendar-heatmaps",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#plotting-multiple-calendar-heatmaps",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.6 Plotting Multiple Calendar Heatmaps",
+    "text": "3.6 Plotting Multiple Calendar Heatmaps\nStep 1: Deriving attack by country object\nIn order to identify the top 4 countries with the highest number of attacks, you are required to do the followings:\n\ncount the number of attacks by country,\ncalculate the percent of attackes by country, and\nsave the results in a tibble data frame.\n\n\nattacks_by_country &lt;- count(\n  attacks, source_country) %&gt;%\n  mutate(percent = percent(n/sum(n))) %&gt;%\n  arrange(desc(n))\n\nStep 2: Preparing the tidy data frame\nIn this step, you are required to extract the attack records of the top 4 countries from attacks data frame and save the data in a new tibble data frame (i.e. top4_attacks).\n\ntop4 &lt;- attacks_by_country$source_country[1:4]\ntop4_attacks &lt;- attacks %&gt;%\n  filter(source_country %in% top4) %&gt;%\n  count(source_country, wkday, hour) %&gt;%\n  ungroup() %&gt;%\n  mutate(source_country = factor(\n    source_country, levels = top4)) %&gt;%\n  na.omit()"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#plotting-multiple-calendar-heatmaps-1",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#plotting-multiple-calendar-heatmaps-1",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "3.7 Plotting Multiple Calendar Heatmaps",
+    "text": "3.7 Plotting Multiple Calendar Heatmaps\nStep 3: Plotting the Multiple Calender Heatmap by using ggplot2 package.\n\nggplot(top4_attacks, \n       aes(hour, \n           wkday, \n           fill = n)) + \n  geom_tile(color = \"white\", \n          size = 0.1) + \n  theme_tufte(base_family = \"Helvetica\") + \n  coord_equal() +\n  scale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\n  facet_wrap(~source_country, ncol = 2) +\n  labs(x = NULL, y = NULL, \n     title = \"Attacks on top 4 countries by weekday and time of day\") +\n  theme(axis.ticks = element_blank(),\n        axis.text.x = element_text(size = 7),\n        plot.title = element_text(hjust = 0.5),\n        legend.title = element_text(size = 8),\n        legend.text = element_text(size = 6) )"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-1-data-import",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-1-data-import",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "4.1 Step 1: Data Import",
+    "text": "4.1 Step 1: Data Import\nFor the purpose of this hands-on exercise, arrivals_by_air.xlsx will be used.\nThe code chunk below imports arrivals_by_air.xlsx by using read_excel() of readxl package and save it as a tibble data frame called air.\n\nair &lt;- read_excel(\"data/arrivals_by_air.xlsx\")"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-2-deriving-month-and-year-fields",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-2-deriving-month-and-year-fields",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "4.2 Step 2: Deriving month and year fields",
+    "text": "4.2 Step 2: Deriving month and year fields\nNext, two new fields called month and year are derived from Month-Year field.\n\nair$month &lt;- factor(month(air$`Month-Year`), \n                    levels=1:12, \n                    labels=month.abb, \n                    ordered=TRUE) \nair$year &lt;- year(ymd(air$`Month-Year`))"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-4-extracting-the-target-country",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-4-extracting-the-target-country",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "4.3 Step 4: Extracting the target country",
+    "text": "4.3 Step 4: Extracting the target country\nNext, the code chunk below is use to extract data for the target country (i.e. Vietnam)\n\nVietnam &lt;- air %&gt;% \n  select(`Vietnam`, \n         month, \n         year) %&gt;%\n  filter(year &gt;= 2010)"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-5-computing-year-average-arrivals-by-month",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-5-computing-year-average-arrivals-by-month",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "4.4 Step 5: Computing year average arrivals by month",
+    "text": "4.4 Step 5: Computing year average arrivals by month\nThe code chunk below uses group_by() and summarise() of dplyr to compute year average arrivals by month.\n\nhline.data &lt;- Vietnam %&gt;% \n  group_by(month) %&gt;%\n  summarise(avgvalue = mean(`Vietnam`))"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-6-plotting-the-cycle-plot",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-6-plotting-the-cycle-plot",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "4.5 Step 6: Plotting the cycle plot",
+    "text": "4.5 Step 6: Plotting the cycle plot\nThe code chunk below is used to plot the cycle plot as shown in Slide 12/23.\n\nggplot() + \n  geom_line(data=Vietnam,\n            aes(x=year, \n                y=`Vietnam`, \n                group=month), \n            colour=\"black\") +\n  geom_hline(aes(yintercept=avgvalue), \n             data=hline.data, \n             linetype=6, \n             colour=\"red\", \n             size=0.5) + \n  facet_grid(~month) +\n  labs(axis.text.x = element_blank(),\n       title = \"Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019\") +\n  xlab(\"\") +\n  ylab(\"No. of Visitors\") +\n  theme_tufte(base_family = \"Helvetica\")"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-1-data-import-1",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-1-data-import-1",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "5.1 Step 1: Data Import",
+    "text": "5.1 Step 1: Data Import\nImport the rice data set into R environment by using the code chunk below.\n\nrice &lt;- read_csv(\"data/rice.csv\")"
+  },
+  {
+    "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-2-plotting-the-slopegraph",
+    "href": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html#step-2-plotting-the-slopegraph",
+    "title": "Hands-On_Ex06: Visualising and Analysing Time-oriented Data",
+    "section": "5.2 Step 2: Plotting the slopegraph",
+    "text": "5.2 Step 2: Plotting the slopegraph\nNext, code chunk below will be used to plot a basic slopegraph as shown below.\n\n#rice %&gt;% \n#  mutate(Year = factor(Year)) %&gt;%\n#  filter(Year %in% c(1961, 1980)) %&gt;%\n#  newggslopegraph(Year, Yield, Country,\n#                Title = \"Rice Yield of Top 11 Asian Counties\",\n#                SubTitle = \"1961-1980\",\n#                Caption = \"Prepared by: Dr. Kam Tin Seong\")\n\n#Error in newggslopegraph() \n#  could not find function \"newggslopegraph\"\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\nFor effective data visualisation design, factor() is used convert the value type of Year field from numeric to factor."
   }
 ]
