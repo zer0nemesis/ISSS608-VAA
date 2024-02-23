@@ -36,6 +36,8 @@ website:
           href: "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05D.html"
         - text: "5.5. Treemap Visualisation with R"
           href: "Hands-On_Ex/Hands-On_Ex05/Hands-On_Ex05E.html"
+        - text: "6. Visualising and Analysing Time-oriented Data"
+          href: "Hands-On_Ex/Hands-On_Ex06/Hands-On_Ex06.html"
           
     - text: "In-Class Exercises"
       menu:
