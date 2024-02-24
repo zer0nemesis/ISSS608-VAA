@@ -1,0 +1,15 @@
+{
+  "hash": "d324ca274623b4b5cba7abcf797014c1",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-Class_Ex06: Horizon Plot with R\"\nauthor: \"Roger Chen\"\ndate: \"24 Feb 2024\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  freeze: true\n  warning: false\n  message: false\nnumber-sections: true\neditor: visual\n---\n\n\n# Overview\n\n# Data Preparation\n\ninstalling the packages\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n\n# \n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

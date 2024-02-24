@@ -1,0 +1,35 @@
+---
+title: "In-Class_Ex06: Horizon Plot with R"
+author: "Roger Chen"
+date: "24 Feb 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+  warning: false
+  message: false
+number-sections: true
+editor: visual
+---
+
+# Overview
+
+# Data Preparation
+
+installing the packages
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+# 
+
+```{r}
+
+
+```
