@@ -4,7 +4,11 @@ author: "Roger Chen"
 date: "29 Jan 2024"
 date-modified: "last-modified"
 execute: 
+  eval: true
+  echo: true
+  freeze: true
   warning: false
+  message: false
 number-sections: true
 ---
 
