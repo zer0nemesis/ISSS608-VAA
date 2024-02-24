@@ -5,6 +5,7 @@ date: "03 Feb 2024"
 date-modified: "last-modified"
 execute: 
   warning: false
+  freeze: true
 number-sections: true
 ---
 

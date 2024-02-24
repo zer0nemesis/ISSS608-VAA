@@ -1,0 +1,165 @@
+---
+title: "Take-Home_Ex04: Rain, Hail or Shine: Unveiling Mysteries of the Sky"
+subtitle: "Working Document for Project Work"
+author: "Roger Chen"
+date: "10 Feb 2024"
+date-modified: "last-modified"
+execute: 
+  warning: false
+  freeze: true
+number-sections: true
+---
+
+# Overview
+
+In this take home exercise, we will
+
+# Data Preparation
+
+## Loading R Packages
+
+In this take home exercise, the following R packages will be used:
+
+-   [tidyverse](https://www.tidyverse.org/),
+
+-   [ggplot2](https://ggplot2.tidyverse.org/),
+
+-   [gganimate](https://gganimate.com/),
+
+-   [plotly](https://plotly.com/r/),
+
+-   [ggiraph](https://davidgohel.github.io/ggiraph/),
+
+-   [DT](https://rstudio.github.io/DT/).
+
+The code chunk used is as follows:
+
+```{r}
+pacman::p_load(tidyverse, ggplot2, gganimate, plotly, ggiraph, DT)
+```
+
+## Importing Temperature Data
+
+***Changi*** will be selected for the weather station, and ***temperature*** chosen as the factor to be analysed. The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website,
+
+Lastly, using the code chunk below, we will combine the five datasets into a single document, and save it as a new dataset.
+
+Next, we will call the dataset "***combinedTemp***" into the environment.
+
+```{r}
+data <- read_csv("data/daily_historical.csv")
+```
+
+## Summary Statistics of Data
+
+::: panel-tabset
+### First 5 Rows
+
+Using [**DT**](https://rstudio.github.io/DT/), we will display the dataset as a interactive table on html page.
+
+```{r}
+DT::datatable(data, class = "display compact", style = "bootstrap5")
+```
+
+::: callout-note
+The data table seemed to be in order.
+:::
+
+### Dataset Structure
+
+```{r}
+str(data)
+```
+
+::: callout-note
+The data types are all correct.
+:::
+
+### Data Health
+
+Checking for missing values
+
+```{r}
+sum(is.na(data))
+```
+
+::: callout-note
+No missing values were found.
+:::
+:::
+
+# Static Data Visualisation
+
+::: panel-tabset
+## Plot
+
+```{r, fig.width = 15, fig.height = 8}
+#| column: page
+#| echo: false
+
+
+          
+
+```
+
+## Code Chunk
+
+```{r}
+#| eval: false
+
+
+
+```
+:::
+
+::: callout-note
+:::
+
+# Interactive Data Visualisation
+
+::: panel-tabset
+## Plot
+
+```{r, fig.height=12}
+#| column: page
+#| echo: false
+
+
+```
+
+## Code Chunk
+
+```{r}
+#| eval: false
+
+
+```
+:::
+
+::: callout-note
+:::
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| echo: false
+
+      
+```
+
+## Code Chunk
+
+```{r}
+#| eval: false
+
+
+
+
+```
+:::
+
+::: callout-note
+:::
+
+# Conclusion

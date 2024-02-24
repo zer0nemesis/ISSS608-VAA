@@ -8,6 +8,7 @@ execute:
   eval: true
   echo: true
   warning: false
+  freeze: true
 number-sections: true
 editor: visual
 ---

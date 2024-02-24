@@ -65,7 +65,8 @@ website:
           href: "Take-Home_Ex/Take-Home_Ex02/Take-Home_Ex02.html"
         - text: "3. Be Weatherwise or Otherwise"
           href: "Take-Home_Ex/Take-Home_Ex03/Take-Home_Ex03.html"
-    
+        - text: "4. Rain, Hail or Shine: Unveiling Mysteries of the Sky"
+          href: "Take-Home_Ex/Take-Home_Ex04/Take-Home_Ex04.html"   
     right:
       - href: index.qmd
         text: Home
