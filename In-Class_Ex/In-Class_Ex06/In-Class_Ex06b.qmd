@@ -93,3 +93,35 @@ Extract data
 ![Publish](images/clipboard-990109285.png)
 
 ![](images/clipboard-1375437826.png)
+
+# Creating Heat Map
+
+Import data from "event_log.csv"
+
+Use dimensions data
+
+-   column
+
+    -   choose month
+
+    -   choose week number
+
+-   row
+
+    -   weekday
+
+![](images/clipboard-1236290390.png)
+
+new field
+
+![Edit, add "1", pull to color](images/clipboard-3297695882.png)
+
+![](images/clipboard-1629233464.png)
+
+::: callout-note
+notice that there are white columns in the output, as the months are not fused together.
+:::
+
+adding filter by zones
+
+![](images/clipboard-66100673.png)

@@ -1,13 +1,61 @@
 ---
-title: "In-Class_Ex06: Time Series with R"
+title: "In-Class_Ex06: Horizon Plot with R"
 author: "Roger Chen"
 date: "24 Feb 2024"
 date-modified: "last-modified"
 execute: 
   eval: true
   echo: true
-  warning: false
   freeze: true
+  warning: false
+  message: false
 number-sections: true
 editor: visual
 ---
+
+# Overview
+
+also Chapter 20
+
+# Data Preparation
+
+installing the packages
+
+```{r}
+pacman::p_load(ggHoriPlot, ggthemes, tidyverse)
+```
+
+Importing the data. We also noticed that the current date fields in the data source is a categorical variable, and thus the mutate function is called to transform the data to a date variable.
+
+```{r}
+averp <- read_csv("data/AVERP.csv") %>%
+  mutate(`Date` = dmy(`Date`))
+```
+
+# Creating Horizon Graph
+
+```{r, fig.width=15, fig.height=12}
+
+averp %>%
+  filter(Date >= "2018-01-01") %>%
+  ggplot() +
+  geom_horizon(aes(x = Date, y = Values),
+               origin = "midpoint",
+               horizonscale = 6) +
+  facet_grid(`Consumer Items`~.) +
+  theme_few() +
+  scale_fill_hcl(palette= 'RdBu') +
+  theme(panel.spacing.y = unit(0, "lines"), strip.text.y = element_text(size = 5, angle = 0, hjust = 0),
+        legend.position = "none",
+            axis.text.y = element_blank(),
+    axis.text.x = element_text(size=7),
+    axis.title.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.ticks.y = element_blank(),
+    panel.border = element_blank()) +
+  
+  scale_x_date(expand=c(0,0), date_breaks = "3 month", date_labels = "%b%y") +
+  ggtitle('Average Retail Prices of Selected Consumer Items (Jan 2018 to Dec 2022)')
+
+
+```

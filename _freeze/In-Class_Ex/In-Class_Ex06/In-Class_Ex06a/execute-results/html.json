@@ -1,0 +1,17 @@
+{
+  "hash": "44f148891ee934eced4943370318229a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-Class_Ex06: Horizon Plot with R\"\nauthor: \"Roger Chen\"\ndate: \"24 Feb 2024\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  freeze: true\n  warning: false\n  message: false\nnumber-sections: true\neditor: visual\n---\n\n\n# Overview\n\nalso Chapter 20\n\n# Data Preparation\n\ninstalling the packages\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(ggHoriPlot, ggthemes, tidyverse)\n```\n:::\n\n\nImporting the data. We also noticed that the current date fields in the data source is a categorical variable, and thus the mutate function is called to transform the data to a date variable.\n\n\n::: {.cell}\n\n```{.r .cell-code}\naverp <- read_csv(\"data/AVERP.csv\") %>%\n  mutate(`Date` = dmy(`Date`))\n```\n:::\n\n\n# Creating Horizon Graph\n\n\n::: {.cell}\n\n```{.r .cell-code}\naverp %>%\n  filter(Date >= \"2018-01-01\") %>%\n  ggplot() +\n  geom_horizon(aes(x = Date, y = Values),\n               origin = \"midpoint\",\n               horizonscale = 6) +\n  facet_grid(`Consumer Items`~.) +\n  theme_few() +\n  scale_fill_hcl(palette= 'RdBu') +\n  theme(panel.spacing.y = unit(0, \"lines\"), strip.text.y = element_text(size = 5, angle = 0, hjust = 0),\n        legend.position = \"none\",\n            axis.text.y = element_blank(),\n    axis.text.x = element_text(size=7),\n    axis.title.y = element_blank(),\n    axis.title.x = element_blank(),\n    axis.ticks.y = element_blank(),\n    panel.border = element_blank()) +\n  \n  scale_x_date(expand=c(0,0), date_breaks = \"3 month\", date_labels = \"%b%y\") +\n  ggtitle('Average Retail Prices of Selected Consumer Items (Jan 2018 to Dec 2022)')\n```\n\n::: {.cell-output-display}\n![](In-Class_Ex06a_files/figure-html/unnamed-chunk-3-1.png){width=1440}\n:::\n:::\n",
+    "supporting": [
+      "In-Class_Ex06a_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
