@@ -11,3 +11,71 @@ execute:
 number-sections: true
 editor: visual
 ---
+
+You can access the published Tableau site [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex06_17087559962100/Dashboard1?publish=yes).
+
+![](images/clipboard-1018825726.png)
+
+not very convenient in Tableau, cos u need to drag countries by countries
+
+![](images/clipboard-3547374314.png)
+
+select all countries from data source, hover to the back to the black triangle
+
+![](images/clipboard-3287327797.png)
+
+-   pivot table
+
+![](images/clipboard-2210779038.png)
+
+renaming the column names
+
+![now we only have three columns, but low variability. To see high variability, we can change to month-year](images/clipboard-4044018769.png)
+
+![](images/clipboard-1725054471.png)
+
+exposing the filter interface
+
+![](images/clipboard-302137107.png)
+
+improving user interface by selecting single value
+
+![](images/clipboard-1001333109.png)
+
+create a cycle plot
+
+-   duplicate the sheet
+
+-   change the month
+
+-   add another year
+
+-   
+
+![](images/clipboard-988787286.png)
+
+fit width
+
+![](images/clipboard-2655687954.png)
+
+add reference line
+
+![](images/clipboard-391444205.png)
+
+Dashboard
+
+![](images/clipboard-1525823386.png)
+
+now we have two legends, which is not ideal
+
+![](images/clipboard-2539476920.png)
+
+Going back to Line Graph Sheet:
+
+-   edit filter
+
+![](images/clipboard-547625262.png)
+
+-   remove additional filter on dashboard
+
+![](images/clipboard-2890346920.png)
