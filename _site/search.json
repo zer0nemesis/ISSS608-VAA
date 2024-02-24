@@ -77,186 +77,144 @@
     "text": "This website documents Roger’s learning journey through the Visual Analytics and Applications Jungle.\n\n\n\n\n\nIn this website, you will find my coursework prepared for this course. Let us navigate through this jungle and learn together."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html",
-    "href": "In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html",
-    "title": "In-Class_Ex05A: Critic on DataViz Makeover",
+    "objectID": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06b.html",
+    "href": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06b.html",
+    "title": "In-Class_Ex06b: Time Series with Tableau",
     "section": "",
-    "text": "Probability Density Plot\nAxis values: instead of density for y-axis, should be probability\nobserving the PDF and comment the skewness of the three curves\nwhen the values are categorical, and “as.factor” is not used, the output will display a scatterplot instead of a boxplot\nsort by mean or median (my graph), to identify patterns\n\ncan also plot by boxplots\n\nfor scatterplot, need to pay attention on the aspect ratio. should try to fit within a square as much as possible, otherwise output will be skewed\nlayout - one histogram should not be larger than the other\n\nbut can be histogram on the left, then 3 x similarly sized boxplots on the right (with the same aspect and scale)\n\nTry to reduce redundancy in the output"
+    "text": "1 Introduction\nIn this in-class exercise, we will learn how to use Tableau to create Line Plots and Cycle Plots, deploy them on a dashboard, before publishing them on Tableau Public.\nYou can access the published Tableau site here.\n\n\n2 Creating Line Plots\nUsing the data source “arrivals_by_air.xls”, we will first plot the year by sum arrivals.\n\nFrom the output above, we can see that it is not very convenient for the user, because you will need need to add/ remove the countries individually. Thus, it will be better if we can change the user interface. To do that, we will be editing the data to a pivot table. First, we will go to Data Source, and select all countries.\n\nAfter that, hover the cursor to the last column, click on the black triangle and select “Pivot”.\n\nAfter which, we can now see that the data source has been changed to a pivot table, comprising three columns: Date, Country, Arrivals. We will rename the columns accordingly.\n\nFrom the sheet, we can see that there is low variability, which is not very useful.\n\nWe will now increase the variability, by changing the Year to Month. We will also add a filter to the line graph:\n\nNotice that the filter is not exposed to the user. We will now display the filter interface:\n\nAlthough there is a filter interface, the user will need to de-select the previous country when he wants to select a new country to visualise the data. Thus, we will improve user interface by selecting single value (list).\n\n\n\n3 Creating Cycle Plot\nFirst, we will duplicate the Line Graph sheet, and rename it as Cycle Plot.\nIn the column, we will change to Month, and add another Year.\n\nAs the output is beyond the display window, we will select “Fit Width”.\n\nWe will also add a reference line.\n\n\n\n4 Creating Dashboard\nAfter creating a new dashboard, we will first select “Automatic” for size, so that users can view the dashboard from both computers and mobile phones.\n\nAfter selecting both Line Graph and Cycle Plot, we notice that there are now two legends, which is not ideal.\n\nIn order to create one legend for both charts, we will first go back to the Line Graph Sheet. We will edit filter and select “All using this Data Source”.\n\nGoing back to the dashboard, we will remove the extra filter from the Cycle Plot.\n\n\n\n5 Publishing to Tableau Public\nExtract data\n\n\n\nPublish\n\n\n\n\n\n6 Creating Heat Map\nImport data from “event_log.csv”\nUse dimensions data\n\ncolumn\n\nchoose month\nchoose week number\n\nrow\n\nweekday\n\n\n\nnew field\n\n\n\nEdit, add “1”, pull to color\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nnotice that there are white columns in the output, as the months are not fused together.\n\n\nadding filter by zones"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html",
+    "title": "In-Class_Ex04B: Visualising Distribution",
     "section": "",
-    "text": "In this chapter, we will learn how to create interactive data visualisation by using functions provided by ggiraph and plotlyr packages."
+    "text": "Visualising distribution is not new in statistical analysis. In Hands-On_Ex01, we have shared that some of the popular statistical graphics methods for visualising distribution are histogram, probability density curve (pdf), boxplot, notch plot and violin plot and how they can be created by using ggplot2. In this exercise, we are going to share two relatively new statistical graphic methods for visualising distribution, namely ridgeline plot and raincloud plot by using ggplot2 and its extensions."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#tooltip-effect-with-tooltip-aesthetic",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#tooltip-effect-with-tooltip-aesthetic",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "4.1 Tooltip effect with tooltip aesthetic",
-    "text": "4.1 Tooltip effect with tooltip aesthetic\nBelow shows a typical code chunk to plot an interactive statistical graph by using ggiraph package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next, girafe() of ggiraph will be used to create an interactive svg object.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = ID),\n    ### ID is chosen as the tooltip interactivity \n    stackgroups = TRUE, \n    binwidth = 1, \n    method = \"histodot\") +\n  scale_y_continuous(NULL, \n                     breaks = NULL)\n### scale can also be made interactive, e.g. scale_fill_steps2_interactive\n\ngirafe(\n  ggobj = p,\n  width_svg = 6,\n  height_svg = 6*0.618\n  ### svg : scalable vector graph (changing a png image to a spg format)\n)\n\nNotice that two steps are involved. First, an interactive version of ggplot2 geom (i.e. geom_dotplot_interactive()) will be used to create the basic graph. Then, girafe() will be used to generate an svg object to be displayed on an html page."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#installing-and-loading-the-packages",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#installing-and-loading-the-packages",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "2.1 Installing and loading the packages",
+    "text": "2.1 Installing and loading the packages\nFor the purpose of this exercise, the following R packages will be used, they are:\n\ntidyverse, a family of R packages for data science process,\nggridges, a ggplot2 extension specially designed for plotting ridgeline plots, and\nggdist for visualising distribution and uncertainty.\n\n\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)\n\n### for referencing, use the HTML version if available. otherwise then the PDF version"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-multiple-information-on-tooltip",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-multiple-information-on-tooltip",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "5.1 Displaying multiple information on tooltip",
-    "text": "5.1 Displaying multiple information on tooltip\nThe content of the tooltip can be customised by including a list object as shown in the code chunk below.\n\nexam_data$tooltip &lt;- c(paste0(     \n  \"Name = \", exam_data$ID,         \n  \"\\n Class = \", exam_data$CLASS)) \n\n### need to specify where to extract the data for the tooltip; \\n is used to insert line breaks\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = tooltip), \n    stackgroups = TRUE,\n    binwidth = 1,\n    method = \"histodot\") +\n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(\n  ggobj = p,\n  width_svg = 8,\n  height_svg = 8*0.618\n)\n\nThe first three lines of codes in the code chunk create a new field called tooltip. At the same time, it populates text in ID and CLASS fields into the newly created field. Next, this newly created field is used as tooltip field as shown in the code of line 7."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#data-import",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#data-import",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "2.2 Data import",
+    "text": "2.2 Data import\nFor the purpose of this exercise, Exam_data.csv will be used.\n\nexam &lt;- read_csv(\"data/Exam_data.csv\")"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#customising-tooltip-style",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#customising-tooltip-style",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.1 Customising Tooltip style",
-    "text": "6.1 Customising Tooltip style\nCode chunk below uses opts_tooltip() of ggiraph to customize tooltip rendering by add css declarations.\n\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)                                        \n\nNotice that the background colour of the tooltip is black and the font colour is white and bold.\n\n\n\n\n\n\n\nRefer to Customizing girafe objects to learn more about how to customise ggiraph objects."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-ridgeline-graph-ggridges-method",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-ridgeline-graph-ggridges-method",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "3.1 Plotting ridgeline graph: ggridges method",
+    "text": "3.1 Plotting ridgeline graph: ggridges method\nThere are several ways to plot ridgeline plot with R. In this section, you will learn how to plot ridgeline plot by using ggridges package.\nggridges package provides two main geom to plot gridgeline plots, they are: geom_ridgeline() and geom_density_ridges(). The former takes height values directly to draw the ridgelines, and the latter first estimates data densities and then draws those using ridgelines.\nThe ridgeline plot below is plotted by using geom_density_ridges().\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nFrom the graph, better students in 3A do better than those in 3B. However, poorer students in 3A are worse off than those in 3B. Students in 3B performed more similarly than students in 3A.\nStudents in 3H can possibly be categorised into two groups, as there are two peaks in the distribution.\n\n\n\nggplot(exam, \n       aes(x = ENGLISH, \n           y = CLASS)) +\n  geom_density_ridges( \n    scale = 3,\n    rel_min_height = 0.01,\n    bandwidth = 3.4,\n    fill = lighten(\"#7097BB\", .3),\n    color = \"white\"\n  ) +\n  scale_x_continuous(\n    name = \"English grades\",\n    expand = c(0, 0)\n    ) +\n  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +\n  theme_ridges()\n\n\n\n\n\n\n\nNote\n\n\n\nThe focus for geom_density_ridges() plots is on identifying the pattern, and not plotting the exact points. If you want the latter, then use geom_ridgeline() &lt;– requires a height value in the argument."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-statistics-on-tooltip",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-statistics-on-tooltip",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.2 Displaying statistics on tooltip",
-    "text": "6.2 Displaying statistics on tooltip\nCode chunk below shows an advanced way to customise tooltip. In this example, a function is used to compute 90% confident interval of the mean. The derived statistics are then displayed in the tooltip.\n\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n###calculating the mean, min-max scores on-the-fly using \"function\", hardcoding the descriptors, e.g. Mean maths scores, so that it is easier to read the tooltip\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)"
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#varying-fill-colors-along-the-x-axis",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#varying-fill-colors-along-the-x-axis",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "3.2 Varying fill colors along the x axis",
+    "text": "3.2 Varying fill colors along the x axis\nSometimes we would like to have the area under a ridgeline not filled with a single solid color but rather with colors that vary in some form along the x axis. This effect can be achieved by using either geom_ridgeline_gradient() or geom_density_ridges_gradient(). Both geoms work just like geom_ridgeline() and geom_density_ridges(), except that they allow for varying fill colors. However, they do not allow for alpha transparency in the fill. For technical reasons, we can have changing fill colors or transparency but not both.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = ENGLISH, \n           y = CLASS,\n           fill = stat(x))) +\n  geom_density_ridges_gradient(\n    scale = 3,\n    rel_min_height = 0.01) +\n  scale_fill_viridis_c(name = \"Temp. [F]\",\n                       option = \"C\") +\n  scale_x_continuous(\n    name = \"English grades\",\n    expand = c(0, 0)\n  ) +\n  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +\n  theme_ridges()"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#hover-effect-with-data_id-aesthetic",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#hover-effect-with-data_id-aesthetic",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.3 Hover effect with data_id aesthetic",
-    "text": "6.3 Hover effect with data_id aesthetic\nCode chunk below shows the second interactive feature of ggiraph, namely data_id.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(           \n    aes(data_id = CLASS,\n        tooltip = CLASS), ### by adding a tooltip=class, you can also show the class when you hover over the selected points   \n    stackgroups = TRUE,               \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618                      \n)                                        \n\nInteractivity: Elements associated with a data_id (i.e CLASS) will be highlighted upon mouse over.\n\n\n\n\n\n\nNote that the default value of the hover css is hover_css = “fill:orange;”."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#mapping-the-probabilities-directly-onto-colour",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#mapping-the-probabilities-directly-onto-colour",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "3.3 Mapping the probabilities directly onto colour",
+    "text": "3.3 Mapping the probabilities directly onto colour\nBeside providing additional geom objects to support the need to plot ridgeline plot, ggridges package also provides a stat function called stat_density_ridges() that replaces stat_density() of ggplot2.\nFigure below is plotted by mapping the probabilities calculated by using stat(ecdf) which represent the empirical cumulative density function for the distribution of English score.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nFrom the graph, we can see where the different percentiles fall within each distribution. For instance, the 50th percentile and 90th percentile of students in Class 3A perform better than Class 3B.\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = 0.5 - abs(0.5-stat(ecdf)))) +\n  stat_density_ridges(geom = \"density_ridges_gradient\", \n                      calc_ecdf = TRUE) +\n  scale_fill_viridis_c(name = \"Tail probability\",\n                       direction = -1) +\n  theme_ridges()\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nIt is important include the argument calc_ecdf = TRUE in stat_density_ridges()."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#styling-hover-effect",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#styling-hover-effect",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.4 Styling hover effect",
-    "text": "6.4 Styling hover effect\nIn the code chunk below, css codes are used to change the highlighting effect.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                        \n\nInteractivity: Elements associated with a data_id (i.e CLASS) will be highlighted upon mouse over.\n\n\n\n\n\n\nNote: Different from previous example, in this example the ccs customisation request are encoded directly."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#ridgeline-plots-with-quantile-lines",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#ridgeline-plots-with-quantile-lines",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "3.4 Ridgeline plots with quantile lines",
+    "text": "3.4 Ridgeline plots with quantile lines\nBy using geom_density_ridges_gradient(), we can colour the ridgeline plot by quantile, via the calculated stat(quantile) aesthetic as shown in the figure below.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = 4,\n    quantile_lines = TRUE) +\n  scale_fill_viridis_d(name = \"Quartiles\") +\n  theme_ridges()\n\n\n\n\nInstead of using number to define the quantiles, we can also specify quantiles by cut points such as 2.5% and 97.5% tails to colour the ridgeline plot as shown in the figure below.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = c(0.025, 0.975)\n    ) +\n  scale_fill_manual(\n    name = \"Probability\",\n    values = c(\"#FF0000A0\", \"#A0A0A0A0\", \"#0000FFA0\"),\n    labels = c(\"(0, 0.025]\", \"(0.025, 0.975]\", \"(0.975, 1]\")\n  ) +\n  theme_ridges()"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#combining-tooltip-and-hover-effect",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#combining-tooltip-and-hover-effect",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.5 Combining tooltip and hover effect",
-    "text": "6.5 Combining tooltip and hover effect\nThere are time that we want to combine tooltip and hover effect on the interactive statistical graph as shown in the code chunk below.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                        \n\nInteractivity: Elements associated with a data_id (i.e CLASS) will be highlighted upon mouse over. At the same time, the tooltip will show the CLASS."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-a-half-eye-graph",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-a-half-eye-graph",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "4.1 Plotting a Half Eye graph",
+    "text": "4.1 Plotting a Half Eye graph\nFirst, we will plot a Half-Eye graph by using stat_halfeye() of ggdist package.\nThis produces a Half Eye visualization, which is contains a half-density and a slab-interval.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA)"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#click-effect-with-onclick",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#click-effect-with-onclick",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.6 Click effect with onclick",
-    "text": "6.6 Click effect with onclick\nonclick argument of ggiraph provides hotlink interactivity on the web.\nThe code chunk below shown an example of onclick.\n\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\nInteractivity: Web document link with a data object will be displayed on the web browser upon mouse click.\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nNote that click actions must be a string column in the dataset containing valid javascript instructions."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-boxplot-with-geom_boxplot",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-boxplot-with-geom_boxplot",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "4.2 Adding the boxplot with geom_boxplot()",
+    "text": "4.2 Adding the boxplot with geom_boxplot()\nNext, we will add the second geometry layer using geom_boxplot() of ggplot2. This produces a narrow boxplot. We reduce the width and adjust the opacity.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA)"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-ggiraph",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-ggiraph",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "6.7 Coordinated Multiple Views with ggiraph",
-    "text": "6.7 Coordinated Multiple Views with ggiraph\nCoordinated multiple views methods has been implemented in the data visualisation below.\n\n\n\n\n\n\nNotice that when a data point of one of the dotplot is selected, the corresponding data point ID on the second data visualisation will be highlighted too.\nIn order to build a coordinated multiple views as shown in the example above, the following programming strategy will be used:\n\nAppropriate interactive functions of ggiraph will be used to create the multiple views.\npatchwork function of patchwork package will be used inside girafe function to create the interactive coordinated multiple views.\n\n\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID,\n        tooltip = tooltip), ### to include the tooltip to display the student name and class              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID,\n        tooltip = tooltip),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), ### to put the 2 graphs side-by side using \"print\", with \"code\" as a container (crosstalk function)\n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"), \n         opts_hover_inv(css = \"opacity:0.2;\") ### using css commands to control the fill and opacity\n         )\n       ) \n\nThe data_id aesthetic is critical to link observations between plots and the tooltip aesthetic is optional but nice to have when mouse over a point."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-dot-plots-with-stat_dots",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-dot-plots-with-stat_dots",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "4.3 Adding the Dot Plots with stat_dots()",
+    "text": "4.3 Adding the Dot Plots with stat_dots()\nNext, we will add the third geometry layer using stat_dots() of ggdist package. This produces a half-dotplot, which is similar to a histogram that indicates the number of samples (number of dots) in each bin. We select side = “left” to indicate we want it on the left-hand side.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nstat_halfeye gives the distribution,\ngeom_boxplot provides the statistics summary, and\nstat_dots displays the sample size\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = .5,\n            dotsize = 2)"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-plot_ly-method",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-plot_ly-method",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "7.1 Creating an interactive scatter plot: plot_ly() method",
-    "text": "7.1 Creating an interactive scatter plot: plot_ly() method\nThe tabset below shows an example a basic interactive plot created by using plot_ly().\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nplot_ly(data = exam_data, \n             x = ~MATHS, \n             y = ~ENGLISH) ### follows the java script for plot_ly()"
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#finishing-touch",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#finishing-touch",
+    "title": "In-Class_Ex04B: Visualising Distribution",
+    "section": "4.4 Finishing touch",
+    "text": "4.4 Finishing touch\nLastly, coord_flip() of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, theme_economist() of ggthemes package is used to give the raincloud chart a professional publishing standard look.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = .5,\n            dotsize = 1.5) +\n  coord_flip() +\n  theme_economist()"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#working-with-visual-variable-plot_ly-method",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#working-with-visual-variable-plot_ly-method",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "7.2 Working with visual variable: plot_ly() method",
-    "text": "7.2 Working with visual variable: plot_ly() method\nIn the code chunk below, color argument is mapped to a qualitative visual variable (i.e. RACE).\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nplot_ly(data = exam_data, \n        x = ~ENGLISH, \n        y = ~MATHS, \n        color = ~RACE)\n### the legend box doubles up as a filter\n### we can also select groups of points by boxing them together\n### we can also use the lasso tool to choose points of irregular shapes (useful tool to use with Shiny)"
+    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html",
+    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html",
+    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "section": "",
+    "text": "In this in-class exercise, we will learn how to use Tableau Public to create interactive scatterplots. You can access the Superstore tableau report here and story here; and the Exam-data dashboard here."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-ggplotly-method",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-ggplotly-method",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "7.3 Creating an interactive scatter plot: ggplotly() method",
-    "text": "7.3 Creating an interactive scatter plot: ggplotly() method\nThe code chunk below plots an interactive scatter plot by using ggplotly().\n\nPlotCode\n\n\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\n\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\nNotice that the only extra line we need to include in the code chunk is ggplotly()."
+    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#importing-data",
+    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#importing-data",
+    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "section": "2.1 Importing Data",
+    "text": "2.1 Importing Data\nWe will build on what we have created during In-Class Exercise 2 here."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-plotly",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-plotly",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "7.4 Coordinated Multiple Views with plotly",
-    "text": "7.4 Coordinated Multiple Views with plotly\nThe creation of a coordinated linked plot by using plotly involves three steps:\n\nhighlight_key() of plotly package is used as shared data.\ntwo scatterplots will be created by using ggplot2 functions.\nlastly, subplot() of plotly package is used to place them next to each other side-by-side.\n\n\nPlotCode\n\n\n\n\n\n\n\n\nClick on a data point of one of the scatterplot and see how the corresponding point on the other scatterplot is selected.\n\n\n\nd &lt;- highlight_key(exam_data) ### exam data becomes a object for highlight purposes\np1 &lt;- ggplot(data=d,  ### data is no longer Exam_data, and is replaced with d\n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\nTip\n\n\n\nThing to learn from the code chunk:\n\nhighlight_key() simply creates an object of class crosstalk::SharedData.\nVisit this link to learn more about crosstalk."
+    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-a-scatter-plot",
+    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-a-scatter-plot",
+    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "section": "3.1 Creating a Scatter Plot",
+    "text": "3.1 Creating a Scatter Plot\n\nAt first glance, the data points have been automatically aggregated. From Analysis tab, uncheck “Aggregate Measures” to reveal the scatter plot.\n\nThis is the resulting scatter plot.\n\nTo make the scatter plot less cluttered, we can select “Percentile”.\n\n\n\n\n\n\n\nTip\n\n\n\nYTD Total, Compound Growth Rate, Year on Year Growth and YTD Growth can be used for time series visualisation.\n\n\nWe will next aggregate the points based on states, by using “Compute using State” and “Aggregate Measures” as shown below:\n\nResulting scatter plot as follows:\n\nTo insert trendlines, we can do so by selecting “Trend Line”. We can also derive the trend lines of specific observations by choosing specific points on the scatter plot.\n\nUnlike JMP where we can use the “lasso tool”, Tableau does not allow us to choose points of odd shapes. To overcome this, we need to select using the box select tool, then unselect those points we do not want.\n\nNext, we will change the size of the scatter plot. First, we drag “sales” to “Size”\n\nNext, changing the colour and opacity of the scatter plot.\n\n\nWe will also plot reference lines on the scatterplot so as to better visualise how the observations can be catergorised into four different quadrants.\n\nWe will now have a scatterplot categorised into four quadrants\n\nWe can also add a “Filter” option on the scatter plot to improve the interactivity.\n\nAlthough we can display the filter panel on the right, but we notice that the graph disappears when none of the options are checked, which can lead to unnecessary panic.\n\nTo prevent that, we can mandate that at least one option needs to be chosen.\n\nWe can help readers zoom into the details of each point. First, we need to create a new sheet name to follow the selected year. We will create a new sheet, and create a new annual sales and profit chart.\n\nCreating a dual axis for profits, so that the profits and losses will be reflected in blue and red respectively.\n\nResizing the charts so that we can view on both desktop and handphone.\n\n\nWe can also customising the animation effects that we want to visualise on the scatter plot.\n\nInserting details\n\nAnd now, we have an interactive scatter plot."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#interactive-data-table-dt-package",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#interactive-data-table-dt-package",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "8.1 Interactive Data Table: DT package",
-    "text": "8.1 Interactive Data Table: DT package\n\nA wrapper of the JavaScript Library DataTables\nData objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’ (typically via R Markdown or Shiny).\n\n\nDT::datatable(exam_data, class = \"display compact\", style = \"bootstrap5\")"
+    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-dashboards-and-story-points",
+    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-dashboards-and-story-points",
+    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "section": "3.2 Creating Dashboards and Story Points",
+    "text": "3.2 Creating Dashboards and Story Points\nWe can use dashboards to combine different visualisation sheets together.\nWe can use story points to combine different visualisation sheets and/or dashboards together.\nWe will practice this by importing the Exam_data.csv, then creating scatterplot and adjust the size and shape.\n\nWe would like to add a boxplot to the scatter plot. To do this, we will click on “Show Me”. We noticed that the boxplot option is actually greyed out, and we are unable to select this option. To overcome this, we will first click on Histogram, which then allows to select the boxplot option.\nThereafter, we will drag “ID” into Detail, and replace “CNT(English)” with “SUM(English)”.\n\nWe will duplicate the sheet and change “SUM(Engligh)” to “SUM(Maths)” to display the maths scores.\n\nWe will now use a Dashboard to piece the scatterplot and boxplots together."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#linked-brushing-crosstalk-method",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#linked-brushing-crosstalk-method",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "8.2 Linked brushing: crosstalk method",
-    "text": "8.2 Linked brushing: crosstalk method\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n### creates a datable table based on what plot_ly() has selected\n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d, class = \"display compact\", style = \"bootstrap5\"), \n                  widths = 5)  \n### data selected by plot_ly is passed over to cross talk, this allows the table\n### to display the records based on the selected obs from the plot_ly graphs     \n\n\n\n\n\n\n\nNote\n\n\n\nThings to learn from the code chunk:\n\nhighlight() is a function of plotly package. It sets a variety of options for brushing (i.e., highlighting) multiple plots. These options are primarily designed for linking multiple plotly graphs, and may not behave as expected when linking plotly to another htmlwidget package via crosstalk. In some cases, other htmlwidgets will respect these options, such as persistent selection in leaflet.\nbscols() is a helper function of crosstalk package. It makes it easy to put HTML elements side by side. It can be called directly from the console but is especially designed to work in an R Markdown document. Warning: This will bring in all of Bootstrap!."
+    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-coordinated-link-view-for-interactivity",
+    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-coordinated-link-view-for-interactivity",
+    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "section": "3.3 Creating Coordinated Link View for Interactivity",
+    "text": "3.3 Creating Coordinated Link View for Interactivity\nTo create a coordinated link view, we will check the aggregation for scatterplot, then drag “ID” into the Detail for each of the three sheets. This will allow the common identifiable between the three sheets to be “ID”.\nFirst, we will work on the scatter plot. Click Dashboard/ Actions/ Add actions/ Highlight and check those sheets that we want to be coordinated, as shown below:\n\nWe will repeat the above step for both Maths and English boxplots. This allows the points on the scatterplot to be selected when readers select any point on either of the boxplot.\n\nWe can adjust the layout (aka stitching) so that the axes across the different plots are synchronised, using Dashboard/Blank.\n\n\n\n\n\n\n\nNote\n\n\n\nAs this is the first time we are using the Exam_data.csv, we will need to extract the exam_data before publishing."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#ggiraph",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#ggiraph",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "9.1 ggiraph",
-    "text": "9.1 ggiraph\nThis link provides online version of the reference guide and several useful articles. Use this link to download the pdf version of the reference guide.\n\nHow to Plot With Ggiraph\nInteractive map of France with ggiraph\nCustom interactive sunbursts with ggplot in R\nThis link provides code example on how ggiraph is used to interactive graphs for Swiss Olympians - the solo specialists."
+    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
+    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
+    "title": "In-Class Exercise 01: Now You See It!",
+    "section": "",
+    "text": "This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#plotly-for-r",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#plotly-for-r",
-    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
-    "section": "9.2 plotly for R",
-    "text": "9.2 plotly for R\n\nGetting Started with Plotly in R\nA collection of plotly R graphs are available via this link.\nCarson Sievert (2020) Interactive web-based data visualization with R, plotly, and shiny, Chapman and Hall/CRC is the best resource to learn plotly for R. The online version is available via this link\nPlotly R Figure Reference provides a comprehensive discussion of each visual representations.\nPlotly R Library Fundamentals is a good place to learn the fundamental features of Plotly’s R API.\nGetting Started\nVisit this link for a very interesting implementation of gganimate by your senior.\nBuilding an animation step-by-step with gganimate.\nCreating a composite gif with multiple gganimate panels"
+    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
+    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
+    "title": "In-Class Exercise 01: Now You See It!",
+    "section": "2.1 Loading R Packages",
+    "text": "2.1 Loading R Packages\nIn this in-class exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#importing-the-data",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#importing-the-data",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "2.1 Importing the data",
-    "text": "2.1 Importing the data\nThere are two ways to import the data. You can either drag the data source file into Tableau Window directly, or clicking on “file/ open/ data”"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#viewing-the-data",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#viewing-the-data",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "2.2 Viewing the Data",
-    "text": "2.2 Viewing the Data\nWe can see that there are three sheets to choose from, which corresponds with the sheets in the data source file. We will first drag “Orders” into the main window.\n\n\n\n\n\nAfter that is done, there will be two tables being displayed, as shown below. On the left are the descriptors for the fields, while the right displays the observations."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#establishing-relationships-between-sheets",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#establishing-relationships-between-sheets",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "2.3 Establishing Relationships between Sheets",
-    "text": "2.3 Establishing Relationships between Sheets\nTo establish a relationships between sheets, simply link them by dragging the sheets into the top window."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#tables",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#tables",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "3.1 Tables",
-    "text": "3.1 Tables\n\n3.1.1 Creating Tables\nTo create a table, first drag “Region” into the Columns and “Year” into Rows. After which, just drag “Sales” into the table itself, as follows:\n\n\n\n\n\n\n\n3.1.2 Computing Totals\nTo compute total, simply go over to the “Analytics Panel”, click on “Totals” and drag it over to either “Column Grand Totals”, “Row Grand Totals” or both."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#graphs",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#graphs",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "3.2 Graphs",
-    "text": "3.2 Graphs\nFirst, you can create a graph by dragging the following variables into the rows and columns.\n\n\n\n\n\n\n3.2.1 Adding Reference Line\nTo add a reference line, simply hover around the y-axis, right click and select “Add Reference Line”. Thereafter, on the pop-out box, you can select the various options for “Scope”, “Line” and “Formatting”.\n\n\n\n\n\nThis is what the per pane for “Scope” looks like:\n\n\n\n\n\nYou can also customise your own reference line by selecting “custom” under “Line/ Label”, and typing in “Avg = &lt;Value&gt;”.\n\n\n\n3.2.2 Adjusting Graph Lines\nUnder the Marks panel, you can select the “Colour” and “Size” for the graph lines.\n\n\n\n\n\n\n\n3.2.3 Incorporating Dual Axis Plot\nWe will demostrate how to incorporate a dual axis plot. First, we drag the “Profits” into the Rows. Notice that graphs for the profits will created in each output pane. Next, we will hover around the profit y-axis, right-click, and select “Dual Axis”.\n\n\nFrom the graph below, we notice that the scales for “Sum(Sales)” and “Sum(Profits)” are not synchronised. It may be difficult for readers to notice the different scales at first glance. Thus we will synchonise the axis by simplying hovering around the “Profit” y-axis, right-click and select “Synchronise Axis”.\n\n\n\n3.2.4 Editing Graph Colours from Ranged to Bi-Polar\nFirst, we will change the graph type of “Profits” from line to bar. Next, we will drag “Sum(Profits)” over to “Color” under the “Marks” panel, selecting 2 for “Stepped Color”.\n\n\n\n3.2.5 Formatting Axis Titles\nWe observe that the x-axis titles are being cut off, resulting in the first letter being displayed, and the remaining letters reflected as “…”. To overcome this, simply hover over “Month” in columns, right-click and select “Format”. From the “Format” panel that popped out, select how you want the dates to be reflected on the axis."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#things-about-tableau-you-must-know",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#things-about-tableau-you-must-know",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "6.1 Things about Tableau you must know!",
-    "text": "6.1 Things about Tableau you must know!\n\nPolaris: A System for Query, Analysis,and Visualization of Multidimensional Relational Databases\nTableau Technology\nShow Me: Automatic Presentation for Visual Analysis\nWhitepaper: Visual Analysis for Everyone\nAnalytics Best Practices in Tableau"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#learning-tableau",
-    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#learning-tableau",
-    "title": "In-Class Exercise 2: Tableau Visualisation",
-    "section": "6.2 Learning Tableau",
-    "text": "6.2 Learning Tableau\n\nGetting Started\nTableau Interface\nGetting Started with Visual Analytics\nFormatting\nThe Formatting Pane\nReference lines\nGetting Started with Data also self-learn the remaining videos under ’‘’Connecting to Data’’’\nGetting Started with Tableau Prep Builder. This is a brand-new product from Tableau designed to help everyone quickly and confidently combine, shape, and clean their data for analysis. You can learn more about Tableau Data Prep here. You are encouraged to view all the 12 videos under ’‘’Tableau Prep’’’."
+    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
+    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
+    "title": "In-Class Exercise 01: Now You See It!",
+    "section": "2.2 Importing PISA Data",
+    "text": "2.2 Importing PISA Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nAs there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \n          \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\n\n\n\n\n\n\nImportant\n\n\n\nRemember to:\n\ndelete the 3.9GB source file from the data folder\ninclude #| eval: false into the first three code chunks, to faciliate the subsequent push to Github."
   },
   {
     "objectID": "Hands-On_Ex/Hands-on_Ex06/Hands-On_Ex06.html",
@@ -1561,137 +1519,200 @@
     "text": "6.2 Designing An Interactive Treemap\nThe codes below perform two processes.\n\ntreemap() is used to build a treemap by using selected variables in condominium data.frame. The treemap created is save as object called tm.\n\n\ntm &lt;- treemap(realis2018_summarised,\n        index=c(\"Planning Region\", \"Planning Area\"),\n        vSize=\"Total Unit Sold\",\n        vColor=\"Median Unit Price ($ psm)\",\n        type=\"value\",\n        title=\"Private Residential Property Sold, 2017\",\n        title.legend = \"Median Unit Price (S$ per sq. m)\"\n        )\n\n\n\n\n\n\n\n\n\nThen d3tree() is used to build an interactive treemap.\n\n\nd3tree(tm,rootname = \"Singapore\" )"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
-    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html",
-    "title": "In-Class Exercise 01: Now You See It!",
+    "objectID": "Hands-On_Ex/Hands-on_Ex07/Hands_On_Ex07a.html",
+    "href": "Hands-On_Ex/Hands-on_Ex07/Hands_On_Ex07a.html",
+    "title": "In-Class_Ex06: Horizon Plot with R",
     "section": "",
-    "text": "This chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds."
+    "text": "1 Overview\n\n\n2 Data Preparation\ninstalling the packages\n\n\n3"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
-    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#loading-r-packages",
-    "title": "In-Class Exercise 01: Now You See It!",
-    "section": "2.1 Loading R Packages",
-    "text": "2.1 Loading R Packages\nIn this in-class exercise, two R packages will be used. They are:\n\ntidyverse, and\nhaven.\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#importing-the-data",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#importing-the-data",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "2.1 Importing the data",
+    "text": "2.1 Importing the data\nThere are two ways to import the data. You can either drag the data source file into Tableau Window directly, or clicking on “file/ open/ data”"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
-    "href": "In-Class_Ex/In-Class_Ex01/In-Class_Ex01.html#importing-pisa-data",
-    "title": "In-Class Exercise 01: Now You See It!",
-    "section": "2.2 Importing PISA Data",
-    "text": "2.2 Importing PISA Data\nThe code chunk below uses the read_sas function from the haven package to import PISA data into R.\n\nstu_qqq &lt;- read_sas(\"data/stu_qqq.sas7bdat\")\n\nAs there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the filter function from the dpylr package.\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nWe will then save the file as a rds document in the data folder, using write_rds function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.\n\nwrite_rds(stu_qqq_SG, \n          \"data/stu_qqq_SG.rds\")\n\nWe will now import the file back into the R enviroment using the read_rds function.\n\nstu_qqq &lt;- read_rds(\"data/stu_qqq_SG.rds\")\n\n\n\n\n\n\n\nImportant\n\n\n\nRemember to:\n\ndelete the 3.9GB source file from the data folder\ninclude #| eval: false into the first three code chunks, to faciliate the subsequent push to Github."
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#viewing-the-data",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#viewing-the-data",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "2.2 Viewing the Data",
+    "text": "2.2 Viewing the Data\nWe can see that there are three sheets to choose from, which corresponds with the sheets in the data source file. We will first drag “Orders” into the main window.\n\n\n\n\n\nAfter that is done, there will be two tables being displayed, as shown below. On the left are the descriptors for the fields, while the right displays the observations."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html",
-    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html",
-    "title": "In-Class Exercise 3: Tableau Visualisation",
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#establishing-relationships-between-sheets",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#establishing-relationships-between-sheets",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "2.3 Establishing Relationships between Sheets",
+    "text": "2.3 Establishing Relationships between Sheets\nTo establish a relationships between sheets, simply link them by dragging the sheets into the top window."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#tables",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#tables",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "3.1 Tables",
+    "text": "3.1 Tables\n\n3.1.1 Creating Tables\nTo create a table, first drag “Region” into the Columns and “Year” into Rows. After which, just drag “Sales” into the table itself, as follows:\n\n\n\n\n\n\n\n3.1.2 Computing Totals\nTo compute total, simply go over to the “Analytics Panel”, click on “Totals” and drag it over to either “Column Grand Totals”, “Row Grand Totals” or both."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#graphs",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#graphs",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "3.2 Graphs",
+    "text": "3.2 Graphs\nFirst, you can create a graph by dragging the following variables into the rows and columns.\n\n\n\n\n\n\n3.2.1 Adding Reference Line\nTo add a reference line, simply hover around the y-axis, right click and select “Add Reference Line”. Thereafter, on the pop-out box, you can select the various options for “Scope”, “Line” and “Formatting”.\n\n\n\n\n\nThis is what the per pane for “Scope” looks like:\n\n\n\n\n\nYou can also customise your own reference line by selecting “custom” under “Line/ Label”, and typing in “Avg = &lt;Value&gt;”.\n\n\n\n3.2.2 Adjusting Graph Lines\nUnder the Marks panel, you can select the “Colour” and “Size” for the graph lines.\n\n\n\n\n\n\n\n3.2.3 Incorporating Dual Axis Plot\nWe will demostrate how to incorporate a dual axis plot. First, we drag the “Profits” into the Rows. Notice that graphs for the profits will created in each output pane. Next, we will hover around the profit y-axis, right-click, and select “Dual Axis”.\n\n\nFrom the graph below, we notice that the scales for “Sum(Sales)” and “Sum(Profits)” are not synchronised. It may be difficult for readers to notice the different scales at first glance. Thus we will synchonise the axis by simplying hovering around the “Profit” y-axis, right-click and select “Synchronise Axis”.\n\n\n\n3.2.4 Editing Graph Colours from Ranged to Bi-Polar\nFirst, we will change the graph type of “Profits” from line to bar. Next, we will drag “Sum(Profits)” over to “Color” under the “Marks” panel, selecting 2 for “Stepped Color”.\n\n\n\n3.2.5 Formatting Axis Titles\nWe observe that the x-axis titles are being cut off, resulting in the first letter being displayed, and the remaining letters reflected as “…”. To overcome this, simply hover over “Month” in columns, right-click and select “Format”. From the “Format” panel that popped out, select how you want the dates to be reflected on the axis."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#things-about-tableau-you-must-know",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#things-about-tableau-you-must-know",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "6.1 Things about Tableau you must know!",
+    "text": "6.1 Things about Tableau you must know!\n\nPolaris: A System for Query, Analysis,and Visualization of Multidimensional Relational Databases\nTableau Technology\nShow Me: Automatic Presentation for Visual Analysis\nWhitepaper: Visual Analysis for Everyone\nAnalytics Best Practices in Tableau"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#learning-tableau",
+    "href": "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html#learning-tableau",
+    "title": "In-Class Exercise 2: Tableau Visualisation",
+    "section": "6.2 Learning Tableau",
+    "text": "6.2 Learning Tableau\n\nGetting Started\nTableau Interface\nGetting Started with Visual Analytics\nFormatting\nThe Formatting Pane\nReference lines\nGetting Started with Data also self-learn the remaining videos under ’‘’Connecting to Data’’’\nGetting Started with Tableau Prep Builder. This is a brand-new product from Tableau designed to help everyone quickly and confidently combine, shape, and clean their data for analysis. You can learn more about Tableau Data Prep here. You are encouraged to view all the 12 videos under ’‘’Tableau Prep’’’."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
     "section": "",
-    "text": "In this in-class exercise, we will learn how to use Tableau Public to create interactive scatterplots. You can access the Superstore tableau report here and story here; and the Exam-data dashboard here."
+    "text": "In this chapter, we will learn how to create interactive data visualisation by using functions provided by ggiraph and plotlyr packages."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#importing-data",
-    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#importing-data",
-    "title": "In-Class Exercise 3: Tableau Visualisation",
-    "section": "2.1 Importing Data",
-    "text": "2.1 Importing Data\nWe will build on what we have created during In-Class Exercise 2 here."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#tooltip-effect-with-tooltip-aesthetic",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#tooltip-effect-with-tooltip-aesthetic",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "4.1 Tooltip effect with tooltip aesthetic",
+    "text": "4.1 Tooltip effect with tooltip aesthetic\nBelow shows a typical code chunk to plot an interactive statistical graph by using ggiraph package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next, girafe() of ggiraph will be used to create an interactive svg object.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = ID),\n    ### ID is chosen as the tooltip interactivity \n    stackgroups = TRUE, \n    binwidth = 1, \n    method = \"histodot\") +\n  scale_y_continuous(NULL, \n                     breaks = NULL)\n### scale can also be made interactive, e.g. scale_fill_steps2_interactive\n\ngirafe(\n  ggobj = p,\n  width_svg = 6,\n  height_svg = 6*0.618\n  ### svg : scalable vector graph (changing a png image to a spg format)\n)\n\nNotice that two steps are involved. First, an interactive version of ggplot2 geom (i.e. geom_dotplot_interactive()) will be used to create the basic graph. Then, girafe() will be used to generate an svg object to be displayed on an html page."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-a-scatter-plot",
-    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-a-scatter-plot",
-    "title": "In-Class Exercise 3: Tableau Visualisation",
-    "section": "3.1 Creating a Scatter Plot",
-    "text": "3.1 Creating a Scatter Plot\n\nAt first glance, the data points have been automatically aggregated. From Analysis tab, uncheck “Aggregate Measures” to reveal the scatter plot.\n\nThis is the resulting scatter plot.\n\nTo make the scatter plot less cluttered, we can select “Percentile”.\n\n\n\n\n\n\n\nTip\n\n\n\nYTD Total, Compound Growth Rate, Year on Year Growth and YTD Growth can be used for time series visualisation.\n\n\nWe will next aggregate the points based on states, by using “Compute using State” and “Aggregate Measures” as shown below:\n\nResulting scatter plot as follows:\n\nTo insert trendlines, we can do so by selecting “Trend Line”. We can also derive the trend lines of specific observations by choosing specific points on the scatter plot.\n\nUnlike JMP where we can use the “lasso tool”, Tableau does not allow us to choose points of odd shapes. To overcome this, we need to select using the box select tool, then unselect those points we do not want.\n\nNext, we will change the size of the scatter plot. First, we drag “sales” to “Size”\n\nNext, changing the colour and opacity of the scatter plot.\n\n\nWe will also plot reference lines on the scatterplot so as to better visualise how the observations can be catergorised into four different quadrants.\n\nWe will now have a scatterplot categorised into four quadrants\n\nWe can also add a “Filter” option on the scatter plot to improve the interactivity.\n\nAlthough we can display the filter panel on the right, but we notice that the graph disappears when none of the options are checked, which can lead to unnecessary panic.\n\nTo prevent that, we can mandate that at least one option needs to be chosen.\n\nWe can help readers zoom into the details of each point. First, we need to create a new sheet name to follow the selected year. We will create a new sheet, and create a new annual sales and profit chart.\n\nCreating a dual axis for profits, so that the profits and losses will be reflected in blue and red respectively.\n\nResizing the charts so that we can view on both desktop and handphone.\n\n\nWe can also customising the animation effects that we want to visualise on the scatter plot.\n\nInserting details\n\nAnd now, we have an interactive scatter plot."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-multiple-information-on-tooltip",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-multiple-information-on-tooltip",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "5.1 Displaying multiple information on tooltip",
+    "text": "5.1 Displaying multiple information on tooltip\nThe content of the tooltip can be customised by including a list object as shown in the code chunk below.\n\nexam_data$tooltip &lt;- c(paste0(     \n  \"Name = \", exam_data$ID,         \n  \"\\n Class = \", exam_data$CLASS)) \n\n### need to specify where to extract the data for the tooltip; \\n is used to insert line breaks\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = tooltip), \n    stackgroups = TRUE,\n    binwidth = 1,\n    method = \"histodot\") +\n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(\n  ggobj = p,\n  width_svg = 8,\n  height_svg = 8*0.618\n)\n\nThe first three lines of codes in the code chunk create a new field called tooltip. At the same time, it populates text in ID and CLASS fields into the newly created field. Next, this newly created field is used as tooltip field as shown in the code of line 7."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-dashboards-and-story-points",
-    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-dashboards-and-story-points",
-    "title": "In-Class Exercise 3: Tableau Visualisation",
-    "section": "3.2 Creating Dashboards and Story Points",
-    "text": "3.2 Creating Dashboards and Story Points\nWe can use dashboards to combine different visualisation sheets together.\nWe can use story points to combine different visualisation sheets and/or dashboards together.\nWe will practice this by importing the Exam_data.csv, then creating scatterplot and adjust the size and shape.\n\nWe would like to add a boxplot to the scatter plot. To do this, we will click on “Show Me”. We noticed that the boxplot option is actually greyed out, and we are unable to select this option. To overcome this, we will first click on Histogram, which then allows to select the boxplot option.\nThereafter, we will drag “ID” into Detail, and replace “CNT(English)” with “SUM(English)”.\n\nWe will duplicate the sheet and change “SUM(Engligh)” to “SUM(Maths)” to display the maths scores.\n\nWe will now use a Dashboard to piece the scatterplot and boxplots together."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#customising-tooltip-style",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#customising-tooltip-style",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.1 Customising Tooltip style",
+    "text": "6.1 Customising Tooltip style\nCode chunk below uses opts_tooltip() of ggiraph to customize tooltip rendering by add css declarations.\n\ntooltip_css &lt;- \"background-color:white; #&lt;&lt;\nfont-style:bold; color:black;\" #&lt;&lt;\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = ID),                   \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(    #&lt;&lt;\n    opts_tooltip(    #&lt;&lt;\n      css = tooltip_css)) #&lt;&lt;\n)                                        \n\nNotice that the background colour of the tooltip is black and the font colour is white and bold.\n\n\n\n\n\n\n\nRefer to Customizing girafe objects to learn more about how to customise ggiraph objects."
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-coordinated-link-view-for-interactivity",
-    "href": "In-Class_Ex/In-Class_Ex03/In-Class_Ex03.html#creating-coordinated-link-view-for-interactivity",
-    "title": "In-Class Exercise 3: Tableau Visualisation",
-    "section": "3.3 Creating Coordinated Link View for Interactivity",
-    "text": "3.3 Creating Coordinated Link View for Interactivity\nTo create a coordinated link view, we will check the aggregation for scatterplot, then drag “ID” into the Detail for each of the three sheets. This will allow the common identifiable between the three sheets to be “ID”.\nFirst, we will work on the scatter plot. Click Dashboard/ Actions/ Add actions/ Highlight and check those sheets that we want to be coordinated, as shown below:\n\nWe will repeat the above step for both Maths and English boxplots. This allows the points on the scatterplot to be selected when readers select any point on either of the boxplot.\n\nWe can adjust the layout (aka stitching) so that the axes across the different plots are synchronised, using Dashboard/Blank.\n\n\n\n\n\n\n\nNote\n\n\n\nAs this is the first time we are using the Exam_data.csv, we will need to extract the exam_data before publishing."
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-statistics-on-tooltip",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#displaying-statistics-on-tooltip",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.2 Displaying statistics on tooltip",
+    "text": "6.2 Displaying statistics on tooltip\nCode chunk below shows an advanced way to customise tooltip. In this example, a function is used to compute 90% confident interval of the mean. The derived statistics are then displayed in the tooltip.\n\ntooltip &lt;- function(y, ymax, accuracy = .01) {\n  mean &lt;- scales::number(y, accuracy = accuracy)\n  sem &lt;- scales::number(ymax - y, accuracy = accuracy)\n  paste(\"Mean maths scores:\", mean, \"+/-\", sem)\n}\n###calculating the mean, min-max scores on-the-fly using \"function\", hardcoding the descriptors, e.g. Mean maths scores, so that it is easier to read the tooltip\n\ngg_point &lt;- ggplot(data=exam_data, \n                   aes(x = RACE),\n) +\n  stat_summary(aes(y = MATHS, \n                   tooltip = after_stat(  \n                     tooltip(y, ymax))),  \n    fun.data = \"mean_se\", \n    geom = GeomInteractiveCol,  \n    fill = \"light blue\"\n  ) +\n  stat_summary(aes(y = MATHS),\n    fun.data = mean_se,\n    geom = \"errorbar\", width = 0.2, size = 0.2\n  )\n\ngirafe(ggobj = gg_point,\n       width_svg = 8,\n       height_svg = 8*0.618)"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html",
-    "title": "In-Class_Ex04B: Visualising Distribution",
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#hover-effect-with-data_id-aesthetic",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#hover-effect-with-data_id-aesthetic",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.3 Hover effect with data_id aesthetic",
+    "text": "6.3 Hover effect with data_id aesthetic\nCode chunk below shows the second interactive feature of ggiraph, namely data_id.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(           \n    aes(data_id = CLASS,\n        tooltip = CLASS), ### by adding a tooltip=class, you can also show the class when you hover over the selected points   \n    stackgroups = TRUE,               \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618                      \n)                                        \n\nInteractivity: Elements associated with a data_id (i.e CLASS) will be highlighted upon mouse over.\n\n\n\n\n\n\nNote that the default value of the hover css is hover_css = “fill:orange;”."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#styling-hover-effect",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#styling-hover-effect",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.4 Styling hover effect",
+    "text": "6.4 Styling hover effect\nIn the code chunk below, css codes are used to change the highlighting effect.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                        \n\nInteractivity: Elements associated with a data_id (i.e CLASS) will be highlighted upon mouse over.\n\n\n\n\n\n\nNote: Different from previous example, in this example the ccs customisation request are encoded directly."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#combining-tooltip-and-hover-effect",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#combining-tooltip-and-hover-effect",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.5 Combining tooltip and hover effect",
+    "text": "6.5 Combining tooltip and hover effect\nThere are time that we want to combine tooltip and hover effect on the interactive statistical graph as shown in the code chunk below.\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(tooltip = CLASS, \n        data_id = CLASS),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618,\n  options = list(                        \n    opts_hover(css = \"fill: #202020;\"),  \n    opts_hover_inv(css = \"opacity:0.2;\") \n  )                                        \n)                                        \n\nInteractivity: Elements associated with a data_id (i.e CLASS) will be highlighted upon mouse over. At the same time, the tooltip will show the CLASS."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#click-effect-with-onclick",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#click-effect-with-onclick",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.6 Click effect with onclick",
+    "text": "6.6 Click effect with onclick\nonclick argument of ggiraph provides hotlink interactivity on the web.\nThe code chunk below shown an example of onclick.\n\nexam_data$onclick &lt;- sprintf(\"window.open(\\\"%s%s\\\")\",\n\"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school\",\nas.character(exam_data$ID))\n\np &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(onclick = onclick),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +               \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\ngirafe(                                  \n  ggobj = p,                             \n  width_svg = 6,                         \n  height_svg = 6*0.618)                                        \n\nInteractivity: Web document link with a data object will be displayed on the web browser upon mouse click.\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nNote that click actions must be a string column in the dataset containing valid javascript instructions."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-ggiraph",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-ggiraph",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "6.7 Coordinated Multiple Views with ggiraph",
+    "text": "6.7 Coordinated Multiple Views with ggiraph\nCoordinated multiple views methods has been implemented in the data visualisation below.\n\n\n\n\n\n\nNotice that when a data point of one of the dotplot is selected, the corresponding data point ID on the second data visualisation will be highlighted too.\nIn order to build a coordinated multiple views as shown in the example above, the following programming strategy will be used:\n\nAppropriate interactive functions of ggiraph will be used to create the multiple views.\npatchwork function of patchwork package will be used inside girafe function to create the interactive coordinated multiple views.\n\n\np1 &lt;- ggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID,\n        tooltip = tooltip), ### to include the tooltip to display the student name and class              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") +  \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\np2 &lt;- ggplot(data=exam_data, \n       aes(x = ENGLISH)) +\n  geom_dotplot_interactive(              \n    aes(data_id = ID,\n        tooltip = tooltip),              \n    stackgroups = TRUE,                  \n    binwidth = 1,                        \n    method = \"histodot\") + \n  coord_cartesian(xlim=c(0,100)) + \n  scale_y_continuous(NULL,               \n                     breaks = NULL)\n\ngirafe(code = print(p1 + p2), ### to put the 2 graphs side-by side using \"print\", with \"code\" as a container (crosstalk function)\n       width_svg = 6,\n       height_svg = 3,\n       options = list(\n         opts_hover(css = \"fill: #202020;\"), \n         opts_hover_inv(css = \"opacity:0.2;\") ### using css commands to control the fill and opacity\n         )\n       ) \n\nThe data_id aesthetic is critical to link observations between plots and the tooltip aesthetic is optional but nice to have when mouse over a point."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-plot_ly-method",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-plot_ly-method",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "7.1 Creating an interactive scatter plot: plot_ly() method",
+    "text": "7.1 Creating an interactive scatter plot: plot_ly() method\nThe tabset below shows an example a basic interactive plot created by using plot_ly().\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nplot_ly(data = exam_data, \n             x = ~MATHS, \n             y = ~ENGLISH) ### follows the java script for plot_ly()"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#working-with-visual-variable-plot_ly-method",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#working-with-visual-variable-plot_ly-method",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "7.2 Working with visual variable: plot_ly() method",
+    "text": "7.2 Working with visual variable: plot_ly() method\nIn the code chunk below, color argument is mapped to a qualitative visual variable (i.e. RACE).\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nplot_ly(data = exam_data, \n        x = ~ENGLISH, \n        y = ~MATHS, \n        color = ~RACE)\n### the legend box doubles up as a filter\n### we can also select groups of points by boxing them together\n### we can also use the lasso tool to choose points of irregular shapes (useful tool to use with Shiny)"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-ggplotly-method",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#creating-an-interactive-scatter-plot-ggplotly-method",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "7.3 Creating an interactive scatter plot: ggplotly() method",
+    "text": "7.3 Creating an interactive scatter plot: ggplotly() method\nThe code chunk below plots an interactive scatter plot by using ggplotly().\n\nPlotCode\n\n\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\n\n\np &lt;- ggplot(data=exam_data, \n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nggplotly(p)\n\n\n\n\n\n\nNotice that the only extra line we need to include in the code chunk is ggplotly()."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-plotly",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#coordinated-multiple-views-with-plotly",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "7.4 Coordinated Multiple Views with plotly",
+    "text": "7.4 Coordinated Multiple Views with plotly\nThe creation of a coordinated linked plot by using plotly involves three steps:\n\nhighlight_key() of plotly package is used as shared data.\ntwo scatterplots will be created by using ggplot2 functions.\nlastly, subplot() of plotly package is used to place them next to each other side-by-side.\n\n\nPlotCode\n\n\n\n\n\n\n\n\nClick on a data point of one of the scatterplot and see how the corresponding point on the other scatterplot is selected.\n\n\n\nd &lt;- highlight_key(exam_data) ### exam data becomes a object for highlight purposes\np1 &lt;- ggplot(data=d,  ### data is no longer Exam_data, and is replaced with d\n            aes(x = MATHS,\n                y = ENGLISH)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\np2 &lt;- ggplot(data=d, \n            aes(x = MATHS,\n                y = SCIENCE)) +\n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\nsubplot(ggplotly(p1),\n        ggplotly(p2))\n\n\n\n\n\n\n\nTip\n\n\n\nThing to learn from the code chunk:\n\nhighlight_key() simply creates an object of class crosstalk::SharedData.\nVisit this link to learn more about crosstalk."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#interactive-data-table-dt-package",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#interactive-data-table-dt-package",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "8.1 Interactive Data Table: DT package",
+    "text": "8.1 Interactive Data Table: DT package\n\nA wrapper of the JavaScript Library DataTables\nData objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’ (typically via R Markdown or Shiny).\n\n\nDT::datatable(exam_data, class = \"display compact\", style = \"bootstrap5\")"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#linked-brushing-crosstalk-method",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#linked-brushing-crosstalk-method",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "8.2 Linked brushing: crosstalk method",
+    "text": "8.2 Linked brushing: crosstalk method\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nd &lt;- highlight_key(exam_data) \np &lt;- ggplot(d, \n            aes(ENGLISH, \n                MATHS)) + \n  geom_point(size=1) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\ngg &lt;- highlight(ggplotly(p),        \n                \"plotly_selected\")  \n### creates a datable table based on what plot_ly() has selected\n\ncrosstalk::bscols(gg,               \n                  DT::datatable(d, class = \"display compact\", style = \"bootstrap5\"), \n                  widths = 5)  \n### data selected by plot_ly is passed over to cross talk, this allows the table\n### to display the records based on the selected obs from the plot_ly graphs     \n\n\n\n\n\n\n\nNote\n\n\n\nThings to learn from the code chunk:\n\nhighlight() is a function of plotly package. It sets a variety of options for brushing (i.e., highlighting) multiple plots. These options are primarily designed for linking multiple plotly graphs, and may not behave as expected when linking plotly to another htmlwidget package via crosstalk. In some cases, other htmlwidgets will respect these options, such as persistent selection in leaflet.\nbscols() is a helper function of crosstalk package. It makes it easy to put HTML elements side by side. It can be called directly from the console but is especially designed to work in an R Markdown document. Warning: This will bring in all of Bootstrap!."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#ggiraph",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#ggiraph",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "9.1 ggiraph",
+    "text": "9.1 ggiraph\nThis link provides online version of the reference guide and several useful articles. Use this link to download the pdf version of the reference guide.\n\nHow to Plot With Ggiraph\nInteractive map of France with ggiraph\nCustom interactive sunbursts with ggplot in R\nThis link provides code example on how ggiraph is used to interactive graphs for Swiss Olympians - the solo specialists."
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#plotly-for-r",
+    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04A.html#plotly-for-r",
+    "title": "In Class Exercise 04A: Programming Interactive Data Visualisation with R",
+    "section": "9.2 plotly for R",
+    "text": "9.2 plotly for R\n\nGetting Started with Plotly in R\nA collection of plotly R graphs are available via this link.\nCarson Sievert (2020) Interactive web-based data visualization with R, plotly, and shiny, Chapman and Hall/CRC is the best resource to learn plotly for R. The online version is available via this link\nPlotly R Figure Reference provides a comprehensive discussion of each visual representations.\nPlotly R Library Fundamentals is a good place to learn the fundamental features of Plotly’s R API.\nGetting Started\nVisit this link for a very interesting implementation of gganimate by your senior.\nBuilding an animation step-by-step with gganimate.\nCreating a composite gif with multiple gganimate panels"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html",
+    "href": "In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html",
+    "title": "In-Class_Ex05A: Critic on DataViz Makeover",
     "section": "",
-    "text": "Visualising distribution is not new in statistical analysis. In Hands-On_Ex01, we have shared that some of the popular statistical graphics methods for visualising distribution are histogram, probability density curve (pdf), boxplot, notch plot and violin plot and how they can be created by using ggplot2. In this exercise, we are going to share two relatively new statistical graphic methods for visualising distribution, namely ridgeline plot and raincloud plot by using ggplot2 and its extensions."
+    "text": "Probability Density Plot\nAxis values: instead of density for y-axis, should be probability\nobserving the PDF and comment the skewness of the three curves\nwhen the values are categorical, and “as.factor” is not used, the output will display a scatterplot instead of a boxplot\nsort by mean or median (my graph), to identify patterns\n\ncan also plot by boxplots\n\nfor scatterplot, need to pay attention on the aspect ratio. should try to fit within a square as much as possible, otherwise output will be skewed\nlayout - one histogram should not be larger than the other\n\nbut can be histogram on the left, then 3 x similarly sized boxplots on the right (with the same aspect and scale)\n\nTry to reduce redundancy in the output"
   },
   {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#installing-and-loading-the-packages",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#installing-and-loading-the-packages",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "2.1 Installing and loading the packages",
-    "text": "2.1 Installing and loading the packages\nFor the purpose of this exercise, the following R packages will be used, they are:\n\ntidyverse, a family of R packages for data science process,\nggridges, a ggplot2 extension specially designed for plotting ridgeline plots, and\nggdist for visualising distribution and uncertainty.\n\n\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)\n\n### for referencing, use the HTML version if available. otherwise then the PDF version"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#data-import",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#data-import",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "2.2 Data import",
-    "text": "2.2 Data import\nFor the purpose of this exercise, Exam_data.csv will be used.\n\nexam &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-ridgeline-graph-ggridges-method",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-ridgeline-graph-ggridges-method",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "3.1 Plotting ridgeline graph: ggridges method",
-    "text": "3.1 Plotting ridgeline graph: ggridges method\nThere are several ways to plot ridgeline plot with R. In this section, you will learn how to plot ridgeline plot by using ggridges package.\nggridges package provides two main geom to plot gridgeline plots, they are: geom_ridgeline() and geom_density_ridges(). The former takes height values directly to draw the ridgelines, and the latter first estimates data densities and then draws those using ridgelines.\nThe ridgeline plot below is plotted by using geom_density_ridges().\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nFrom the graph, better students in 3A do better than those in 3B. However, poorer students in 3A are worse off than those in 3B. Students in 3B performed more similarly than students in 3A.\nStudents in 3H can possibly be categorised into two groups, as there are two peaks in the distribution.\n\n\n\nggplot(exam, \n       aes(x = ENGLISH, \n           y = CLASS)) +\n  geom_density_ridges( \n    scale = 3,\n    rel_min_height = 0.01,\n    bandwidth = 3.4,\n    fill = lighten(\"#7097BB\", .3),\n    color = \"white\"\n  ) +\n  scale_x_continuous(\n    name = \"English grades\",\n    expand = c(0, 0)\n    ) +\n  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +\n  theme_ridges()\n\n\n\n\n\n\n\nNote\n\n\n\nThe focus for geom_density_ridges() plots is on identifying the pattern, and not plotting the exact points. If you want the latter, then use geom_ridgeline() &lt;– requires a height value in the argument."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#varying-fill-colors-along-the-x-axis",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#varying-fill-colors-along-the-x-axis",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "3.2 Varying fill colors along the x axis",
-    "text": "3.2 Varying fill colors along the x axis\nSometimes we would like to have the area under a ridgeline not filled with a single solid color but rather with colors that vary in some form along the x axis. This effect can be achieved by using either geom_ridgeline_gradient() or geom_density_ridges_gradient(). Both geoms work just like geom_ridgeline() and geom_density_ridges(), except that they allow for varying fill colors. However, they do not allow for alpha transparency in the fill. For technical reasons, we can have changing fill colors or transparency but not both.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = ENGLISH, \n           y = CLASS,\n           fill = stat(x))) +\n  geom_density_ridges_gradient(\n    scale = 3,\n    rel_min_height = 0.01) +\n  scale_fill_viridis_c(name = \"Temp. [F]\",\n                       option = \"C\") +\n  scale_x_continuous(\n    name = \"English grades\",\n    expand = c(0, 0)\n  ) +\n  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +\n  theme_ridges()"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#mapping-the-probabilities-directly-onto-colour",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#mapping-the-probabilities-directly-onto-colour",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "3.3 Mapping the probabilities directly onto colour",
-    "text": "3.3 Mapping the probabilities directly onto colour\nBeside providing additional geom objects to support the need to plot ridgeline plot, ggridges package also provides a stat function called stat_density_ridges() that replaces stat_density() of ggplot2.\nFigure below is plotted by mapping the probabilities calculated by using stat(ecdf) which represent the empirical cumulative density function for the distribution of English score.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nFrom the graph, we can see where the different percentiles fall within each distribution. For instance, the 50th percentile and 90th percentile of students in Class 3A perform better than Class 3B.\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = 0.5 - abs(0.5-stat(ecdf)))) +\n  stat_density_ridges(geom = \"density_ridges_gradient\", \n                      calc_ecdf = TRUE) +\n  scale_fill_viridis_c(name = \"Tail probability\",\n                       direction = -1) +\n  theme_ridges()\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nIt is important include the argument calc_ecdf = TRUE in stat_density_ridges()."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#ridgeline-plots-with-quantile-lines",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#ridgeline-plots-with-quantile-lines",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "3.4 Ridgeline plots with quantile lines",
-    "text": "3.4 Ridgeline plots with quantile lines\nBy using geom_density_ridges_gradient(), we can colour the ridgeline plot by quantile, via the calculated stat(quantile) aesthetic as shown in the figure below.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = 4,\n    quantile_lines = TRUE) +\n  scale_fill_viridis_d(name = \"Quartiles\") +\n  theme_ridges()\n\n\n\n\nInstead of using number to define the quantiles, we can also specify quantiles by cut points such as 2.5% and 97.5% tails to colour the ridgeline plot as shown in the figure below.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = c(0.025, 0.975)\n    ) +\n  scale_fill_manual(\n    name = \"Probability\",\n    values = c(\"#FF0000A0\", \"#A0A0A0A0\", \"#0000FFA0\"),\n    labels = c(\"(0, 0.025]\", \"(0.025, 0.975]\", \"(0.975, 1]\")\n  ) +\n  theme_ridges()"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-a-half-eye-graph",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#plotting-a-half-eye-graph",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "4.1 Plotting a Half Eye graph",
-    "text": "4.1 Plotting a Half Eye graph\nFirst, we will plot a Half-Eye graph by using stat_halfeye() of ggdist package.\nThis produces a Half Eye visualization, which is contains a half-density and a slab-interval.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA)"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-boxplot-with-geom_boxplot",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-boxplot-with-geom_boxplot",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "4.2 Adding the boxplot with geom_boxplot()",
-    "text": "4.2 Adding the boxplot with geom_boxplot()\nNext, we will add the second geometry layer using geom_boxplot() of ggplot2. This produces a narrow boxplot. We reduce the width and adjust the opacity.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA)"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-dot-plots-with-stat_dots",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#adding-the-dot-plots-with-stat_dots",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "4.3 Adding the Dot Plots with stat_dots()",
-    "text": "4.3 Adding the Dot Plots with stat_dots()\nNext, we will add the third geometry layer using stat_dots() of ggdist package. This produces a half-dotplot, which is similar to a histogram that indicates the number of samples (number of dots) in each bin. We select side = “left” to indicate we want it on the left-hand side.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\nstat_halfeye gives the distribution,\ngeom_boxplot provides the statistics summary, and\nstat_dots displays the sample size\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = .5,\n            dotsize = 2)"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#finishing-touch",
-    "href": "In-Class_Ex/In-Class_Ex04/In-Class_Ex04B.html#finishing-touch",
-    "title": "In-Class_Ex04B: Visualising Distribution",
-    "section": "4.4 Finishing touch",
-    "text": "4.4 Finishing touch\nLastly, coord_flip() of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, theme_economist() of ggthemes package is used to give the raincloud chart a professional publishing standard look.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = .5,\n            dotsize = 1.5) +\n  coord_flip() +\n  theme_economist()"
+    "objectID": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html",
+    "href": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html",
+    "title": "In-Class_Ex06a: Horizon Plot with R",
+    "section": "",
+    "text": "1 Overview\nalso Chapter 20\n\n\n2 Data Preparation\ninstalling the packages\n\npacman::p_load(ggHoriPlot, ggthemes, tidyverse)\n\nImporting the data. We also noticed that the current date fields in the data source is a categorical variable, and thus the mutate function is called to transform the data to a date variable.\n\naverp &lt;- read_csv(\"data/AVERP.csv\") %&gt;%\n  mutate(`Date` = dmy(`Date`))\n\n\n\n3 Creating Horizon Graph\n\naverp %&gt;%\n  filter(Date &gt;= \"2018-01-01\") %&gt;%\n  ggplot() +\n  geom_horizon(aes(x = Date, y = Values),\n               origin = \"midpoint\",\n               horizonscale = 6) +\n  facet_grid(`Consumer Items`~.) +\n  theme_few() +\n  scale_fill_hcl(palette= 'RdBu') +\n  theme(panel.spacing.y = unit(0, \"lines\"), strip.text.y = element_text(size = 5, angle = 0, hjust = 0),\n        legend.position = \"none\",\n            axis.text.y = element_blank(),\n    axis.text.x = element_text(size=7),\n    axis.title.y = element_blank(),\n    axis.title.x = element_blank(),\n    axis.ticks.y = element_blank(),\n    panel.border = element_blank()) +\n  \n  scale_x_date(expand=c(0,0), date_breaks = \"3 month\", date_labels = \"%b%y\") +\n  ggtitle('Average Retail Prices of Selected Consumer Items (Jan 2018 to Dec 2022)')"
   },
   {
     "objectID": "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html",
@@ -1748,26 +1769,5 @@
     "title": "Take-Home_Ex03: Be Weatherwise or Otherwise",
     "section": "2.3 Summary Statistics of Data",
     "text": "2.3 Summary Statistics of Data\n\nFirst 5 RowsDataset StructureData Health\n\n\nUsing DT, we will display the dataset as a interactive table on html page.\n\nDT::datatable(combinedTemp, class = \"display compact\", style = \"bootstrap5\")\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe data table seemed to be in order.\n\n\n\n\n\nstr(combinedTemp)\n\ntibble [155 × 6] (S3: tbl_df/tbl/data.frame)\n $ Year                    : num [1:155] 1983 1983 1983 1983 1983 ...\n $ Month                   : num [1:155] 5 5 5 5 5 5 5 5 5 5 ...\n $ Day                     : num [1:155] 1 2 3 4 5 6 7 8 9 10 ...\n $ Mean Temperature (°C)   : num [1:155] 27.5 28.3 28.9 28.1 28.2 27.9 28.2 27.3 26.2 28.1 ...\n $ Maximum Temperature (°C): num [1:155] 32.2 33.1 33.5 33.4 32.7 32.8 33.1 34 32.2 32.9 ...\n $ Minimum Temperature (°C): num [1:155] 24.3 25 26 25 25.3 25.2 24.9 23.5 23.7 24.7 ...\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe data types are all correct.\n\n\n\n\nChecking for missing values\n\nsum(is.na(combinedTemp))\n\n[1] 0\n\n\n\n\n\n\n\n\nNote\n\n\n\nNo missing values were found."
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06b.html",
-    "href": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06b.html",
-    "title": "In-Class_Ex06b: Time Series with Tableau",
-    "section": "",
-    "text": "1 Introduction\nIn this in-class exercise, we will learn how to use Tableau to create Line Plots and Cycle Plots, deploy them on a dashboard, before publishing them on Tableau Public.\nYou can access the published Tableau site here.\n\n\n2 Creating Line Plots\nUsing the data source “arrivals_by_air.xls”, we will first plot the year by sum arrivals.\n\nFrom the output above, we can see that it is not very convenient for the user, because you will need need to add/ remove the countries individually. Thus, it will be better if we can change the user interface. To do that, we will be editing the data to a pivot table. First, we will go to Data Source, and select all countries.\n\nAfter that, hover the cursor to the last column, click on the black triangle and select “Pivot”.\n\nAfter which, we can now see that the data source has been changed to a pivot table, comprising three columns: Date, Country, Arrivals. We will rename the columns accordingly.\n\nFrom the sheet, we can see that there is low variability, which is not very useful.\n\nWe will now increase the variability, by changing the Year to Month. We will also add a filter to the line graph:\n\nNotice that the filter is not exposed to the user. We will now display the filter interface:\n\nAlthough there is a filter interface, the user will need to de-select the previous country when he wants to select a new country to visualise the data. Thus, we will improve user interface by selecting single value (list).\n\n\n\n3 Creating Cycle Plot\nFirst, we will duplicate the Line Graph sheet, and rename it as Cycle Plot.\nIn the column, we will change to Month, and add another Year.\n\nAs the output is beyond the display window, we will select “Fit Width”.\n\nWe will also add a reference line.\n\n\n\n4 Creating Dashboard\nAfter creating a new dashboard, we will first select “Automatic” for size, so that users can view the dashboard from both computers and mobile phones.\n\nAfter selecting both Line Graph and Cycle Plot, we notice that there are now two legends, which is not ideal.\n\nIn order to create one legend for both charts, we will first go back to the Line Graph Sheet. We will edit filter and select “All using this Data Source”.\n\nGoing back to the dashboard, we will remove the extra filter from the Cycle Plot.\n\n\n\n5 Publishing to Tableau Public\nExtract data\n\n\n\nPublish\n\n\n\n\n\n6 Creating Heat Map\nImport data from “event_log.csv”\nUse dimensions data\n\ncolumn\n\nchoose month\nchoose week number\n\nrow\n\nweekday\n\n\n\nnew field\n\n\n\nEdit, add “1”, pull to color\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nnotice that there are white columns in the output, as the months are not fused together.\n\n\nadding filter by zones"
-  },
-  {
-    "objectID": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html",
-    "href": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html",
-    "title": "In-Class_Ex06a: Horizon Plot with R",
-    "section": "",
-    "text": "1 Overview\nalso Chapter 20\n\n\n2 Data Preparation\ninstalling the packages\n\npacman::p_load(ggHoriPlot, ggthemes, tidyverse)\n\nImporting the data. We also noticed that the current date fields in the data source is a categorical variable, and thus the mutate function is called to transform the data to a date variable.\n\naverp &lt;- read_csv(\"data/AVERP.csv\") %&gt;%\n  mutate(`Date` = dmy(`Date`))\n\n\n\n3 Creating Horizon Graph\n\naverp %&gt;%\n  filter(Date &gt;= \"2018-01-01\") %&gt;%\n  ggplot() +\n  geom_horizon(aes(x = Date, y = Values),\n               origin = \"midpoint\",\n               horizonscale = 6) +\n  facet_grid(`Consumer Items`~.) +\n  theme_few() +\n  scale_fill_hcl(palette= 'RdBu') +\n  theme(panel.spacing.y = unit(0, \"lines\"), strip.text.y = element_text(size = 5, angle = 0, hjust = 0),\n        legend.position = \"none\",\n            axis.text.y = element_blank(),\n    axis.text.x = element_text(size=7),\n    axis.title.y = element_blank(),\n    axis.title.x = element_blank(),\n    axis.ticks.y = element_blank(),\n    panel.border = element_blank()) +\n  \n  scale_x_date(expand=c(0,0), date_breaks = \"3 month\", date_labels = \"%b%y\") +\n  ggtitle('Average Retail Prices of Selected Consumer Items (Jan 2018 to Dec 2022)')"
-  },
-  {
-    "objectID": "Hands-On_Ex/Hands-on_Ex07/Hands_On_Ex07a.html",
-    "href": "Hands-On_Ex/Hands-on_Ex07/Hands_On_Ex07a.html",
-    "title": "In-Class_Ex06: Horizon Plot with R",
-    "section": "",
-    "text": "1 Overview\n\n\n2 Data Preparation\ninstalling the packages\n\n\n3"
   }
 ]
