@@ -9,7 +9,7 @@
 <meta name="author" content="Roger Chen">
 <meta name="dcterms.date" content="2024-02-24">
 
-<title>ISSS608-VAA - In-Class_Ex06: Time Series with Tableau</title>
+<title>ISSS608-VAA - In-Class_Ex06b: Time Series with Tableau</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -245,14 +245,24 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#creating-line-plots" id="toc-creating-line-plots" class="nav-link" data-scroll-target="#creating-line-plots"><span class="header-section-number">2</span> Creating Line Plots</a></li>
+  <li><a href="#creating-cycle-plot" id="toc-creating-cycle-plot" class="nav-link" data-scroll-target="#creating-cycle-plot"><span class="header-section-number">3</span> Creating Cycle Plot</a></li>
+  <li><a href="#creating-dashboard" id="toc-creating-dashboard" class="nav-link" data-scroll-target="#creating-dashboard"><span class="header-section-number">4</span> Creating Dashboard</a></li>
+  <li><a href="#publishing-to-tableau-public" id="toc-publishing-to-tableau-public" class="nav-link" data-scroll-target="#publishing-to-tableau-public"><span class="header-section-number">5</span> Publishing to Tableau Public</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">In-Class_Ex06: Time Series with Tableau</h1>
+<h1 class="title">In-Class_Ex06b: Time Series with Tableau</h1>
 </div>
 
 
@@ -287,55 +297,64 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>In this in-class exercise, we will learn how to use Tableau to create Line Plots and Cycle Plots, deploy them on a dashboard, before publishing them on Tableau Public.</p>
 <p>You can access the published Tableau site <a href="https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex06_17087559962100/Dashboard1?publish=yes">here</a>.</p>
+</section>
+<section id="creating-line-plots" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Creating Line Plots</h1>
+<p>Using the data source “arrivals_by_air.xls”, we will first plot the year by sum arrivals.</p>
 <p><img src="images/clipboard-1018825726.png" class="img-fluid"></p>
-<p>not very convenient in Tableau, cos u need to drag countries by countries</p>
+<p>From the output above, we can see that it is not very convenient for the user, because you will need need to add/ remove the countries individually. Thus, it will be better if we can change the user interface. To do that, we will be editing the data to a pivot table. First, we will go to <em>Data Source</em>, and select all countries.</p>
 <p><img src="images/clipboard-3547374314.png" class="img-fluid"></p>
-<p>select all countries from data source, hover to the back to the black triangle</p>
+<p>After that, hover the cursor to the last column, click on the black triangle and select “<em>Pivot</em>”.</p>
 <p><img src="images/clipboard-3287327797.png" class="img-fluid"></p>
-<ul>
-<li>pivot table</li>
-</ul>
+<p>After which, we can now see that the data source has been changed to a pivot table, comprising three columns: Date, Country, Arrivals. We will rename the columns accordingly.</p>
 <p><img src="images/clipboard-2210779038.png" class="img-fluid"></p>
-<p>renaming the column names</p>
+<p>From the sheet, we can see that there is low variability, which is not very useful.</p>
+<p><img src="images/clipboard-4044018769.png" class="img-fluid"></p>
+<p>We will now increase the variability, by changing the <em>Year</em> to <em>Month</em>. We will also add a filter to the line graph:</p>
+<p><img src="images/clipboard-1725054471.png" class="img-fluid"></p>
+<p>Notice that the filter is not exposed to the user. We will now display the filter interface:</p>
+<p><img src="images/clipboard-302137107.png" class="img-fluid"></p>
+<p>Although there is a filter interface, the user will need to de-select the previous country when he wants to select a new country to visualise the data. Thus, we will improve user interface by selecting single value (list).</p>
+<p><img src="images/clipboard-1001333109.png" class="img-fluid"></p>
+</section>
+<section id="creating-cycle-plot" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Creating Cycle Plot</h1>
+<p>First, we will duplicate the <em>Line Graph</em> sheet, and rename it as <em>Cycle Plot</em>.</p>
+<p>In the column, we will change to Month, and add another Year.</p>
+<p><img src="images/clipboard-988787286.png" class="img-fluid"></p>
+<p>As the output is beyond the display window, we will select “<em>Fit Width</em>”.</p>
+<p><img src="images/clipboard-2655687954.png" class="img-fluid"></p>
+<p>We will also add a reference line.</p>
+<p><img src="images/clipboard-391444205.png" class="img-fluid"></p>
+</section>
+<section id="creating-dashboard" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Creating Dashboard</h1>
+<p>After creating a new dashboard, we will first select “Automatic” for size, so that users can view the dashboard from both computers and mobile phones.</p>
+<p><img src="images/clipboard-1525823386.png" class="img-fluid"></p>
+<p>After selecting both Line Graph and Cycle Plot, we notice that there are now two legends, which is not ideal.</p>
+<p><img src="images/clipboard-2539476920.png" class="img-fluid"></p>
+<p>In order to create one legend for both charts, we will first go back to the Line Graph Sheet. We will edit filter and select “<em>All using this Data Source</em>”.</p>
+<p><img src="images/clipboard-547625262.png" class="img-fluid"></p>
+<p>Going back to the dashboard, we will remove the extra filter from the Cycle Plot.</p>
+<p><img src="images/clipboard-2890346920.png" class="img-fluid"></p>
+</section>
+<section id="publishing-to-tableau-public" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Publishing to Tableau Public</h1>
+<p>Extract data</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/clipboard-4044018769.png" class="img-fluid figure-img"></p>
-<figcaption>now we only have three columns, but low variability. To see high variability, we can change to month-year</figcaption>
+<p><img src="images/clipboard-990109285.png" class="img-fluid figure-img"></p>
+<figcaption>Publish</figcaption>
 </figure>
 </div>
-<p><img src="images/clipboard-1725054471.png" class="img-fluid"></p>
-<p>exposing the filter interface</p>
-<p><img src="images/clipboard-302137107.png" class="img-fluid"></p>
-<p>improving user interface by selecting single value</p>
-<p><img src="images/clipboard-1001333109.png" class="img-fluid"></p>
-<p>create a cycle plot</p>
-<ul>
-<li><p>duplicate the sheet</p></li>
-<li><p>change the month</p></li>
-<li><p>add another year</p></li>
-<li></li>
-</ul>
-<p><img src="images/clipboard-988787286.png" class="img-fluid"></p>
-<p>fit width</p>
-<p><img src="images/clipboard-2655687954.png" class="img-fluid"></p>
-<p>add reference line</p>
-<p><img src="images/clipboard-391444205.png" class="img-fluid"></p>
-<p>Dashboard</p>
-<p><img src="images/clipboard-1525823386.png" class="img-fluid"></p>
-<p>now we have two legends, which is not ideal</p>
-<p><img src="images/clipboard-2539476920.png" class="img-fluid"></p>
-<p>Going back to Line Graph Sheet:</p>
-<ul>
-<li>edit filter</li>
-</ul>
-<p><img src="images/clipboard-547625262.png" class="img-fluid"></p>
-<ul>
-<li>remove additional filter on dashboard</li>
-</ul>
-<p><img src="images/clipboard-2890346920.png" class="img-fluid"></p>
+<p><img src="images/clipboard-1375437826.png" class="img-fluid"></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
