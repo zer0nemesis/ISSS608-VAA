@@ -1,5 +1,5 @@
 ---
-title: "In-Class_Ex06: Time Series"
+title: "In-Class_Ex06: Time Series with R"
 author: "Roger Chen"
 date: "24 Feb 2024"
 date-modified: "last-modified"
