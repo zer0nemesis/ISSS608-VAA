@@ -1759,7 +1759,7 @@
   {
     "objectID": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html",
     "href": "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html",
-    "title": "In-Class_Ex06: Horizon Plot with R",
+    "title": "In-Class_Ex06a: Horizon Plot with R",
     "section": "",
     "text": "1 Overview\nalso Chapter 20\n\n\n2 Data Preparation\ninstalling the packages\n\npacman::p_load(ggHoriPlot, ggthemes, tidyverse)\n\nImporting the data. We also noticed that the current date fields in the data source is a categorical variable, and thus the mutate function is called to transform the data to a date variable.\n\naverp &lt;- read_csv(\"data/AVERP.csv\") %&gt;%\n  mutate(`Date` = dmy(`Date`))\n\n\n\n3 Creating Horizon Graph\n\naverp %&gt;%\n  filter(Date &gt;= \"2018-01-01\") %&gt;%\n  ggplot() +\n  geom_horizon(aes(x = Date, y = Values),\n               origin = \"midpoint\",\n               horizonscale = 6) +\n  facet_grid(`Consumer Items`~.) +\n  theme_few() +\n  scale_fill_hcl(palette= 'RdBu') +\n  theme(panel.spacing.y = unit(0, \"lines\"), strip.text.y = element_text(size = 5, angle = 0, hjust = 0),\n        legend.position = \"none\",\n            axis.text.y = element_blank(),\n    axis.text.x = element_text(size=7),\n    axis.title.y = element_blank(),\n    axis.title.x = element_blank(),\n    axis.ticks.y = element_blank(),\n    panel.border = element_blank()) +\n  \n  scale_x_date(expand=c(0,0), date_breaks = \"3 month\", date_labels = \"%b%y\") +\n  ggtitle('Average Retail Prices of Selected Consumer Items (Jan 2018 to Dec 2022)')"
   },

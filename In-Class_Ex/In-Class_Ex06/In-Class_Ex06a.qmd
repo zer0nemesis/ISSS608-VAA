@@ -1,5 +1,5 @@
 ---
-title: "In-Class_Ex06: Horizon Plot with R"
+title: "In-Class_Ex06a: Horizon Plot with R"
 author: "Roger Chen"
 date: "24 Feb 2024"
 date-modified: "last-modified"
