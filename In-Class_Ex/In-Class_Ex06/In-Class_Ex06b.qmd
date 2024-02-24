@@ -1,0 +1,13 @@
+---
+title: "In-Class_Ex06: Time Series"
+author: "Roger Chen"
+date: "24 Feb 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+number-sections: true
+editor: visual
+---
