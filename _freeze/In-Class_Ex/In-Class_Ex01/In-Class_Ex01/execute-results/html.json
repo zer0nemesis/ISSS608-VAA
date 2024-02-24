@@ -1,0 +1,15 @@
+{
+  "hash": "0548cc10ac1c548a0a94defe3df8e542",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-Class Exercise 01: Now You See It!\"\nauthor: \"Roger Chen\"\ndate: \"13 Jan 2024\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  warning: false\n  freeze: true\neditor: visual\n---\n\n\n# 1. Learning Outcome\n\nThis chapter aims to share on data manipulation using tidyverse, haven, read_rds and write_rds.\n\n# 2. Getting Started\n\n## 2.1 Loading R Packages\n\nIn this in-class exercise, two R packages will be used. They are:\n\n-   [tidyverse](https://www.tidyverse.org/), and\n\n-   [haven](https://haven.tidyverse.org/).\n\nThe code chunk used is as follows:\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(tidyverse, haven)\n```\n:::\n\n\n## 2.2 Importing PISA Data\n\nThe code chunk below uses the [read_sas](https://haven.tidyverse.org/reference/read_sas.html) function from the haven package to import PISA data into R.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nstu_qqq <- read_sas(\"data/stu_qqq.sas7bdat\")\n```\n:::\n\n\nAs there are 613,744 observations across many countries, we will next filter the observations to those from Singapore, using the [filter](https://dplyr.tidyverse.org/reference/filter.html) function from the dpylr package.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nstu_qqq_SG <- stu_qqq %>%\n  filter(CNT == \"SGP\")\n```\n:::\n\n\nWe will then save the file as a rds document in the data folder, using [write_rds](https://readr.tidyverse.org/reference/read_rds.html) function. This reduced the file size from 3.9GB to 65.3MB, which will make it easier to push to Github subsequently.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nwrite_rds(stu_qqq_SG, \n          \"data/stu_qqq_SG.rds\")\n```\n:::\n\n\nWe will now import the file back into the R enviroment using the [read_rds](https://readr.tidyverse.org/reference/read_rds.html) function.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nstu_qqq <- read_rds(\"data/stu_qqq_SG.rds\")\n```\n:::\n\n\n::: callout-important\nRemember to:\n\n-   delete the 3.9GB source file from the data folder\n\n-   include #\\| eval: false into the first three code chunks, to faciliate the subsequent push to Github.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

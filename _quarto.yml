@@ -55,8 +55,11 @@ website:
           href: "In-Class_Ex/In-Class_Ex05/In-Class_Ex05a.html" 
         - text: "5.2. Designing Web-enabled Visual Analytics Application with Shiny"
           href: "In-Class_Ex/In-Class_Ex05/In-Class_Ex05b.html" 
+        - text: "6.1 Time Series with R"
+          href: "In-Class_Ex/In-Class_Ex06/In-Class_Ex06a.html"           
+        - text: "6.2 Time Series with Tableau"
+          href: "In-Class_Ex/In-Class_Ex06/In-Class_Ex06b.html"
           
-    
     - text: "Take Home Exercises"
       menu:
         - text: "1. Creating Data Visualisation Beyond Default"
