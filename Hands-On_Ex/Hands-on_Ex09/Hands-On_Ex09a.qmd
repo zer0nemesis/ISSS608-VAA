@@ -1,6 +1,6 @@
 ---
 title: "Visualising and Analysing Text Data with R: tidytext methods"
-subtitle: "WIP""
+subtitle: "WIP"
 author: "Roger Chen"
 date: "07 Mar 2024"
 date-modified: "last-modified"
