@@ -57,6 +57,133 @@ temp_data <- all_data %>%
 write_rds(temp_data, "data/temp_data.rds")
 ```
 
+# Temperature Data EDA
+
+```{r}
+temp_data <- read_rds("data/temp_data.rds")
+
+glimpse(temp_data)
+```
+
+# Data Wrangling
+
+## Summary Statistics of Data
+
+finding how many missing data
+
+```{r}
+sum(is.na(temp_data))
+```
+
+dropping those with missing data
+
+```{r}
+temp_data <- temp_data %>% drop_na()
+```
+
+checking data for missing data again
+
+```{r}
+sum(is.na(temp_data))
+```
+
+## Aggregating the Mean, Min and Max Temperatures by Month
+
+finding the average, as well as the min and max temperatures by station-month-year
+
+```{r}
+monthly_temp_data <- aggregate(mean_temperature ~ year + month, data = temp_data, FUN = mean)
+```
+
+```{r}
+monthly_mean_temp <- aggregate(mean_temperature ~ station + year + month, data = temp_data, FUN = mean)
+```
+
+```{r}
+monthly_min_temp <- aggregate(minimum_temperature ~ station + year + month, data = temp_data, FUN = min)
+```
+
+```{r}
+monthly_max_temp <- aggregate(maximum_temperature ~ station + year + month, data = temp_data, FUN = max)
+```
+
+combining the data together
+
+```{r}
+merged_temp <- monthly_mean_temp %>%
+  left_join(monthly_max_temp, by = c("station", "year", "month")) %>%
+  left_join(monthly_min_temp, by = c("station", "year", "month"))
+
+glimpse(merged_temp)
+```
+
+Distribution of mean temperature using a ridgeline plot
+
+```{r}
+
+ridge_plot <- ggplot(monthly_temp_data, aes(x = mean_temperature, y=factor(year), fill = stat(x))) +
+  geom_density_ridges_gradient(scale =2,rel_min_height = 0.01, gradient_lwd = 1.) +
+                       scale_y_discrete(name= NULL)+
+                       scale_fill_viridis_c(name = "°C", option = "C") +
+                       labs(title = 'temperature profile',
+                        subtitle = 'Distribution of daily mean temperature across years',
+                        x = "Temperature (°C)",
+                        y = "Year") +
+                        theme_ridges(font_size = 13, grid = TRUE) +
+  theme(plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 10),
+        axis.title.x = element_text(size = 8),
+        axis.title.y = element_text(size = 8, angle = 360))
+
+ridge_plot
+
+```
+
+Distribution of mean temperature using a boxplot
+
+```{r}
+box_plot <- ggplot(monthly_temp_data, 
+                   aes(y= mean_temperature,
+                       x = as.factor(year))) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 60))
+
+box_plot
+```
+
+Distribution of mean temperature using a boxplot, by stations
+
+```{r}
+#| fig-width: 15
+#| fig-height: 12
+
+box_plot_m <- ggplot(merged_temp, 
+                   aes(y= mean_temperature,
+                       x = as.factor(year))) +
+  geom_boxplot()+
+  facet_wrap(~ station) +
+  theme(axis.text.x = element_text(angle = 60))
+
+box_plot_m
+```
+
+```{r}
+violin_plot <- plot_ly(data = monthly_temp_data, x = ~year, y = ~mean_temperature, type = 'violin', 
+               split = ~year, 
+               box = list(visible = T),
+               meanline = list(visible = T)) %>% # Adds a box plot inside the violin for summary statistics
+  layout(title = list(text = "<b>Distribution of Mean Temperatures Across Years</b>", 
+                                                   font = list(family = "Arial", size = 14),
+                                                   xanchor = "center", xref = "paper",
+                                                   yanchor = "middle", yref = "paper"),
+                      yaxis = list(title = list(text = "Temperature (°C)", 
+                                                font = list(family = "Arial", size = 12)) ),
+                      xaxis = list(title = list(text = "Year", 
+                                                font = list(family = "Arial", size = 12)) ))
+
+violin_plot
+```
+
 # Rain Data EDA
 
 ```{r}
