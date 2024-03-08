@@ -5,8 +5,11 @@ author: "Roger Chen"
 date: "24 Feb 2024"
 date-modified: "last-modified"
 execute: 
-  warning: false
+  eval: true
+  echo: true
   freeze: true
+  warning: false
+  message: false
 number-sections: true
 ---
 
@@ -20,73 +23,69 @@ In this take home exercise, we will
 
 In this take home exercise, the following R packages will be used:
 
--   [tidyverse](https://www.tidyverse.org/),
-
--   [ggplot2](https://ggplot2.tidyverse.org/),
-
--   [gganimate](https://gganimate.com/),
-
--   [plotly](https://plotly.com/r/),
-
--   [ggiraph](https://davidgohel.github.io/ggiraph/),
-
--   [DT](https://rstudio.github.io/DT/).
-
 The code chunk used is as follows:
 
 ```{r}
-pacman::p_load(tidyverse, ggplot2, gganimate, plotly, ggiraph, DT)
+pacman::p_load(readr, dplyr, purrr, naniar,kableExtra,
+               tidyverse, DT, ggplot2, patchwork, 
+               ggridges, ggdist, ggstatsplot,
+               plotly, ggiraph, DT, ggdist, 
+               ungeviz, crosstalk, 
+               viridis)
 ```
 
-## Importing Temperature Data
+## Importing Weather Data
 
-***Changi*** will be selected for the weather station, and ***temperature*** chosen as the factor to be analysed. The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website,
+The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website,
 
-Lastly, using the code chunk below, we will combine the five datasets into a single document, and save it as a new dataset.
+filter by rain, and temp, load as rds file for faster data wrangling
 
-Next, we will call the dataset "***combinedTemp***" into the environment.
+read rds file
 
 ```{r}
-data <- read_csv("data/daily_historical.csv")
+#| eval: false
+all_data <- read_csv("data/daily_historical.csv")
+
+rain_data <- all_data %>%
+  select(station, year, month, day, daily_rainfall_total, highest_30_min_rainfall, highest_60_min_rainfall, highest_120_min_rainfall)
+
+write_rds(rain_data, "data/rain_data.rds")
+
+temp_data <- all_data %>%
+  select(station, year, month, day, mean_temperature, maximum_temperature, minimum_temperature)
+
+write_rds(temp_data, "data/temp_data.rds")
+```
+
+# Rain Data EDA
+
+```{r}
+rain_data <- read_rds("data/rain_data.rds")
+
+glimpse(rain_data)
 ```
 
 ## Summary Statistics of Data
 
-::: panel-tabset
-### First 5 Rows
-
-Using [**DT**](https://rstudio.github.io/DT/), we will display the dataset as a interactive table on html page.
+finding how many missing data
 
 ```{r}
-DT::datatable(data, class = "display compact", style = "bootstrap5")
+sum(is.na(rain_data))
 ```
 
-::: callout-note
-The data table seemed to be in order.
-:::
-
-### Dataset Structure
+dropping those with missing data
 
 ```{r}
-str(data)
+rain_data <- rain_data %>% drop_na()
+
 ```
 
-::: callout-note
-The data types are all correct.
-:::
-
-### Data Health
-
-Checking for missing values
+checking data for missing data again
 
 ```{r}
-sum(is.na(data))
-```
+sum(is.na(rain_data))
 
-::: callout-note
-No missing values were found.
-:::
-:::
+```
 
 # Static Data Visualisation
 
