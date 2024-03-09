@@ -57,6 +57,23 @@ temp_data <- all_data %>%
 write_rds(temp_data, "data/temp_data.rds")
 ```
 
+# Aggregating weather stations by regions
+
+![](images/clipboard-2866862969.png)
+
+```{r}
+temp_data <- read_rds("data/temp_data.rds")
+
+temp_data <- temp_data %>%
+  mutate(region = case_when(
+    (station == "Changi" | station == "East Coast Parkway" | station == "Tai Seng") ~ "East",
+     (station == "Clementi" | station == "Tuas South" | station == "Choa Chu Kang (South)" | station == "Jurong (West)" | station == "Jurong Island" | station == "Admiralty") ~ "West",
+    (station == "Ang Mo Kio" | station == "Newton"  | station == "Sentosa Island") ~ "Central"
+  ))
+
+write_rds(temp_data, "data/temp_data.rds")
+```
+
 # Temperature Data EDA
 
 ```{r}
@@ -89,30 +106,30 @@ sum(is.na(temp_data))
 
 ## Aggregating the Mean, Min and Max Temperatures by Month
 
-finding the average, as well as the min and max temperatures by station-month-year
+finding the average, as well as the min and max temperatures by region-month-year
 
 ```{r}
 monthly_temp_data <- aggregate(mean_temperature ~ year + month, data = temp_data, FUN = mean)
 ```
 
 ```{r}
-monthly_mean_temp <- aggregate(mean_temperature ~ station + year + month, data = temp_data, FUN = mean)
+monthly_mean_temp <- aggregate(mean_temperature ~ region + year + month, data = temp_data, FUN = mean)
 ```
 
 ```{r}
-monthly_min_temp <- aggregate(minimum_temperature ~ station + year + month, data = temp_data, FUN = min)
+monthly_min_temp <- aggregate(minimum_temperature ~ region + year + month, data = temp_data, FUN = min)
 ```
 
 ```{r}
-monthly_max_temp <- aggregate(maximum_temperature ~ station + year + month, data = temp_data, FUN = max)
+monthly_max_temp <- aggregate(maximum_temperature ~ region + year + month, data = temp_data, FUN = max)
 ```
 
 combining the data together
 
 ```{r}
 merged_temp <- monthly_mean_temp %>%
-  left_join(monthly_max_temp, by = c("station", "year", "month")) %>%
-  left_join(monthly_min_temp, by = c("station", "year", "month"))
+  left_join(monthly_max_temp, by = c("region", "year", "month")) %>%
+  left_join(monthly_min_temp, by = c("region", "year", "month"))
 
 glimpse(merged_temp)
 ```
@@ -156,7 +173,7 @@ box_plot <- ggplot(monthly_temp_data,
 box_plot
 ```
 
-## Boxplot, by stations
+## Boxplot, by Regions
 
 Distribution of mean temperature
 
@@ -169,7 +186,7 @@ box_plot_m <- ggplot(merged_temp,
                    aes(y= mean_temperature,
                        x = as.factor(year))) +
   geom_boxplot()+
-  facet_wrap(~ station) +
+  facet_wrap(~ region) +
   theme(axis.text.x = element_text(angle = 85,
                                    size = 6))
 
@@ -206,7 +223,7 @@ violin_plot
 # Base density plot
 ggplot(data = merged_temp, 
        aes(x = mean_temperature, 
-           y = station,
+           y = region,
            fill = after_stat(x))) +
   
   geom_density_ridges_gradient(scale = 3, 
@@ -216,9 +233,9 @@ ggplot(data = merged_temp,
                        option = "C") +
   
   theme_minimal() +
-    labs(title = "Distribution of Mean Temperatures by Location & Year",
+    labs(title = "Distribution of Mean Temperatures by Region & Year",
       subtitle = "Year: {closest_state}",
-       y = "Station",
+       y = "Region",
        x = "Temperature (°C)") +
   
   theme(legend.position="none",

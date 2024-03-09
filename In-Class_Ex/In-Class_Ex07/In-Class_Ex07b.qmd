@@ -1,0 +1,34 @@
+---
+title: "In-Class_Ex07a: Visualising and Analysing Geographic Data with Tableau "
+author: "Roger Chen"
+date: "09 Mar 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+  warning: false
+  message: false
+number-sections: true
+editor: visual
+---
+
+# Overview
+
+# Data Preparation
+
+installing the packages
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+# Creating Horizon Graph
+
+```{r}
+
+```

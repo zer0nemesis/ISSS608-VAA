@@ -1,0 +1,110 @@
+---
+title: "In-Class_Ex07a: Visualising and Analysing Geographic Data with Tableau "
+author: "Roger Chen"
+date: "09 Mar 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+  warning: false
+  message: false
+number-sections: true
+editor: visual
+---
+
+# Introduction
+
+In this in-class exercise, we will learn how to use Tableau to create visualise and analyse geographical date with Tableau and publish them on Tableau Public.
+
+You can access the published Tableau site [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex07aTreeMapbyPropertyType/TreeMapbyPropertyType?publish=yes).
+
+# Importing Data
+
+Select all the files, and drag them into the table pane
+
+![](images/clipboard-1696129587.png)
+
+Alternatively, we can also drag file by file. Take note to drag the subsequent files onto the preceding file, and that the "union" textbox appears.
+
+![](images/clipboard-825386167.png)
+
+The resulting output is as follows. The eight spreadsheets have been joined into a single data source
+
+![](images/clipboard-4190008694.png)
+
+# Viewing the Data
+
+Drag the postal code into the sheet.
+
+![](images/clipboard-1225211665.png)
+
+::: callout-note
+Note that the SG map is automatically loaded in Tableau. This is only possible when there is internet connection, as Tableau API reads the postal code, and links up with URA website to pull the base map.
+:::
+
+From the output above, we noticed that there are 429 unknown locations. These are locations that are currently under construction, and URA intentionally mask these from the map.
+
+![](images/clipboard-1250670275.png)
+
+Using Tableau, we can also extract the lat and long from the postal code in the file, by right-clicking and choosing " View data".
+
+![](images/clipboard-3890159059.png)
+
+# Visualizing the Geographical Data
+
+Drag and drop number of units to "Size", and Unit Price to "Color". Use Median(Price) instead of SUM(Price)
+
+![](images/clipboard-1185225152.png)
+
+Drag Project Name into "Tooltip"
+
+![](images/clipboard-4204040269.png)
+
+Next, we want to create the boxplot:
+
+-   drag Sales Date to Column, and select year
+
+-   Drag Sales Date (again) to column, and select quarter
+
+-   drag unit price to Rows
+
+-   select boxplot from the "Show Me"
+
+-   Exclude leftmost data
+
+-   adjust the size of the output
+
+![](images/clipboard-4163386980.png)
+
+now, we connect Sheet 1 with Sheet 2, by editing the tooltip
+
+![](images/clipboard-3552661364.png)
+
+Next, we will create a new sheet. Let's change the Planning Area's Geographic role to "State/Province".
+
+![](images/clipboard-913686082.png)
+
+Comparing between the other geographic roles, "State/Province" gives the best fit.
+
+![](images/clipboard-19161330.png)
+
+We will now duplicate the sheet, and replace planning area with median (unit price)
+
+![](images/clipboard-4056424768.png)
+
+We will also add filters based on: (1) type of sale and (2) property type
+
+![](images/clipboard-626483708.png)
+
+Next, we will plot a treemap. We will select:(1) planning area, (2) planning region, (3) median(unit price) and (4) sum(number of units) into the sheet, and select "Treemap" from "Show Me".
+
+![](images/clipboard-3115434375.png)
+
+We will also add project name to labels, and adding filter based on property type
+
+![](images/clipboard-1286320327.png)
+
+We can also organise treemaps by property type
+
+![](images/clipboard-2615379497.png)

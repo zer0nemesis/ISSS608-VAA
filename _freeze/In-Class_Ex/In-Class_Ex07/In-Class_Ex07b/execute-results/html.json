@@ -1,0 +1,15 @@
+{
+  "hash": "8ca1279d8bec1f3ee000dfcd7f496daa",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-Class_Ex07a: Visualising and Analysing Geographic Data with Tableau \"\nauthor: \"Roger Chen\"\ndate: \"09 Mar 2024\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  freeze: true\n  warning: false\n  message: false\nnumber-sections: true\neditor: visual\n---\n\n\n# Overview\n\n# Data Preparation\n\ninstalling the packages\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n\n# Creating Horizon Graph\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
