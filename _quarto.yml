@@ -74,7 +74,7 @@ website:
           href: "In-Class_Ex/In-Class_Ex06/In-Class_Ex06b.html"
         - text: "7.1. Visualising and Analysing Geographic Data with Tableau"
           href: "In-Class_Ex/In-Class_Ex07/In-Class_Ex07a.html"
-        - text: "7.2. Visualising and Analysing Geographic Data with R"
+        - text: "7.2. Building an Isopleth Map with R"
           href: "In-Class_Ex/In-Class_Ex07/In-Class_Ex07b.html"
           
     - text: "Take Home Exercises"

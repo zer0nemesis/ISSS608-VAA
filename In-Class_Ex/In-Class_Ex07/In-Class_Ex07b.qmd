@@ -1,5 +1,5 @@
 ---
-title: "In-Class_Ex07b: Building a Isopleth Map"
+title: "In-Class_Ex07b: Building an Isopleth Map with R"
 author: "Roger Chen"
 date: "09 Mar 2024"
 date-modified: "last-modified"
