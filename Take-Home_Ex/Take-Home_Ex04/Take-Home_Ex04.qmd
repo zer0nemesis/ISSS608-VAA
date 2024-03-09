@@ -31,7 +31,7 @@ pacman::p_load(readr, dplyr, purrr, naniar,kableExtra,
                ggridges, ggdist, ggstatsplot,
                plotly, ggiraph, DT, ggdist, 
                ungeviz, crosstalk, 
-               viridis)
+               viridis, gganimate)
 ```
 
 ## Importing Weather Data
@@ -117,7 +117,10 @@ merged_temp <- monthly_mean_temp %>%
 glimpse(merged_temp)
 ```
 
-Distribution of mean temperature using a ridgeline plot
+::: panel-tabset
+## Ridgeline plot
+
+Distribution of mean temperature
 
 ```{r}
 
@@ -139,7 +142,9 @@ ridge_plot
 
 ```
 
-Distribution of mean temperature using a boxplot
+## Boxplot
+
+Distribution of mean temperature
 
 ```{r}
 box_plot <- ggplot(monthly_temp_data, 
@@ -151,21 +156,33 @@ box_plot <- ggplot(monthly_temp_data,
 box_plot
 ```
 
-Distribution of mean temperature using a boxplot, by stations
+## Boxplot, by stations
+
+Distribution of mean temperature
 
 ```{r}
 #| fig-width: 15
 #| fig-height: 12
+#| column: screen
 
 box_plot_m <- ggplot(merged_temp, 
                    aes(y= mean_temperature,
                        x = as.factor(year))) +
   geom_boxplot()+
   facet_wrap(~ station) +
-  theme(axis.text.x = element_text(angle = 60))
+  theme(axis.text.x = element_text(angle = 85,
+                                   size = 6))
 
 box_plot_m
 ```
+
+::: callout-note
+from the output above, we can tell that Changi station, is the only station with temp data from 1982 to 2008. thus, the average singapore temp will be equals to the changi's data. WIth this mind, we may exclude the 1982 to 2008 data for better comparison.
+:::
+
+## Violin plots
+
+Distribution of mean temperature
 
 ```{r}
 violin_plot <- plot_ly(data = monthly_temp_data, x = ~year, y = ~mean_temperature, type = 'violin', 
@@ -182,6 +199,38 @@ violin_plot <- plot_ly(data = monthly_temp_data, x = ~year, y = ~mean_temperatur
                                                 font = list(family = "Arial", size = 12)) ))
 
 violin_plot
+```
+:::
+
+```{r}
+# Base density plot
+ggplot(data = merged_temp, 
+       aes(x = mean_temperature, 
+           y = station,
+           fill = after_stat(x))) +
+  
+  geom_density_ridges_gradient(scale = 3, 
+                               rel_min_height = 0.01) +
+  
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  
+  theme_minimal() +
+    labs(title = "Distribution of Mean Temperatures by Location & Year",
+      subtitle = "Year: {closest_state}",
+       y = "Station",
+       x = "Temperature (°C)") +
+  
+  theme(legend.position="none",
+  plot.title = element_text(face = "bold", size = 12),
+  axis.title.x = element_text(size = 10),
+  axis.title.y = element_text(hjust=1, angle=0, size = 10),
+  axis.text = element_text(size = 8),
+  plot.background = element_rect(fill = "#f5f5f5", color = "#f5f5f5")) +
+
+  transition_states(year) + 
+  ease_aes('linear')
+
 ```
 
 # Rain Data EDA
