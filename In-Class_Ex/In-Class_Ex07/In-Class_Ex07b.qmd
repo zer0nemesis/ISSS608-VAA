@@ -1,5 +1,5 @@
 ---
-title: "In-Class_Ex07a: Visualising and Analysing Geographic Data with Tableau "
+title: "In-Class_Ex07b: Building a Isopleth Map"
 author: "Roger Chen"
 date: "09 Mar 2024"
 date-modified: "last-modified"
@@ -19,12 +19,18 @@ editor: visual
 
 installing the packages
 
-```{r}
+-   sf:
 
+-   terra: to convert images into map data
+
+-   gstat: geo statistical methods
+
+```{r}
+pacman:: p_load(sf, terra, gstat, tmap, viridis, tidyverse)
 ```
 
 ```{r}
-
+rfstations <- read_csv("data/aspatial/RainfallStation.csv")
 ```
 
 # Creating Horizon Graph
