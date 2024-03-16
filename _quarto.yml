@@ -73,6 +73,8 @@ website:
           href: "In-Class_Ex/In-Class_Ex07/In-Class_Ex07a.html"
         - text: "7.2. Building an Isopleth Map with R"
           href: "In-Class_Ex/In-Class_Ex07/In-Class_Ex07b.html"
+        - text: "8. Modelling, Visualising and Analysing Network Data with R"
+          href: "In-Class_Ex/In-Class_Ex08/In-Class_Ex08.html"
           
     - text: "Take Home Exercises"
       menu:
