@@ -15,15 +15,13 @@ number-sections: true
 
 # Overview
 
-In this take home exercise, we will
+In this take home exercise, we will be working towards creating a protoype module as part of the Visual Analytics Project. Specific to this exercise, it will solely comprise the Exploratory Data Analysis (EDA is my part), as the Confirmatory Data Analysis (CDA) and Forecasting are anchored by [Simin](https://isss608-ksm.netlify.app/take-home_ex/take-home_ex4/take-home_ex4#cda-3---are-there-certain-locations-drier-or-wetter-hotter-or-cooler) and [Sihui](https://gsh-vaa.netlify.app/take-home_ex/take-home_ex04/take-home_ex04a#shiny-dashboard-prototype) respectively. A draft UI design for R Shiny App will also be prepared as a precursor to the final project dashboard.
 
 # Data Preparation
 
 ## Loading R Packages
 
-In this take home exercise, the following R packages will be used:
-
-The code chunk used is as follows:
+The following R packages will be used, as shown in the code chunk below:
 
 ```{r}
 pacman::p_load(readr, dplyr, purrr, naniar,kableExtra,
@@ -36,11 +34,9 @@ pacman::p_load(readr, dplyr, purrr, naniar,kableExtra,
 
 ## Importing Weather Data
 
-The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website,
+The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website. The data is filtered by rain and temperature (the wind data will excluded as it falls outside the project scope) and saved as a .rds file for faster data wrangling.
 
-filter by rain, and temp, load as rds file for faster data wrangling
-
-read rds file
+The code chunk is as follows:
 
 ```{r}
 #| eval: false

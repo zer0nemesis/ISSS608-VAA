@@ -1,5 +1,5 @@
 ---
-title: "Visualising and Analysing Text Data with R: tidytext methods"
+title: "Information Dashboard Design: R methods"
 subtitle: "WIP"
 author: "Roger Chen"
 date: "07 Mar 2024"

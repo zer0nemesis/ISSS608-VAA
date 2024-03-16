@@ -46,11 +46,8 @@ website:
           href: "Hands-On_Ex/Hands-On_Ex07/Hands-On_Ex07c.html"
         - text: "8. Modelling, Visualising and Analysing Network Data with R"
           href: "Hands-On_Ex/Hands-On_Ex08/Hands-On_Ex08.html"
-        - text: "9.1. Visualising and Analysing Text Data with R: tidytext methods"
-          href: "Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex09a.html"
-        - text: "9.2. R for Data Science: Tidyverse principles and methods"
-          href: "Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex09b.html"       
-          
+        - text: "9.1. Information Dashboard Design: R methods"
+          href: "Hands-On_Ex/Hands-On_Ex09/Hands-On_Ex09.html"
           
     - text: "In-Class Exercises"
       menu:
