@@ -487,7 +487,7 @@ Based on the feedback from Prof Kam, the EDA module will need to take note of th
 
 -    ***Appropriateness of analytical methods used***
 
-    -   Relationship between two variables, supported by stats (using[**ggstatplot**](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggscatterstats.html) e.g. ggscatterplot, to control the confidence interval, or x and y axes)
+    -   Relationship between two variables, supported by stats (using**ggstatplot** e.g. ggscatterplot, to control the confidence interval, or x and y axes)
 
     -   Example: Use annual mean between stations, and identify if there is a relationship using a boxplot
 
