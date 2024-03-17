@@ -468,4 +468,50 @@ violin_plot_t1
 
 # UI Design
 
-# Conclusion
+The envisaged Shiny App Dashboard for EDA is shown below:
+
+![](images/clipboard-3010590307.png)
+
+## Parameters to Expose
+
+-   **Weather Station** : Choosing from one of the 13 weather stations, or by regions
+
+-   **Type of data** : Temperature or Rainfall
+
+-   **Number of months** : from one to ten years
+
+::: callout-note
+## Things to improve for Project
+
+Based on the feedback from Prof Kam, the EDA module will need to take note of the following four principal considerations:
+
+-    ***Appropriateness of analytical methods used***
+
+    -   Relationship between two variables, supported by stats (using[**ggstatplot**](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggscatterstats.html) e.g. ggscatterplot, to control the confidence interval, or x and y axes)
+
+    -   Example: Use annual mean between stations, and identify if there is a relationship using a boxplot
+
+-   ***Appropriateness of data visualisation methods used***
+
+    -   Don’t just show average in a bar chart, use a boxplot to show the distribution
+
+-   ***Appropriateness of R packages used***
+
+    -   For interactivity, consider using
+
+        -   giraffe
+
+        -   plotly
+
+        -   either timetk or tidyvert (but not both)
+
+        -   tsibble for date wrangling (auto aggregation)
+
+-   ***Appropriateness of UI design used***
+
+    -   Layout
+
+    -   Configurations (expose the statistical methods e.g. confidence interval, p-value, t-test, to calibrate the model)
+
+    -   Don’t expose things that readers don’t need to know
+:::

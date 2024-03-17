@@ -2553,5 +2553,12 @@
     "title": "Take-Home_Ex04: Rain, Hail or Shine: Unveiling Mysteries of the Sky",
     "section": "4.3 ",
     "text": "4.3"
+  },
+  {
+    "objectID": "Take-Home_Ex/Take-Home_Ex04/Take-Home_Ex04.html#parameters-to-expose",
+    "href": "Take-Home_Ex/Take-Home_Ex04/Take-Home_Ex04.html#parameters-to-expose",
+    "title": "Take-Home_Ex04: Rain, Hail or Shine: Unveiling Mysteries of the Sky",
+    "section": "5.1 Parameters to Expose",
+    "text": "5.1 Parameters to Expose\n\nWeather Station : Choosing from one of the 13 weather stations, or by regions\nType of data : Temperature or Rainfall\nNumber of months : from one to ten years\n\n\n\n\n\n\n\nThings to improve for Project\n\n\n\nBased on the feedback from Prof Kam, the EDA module will need to take note of the following four principal considerations:\n\nAppropriateness of analytical methods used\n\n-   Relationship between two variables, supported by stats (using[**ggstatplot**](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggscatterstats.html) e.g. ggscatterplot, to control the confidence interval, or x and y axes)\n\n-   Example: Use annual mean between stations, and identify if there is a relationship using a boxplot\n\nAppropriateness of data visualisation methods used\n\nDon’t just show average in a bar chart, use a boxplot to show the distribution\n\nAppropriateness of R packages used\n\nFor interactivity, consider using\n\ngiraffe\nplotly\neither timetk or tidyvert (but not both)\ntsibble for date wrangling (auto aggregation)\n\n\nAppropriateness of UI design used\n\nLayout\nConfigurations (expose the statistical methods e.g. confidence interval, p-value, t-test, to calibrate the model)\nDon’t expose things that readers don’t need to know"
   }
 ]
