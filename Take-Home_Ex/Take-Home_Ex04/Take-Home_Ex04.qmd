@@ -24,111 +24,179 @@ In this take home exercise, we will be working towards creating a protoype modul
 The following R packages will be used, as shown in the code chunk below:
 
 ```{r}
-pacman::p_load(readr, dplyr, purrr, naniar,kableExtra,
-               tidyverse, DT, ggplot2, patchwork, 
-               ggridges, ggdist, ggstatsplot,
-               plotly, ggiraph, DT, ggdist, 
-               ungeviz, crosstalk, 
+pacman::p_load(dplyr, naniar, kableExtra,
+               tidyverse, DT, ggplot2, ggridges,  
+               ggdist, ggstatsplot,
+               plotly, ggiraph, 
                viridis, gganimate)
 ```
 
 ## Importing Weather Data
 
-The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website. The data is filtered by rain and temperature (the wind data will excluded as it falls outside the project scope) and saved as a .rds file for faster data wrangling.
+The data sets will be downloaded from [historical daily temperature](https://www.weather.gov.sg/climate-historical-daily/) from [Meteorological Service Singapore](http://www.weather.gov.sg/home/) website. The data will focus on rain and temperature (the wind data will excluded as it falls outside the project scope).
 
 The code chunk is as follows:
 
 ```{r}
 #| eval: false
+
 all_data <- read_csv("data/daily_historical.csv")
-
-rain_data <- all_data %>%
-  select(station, year, month, day, daily_rainfall_total, highest_30_min_rainfall, highest_60_min_rainfall, highest_120_min_rainfall)
-
-write_rds(rain_data, "data/rain_data.rds")
-
-temp_data <- all_data %>%
-  select(station, year, month, day, mean_temperature, maximum_temperature, minimum_temperature)
-
-write_rds(temp_data, "data/temp_data.rds")
 ```
 
-# Aggregating weather stations by regions
+## Data Wrangling
+
+First, we will find out how the temperature and rainfall data look like using boxplots.
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+ggplot(all_data,
+       aes(y= mean_temperature,
+           x = as.factor(year))) +
+  facet_wrap(~station) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 60,
+                                   size = 6))
+
+```
+
+![](images/clipboard-2816800767.png){width="738"}
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+ggplot(all_data,
+       aes(y= daily_rainfall_total,
+           x = as.factor(year))) +
+  facet_wrap(~station) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 60,
+                                   size = 6))
+```
+
+![](images/clipboard-1273158408.png)
+
+::: callout-note
+From the output above, there are only 13/37 stations that captured temperature data, while only 13/37 stations captured rainfall data from 1980 onwards (with the remaining stations starting from 2009 onwards). For ease of comparison, we will only look at the 13 stations with both temperature and rainfall data, and between a ten-year observation from 2014 to 2023.
+:::
+
+We will proceed to drop all those station with missing data, and filter those results from 2014 onwards, using the code chunk below.
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+filtered_data <- all_data %>% 
+  filter(year >="2014") %>%
+  drop_na() 
+```
+
+Let's examine the boxplots based again.
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+ggplot(filtered_data,
+       aes(y= mean_temperature,
+           x = as.factor(year))) +
+  facet_wrap(~station) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 60,
+                                   size = 6))
+```
+
+![](images/clipboard-1465182825.png)
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+ggplot(filtered_data,
+       aes(y= daily_rainfall_total,
+           x = as.factor(year))) +
+  facet_wrap(~station) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 60,
+                                   size = 6))
+```
+
+![](images/clipboard-1407614811.png)
+
+## Aggregating weather stations by regions
 
 ![](images/clipboard-2866862969.png)
 
+With reference to the map above, we will carve out Singapore into three main regions for easier visualisations subsequently:
+
+-   West \<- South West + North West districts
+
+-   Central \<- Central Singapore district
+
+-   East \<- North East + South East districts
+
 ```{r}
-temp_data <- read_rds("data/temp_data.rds")
+#| eval: false
+#| code-fold: true
 
-temp_data <- temp_data %>%
+filtered_data <- filtered_data %>%
   mutate(region = case_when(
-    (station == "Changi" | station == "East Coast Parkway" | station == "Tai Seng") ~ "East",
-     (station == "Clementi" | station == "Tuas South" | station == "Choa Chu Kang (South)" | station == "Jurong (West)" | station == "Jurong Island" | station == "Admiralty") ~ "West",
-    (station == "Ang Mo Kio" | station == "Newton"  | station == "Sentosa Island") ~ "Central"
-  ))
+     (station == "Clementi" | station == "Tuas South" | station == "Choa Chu Kang (South)" | station == "Jurong (West)" | station == "Jurong Island" | station == "Admiralty" | station == "Pasir Panjang") ~ "West",
+    (station == "Ang Mo Kio" | station == "Newton"  | station == "Sentosa Island") ~ "Central",
+    (station == "Changi" | station == "East Coast Parkway" | station == "Tai Seng") ~ "East"
+    ))
+```
 
-write_rds(temp_data, "data/temp_data.rds")
+We will now extract the relevant data for temperature and rainfall, and save the data in rds format for faster data wrangling.
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+filtered_data <- filtered_data %>%
+  select(station, year, month, day, mean_temperature, maximum_temperature, minimum_temperature, daily_rainfall_total, highest_30_min_rainfall, highest_60_min_rainfall, highest_120_min_rainfall,region)
+
+write_rds(filtered_data, "data/filtered_data.rds")
 ```
 
 # Temperature Data EDA
 
 ```{r}
-temp_data <- read_rds("data/temp_data.rds")
+#| code-fold: true
 
-glimpse(temp_data)
+filtered_data <- read_rds("data/filtered_data.rds")
 ```
 
-# Data Wrangling
-
-## Summary Statistics of Data
-
-finding how many missing data
+Lets have a glimpse of what the data looks like.
 
 ```{r}
-sum(is.na(temp_data))
-```
+#| code-fold: true
 
-dropping those with missing data
-
-```{r}
-temp_data <- temp_data %>% drop_na()
-```
-
-checking data for missing data again
-
-```{r}
-sum(is.na(temp_data))
+glimpse(filtered_data)
 ```
 
 ## Aggregating the Mean, Min and Max Temperatures by Month
 
-finding the average, as well as the min and max temperatures by region-month-year
+As the data is broken down by days, there will simply be too many data points across the 10 years of data (from 2014 to 2023). Thus, we will aggregate the data by monthly mean temperature, monthly mininum temperature and monthly maximum temperature.
 
 ```{r}
-monthly_temp_data <- aggregate(mean_temperature ~ year + month, data = temp_data, FUN = mean)
-```
+#| code-fold: true
+monthly_mean_temp <- aggregate(mean_temperature ~ region + station + year + month, data = filtered_data, FUN = mean)
 
-```{r}
-monthly_mean_temp <- aggregate(mean_temperature ~ region + year + month, data = temp_data, FUN = mean)
-```
+monthly_min_temp <- aggregate(minimum_temperature ~ region + station +year + month, data = filtered_data, FUN = min)
 
-```{r}
-monthly_min_temp <- aggregate(minimum_temperature ~ region + year + month, data = temp_data, FUN = min)
-```
+monthly_max_temp <- aggregate(maximum_temperature ~ region + station + year + month, data = filtered_data, FUN = max)
 
-```{r}
-monthly_max_temp <- aggregate(maximum_temperature ~ region + year + month, data = temp_data, FUN = max)
-```
-
-combining the data together
-
-```{r}
 merged_temp <- monthly_mean_temp %>%
-  left_join(monthly_max_temp, by = c("region", "year", "month")) %>%
-  left_join(monthly_min_temp, by = c("region", "year", "month"))
+  left_join(monthly_max_temp, by = c("region", "station", "year", "month")) %>%
+  left_join(monthly_min_temp, by = c("region", "station", "year", "month"))
 
 glimpse(merged_temp)
 ```
+
+## Distributions of Temperature Data
 
 ::: panel-tabset
 ## Ridgeline plot
@@ -136,17 +204,17 @@ glimpse(merged_temp)
 Distribution of mean temperature
 
 ```{r}
+#| code-fold: true
 
-ridge_plot <- ggplot(monthly_temp_data, aes(x = mean_temperature, y=factor(year), fill = stat(x))) +
+ridge_plot <- ggplot(merged_temp, aes(x = mean_temperature, y=factor(year), fill = stat(x))) +
   geom_density_ridges_gradient(scale =2,rel_min_height = 0.01, gradient_lwd = 1.) +
-                       scale_y_discrete(name= NULL)+
-                       scale_fill_viridis_c(name = "°C", option = "C") +
-                       labs(title = 'temperature profile',
-                        subtitle = 'Distribution of daily mean temperature across years',
-                        x = "Temperature (°C)",
-                        y = "Year") +
-                        theme_ridges(font_size = 13, grid = TRUE) +
-  theme(plot.title = element_text(size = 14),
+  scale_y_discrete(name= NULL) +
+  scale_fill_viridis_c(name = "°C", option = "C") +
+  labs(title = 'Distribution of Monthly Mean Temperature across years',
+       x = "Temperature (°C)",
+       y = "Year") +
+  theme_ridges(font_size = 13, grid = TRUE) +
+    theme(plot.title = element_text(size = 14),
         plot.subtitle = element_text(size = 10),
         axis.title.x = element_text(size = 8),
         axis.title.y = element_text(size = 8, angle = 360))
@@ -155,28 +223,64 @@ ridge_plot
 
 ```
 
+Here is an animated visualisation of the changes in mean temperatures
+
+```{r}
+#| code-fold: true
+
+ggplot(data = merged_temp, 
+       aes(x = mean_temperature, 
+           y = station,
+           fill = after_stat(x))) +
+  
+  geom_density_ridges_gradient(scale = 3, 
+                               rel_min_height = 0.01) +
+  
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  
+  theme_minimal() +
+    labs(title = "Distribution of Mean Temperatures by Region & Year",
+      subtitle = "Year: {closest_state}",
+       y = "Station",
+       x = "Temperature (°C)") +
+  
+  theme(legend.position="none",
+  plot.title = element_text(face = "bold", size = 12),
+  axis.title.x = element_text(size = 10),
+  axis.title.y = element_text(hjust=1, angle=0, size = 10),
+  axis.text = element_text(size = 8),
+  plot.background = element_rect(fill = "#f5f5f5", color = "#f5f5f5")) +
+
+  transition_states(year) + 
+  ease_aes('linear')
+```
+
 ## Boxplot
 
 Distribution of mean temperature
 
 ```{r}
-box_plot <- ggplot(monthly_temp_data, 
+#| code-fold: true
+
+box_plot1 <- ggplot(merged_temp, 
                    aes(y= mean_temperature,
                        x = as.factor(year))) +
   geom_boxplot()+
-  theme(axis.text.x = element_text(angle = 60))
+  theme(axis.text.x = element_text(angle = 60)) +
+  scale_x_discrete(name = "Year") +
+  scale_y_continuous(name = "Mean Temperature")
 
-box_plot
+box_plot1
 ```
 
-## Boxplot, by Regions
-
-Distribution of mean temperature
+Distribution of mean temperature by regions
 
 ```{r}
 #| fig-width: 15
 #| fig-height: 12
 #| column: screen
+#| code-fold: true
 
 box_plot_m <- ggplot(merged_temp, 
                    aes(y= mean_temperature,
@@ -184,21 +288,21 @@ box_plot_m <- ggplot(merged_temp,
   geom_boxplot()+
   facet_wrap(~ region) +
   theme(axis.text.x = element_text(angle = 85,
-                                   size = 6))
+                                   size = 6)) +
+  scale_x_discrete(name = "Year") +
+  scale_y_continuous(name = "Mean Temperature")
 
 box_plot_m
 ```
-
-::: callout-note
-from the output above, we can tell that Changi station, is the only station with temp data from 1982 to 2008. thus, the average singapore temp will be equals to the changi's data. WIth this mind, we may exclude the 1982 to 2008 data for better comparison.
-:::
 
 ## Violin plots
 
 Distribution of mean temperature
 
 ```{r}
-violin_plot <- plot_ly(data = monthly_temp_data, x = ~year, y = ~mean_temperature, type = 'violin', 
+#| code-fold: true
+
+violin_plot <- plot_ly(data = merged_temp, x = ~year, y = ~mean_temperature, type = 'violin', 
                split = ~year, 
                box = list(visible = T),
                meanline = list(visible = T)) %>% # Adds a box plot inside the violin for summary statistics
@@ -215,64 +319,27 @@ violin_plot
 ```
 :::
 
-```{r}
-# Base density plot
-ggplot(data = merged_temp, 
-       aes(x = mean_temperature, 
-           y = region,
-           fill = after_stat(x))) +
-  
-  geom_density_ridges_gradient(scale = 3, 
-                               rel_min_height = 0.01) +
-  
-  scale_fill_viridis_c(name = "Colour Scale",
-                       option = "C") +
-  
-  theme_minimal() +
-    labs(title = "Distribution of Mean Temperatures by Region & Year",
-      subtitle = "Year: {closest_state}",
-       y = "Region",
-       x = "Temperature (°C)") +
-  
-  theme(legend.position="none",
-  plot.title = element_text(face = "bold", size = 12),
-  axis.title.x = element_text(size = 10),
-  axis.title.y = element_text(hjust=1, angle=0, size = 10),
-  axis.text = element_text(size = 8),
-  plot.background = element_rect(fill = "#f5f5f5", color = "#f5f5f5")) +
-
-  transition_states(year) + 
-  ease_aes('linear')
-
-```
-
 # Rain Data EDA
 
 ```{r}
-rain_data <- read_rds("data/rain_data.rds")
-
-glimpse(rain_data)
-```
-
-## Summary Statistics of Data
-
-finding how many missing data
-
-```{r}
-sum(is.na(rain_data))
-```
-
-dropping those with missing data
-
-```{r}
-rain_data <- rain_data %>% drop_na()
 
 ```
 
-checking data for missing data again
+```{r}
+
+```
 
 ```{r}
-sum(is.na(rain_data))
+
+```
+
+```{r}
+
+
+```
+
+```{r}
+
 
 ```
 
