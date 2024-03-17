@@ -261,12 +261,16 @@ ggplot(data = merged_temp,
 Distribution of mean temperature
 
 ```{r}
+#| fig-width: 15
+#| fig-height: 12
+#| column: screen
 #| code-fold: true
 
 box_plot_t1 <- ggplot(merged_temp, 
                    aes(y= mean_temperature,
                        x = as.factor(year))) +
   geom_boxplot()+
+  facet_wrap(~station) +
   theme(axis.text.x = element_text(angle = 60)) +
   scale_x_discrete(name = "Year") +
   scale_y_continuous(name = "Mean Temperature")
@@ -277,9 +281,6 @@ box_plot_t1
 Distribution of mean temperature by regions
 
 ```{r}
-#| fig-width: 15
-#| fig-height: 12
-#| column: screen
 #| code-fold: true
 
 box_plot_t2 <- ggplot(merged_temp, 
@@ -353,6 +354,7 @@ glimpse(merged_rainfall)
 ## Ridgeline Plot
 
 ```{r}
+#| message: false
 #| code-fold: true
 
 ridge_plot_r1 <- ggplot(merged_rainfall, aes(x = monthly_rainfall_total, y=factor(year), fill = stat(x))) +
@@ -410,12 +412,16 @@ ggplot(data = merged_rainfall,
 Distribution of Monthly Total Rainfall
 
 ```{r}
+#| fig-width: 15
+#| fig-height: 12
+#| column: screen
 #| code-fold: true
 
 box_plot_r1 <- ggplot(merged_rainfall, 
                    aes(y= monthly_rainfall_total,
                        x = as.factor(year))) +
   geom_boxplot()+
+  facet_wrap(~station)+
   theme(axis.text.x = element_text(angle = 60)) +
   scale_x_discrete(name = "Year") +
   scale_y_continuous(name = "Monthly Total Rainfall(mm)")
@@ -426,9 +432,6 @@ box_plot_r1
 Distribution of Monthly Total Rainfall by Region
 
 ```{r}
-#| fig-width: 15
-#| fig-height: 12
-#| column: screen
 #| code-fold: true
 
 box_plot_r2 <- ggplot(merged_rainfall, 
