@@ -206,7 +206,7 @@ Distribution of mean temperature
 ```{r}
 #| code-fold: true
 
-ridge_plot <- ggplot(merged_temp, aes(x = mean_temperature, y=factor(year), fill = stat(x))) +
+ridge_plot_t1 <- ggplot(merged_temp, aes(x = mean_temperature, y=factor(year), fill = stat(x))) +
   geom_density_ridges_gradient(scale =2,rel_min_height = 0.01, gradient_lwd = 1.) +
   scale_y_discrete(name= NULL) +
   scale_fill_viridis_c(name = "°C", option = "C") +
@@ -219,7 +219,7 @@ ridge_plot <- ggplot(merged_temp, aes(x = mean_temperature, y=factor(year), fill
         axis.title.x = element_text(size = 8),
         axis.title.y = element_text(size = 8, angle = 360))
 
-ridge_plot
+ridge_plot_t1
 
 ```
 
@@ -240,7 +240,7 @@ ggplot(data = merged_temp,
                        option = "C") +
   
   theme_minimal() +
-    labs(title = "Distribution of Mean Temperatures by Region & Year",
+    labs(title = "Distribution of Mean Temperatures by Station & Year",
       subtitle = "Year: {closest_state}",
        y = "Station",
        x = "Temperature (°C)") +
@@ -263,7 +263,7 @@ Distribution of mean temperature
 ```{r}
 #| code-fold: true
 
-box_plot1 <- ggplot(merged_temp, 
+box_plot_t1 <- ggplot(merged_temp, 
                    aes(y= mean_temperature,
                        x = as.factor(year))) +
   geom_boxplot()+
@@ -271,7 +271,7 @@ box_plot1 <- ggplot(merged_temp,
   scale_x_discrete(name = "Year") +
   scale_y_continuous(name = "Mean Temperature")
 
-box_plot1
+box_plot_t1
 ```
 
 Distribution of mean temperature by regions
@@ -282,7 +282,7 @@ Distribution of mean temperature by regions
 #| column: screen
 #| code-fold: true
 
-box_plot_m <- ggplot(merged_temp, 
+box_plot_t2 <- ggplot(merged_temp, 
                    aes(y= mean_temperature,
                        x = as.factor(year))) +
   geom_boxplot()+
@@ -292,7 +292,7 @@ box_plot_m <- ggplot(merged_temp,
   scale_x_discrete(name = "Year") +
   scale_y_continuous(name = "Mean Temperature")
 
-box_plot_m
+box_plot_t2
 ```
 
 ## Violin plots
@@ -302,7 +302,7 @@ Distribution of mean temperature
 ```{r}
 #| code-fold: true
 
-violin_plot <- plot_ly(data = merged_temp, x = ~year, y = ~mean_temperature, type = 'violin', 
+violin_plot_t1 <- plot_ly(data = merged_temp, x = ~year, y = ~mean_temperature, type = 'violin', 
                split = ~year, 
                box = list(visible = T),
                meanline = list(visible = T)) %>% # Adds a box plot inside the violin for summary statistics
@@ -315,106 +315,157 @@ violin_plot <- plot_ly(data = merged_temp, x = ~year, y = ~mean_temperature, typ
                       xaxis = list(title = list(text = "Year", 
                                                 font = list(family = "Arial", size = 12)) ))
 
-violin_plot
+violin_plot_t1
 ```
 :::
 
-# Rain Data EDA
+# Rainfall Data EDA
+
+## Aggregating the Daily Rainfall, and Highest Rainfall by Month
+
+Similar to temperature data, we will aggregate the data by total monthly rainfall, highest 30min/ 60min and 120min rainfall within a month.
 
 ```{r}
+#| code-fold: true
 
+monthly_rainfall <- aggregate(daily_rainfall_total ~ region + station + year + month, data = filtered_data, FUN = sum)
+
+highest_30min_rainfall <- aggregate(highest_30_min_rainfall ~ region + station +year + month, data = filtered_data, FUN = max)
+
+highest_60min_rainfall <- aggregate(highest_60_min_rainfall ~ region + station + year + month, data = filtered_data, FUN = max)
+
+highest_120min_rainfall <- aggregate(highest_120_min_rainfall ~ region + station + year + month, data = filtered_data, FUN = max)
+
+merged_rainfall <- monthly_rainfall %>%
+  left_join(highest_30min_rainfall, by = c("region", "station", "year", "month")) %>%
+  left_join(highest_60min_rainfall, by = c("region", "station", "year", "month")) %>%
+  left_join(highest_120min_rainfall, by = c("region", "station", "year", "month"))
+
+#renaming the column name "daily_rainfall_total" to "monthly_rainfall_total" for a more accurate description
+colnames(merged_rainfall)[colnames(merged_rainfall) == "daily_rainfall_total"] <- "monthly_rainfall_total"
+
+glimpse(merged_rainfall)
 ```
 
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-
-```
-
-```{r}
-
-
-```
-
-# Static Data Visualisation
+## Distributions of Rainfall Data
 
 ::: panel-tabset
-## Plot
-
-```{r, fig.width = 15, fig.height = 8}
-#| column: page
-#| echo: false
-
-
-          
-
-```
-
-## Code Chunk
+## Ridgeline Plot
 
 ```{r}
-#| eval: false
+#| code-fold: true
 
+ridge_plot_r1 <- ggplot(merged_rainfall, aes(x = monthly_rainfall_total, y=factor(year), fill = stat(x))) +
+  geom_density_ridges_gradient(scale =2,rel_min_height = 0.01, gradient_lwd = 1.) +
+  scale_y_discrete(name= NULL) +
+  scale_fill_viridis_c(name = "°C", option = "C") +
+  labs(title = 'Distribution of Monthly Rainfall Across Years',
+       x = "Rainfall(mm)",
+       y = "Year") +
+  theme_ridges(font_size = 13, grid = TRUE) +
+    theme(plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 10),
+        axis.title.x = element_text(size = 8),
+        axis.title.y = element_text(size = 8, angle = 360))
 
-
-```
-:::
-
-::: callout-note
-:::
-
-# Interactive Data Visualisation
-
-::: panel-tabset
-## Plot
-
-```{r, fig.height=12}
-#| column: page
-#| echo: false
-
+ridge_plot_r1
 
 ```
 
-## Code Chunk
+Here is an animated visualisation of the changes in mean temperatures
 
 ```{r}
-#| eval: false
+#| code-fold: true
 
+ggplot(data = merged_rainfall, 
+       aes(x = monthly_rainfall_total, 
+           y = station,
+           fill = after_stat(x))) +
+  
+  geom_density_ridges_gradient(scale = 3, 
+                               rel_min_height = 0.01) +
+  
+  scale_fill_viridis_c(name = "Colour Scale",
+                       option = "C") +
+  
+  theme_minimal() +
+    labs(title = "Distribution of Monthly Total Rainfall by Station & Year",
+      subtitle = "Year: {closest_state}",
+       y = "Station",
+       x = "Rainfall") +
+  
+  theme(legend.position="none",
+  plot.title = element_text(face = "bold", size = 12),
+  axis.title.x = element_text(size = 10),
+  axis.title.y = element_text(hjust=1, angle=0, size = 10),
+  axis.text = element_text(size = 8),
+  plot.background = element_rect(fill = "#f5f5f5", color = "#f5f5f5")) +
 
+  transition_states(year) + 
+  ease_aes('linear')
 ```
-:::
 
-::: callout-note
-:::
+## Box Plot
 
-::: panel-tabset
-## Plot
+Distribution of Monthly Total Rainfall
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
-      
+box_plot_r1 <- ggplot(merged_rainfall, 
+                   aes(y= monthly_rainfall_total,
+                       x = as.factor(year))) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 60)) +
+  scale_x_discrete(name = "Year") +
+  scale_y_continuous(name = "Monthly Total Rainfall(mm)")
+
+box_plot_r1
 ```
 
-## Code Chunk
+Distribution of Monthly Total Rainfall by Region
 
 ```{r}
-#| eval: false
+#| fig-width: 15
+#| fig-height: 12
+#| column: screen
+#| code-fold: true
 
+box_plot_r2 <- ggplot(merged_rainfall, 
+                   aes(y= monthly_rainfall_total,
+                       x = as.factor(year))) +
+  geom_boxplot()+
+  facet_wrap(~ region) +
+  theme(axis.text.x = element_text(angle = 85,
+                                   size = 6)) +
+  scale_x_discrete(name = "Year") +
+  scale_y_continuous(name = "Monthly Total Rainfall(mm)")
 
+box_plot_r2
+```
 
+## Violin Plot
 
+```{r}
+#| code-fold: true
+
+violin_plot_t1 <- plot_ly(data = merged_rainfall, x = ~year, y = ~monthly_rainfall_total, type = 'violin', 
+               split = ~year, 
+               box = list(visible = T),
+               meanline = list(visible = T)) %>% # Adds a box plot inside the violin for summary statistics
+  layout(title = list(text = "<b>Distribution of Monthly Total Rainfall Across Years</b>", 
+                                                   font = list(family = "Arial", size = 14),
+                                                   xanchor = "center", xref = "paper",
+                                                   yanchor = "middle", yref = "paper"),
+                      yaxis = list(title = list(text = "Rainfall(mm)", 
+                                                font = list(family = "Arial", size = 12)) ),
+                      xaxis = list(title = list(text = "Year", 
+                                                font = list(family = "Arial", size = 12)) ))
+
+violin_plot_t1
 ```
 :::
 
-::: callout-note
-:::
+# UI Design
 
 # Conclusion
