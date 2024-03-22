@@ -1,5 +1,5 @@
 ---
-title: "Information Dashboard Design: R methods"
+title: "Hands-On_Ex09:Information Dashboard Design: R methods"
 author: "Roger Chen"
 date: "22 Mar 2024"
 date-modified: "last-modified"
