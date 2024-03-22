@@ -2664,6 +2664,6 @@
     "href": "Hands-On_Ex/Hands-on_Ex09/Hands-On_Ex09.html#changing-from-sparkline-to-sparkbar",
     "title": "Information Dashboard Design: R methods",
     "section": "7.6 Changing from sparkline to sparkbar",
-    "text": "7.6 Changing from sparkline to sparkbar"
+    "text": "7.6 Changing from sparkline to sparkbar\nInstead of displaying the values as sparklines, we can display them as sparkbars as shown below.\n\n\nCode\nreactable(\n  report,\n  defaultPageSize = 13,\n  columns = list(\n    Product = colDef(maxWidth = 200),\n    `Monthly Sales` = colDef(\n      cell = react_sparkbar(\n        report,\n        highlight_bars = highlight_bars(\n          min = \"red\", max = \"blue\"),\n        bandline = \"innerquartiles\",\n        statline = \"mean\")\n    )\n  )\n)"
   }
 ]

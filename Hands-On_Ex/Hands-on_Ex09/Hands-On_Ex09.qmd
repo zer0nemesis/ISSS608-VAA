@@ -442,3 +442,26 @@ reactable(
 ```
 
 ## **Changing from sparkline to sparkbar**
+
+Instead of displaying the values as sparklines, we can display them as sparkbars as shown below.
+
+```{r}
+#| code-fold: true
+
+reactable(
+  report,
+  defaultPageSize = 13,
+  columns = list(
+    Product = colDef(maxWidth = 200),
+    `Monthly Sales` = colDef(
+      cell = react_sparkbar(
+        report,
+        highlight_bars = highlight_bars(
+          min = "red", max = "blue"),
+        bandline = "innerquartiles",
+        statline = "mean")
+    )
+  )
+)
+
+```
