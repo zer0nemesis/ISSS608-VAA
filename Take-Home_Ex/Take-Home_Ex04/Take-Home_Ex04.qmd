@@ -488,12 +488,14 @@ The envisaged Shiny App Dashboard for EDA is shown below:
 
 Based on the feedback from Prof Kam, the EDA module will need to take note of the following four principal considerations:
 
--    ***Appropriateness of analytical methods used***
+-   ***Appropriateness of analytical methods used***
 
-    -   Relationship between two variables, supported by stats (using**ggstatplot** \
-        e.g. ggscatterplot, to control the confidence interval, or x and y axes)
+```         
+-   Relationship between two variables, supported by stats (using**ggstatplot** \
+    e.g. ggscatterplot, to control the confidence interval, or x and y axes)
 
-    -   Example: Use annual mean between stations, and identify if there is a relationship using a boxplot
+-   Example: Use annual mean between stations, and identify if there is a relationship using a boxplot
+```
 
 -   ***Appropriateness of data visualisation methods used***
 
