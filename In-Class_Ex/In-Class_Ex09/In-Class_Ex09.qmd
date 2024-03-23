@@ -1,0 +1,104 @@
+---
+title: "In-Class_Ex09: Information Dashboard Design with Tableau"
+author: "Roger Chen"
+date: "23 Mar 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+  warning: false
+  message: false
+number-sections: true
+editor: visual
+---
+
+# Overview
+
+In this in-class exercise, we will learn how to use Tableau to create:
+
+-   Bullet Graph,
+
+-   Sparkline,
+
+-   Dashboard
+
+You can access the Tableau webpage [here](https://public.tableau.com/app/profile/roger.chen4630/viz/In-Class_Ex09_17111734483180/In-Class_Ex09?publish=yes).
+
+# Creating Bullet Graph
+
+First, to create a bullet graph, we will select the parameters "Budget Sales", "Market" and "Product Type" and select "Bullet Graph" in *Show Me*.
+
+![](images/clipboard-4062681412.png)
+
+Next, we will swap the reference line fields.
+
+![](images/clipboard-3870839610.png)
+
+# Creating Sparkline
+
+For the Column field, we will select Date, and change from Year to Month.
+
+For the Row field, we will select "Market", "Product Type" and "Sales".
+
+![](images/clipboard-2205300484.png)
+
+![](images/clipboard-4064710028.png)
+
+Next, we will select independent axes for each row and column.
+
+![](images/clipboard-1464482312.png)
+
+![](images/clipboard-3820564561.png)
+
+For easier viewing, we will adjust the margins so that we can fit all the graphs within one page.
+
+![Next, we will make use of the "Create Calculated Field) to display the min and max point.](images/clipboard-606467558.png)
+
+![](images/clipboard-1170086956.png)
+
+The code is as follows:
+
+![](images/clipboard-2584512069.png)
+
+We will select the high-low point and insert it as our secondary y-axis.
+
+![](images/clipboard-2388220677.png)
+
+We will change the shape to Circle, and synchronise both Y-axes.
+
+![](images/clipboard-3029402029.png)
+
+We will also hide the indicator that is displayed on the bottom of the graph.
+
+![](images/clipboard-551589720.png)
+
+Next, to differentiate the min and max points by colours, we will create a calculated field for Low-High Colour. The code is as follows:
+
+![](images/clipboard-148935016.png)
+
+We will now drag high-low colour to the graph, and change the colour for low and high points to red and blue respectively.
+
+![](images/clipboard-4095981059.png)
+
+As the graph is now too cluttered by different colours, we will change the colour of the base graph to grey.
+
+![](images/clipboard-13885547.png)
+
+Next, to display the values of the min and max values, we will create another calculated field for the high-low labels. The code is as follows:
+
+![](images/clipboard-588697963.png)
+
+We will add the labels to the graph.
+
+![](images/clipboard-357277311.png)
+
+# Creating Dashboard
+
+Next, we will create the dashboard which incorporates both the Bullet Graph (Annual Sales) and the Sparkline (Monthly Sales).
+
+We will add a blank panel below Sparkline so that we can synchronise the borders. We will also synchronise to one single date filter.
+
+![](images/clipboard-2888640092.png)
+
+Lastly, we will extract the data before publishing on Tableau Public.
