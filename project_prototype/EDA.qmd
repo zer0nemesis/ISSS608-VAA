@@ -424,12 +424,45 @@ ggbetweenstats(
   y = mean_monthly_temperature,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Mean Temperature by year from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
   messages = FALSE)
 
+```
+
+Visualising using an interactive line graph.
+
+```{r, fig.height=10, fig.width=15}
+#| code-fold: true
+
+hline.data <- data %>%
+  group_by(Year) %>%
+  summarise(avgvalue = mean(mean_monthly_temperature))
+
+p6<- ggplot() +
+  geom_line(data = data,
+            aes(x = as.factor(Month),
+                y = mean_monthly_temperature,
+                label = station))+
+  geom_hline(aes(yintercept=avgvalue),
+       data=hline.data,
+       linetype=6,
+       colour="red",
+       size=0.5)+
+  facet_wrap(~Year,scales = "free_x")+
+  labs(title = "Mean Temperature by year from 2014 to 2023",
+       colour = "Month") +
+  xlab("Year")+
+  ylab("Degrees (°C)")+
+  theme_tufte(base_family = "Helvetica")+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
+
+p6 <- ggplotly(p6, tooltip = "all")
+
+p6
 ```
 
 ## Min Temp by Year
@@ -445,12 +478,46 @@ ggbetweenstats(
   y = min_monthly_temperature,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Min Temperature by year from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
   messages = FALSE)
 
+```
+
+Visualising using an interactive line graph.
+
+```{r, fig.height=10, fig.width=15}
+#| code-fold: true
+
+hline.data <- data %>%
+  group_by(Year) %>%
+  summarise(avgvalue = mean(min_monthly_temperature))
+
+p7<- ggplot() +
+  geom_line(data = data,
+            aes(x = as.factor(Month),
+                y = min_monthly_temperature,
+                label = station))+
+  geom_hline(aes(yintercept=avgvalue),
+       data=hline.data,
+       linetype=6,
+       colour="red",
+       size=0.5)+
+  facet_wrap(~Year,scales = "free_x")+
+  labs(title = "Min Temperature by year from 2014 to 2023",
+       colour = "Month") +
+
+  xlab("Year")+
+  ylab("Degrees (°C)")+
+  theme_tufte(base_family = "Helvetica")+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
+
+p7 <- ggplotly(p7, tooltip = "all")
+
+p7
 ```
 
 ## Max Temp by Year
@@ -466,11 +533,46 @@ ggbetweenstats(
   y = max_monthly_temperature,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Max Temperature by year from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
   messages = FALSE)
+
+```
+
+Visualising using an interactive line graph.
+
+```{r, fig.height=10, fig.width=15}
+#| code-fold: true
+
+hline.data <- data %>%
+  group_by(Year) %>%
+  summarise(avgvalue = mean(max_monthly_temperature))
+
+p8<- ggplot() +
+  geom_line(data = data,
+            aes(x = as.factor(Month),
+                y = max_monthly_temperature,
+                label = station))+
+  geom_hline(aes(yintercept=avgvalue),
+       data=hline.data,
+       linetype=6,
+       colour="red",
+       size=0.5)+
+  facet_wrap(~Year,scales = "free_x")+
+  labs(title = "Max Temperature by year from 2014 to 2023",
+       colour = "Month") +
+
+  xlab("Year")+
+  ylab("Degrees (°C)")+
+  theme_tufte(base_family = "Helvetica")+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
+
+p8 <- ggplotly(p8, tooltip = "all")
+
+p8
 
 ```
 
@@ -487,12 +589,36 @@ ggbetweenstats(
   y = monthly_rainfall,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Rainfall by year from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
   messages = FALSE)
 
+```
+
+Visualising using an interactive line graph.
+
+```{r, fig.height=12, fig.width=18}
+#| code-fold: true
+
+p9 <- ggplot(data,
+             aes(y=monthly_rainfall,
+                 x = as.factor(Month),
+                 fill = as.factor(Year),
+                 label = station)) +
+  geom_bar(stat = "identity")+
+  facet_wrap(~Year, scales = "free_x") +
+  labs(title="Monthly rainfall each year from 2014 to 2023",
+       y = "Rainfall volume (mm)",
+       x = "Month") +
+  theme_minimal()+
+  theme(panel.spacing.y = unit(10, "lines"))+
+  scale_fill_discrete(name = "Year")
+
+p9 <- ggplotly(p9, tooltip = "all")
+
+p9
 ```
 :::
 
@@ -522,7 +648,7 @@ ggbetweenstats(
 
 Visualising using an interactive line graph.
 
-```{r}
+```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
 hline.data <- data %>%
@@ -534,7 +660,8 @@ p1<- ggplot() +
             aes(x = Year,
                 y = mean_monthly_temperature,
                 group = Month,
-                colour = as.factor(Month)))+
+                colour = as.factor(Month),
+                 label = station))+
   geom_hline(aes(yintercept=avgvalue),
        data=hline.data,
        linetype=6,
@@ -577,19 +704,20 @@ ggbetweenstats(
 
 Visualising using an interactive line graph.
 
-```{r}
+```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
 hline.data2 <- data %>%
   group_by(Month) %>%
-  summarise(avgvalue = min(min_monthly_temperature))
+  summarise(avgvalue = mean(min_monthly_temperature))
 
 p2<- ggplot() +
   geom_line(data = data,
             aes(x = Year,
                 y = min_monthly_temperature,
                 group = Month,
-                colour = as.factor(Month)))+
+                colour = as.factor(Month),
+                 label = station))+
   geom_hline(aes(yintercept=avgvalue),
        data=hline.data2,
        linetype=6,
@@ -633,19 +761,20 @@ ggbetweenstats(
 
 Visualising using an interactive line graph.
 
-```{r}
+```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
 hline.data3 <- data %>%
   group_by(Month) %>%
-  summarise(avgvalue = max(max_monthly_temperature))
+  summarise(avgvalue = mean(max_monthly_temperature))
 
 p3<- ggplot() +
   geom_line(data = data,
             aes(x = Year,
                 y = max_monthly_temperature,
                 group = Month,
-                colour = as.factor(Month)))+
+                colour = as.factor(Month),
+                 label = station))+
   geom_hline(aes(yintercept=avgvalue),
        data=hline.data3,
        linetype=6,
@@ -689,22 +818,24 @@ ggbetweenstats(
 
 Visualising using an interactive bar chart.
 
-```{r}
+```{r, fig.height=12, fig.width=18}
 #| code-fold: true
 
 p5 <- ggplot(data,
              aes(y=monthly_rainfall,
-                 x = as.factor(Month),
+                 x = as.factor(Year),
                  fill = as.factor(Year),
                  label = station)) +
   geom_bar(stat = "identity")+
-  facet_wrap(~Year, scales = "free_x") +
+  facet_wrap(~Month, scales = "free_x") +
   labs(title="Monthly rainfall each year from 2014 to 2023",
        y = "Rainfall volume (mm)",
        x = "Month") +
   theme_minimal()+
   theme(panel.spacing.y = unit(10, "lines"))+
-  scale_fill_discrete(name = "Year")
+  scale_fill_discrete(name = "Year")  + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
 
 p5 <- ggplotly(p5, tooltip = "all")
 
