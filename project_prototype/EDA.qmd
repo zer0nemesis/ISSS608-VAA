@@ -31,7 +31,11 @@ The following code chunk is used to install the necessary R packages:
 ```{r}
 #| code-fold: true
 
-pacman::p_load(tidyverse,ggridges,ggthemes,ggstatsplot,hrbrthemes,dplyr,plotly,ggiraph,lubridate, car)
+pacman::p_load(tidyverse, shiny, bslib,lubridate, DT, ggplot2, plotly, ggthemes,
+               hrbrthemes, timetk, modeltime, tidymodels,xgboost, recipes, parsnip,
+               workflows, patchwork, thematic, showtext, glue, bsicons,tmap, sf,
+               terra, gstat, automap, ggstatsplot, ggridges, ggrepel, ggsignif,
+               gifski,gganimate, ggiraph, magick, car)
 ```
 
 # **Importing the Dataset**
@@ -68,6 +72,8 @@ glimpse(data)
 
 ## **Correlation Analysis**
 
+In each of the tabsets below, we will examine the correlation between the weather variables (i.e., mean temperature, minimum temperature, maximum temperature and rainfall.
+
 ::: panel-tabset
 ### Correlation Matrix
 
@@ -100,7 +106,7 @@ ggcorrmat(
   )
 ```
 
-### Mean Temperature Vs Minimum Temperature
+### Mean Vs Min Temp
 
 ```{r}
 #| code-fold: true
@@ -116,7 +122,7 @@ ggscatterstats(
     )
 ```
 
-### Mean Temperature Vs Maximum Temperature
+### Mean Vs Max Temp
 
 ```{r}
 #| code-fold: true
@@ -132,7 +138,7 @@ ggscatterstats(
     )
 ```
 
-### Maximum Temperature Vs Minimum Temperature
+### Max Vs Min Temp
 
 ```{r}
 #| code-fold: true
@@ -148,9 +154,7 @@ ggscatterstats(
     )
 ```
 
-### Mean Temperature Vs Rainfall
-
-The following code chunk is used.
+### Mean Temp Vs Rainfall
 
 ```{r}
 #| code-fold: true
@@ -166,7 +170,7 @@ ggscatterstats(
     )
 ```
 
-### Minimum Temperature Vs Rainfall
+### Min Temp Vs Rainfall
 
 ```{r}
 #| code-fold: true
@@ -182,7 +186,7 @@ ggscatterstats(
     )
 ```
 
-### Maximum Temperature Vs Rainfall
+### Max Temp Vs Rainfall
 
 ```{r}
 #| code-fold: true
@@ -203,9 +207,9 @@ ggscatterstats(
 ## **Exploring relationships for temperature/ rainfall between stations**
 
 ::: panel-tabset
-### Mean Temperature by Station
+### Mean Temp by Station
 
-Violin Plot
+We will first arrange the stations in ascending order of mean temperature, for ease of comparison. Thereafter we will use ggbetweenstats to plot a violin plot to examine the relationship between mean temperature and station.
 
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
@@ -229,7 +233,7 @@ ggbetweenstats(
                                    size = 8))
 ```
 
-Ridgeline Plot
+Visualisation using a ridgeline plot.
 
 ```{r}
 #| code-fold: true
@@ -253,9 +257,9 @@ ggplot(data,
         axis.title.y = element_text(size = 8, angle = 360))
 ```
 
-### Minimum Temperature by Station
+### Min Temp by Station
 
-Violin Plot
+We will first arrange the stations in ascending order of minimum temperature, for ease of comparison. Thereafter we will use ggbetweenstats to plot a violin plot to examine the relationship between minimum temperature and station.
 
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
@@ -279,7 +283,7 @@ ggbetweenstats(
                                    size = 8))
 ```
 
-Rideline Plot
+Visualisation using a rideline plot.
 
 ```{r}
 #| code-fold: true
@@ -303,9 +307,9 @@ ggplot(data,
         axis.title.y = element_text(size = 8, angle = 360))
 ```
 
-### Maximum Temperature by Station
+### Max Temp by Station
 
-Violin Plot
+We will first arrange the stations in ascending order of maximum temperature, for ease of comparison. Thereafter we will use ggbetweenstats to plot a violin plot to examine the relationship between maximum temperature and station.
 
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
@@ -329,7 +333,7 @@ ggbetweenstats(
                                    size = 8))
 ```
 
-Ridgeline Plot
+Visualising using a ridgeline plot.
 
 ```{r}
 #| code-fold: true
@@ -355,7 +359,7 @@ ggplot(data,
 
 ### Rainfall by Station
 
-Violin Plot
+We will first arrange the stations in ascending order of monthly rainfall, for ease of comparison. Thereafter we will use ggbetweenstats to plot a violin plot to examine the relationship between monthly rainfall and station.
 
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
@@ -379,7 +383,7 @@ ggbetweenstats(
                                    size = 8))
 ```
 
-Ridgeline Plot
+Visualising using a ridgeline plot.
 
 ```{r}
 #| code-fold: true
@@ -405,9 +409,12 @@ ggplot(data,
 :::
 
 ## **Exploring relationships for temperature/ rainfall across years**
-:::panel-tabset
 
-## Mean Temperature by Year
+::: panel-tabset
+## Mean Temp by Year
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between mean temperature across the years.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -425,7 +432,10 @@ ggbetweenstats(
 
 ```
 
-## Minimum Temperature by Year
+## Min Temp by Year
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between minimum temperature across the years.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -443,7 +453,10 @@ ggbetweenstats(
 
 ```
 
-## Maximum Temperature by Year
+## Max Temp by Year
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between maximum temperature across the years.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -462,6 +475,9 @@ ggbetweenstats(
 ```
 
 ## Rainfall by Year
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between monthly rainfall across the years.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -478,14 +494,15 @@ ggbetweenstats(
   messages = FALSE)
 
 ```
-
 :::
 
 ## **Exploring relationships for temperature/ rainfall across months**
-:::panel-tabset
 
-## Mean Temperature by Month
-Violin Plot
+::: panel-tabset
+## Mean Temp by Month
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between mean temperature across the different months in a year.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -495,7 +512,7 @@ ggbetweenstats(
   y = mean_monthly_temperature,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Mean Temperature by month from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
@@ -503,9 +520,45 @@ ggbetweenstats(
 
 ```
 
+Visualising using an interactive line graph.
 
-## Minimum Temperature by Month
-Violin Plot
+```{r}
+#| code-fold: true
+
+hline.data <- data %>%
+  group_by(Month) %>%
+  summarise(avgvalue = mean(mean_monthly_temperature))
+
+p1<- ggplot() +
+  geom_line(data = data,
+            aes(x = Year,
+                y = mean_monthly_temperature,
+                group = Month,
+                colour = as.factor(Month)))+
+  geom_hline(aes(yintercept=avgvalue),
+       data=hline.data,
+       linetype=6,
+       colour="red",
+       size=0.5)+
+  facet_wrap(~Month,scales = "free_x")+
+  labs(title = "Mean Temperature by month from 2014 to 2023",
+       colour = "Month") +
+
+  xlab("Year")+
+  ylab("Degrees (°C)")+
+  theme_tufte(base_family = "Helvetica")+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
+
+p1 <- ggplotly(p1, tooltip = "all")
+
+p1
+```
+
+## Min Temp by Month
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between minimum temperature across the different months in a year.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -515,16 +568,52 @@ ggbetweenstats(
   y = min_monthly_temperature,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Min Temperature by month from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
   messages = FALSE)
-
 ```
 
-## Maximum Temperature by Month
-Violin Plot
+Visualising using an interactive line graph.
+
+```{r}
+#| code-fold: true
+
+hline.data2 <- data %>%
+  group_by(Month) %>%
+  summarise(avgvalue = min(min_monthly_temperature))
+
+p2<- ggplot() +
+  geom_line(data = data,
+            aes(x = Year,
+                y = min_monthly_temperature,
+                group = Month,
+                colour = as.factor(Month)))+
+  geom_hline(aes(yintercept=avgvalue),
+       data=hline.data2,
+       linetype=6,
+       colour="red",
+       size=0.5)+
+  facet_wrap(~Month,scales = "free_x")+
+  labs(title = "Min Temperature by month from 2014 to 2023",
+       colour = "Month") +
+
+  xlab("Year")+
+  ylab("Degrees (°C)")+
+  theme_tufte(base_family = "Helvetica")+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
+
+p2 <- ggplotly(p2, tooltip = "all")
+
+p2
+```
+
+## Max Temp by Month
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between maximum temperature across the different months in a year.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -534,7 +623,7 @@ ggbetweenstats(
   y = max_monthly_temperature,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Max Temperature by month from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
@@ -542,8 +631,45 @@ ggbetweenstats(
 
 ```
 
+Visualising using an interactive line graph.
+
+```{r}
+#| code-fold: true
+
+hline.data3 <- data %>%
+  group_by(Month) %>%
+  summarise(avgvalue = max(max_monthly_temperature))
+
+p3<- ggplot() +
+  geom_line(data = data,
+            aes(x = Year,
+                y = max_monthly_temperature,
+                group = Month,
+                colour = as.factor(Month)))+
+  geom_hline(aes(yintercept=avgvalue),
+       data=hline.data3,
+       linetype=6,
+       colour="red",
+       size=0.5)+
+  facet_wrap(~Month,scales = "free_x")+
+  labs(title = "Max Temperature by month from 2014 to 2023",
+       colour = "Month") +
+
+  xlab("Year")+
+  ylab("Degrees (°C)")+
+  theme_tufte(base_family = "Helvetica")+ 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1),
+        legend.position = "none")
+
+p3 <- ggplotly(p3, tooltip = "all")
+
+p3
+```
+
 ## Rainfall by Month
-Violin Plot
+
+Using the code chunk below, we will use ggbetweenstats to find out if there is any significant differences between monthly rainfall across the different months in a year.
+
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -553,7 +679,7 @@ ggbetweenstats(
   y = monthly_rainfall,
   type = "p",
   mean.ci = TRUE, 
-  title = "Violine Plots by All Stations",
+  title = "Monthly rainfall each year from 2014 to 2023",
   pairwise.comparisons = TRUE, 
   pairwise.display = "s",
   p.adjust.method = "fdr",
@@ -561,8 +687,27 @@ ggbetweenstats(
 
 ```
 
-Histogram Plot
-```{r}
+Visualising using an interactive bar chart.
 
+```{r}
+#| code-fold: true
+
+p5 <- ggplot(data,
+             aes(y=monthly_rainfall,
+                 x = as.factor(Month),
+                 fill = as.factor(Year),
+                 label = station)) +
+  geom_bar(stat = "identity")+
+  facet_wrap(~Year, scales = "free_x") +
+  labs(title="Monthly rainfall each year from 2014 to 2023",
+       y = "Rainfall volume (mm)",
+       x = "Month") +
+  theme_minimal()+
+  theme(panel.spacing.y = unit(10, "lines"))+
+  scale_fill_discrete(name = "Year")
+
+p5 <- ggplotly(p5, tooltip = "all")
+
+p5
 ```
 :::
