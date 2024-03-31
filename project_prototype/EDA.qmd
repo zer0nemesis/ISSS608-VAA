@@ -485,6 +485,7 @@ ggbetweenstats(
 :::panel-tabset
 
 ## Mean Temperature by Month
+Violin Plot
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -502,7 +503,9 @@ ggbetweenstats(
 
 ```
 
+
 ## Minimum Temperature by Month
+Violin Plot
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -521,6 +524,7 @@ ggbetweenstats(
 ```
 
 ## Maximum Temperature by Month
+Violin Plot
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -539,6 +543,7 @@ ggbetweenstats(
 ```
 
 ## Rainfall by Month
+Violin Plot
 ```{r, fig.height=10, fig.width=15}
 #| code-fold: true
 
@@ -556,4 +561,8 @@ ggbetweenstats(
 
 ```
 
+Histogram Plot
+```{r}
+
+```
 :::
